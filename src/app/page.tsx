@@ -23,7 +23,7 @@ export default function Home() {
           I&apos;m interested in startups and developing services.
         </p>
         <p className={styles.description}>
-          Look around the my Experiences and Projects
+          Look around my Experiences and Projects
         </p>
         <div className={styles.contact}>
           <LinkIcon linkType={LinkType.Github} />
@@ -38,11 +38,11 @@ export default function Home() {
             Experiences<span className={styles.blank}></span>&rarr;
           </h2>
           <p className={styles.link_description}>
-            Look around my experiences.
+            My experiences since 2021.
             <br /> Careers, Education, and Extra Activities
           </p>
         </Link>
-        <Link href={`/experiences`} className={styles.link_template}>
+        <Link href={`/projects`} className={styles.link_template}>
           <h2 className={styles.link_title}>
             Projects<span className={styles.blank}></span>&rarr;
           </h2>
