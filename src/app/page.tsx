@@ -1,95 +1,60 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
+import LinkIcon, { LinkType } from "@/components/link_icon";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
+      <div className={styles.container}>
+        <Image
+          className={styles.profile_image}
+          src="/img/profile_round.png"
+          alt="Ikjun Choi"
+          width={160}
+          height={160}
+        />
+        <h1 className={styles.title}>
+          <span className={styles.light_title}>최익준</span>&nbsp;&nbsp;Ikjun
+          Choi
+        </h1>
+        <p className={styles.description}>🚀👨‍💻👍</p>
+        <p className={styles.description}>
+          I&apos;m interested in startups and developing services.
         </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+        <p className={styles.description}>
+          Look around the my Experiences and Projects
+        </p>
+        <div className={styles.contact}>
+          <LinkIcon linkType={LinkType.Github} />
+          <LinkIcon linkType={LinkType.LinkedIn} />
+          <LinkIcon linkType={LinkType.Instagram} />
+          <LinkIcon linkType={LinkType.Mail} />
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
+      <div className={styles.bottom_container}>
+        <Link href={`/experiences`} className={styles.link_template}>
+          <h2 className={styles.link_title}>
+            Experiences<span className={styles.blank}></span>&rarr;
           </h2>
-          <p>Find in-depth information about Next.js features and API</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+          <p className={styles.link_description}>
+            Look around my experiences.
+            <br /> Careers, Education, and Extra Activities
           </p>
-        </a>
+        </Link>
+        <Link href={`/experiences`} className={styles.link_template}>
+          <h2 className={styles.link_title}>
+            Projects<span className={styles.blank}></span>&rarr;
+          </h2>
+          <p className={styles.link_description}>
+            These are my own projects.
+            <br /> Web/App services and ongoings projects
+          </p>
+        </Link>
       </div>
+      <p className={styles.copyright}>
+        © 2023 Ikjun Choi. All Rights Reserved.
+      </p>
     </main>
   );
 }
