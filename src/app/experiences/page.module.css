@@ -1,0 +1,129 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+  gap: 3.5rem;
+}
+
+.container {
+  min-width: 55%;
+}
+
+.back_button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  text-decoration: none;
+  margin: 0 0 0.5rem 0;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgb(143, 143, 143);
+  padding: 0.35rem 0.5rem 0.35rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.left_arrow {
+  font-size: 1.2rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(93, 93, 93);
+  transition: all 0.2s ease-in-out;
+}
+
+.back_button:hover {
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgb(173, 173, 173);
+  background-color: rgb(241, 241, 241);
+}
+
+.back_button:hover > .left_arrow {
+  transition: all 0.2s ease-in-out;
+  color: rgb(70, 70, 70);
+}
+
+.title_container {
+  margin: 1rem 0 3rem 0;
+}
+
+.title {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 2.3rem;
+  font-family: "PretendardBold";
+  font-weight: 900;
+}
+
+.description {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(127, 127, 127);
+}
+
+.content_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 3rem;
+}
+
+.content_title {
+  margin: 0 0 2rem 0;
+  font-size: 1.9rem;
+  font-family: "PretendardBold";
+  font-weight: 900;
+}
+
+.content_subtitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-family: "PretendardBold";
+  font-weight: 900;
+}
+
+.link_icon {
+  margin-left: 7px;
+  opacity: 0.5;
+  vertical-align: baseline;
+  transition: all 0.2s ease-in-out;
+}
+
+.link_icon:hover {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.content_description {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(127, 127, 127);
+}
+
+.content_box {
+  margin: 1rem 0 3rem 0;
+  border-left: 0.35rem solid rgb(127, 127, 127);
+  padding: 0.5rem 0 0.5rem 2rem;
+}
+
+.content_box_title {
+  margin: 0 0 0 0;
+  font-size: 1.2rem;
+  font-family: "PretendardBold";
+  font-weight: 400;
+  font-style: italic;
+  color: rgb(25, 25, 25);
+}
+
+.content_box_description {
+  margin: 0.7rem 0 0 0;
+  font-size: 1.1rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(83, 83, 83);
+}
