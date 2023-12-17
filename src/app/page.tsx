@@ -23,7 +23,8 @@ export default function Home() {
           I&apos;m interested in startups and developing services.
         </p>
         <p className={styles.description}>
-          Look around my Experiences and Projects
+          Look around my <Link href="/experiences">Experiences</Link> and&nbsp;
+          <Link href="/projects">Projects</Link>
         </p>
         <div className={styles.contact}>
           <LinkIcon linkType={LinkType.Github} />

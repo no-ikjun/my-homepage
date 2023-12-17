@@ -42,6 +42,18 @@
   color: rgb(127, 127, 127);
 }
 
+.description > a {
+  color: rgb(127, 127, 127);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.description > a:hover {
+  color: rgb(0, 0, 0);
+  transition: all 0.2s ease-in-out;
+  text-decoration: underline;
+}
+
 .contact {
   margin: 0.5rem 0 0.5rem 0;
   display: flex;
