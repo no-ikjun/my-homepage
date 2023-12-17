@@ -130,9 +130,8 @@
 
 @media (max-width: 700px) {
   .main {
-    padding: 4rem 0.1rem;
-  }
-  .container {
-    min-width: 95%;
+    padding: 3rem;
+    justify-content: center;
+    align-items: center;
   }
 }
