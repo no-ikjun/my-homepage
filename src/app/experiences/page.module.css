@@ -135,3 +135,7 @@
     align-items: center;
   }
 }
+
+.content_box_description {
+  list-style-position: inside;
+}

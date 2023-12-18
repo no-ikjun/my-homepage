@@ -36,12 +36,13 @@ export default function DetailExperience({ data }: DetailExperienceProps) {
           <p className={styles.content_description}>{item.description}</p>
           <div className={styles.content_box}>
             <p className={styles.content_box_title}>{item.subDescription}</p>
-            {item.content.map((content) => (
-              <p className={styles.content_box_description} key={content}>
-                {"- "}
-                {content}
-              </p>
-            ))}
+            <ul>
+              {item.content.map((content) => (
+                <li className={styles.content_box_description} key={content}>
+                  {content}
+                </li>
+              ))}
+            </ul>
           </div>
         </>
       ))}
