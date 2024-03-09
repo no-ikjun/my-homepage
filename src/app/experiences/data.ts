@@ -5,7 +5,7 @@ export const experiences = [
       {
         title: "Sigor Inc.",
         link: "https://introduce.sigor.company",
-        description: "2023.06 ~ Present",
+        description: "2023.06 ~ 2024.02",
         subDescription: "Developer",
         content: [
           "Front End Web Development",
@@ -56,6 +56,13 @@ export const experiences = [
         link: "https://ccei.creativekorea.or.kr/gwangju/custom/notice_view.do?no=28519&rnum=1361&kind=undefined&sPtime=undefinedb",
         description: "2023.07",
         subDescription: "🥈 2nd prize (서비스 개발 부문 우수상)",
+        content: [],
+      },
+      {
+        title: "2024 KPMG Ideathon@삼정 KPMG",
+        link: "http://www.dhnews.co.kr/news/view/1065585962399224",
+        description: "2024.02",
+        subDescription: "🥉 3rd prize",
         content: [],
       },
     ],
