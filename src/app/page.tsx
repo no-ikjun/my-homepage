@@ -9,7 +9,7 @@ export default function Home() {
       <div className={styles.container}>
         <Image
           className={styles.profile_image}
-          src="/img/profile_round.png"
+          src="/img/profile_round2.png"
           alt="Ikjun Choi"
           width={160}
           height={160}
