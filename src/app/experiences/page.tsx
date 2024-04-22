@@ -13,7 +13,7 @@ export default function ExperiencePage() {
         <div className={styles.title_container}>
           <h1 className={styles.title}>Experiences</h1>
           <p className={styles.description}>2021 ~ Present</p>
-          <p className={styles.description}>Updated : 2024.03</p>
+          <p className={styles.description}>Updated : 2024.04</p>
         </div>
         <div className={styles.content_container}>
           {experiences.map((topic) => (
