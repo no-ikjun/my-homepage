@@ -75,7 +75,7 @@ export const experiences = [
         link: "https://www.gist.ac.kr/kr/main.html",
         description: "2023.03 ~ Present",
         subDescription: "UnderGraduate Student",
-        content: ["School of Electrical Engineering and Computer Science", "Minor in management and economy"],
+        content: ["School of Electrical Engineering and Computer Science", "Minor in Business Administration and Economics"],
       },
       {
         title: "Jeonnam Science High School",
