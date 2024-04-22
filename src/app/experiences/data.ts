@@ -46,24 +46,30 @@ export const experiences = [
     content: [
       {
         title: "Side With Startups@KAIST",
-        link: "",
+        link: "https://docs.google.com/presentation/d/1cXm37OX8B42wRRq6S16i2StgV6BaVh9VDfI3NG8HTPo/edit?usp=sharing",
         description: "2023.05",
         subDescription: "🥇 1st prize",
-        content: [],
+        content: [
+          "UI/UX Improvement Solution Platform by Generative AI - U-in",
+        ],
       },
       {
         title: "Gwangju Public Data Utilization Contest",
         link: "https://ccei.creativekorea.or.kr/gwangju/custom/notice_view.do?no=28519&rnum=1361&kind=undefined&sPtime=undefinedb",
         description: "2023.07",
         subDescription: "🥈 2nd prize (서비스 개발 부문 우수상)",
-        content: [],
+        content: [
+          "Platform for participation in the politics of the common people - Mefeto",
+        ],
       },
       {
         title: "2024 KPMG Ideathon@삼정 KPMG",
         link: "http://www.dhnews.co.kr/news/view/1065585962399224",
         description: "2024.02",
         subDescription: "🥉 3rd prize",
-        content: [],
+        content: [
+          "Tools to improve work productivity with Generative AI - Docuflow",
+        ],
       },
     ],
   },
@@ -75,7 +81,10 @@ export const experiences = [
         link: "https://www.gist.ac.kr/kr/main.html",
         description: "2023.03 ~ Present",
         subDescription: "UnderGraduate Student",
-        content: ["School of Electrical Engineering and Computer Science", "Minor in Business Administration and Economics"],
+        content: [
+          "School of Electrical Engineering and Computer Science",
+          "Minor in Business Administration and Economics",
+        ],
       },
       {
         title: "Jeonnam Science High School",
