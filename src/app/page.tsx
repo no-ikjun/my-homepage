@@ -24,7 +24,7 @@ export default function Home() {
         </p>
         <p className={styles.description}>
           Look around my <Link href="/experiences">Experiences</Link> and&nbsp;
-          <Link href="https://sprit-app.me">Projects</Link>
+          <Link href="/projects">Projects</Link>
         </p>
         <div className={styles.contact}>
           <LinkIcon linkType={LinkType.Github} />
@@ -43,7 +43,7 @@ export default function Home() {
             <br /> Careers, Education, and Extra Activities
           </p>
         </Link>
-        <Link href={`https://sprit-app.me`} className={styles.link_template}>
+        <Link href={`/projects`} className={styles.link_template}>
           <h2 className={styles.link_title}>
             Projects<span className={styles.blank}></span>&rarr;
           </h2>

@@ -7,3 +7,152 @@
   min-height: 100vh;
   gap: 3.5rem;
 }
+
+.container {
+  min-width: 55%;
+}
+
+.back_button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  text-decoration: none;
+  margin: 0 0 0.5rem 0;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgb(143, 143, 143);
+  padding: 0.35rem 0.5rem 0.35rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.left_arrow {
+  font-size: 1.2rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(93, 93, 93);
+  transition: all 0.2s ease-in-out;
+}
+
+.back_button:hover {
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgb(173, 173, 173);
+  background-color: rgb(241, 241, 241);
+}
+
+.back_button:hover > .left_arrow {
+  transition: all 0.2s ease-in-out;
+  color: rgb(70, 70, 70);
+}
+
+.title_container {
+  margin: 1rem 0 2rem 0;
+}
+
+.title {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 2.3rem;
+  font-family: "PretendardBold";
+  font-weight: 900;
+}
+
+.description {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(127, 127, 127);
+}
+
+.content_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 3rem;
+}
+
+.project_box {
+  margin: 1rem 0 2rem 0;
+  border-left: 0.35rem solid rgb(127, 127, 127);
+  padding: 0.5rem 0 0.5rem 2rem;
+}
+
+.project_title {
+  margin: 0 0 0 0;
+  font-size: 1.4rem;
+  font-family: "PretendardBold";
+  font-weight: 400;
+  color: rgb(25, 25, 25);
+}
+
+.project_description {
+  margin: 0.7rem 0 0 0;
+  font-size: 1.1rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(83, 83, 83);
+}
+
+.tech_stack {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.links {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.tech_stack > p {
+  font-size: 1.1rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(118, 118, 118);
+}
+
+.icon_container {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon_button {
+  width: 1.5rem;
+  height: 1.5rem;
+  filter: grayscale(1);
+  opacity: 0.5;
+  transition: all 0.2s ease-in-out;
+  vertical-align: top;
+}
+
+.icon_button:hover {
+  transition: all 0.2s ease-in-out;
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.link_div {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .main {
+    padding: 3rem;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.project_description {
+  list-style-position: inside;
+}
