@@ -145,6 +145,65 @@
   color: rgb(154, 154, 154);
 }
 
+/* projects/page.module.css */
+.tech_stack {
+  margin-top: 1rem;
+}
+
+.tech_stack h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-family: "PretendardBold";
+  font-weight: 700;
+  color: rgb(50, 50, 50);
+}
+
+.tech_stack ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.tech_stack li {
+  font-size: 1rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(83, 83, 83);
+}
+
+.links {
+  margin-top: 1rem;
+}
+
+.links h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-family: "PretendardBold";
+  font-weight: 700;
+  color: rgb(50, 50, 50);
+}
+
+.links ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.links li {
+  font-size: 1rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(83, 83, 83);
+}
+
+.links a {
+  text-decoration: none;
+  color: rgb(34, 93, 214);
+  transition: color 0.2s ease-in-out;
+}
+
+.links a:hover {
+  color: rgb(21, 60, 139);
+}
+
 /* Mobile */
 @media (max-width: 700px) {
   .main {
