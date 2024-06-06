@@ -54,7 +54,6 @@ export default function ProjectBox({
         ))}
       </div>
       <div className={styles.tech_stack}>
-        <p>Used Tech : </p>
         {techStack.map((tech) => (
           <TechStack name={tech} key={tech} />
         ))}
