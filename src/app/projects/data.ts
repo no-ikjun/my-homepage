@@ -1,3 +1,5 @@
+import { link } from "fs";
+
 // pages/projects/data.js
 export const projects = [
   {
@@ -38,6 +40,19 @@ export const projects = [
         type: "github",
         url: "https://github.com/no-ikjun/analyst-fe",
         description: "Frontend GitHub repository",
+      },
+    ],
+  },
+  {
+    title: "DeokDam Pocket",
+    description: "New year's Greeting Platform",
+    directLink: "https://new-year.app",
+    techStack: ["NextJS"],
+    links: [
+      {
+        type: "github",
+        url: "https://github.com/no-ikjun/new-year-2024",
+        description: "GitHub repository",
       },
     ],
   },
