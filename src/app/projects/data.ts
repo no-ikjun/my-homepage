@@ -26,6 +26,19 @@ export const projects = [
     ],
   },
   {
+    title: "DeokDam Pocket",
+    description: "New year's Greeting Platform",
+    directLink: "https://deokdam.app",
+    techStack: ["NextJS"],
+    links: [
+      {
+        type: "github",
+        url: "https://github.com/no-ikjun/deokdam-pocket",
+        description: "GitHub repository",
+      },
+    ],
+  },
+  {
     title: "AI Analyst",
     description: "Auto-reporting system for stock item analysis using ChatGPT",
     directLink: "https://analyst.ikjun.com",
@@ -40,19 +53,6 @@ export const projects = [
         type: "github",
         url: "https://github.com/no-ikjun/analyst-fe",
         description: "Frontend GitHub repository",
-      },
-    ],
-  },
-  {
-    title: "DeokDam Pocket",
-    description: "New year's Greeting Platform",
-    directLink: "https://deokdam.app",
-    techStack: ["NextJS"],
-    links: [
-      {
-        type: "github",
-        url: "https://github.com/no-ikjun/deokdam-pocket",
-        description: "GitHub repository",
       },
     ],
   },
