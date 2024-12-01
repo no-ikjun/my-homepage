@@ -46,12 +46,12 @@ export const projects = [
   {
     title: "DeokDam Pocket",
     description: "New year's Greeting Platform",
-    directLink: "https://new-year.app",
+    directLink: "https://deokdam.app",
     techStack: ["NextJS"],
     links: [
       {
         type: "github",
-        url: "https://github.com/no-ikjun/new-year-2024",
+        url: "https://github.com/no-ikjun/deokdam-pocket",
         description: "GitHub repository",
       },
     ],
