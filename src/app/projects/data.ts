@@ -36,6 +36,11 @@ export const projects = [
         url: "https://github.com/no-ikjun/deokdam-pocket",
         description: "GitHub repository",
       },
+      {
+        type: "website",
+        url: "https://www.instagram.com/deokdam_pocket/",
+        description: "Instagram profile",
+      },
     ],
   },
   {
