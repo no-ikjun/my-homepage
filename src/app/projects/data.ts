@@ -6,7 +6,7 @@ export const projects = [
     title: "SPRIT",
     description: "App service that creates a steady reading habit.",
     directLink: "https://sprit-app.me",
-    techStack: ["flutter", "NextJS", "NestJS", "AWS"],
+    techStack: ["flutter", "NextJS", "NestJS", "docker", "AWS"],
     links: [
       {
         type: "github",
