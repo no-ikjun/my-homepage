@@ -21,6 +21,10 @@ export default function TechStack({ name }: TechStackProps) {
       src = "./img/nestjs_icon.svg";
       alt = "NestJS";
       break;
+    case "docker":
+      src = "./img/docker_icon.svg";
+      alt = "Docker";
+      break;
     case "AWS":
       src = "./img/aws_icon.svg";
       alt = "AWS";
