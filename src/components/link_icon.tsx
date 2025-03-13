@@ -25,7 +25,7 @@ export default function LinkIcon({ linkType }: { linkType: LinkType }) {
       alt = "LinkedIn";
       break;
     case LinkType.Instagram:
-      href = "https://www.instagram.com/hi_ikjun/";
+      href = "https://www.instagram.com/__ikjun/";
       src = "./img/instagram_icon.svg";
       alt = "Instagram";
       break;
