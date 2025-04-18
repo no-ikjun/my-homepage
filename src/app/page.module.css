@@ -238,3 +238,24 @@
 
 @media (prefers-color-scheme: dark) {
 }
+
+.floating {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 9999px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.floating:hover {
+  transform: scale(1.05);
+  background-color: #f3f4f6;
+}
