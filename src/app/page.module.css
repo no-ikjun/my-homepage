@@ -15,7 +15,7 @@
   align-items: center;
   max-width: 1200px;
   width: 100%;
-  padding: 0 2rem;
+  padding: 0;
   gap: 3rem;
 }
 
@@ -95,7 +95,6 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-content: center;
   align-items: center;
-  gap: 3rem;
 }
 
 .link_template {
