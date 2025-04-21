@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
-import { notFound } from "next/navigation";
 import LocaleSwitcher from "@/components/locale_switcher";
 import { headers } from "next/headers";
 import Header from "@/components/header";
@@ -32,9 +29,9 @@ export default function RootLayout({
     <html lang={params.locale}>
       <body className={inter.className}>
         <Header />
-        <Analytics />
         {children}
-        <LocaleSwitcher currentLocale={params.locale} pathname={pathname} />
+        {/* <LocaleSwitcher currentLocale={params.locale} pathname={pathname} /> */}
+        <Analytics />
       </body>
     </html>
   );
