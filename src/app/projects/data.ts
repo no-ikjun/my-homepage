@@ -6,7 +6,7 @@ export const projects = [
       "https://play-lh.googleusercontent.com/xc7SKBJq60amNLJMphT9QBPkfbaVXtbrhGbTuexJPtxYII_A-QC2hcLHuJ96PvHqHw=w240-h480-rw",
     description: "App service that creates a steady reading habit.",
     directLink: "https://sprit-app.me",
-    techStack: ["flutter", "NextJS", "NestJS", "docker", "AWS"],
+    techStack: ["flutter", "NextJS", "NestJS", "docker", "AWS", "Figma"],
     links: [
       {
         type: "github",
@@ -32,7 +32,7 @@ export const projects = [
       "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
     description: "New year's Greeting Platform since 2024",
     directLink: "https://deokdam.app",
-    techStack: ["NextJS"],
+    techStack: ["NextJS", "TypeScript"],
     links: [
       {
         type: "github",
