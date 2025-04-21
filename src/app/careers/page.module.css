@@ -1,0 +1,236 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  padding: 6rem 0;
+  min-height: 100vh;
+  gap: 3.5rem;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  padding: 0 2rem;
+  max-width: 1200px;
+}
+
+.back_button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  text-decoration: none;
+  margin: 0 0 0.5rem 0;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgb(143, 143, 143);
+  padding: 0.35rem 0.5rem 0.35rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.left_arrow {
+  font-size: 1.2rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(93, 93, 93);
+  transition: all 0.2s ease-in-out;
+}
+
+.back_button:hover {
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgb(173, 173, 173);
+  background-color: rgb(241, 241, 241);
+}
+
+.back_button:hover > .left_arrow {
+  transition: all 0.2s ease-in-out;
+  color: rgb(70, 70, 70);
+}
+
+.title_container {
+  margin: 1rem 0 1rem 0;
+}
+
+.title {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 2.3rem;
+  font-family: "PretendardBold";
+  font-weight: 900;
+}
+
+.description {
+  margin: 0 0 2rem 0;
+  font-size: 1rem;
+  font-family: "PretendardRegular";
+  font-weight: 400;
+  color: rgb(127, 127, 127);
+}
+
+.career_list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.career_card {
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  padding: 2rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.career_card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.career_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.career_left {
+  max-width: 150px;
+}
+
+.career_logo {
+  width: 130px;
+  height: 130px;
+  border-radius: 1.5rem;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #ddd;
+}
+
+.career_right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.career_header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.career_company {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0;
+  color: #111;
+  font-family: "PretendardBold", sans-serif;
+}
+
+.career_link {
+  color: #111;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.career_link:hover {
+  text-decoration: underline;
+}
+
+.career_date {
+  font-size: 0.95rem;
+  color: #666;
+  font-family: "PretendardRegular";
+}
+
+.career_role {
+  font-weight: 600;
+  background: #111;
+  color: #fff;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  display: inline-block;
+  font-size: 1rem;
+  width: fit-content;
+  font-family: "PretendardMedium";
+}
+
+.career_content {
+  list-style-type: disc;
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.career_content li {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.6;
+  font-family: "PretendardRegular", sans-serif;
+}
+
+.project_block {
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.project_block:nth-of-type(1) {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.project_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project_title {
+  font-size: 1.1rem;
+  font-family: "PretendardBold";
+  font-weight: 700;
+  margin: 0;
+  color: #222;
+}
+
+.project_period {
+  font-size: 0.9rem;
+  color: #666;
+  font-family: "PretendardRegular";
+}
+
+.project_description {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #444;
+  font-family: "PretendardRegular";
+}
+
+.project_list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.project_list li {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.6;
+  font-family: "PretendardRegular", sans-serif;
+}
+
+@media (max-width: 700px) {
+  .career_item {
+    flex-direction: column;
+  }
+  .career_left {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .career_logo {
+    width: 80px;
+    height: 80px;
+  }
+}

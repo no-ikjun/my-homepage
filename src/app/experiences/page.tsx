@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import ExperienceBox from "@/components/experience_box";
-import { activities, experiences, educations, awards } from "./data";
+import { activities, educations, awards } from "./data";
 import Link from "next/link";
 import AwardsBox from "@/components/awards_box";
 import EducationsBox from "@/components/educations_box";
