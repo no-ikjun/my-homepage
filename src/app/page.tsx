@@ -27,10 +27,10 @@ export default function Home() {
             iteration.
           </p>
           <div className={styles.contact}>
+            <LinkIcon linkType={LinkType.Mail} />
             <LinkIcon linkType={LinkType.Github} />
             <LinkIcon linkType={LinkType.LinkedIn} />
             <LinkIcon linkType={LinkType.Instagram} />
-            <LinkIcon linkType={LinkType.Mail} />
           </div>
         </div>
       </div>
