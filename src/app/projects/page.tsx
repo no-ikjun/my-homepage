@@ -1,7 +1,22 @@
 import styles from "./page.module.css";
-import ProjectBox from "@/components/project_box";
 import { projects } from "./data";
 import Link from "next/link";
+import Image from "next/image";
+
+const techIconMap: Record<string, string> = {
+  flutter: "/img/flutter_icon.svg",
+  NextJS: "/img/nextjs_icon.svg",
+  NestJS: "/img/nestjs_icon.svg",
+  docker: "/img/docker_icon.svg",
+  AWS: "/img/aws_icon.svg",
+  React: "/img/react_icon.svg",
+  CloudFlare: "/img/cloudflare_icon.svg",
+};
+
+const linkIconMap: Record<string, string> = {
+  github: "/img/github_icon.svg",
+  website: "/img/link_icon.svg",
+};
 
 export default function ProjectsPage() {
   return (
@@ -13,18 +28,65 @@ export default function ProjectsPage() {
         <div className={styles.title_container}>
           <h1 className={styles.title}>Projects</h1>
           <p className={styles.description}>My Own Projects Since 2023</p>
-          <p className={styles.description}>Updated : 2024.06</p>
         </div>
-        <div className={styles.content_container}>
+        <div className={styles.project_grid}>
           {projects.map((project) => (
-            <ProjectBox
-              title={project.title}
-              description={project.description}
-              directLink={project.directLink}
-              techStack={project.techStack}
-              links={project.links}
-              key={project.title}
-            />
+            <div className={styles.project_card} key={project.title}>
+              <div className={styles.project_header}>
+                <div
+                  className={styles.project_logo}
+                  style={{ backgroundImage: `url(${project.iamge})` }}
+                />
+                <div className={styles.project_info}>
+                  <h3 className={styles.project_title}>
+                    <Link
+                      href={project.directLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.project_link}
+                    >
+                      {project.title} ↗
+                    </Link>
+                  </h3>
+                  <p className={styles.project_period}>{project.period}</p>
+                  <p className={styles.project_description}>
+                    {project.description}
+                  </p>
+                </div>
+              </div>
+              <div className={styles.tech_stack}>
+                {project.techStack.map((tech) => (
+                  <Image
+                    key={tech}
+                    src={techIconMap[tech]}
+                    alt={tech}
+                    width={24}
+                    height={24}
+                    className={styles.icon}
+                  />
+                ))}
+              </div>
+              <div className={styles.links}>
+                {project.links.map((link) => (
+                  <Link
+                    key={link.url}
+                    href={link.url}
+                    className={styles.link_div}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={linkIconMap[link.type]}
+                      alt={link.type}
+                      width={16}
+                      height={16}
+                      className={styles.icon_button}
+                    />
+                    {link.description}
+                  </Link>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

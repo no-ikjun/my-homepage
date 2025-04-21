@@ -37,13 +37,13 @@ export default function LinkIcon({ linkType }: { linkType: LinkType }) {
   }
   return (
     <div className={styles.icon_container}>
-      <Link href={href}>
+      <Link href={href} target="_blank">
         <Image
           className={styles.icon}
           src={src}
           alt={alt}
-          width={32}
-          height={32}
+          width={35}
+          height={35}
         />
       </Link>
     </div>

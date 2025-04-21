@@ -1,9 +1,9 @@
-import { link } from "fs";
-
-// pages/projects/data.js
 export const projects = [
   {
     title: "SPRIT",
+    period: "2024.3 - (ongoing)",
+    iamge:
+      "https://play-lh.googleusercontent.com/xc7SKBJq60amNLJMphT9QBPkfbaVXtbrhGbTuexJPtxYII_A-QC2hcLHuJ96PvHqHw=w240-h480-rw",
     description: "App service that creates a steady reading habit.",
     directLink: "https://sprit-app.me",
     techStack: ["flutter", "NextJS", "NestJS", "docker", "AWS"],
@@ -27,7 +27,10 @@ export const projects = [
   },
   {
     title: "DeokDam Pocket",
-    description: "New year's Greeting Platform",
+    period: "2023.12 - (ongoing)",
+    iamge:
+      "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
+    description: "New year's Greeting Platform since 2024",
     directLink: "https://deokdam.app",
     techStack: ["NextJS"],
     links: [
@@ -45,6 +48,9 @@ export const projects = [
   },
   {
     title: "AI Analyst",
+    period: "2024.2 - 2024.5",
+    iamge:
+      "https://www.anao.gov.au/sites/default/files/styles/anao_report/public/2024-02/anao-australian-taxation-offices-adoption-automation-and-artificial-intelligence.jpg?itok=Lex-bDwX",
     description: "Auto-reporting system for stock item analysis using ChatGPT",
     directLink: "https://analyst.ikjun.com",
     techStack: ["React", "CloudFlare", "NestJS", "AWS"],
