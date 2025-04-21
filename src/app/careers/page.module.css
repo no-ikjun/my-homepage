@@ -228,10 +228,11 @@
   }
   .career_item {
     flex-direction: column;
+    gap: 1rem;
   }
   .career_left {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     width: 100%;
   }
   .career_logo {

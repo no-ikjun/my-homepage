@@ -11,6 +11,8 @@ const techIconMap: Record<string, string> = {
   AWS: "/img/aws_icon.svg",
   React: "/img/react_icon.svg",
   CloudFlare: "/img/cloudflare_icon.svg",
+  Figma: "/img/figma_icon.svg",
+  TypeScript: "/img/typescript_icon.svg",
 };
 
 const linkIconMap: Record<string, string> = {
