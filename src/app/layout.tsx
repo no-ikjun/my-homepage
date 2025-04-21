@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { notFound } from "next/navigation";
 import LocaleSwitcher from "@/components/locale_switcher";
 import { headers } from "next/headers";
+import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,8 @@ export default function RootLayout({
   return (
     <html lang={params.locale}>
       <body className={inter.className}>
+        <Header />
+        <Analytics />
         {children}
         <LocaleSwitcher currentLocale={params.locale} pathname={pathname} />
       </body>
