@@ -221,6 +221,11 @@
 }
 
 @media (max-width: 700px) {
+  .main {
+    padding: 4rem 0;
+    justify-content: center;
+    align-items: center;
+  }
   .career_item {
     flex-direction: column;
   }

@@ -15,8 +15,9 @@ export default function ExperiencePage() {
         </Link>
         <div className={styles.title_container}>
           <h1 className={styles.title}>Experiences</h1>
-          <p className={styles.description}>2021 ~ Present</p>
-          <p className={styles.description}>Updated : 2024.06</p>
+          <p className={styles.description}>
+            Experiences and activities that I have done
+          </p>
         </div>
         <div className={styles.content_container}>
           <EducationsBox data={educations} />
