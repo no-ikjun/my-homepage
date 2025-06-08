@@ -55,6 +55,16 @@ export const awards = [
       "Tools to improve work productivity with Generative AI - Docuflow",
     ],
   },
+  {
+    title: "2025 Impact AI Hackathon@GDG GIST",
+    link: "https://gdg.community.dev/events/details/google-gdg-on-campus-gwangju-institute-of-science-and-technology-gwangju-south-korea-presents-build-with-ai-impact-ai-hackathon-1/",
+    image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/IMG_0019.PNG",
+    description: "2025.05",
+    subDescription: "🥇 1st prize",
+    content: [
+      "AI-based news article platform to solve eco-chamber phenomenon - Agora",
+    ],
+  },
 ];
 
 export const activities = [
