@@ -51,7 +51,7 @@ export const projects = [
     period: "2024.2 - 2025.7",
     iamge:
       "https://analyst.ikjun.com/logo.png",
-    description: "AI Financial Agend based on ChatGPT & HyperCLOVA X",
+    description: "AI Financial Agent based on ChatGPT & HyperCLOVA X",
     directLink: "https://analyst.ikjun.com",
     techStack: ["React", "CloudFlare", "NestJS", "FastAPI", "AWS"],
     links: [
