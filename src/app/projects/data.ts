@@ -47,18 +47,23 @@ export const projects = [
     ],
   },
   {
-    title: "AI Analyst",
-    period: "2024.2 - 2024.5",
+    title: "Wisemind",
+    period: "2024.2 - 2025.7",
     iamge:
-      "https://www.anao.gov.au/sites/default/files/styles/anao_report/public/2024-02/anao-australian-taxation-offices-adoption-automation-and-artificial-intelligence.jpg?itok=Lex-bDwX",
-    description: "Auto-reporting system for stock item analysis using ChatGPT",
+      "https://analyst.ikjun.com/logo.png",
+    description: "AI Investment Content Creation and Investment Decision Making AI Agent based on HyperCLOVA X & ChatGPT",
     directLink: "https://analyst.ikjun.com",
-    techStack: ["React", "CloudFlare", "NestJS", "AWS"],
+    techStack: ["React", "CloudFlare", "NestJS", "FastAPI", "AWS"],
     links: [
       {
         type: "github",
         url: "https://github.com/no-ikjun/analyst-nest",
         description: "Backend GitHub repository",
+      },
+      {
+        type: "github",
+        url: "https://github.com/no-ikjun/wisemind-ai-server",
+        description: "AI Server GitHub repository",
       },
       {
         type: "github",
