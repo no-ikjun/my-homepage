@@ -37,7 +37,7 @@ export default function TechStack({ name }: TechStackProps) {
       src = "./img/flutter_icon.svg";
       alt = "Flutter";
       break;
-    case "fastapi":
+    case "FastAPI":
       src = "./img/fastapi_icon.svg";
       alt = "FastAPI";
       break;
