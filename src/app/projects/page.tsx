@@ -13,6 +13,7 @@ const techIconMap: Record<string, string> = {
   CloudFlare: "/img/cloudflare_icon.svg",
   Figma: "/img/figma_icon.svg",
   TypeScript: "/img/typescript_icon.svg",
+  FastAPI: "/img/fastapi_icon.svg",
 };
 
 const linkIconMap: Record<string, string> = {
