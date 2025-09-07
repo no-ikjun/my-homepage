@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../app/experiences/page.module.css";
+import styles from "../[locale]/experiences/page.module.css";
 import Link from "next/link";
 
 type ActivitiesBoxProps = {

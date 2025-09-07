@@ -1,11 +1,21 @@
-// import createMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
+import createMiddleware from "next-intl/middleware";
+import { NextRequest, NextResponse } from "next/server";
 
-// export default createMiddleware({
-//   locales: ["ko", "en"],
-//   defaultLocale: "ko",
-//   localeDetection: false,
-// });
+const intlMiddleware = createMiddleware(routing);
 
-// export const config = {
-//   matcher: ["/((?!api|_next|.*\\..*).*)"],
-// };
+export default function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Explicitly redirect root to default locale
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL(`/${routing.defaultLocale}`, request.url));
+  }
+
+  return intlMiddleware(request);
+}
+
+export const config = {
+  // Run on root and all localized paths
+  matcher: ["/", "/(en|ko)/:path*"],
+};

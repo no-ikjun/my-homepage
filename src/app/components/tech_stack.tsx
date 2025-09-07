@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../app/[locale]/projects/page.module.css";
+import styles from "../[locale]/projects/page.module.css";
 
 export interface TechStackProps {
   name: string;
@@ -36,10 +36,6 @@ export default function TechStack({ name }: TechStackProps) {
     case "flutter":
       src = "./img/flutter_icon.svg";
       alt = "Flutter";
-      break;
-    case "FastAPI":
-      src = "./img/fastapi_icon.svg";
-      alt = "FastAPI";
       break;
   }
   return (

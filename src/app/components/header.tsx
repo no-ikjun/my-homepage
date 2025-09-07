@@ -1,6 +1,7 @@
-import Link from "next/link";
-import styles from "../app/page.module.css";
+import styles from "../[locale]/page.module.css";
 import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import LocaleSwitcher from "@/app/components/locale_switcher";
 
 export default function Header() {
   return (
@@ -30,6 +31,7 @@ export default function Header() {
             </li>
           </ul>
         </nav>
+        <LocaleSwitcher />
       </div>
     </header>
   );

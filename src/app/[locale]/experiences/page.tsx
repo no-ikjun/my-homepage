@@ -1,10 +1,10 @@
 import styles from "./page.module.css";
-import ExperienceBox from "@/components/experience_box";
+import ExperienceBox from "@/app/components/experience_box";
 import { activities, educations, awards } from "./data";
-import Link from "next/link";
-import AwardsBox from "@/components/awards_box";
-import EducationsBox from "@/components/educations_box";
-import ActivitiesBox from "@/components/activities_box";
+import { Link } from "@/i18n/routing";
+import AwardsBox from "@/app/components/awards_box";
+import EducationsBox from "@/app/components/educations_box";
+import ActivitiesBox from "@/app/components/activities_box";
 
 export default function ExperiencePage() {
   return (

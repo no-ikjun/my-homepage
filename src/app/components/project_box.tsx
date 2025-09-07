@@ -1,4 +1,4 @@
-import styles from "../app/projects/page.module.css";
+import styles from "../[locale]/projects/page.module.css";
 import TechStack from "./tech_stack";
 import ProjectLink from "./project_link";
 import Link from "next/link";

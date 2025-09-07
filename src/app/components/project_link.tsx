@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../app/projects/page.module.css";
+import styles from "../[locale]/projects/page.module.css";
 import Image from "next/image";
 
 export interface ProjectLinkProps {

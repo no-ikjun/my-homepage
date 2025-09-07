@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../app/page.module.css";
+import styles from "../[locale]/page.module.css";
 import Image from "next/image";
 
 export enum LinkType {

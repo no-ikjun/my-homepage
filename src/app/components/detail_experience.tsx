@@ -1,4 +1,4 @@
-import styles from "../app/experiences/page.module.css";
+import styles from "../[locale]/experiences/page.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
