@@ -703,7 +703,9 @@
     text-align: center;
   }
   .bottom_container {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
   .featured {
     padding: 0 1rem;
