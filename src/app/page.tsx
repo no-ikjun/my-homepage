@@ -7,13 +7,17 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <Image
-          className={styles.profile_image}
-          src="/img/profile_round3.png"
-          alt="Ikjun Choi"
-          width={280}
-          height={280}
-        />
+        <div className={styles.profile_wrap}>
+          <Image
+            className={styles.profile_image}
+            src="/img/profile_round3.png"
+            alt="Ikjun Choi"
+            width={280}
+            height={280}
+            priority
+            sizes="(max-width: 700px) 160px, 280px"
+          />
+        </div>
         <div className={styles.profile_container}>
           <h1 className={styles.title}>
             <span className={styles.light_title}>최익준</span>&nbsp;&nbsp;Ikjun
@@ -27,38 +31,73 @@ export default function Home() {
             iteration.
           </p>
           <div className={styles.contact}>
-            <LinkIcon linkType={LinkType.Mail} />
+            {/* <LinkIcon linkType={LinkType.Mail} /> */}
             <LinkIcon linkType={LinkType.Github} />
             <LinkIcon linkType={LinkType.LinkedIn} />
             <LinkIcon linkType={LinkType.Instagram} />
           </div>
+          <div className={styles.cta_container}>
+            <Link
+              href="/projects"
+              className={`${styles.cta_button} ${styles.cta_primary}`}
+              aria-label="View Projects"
+            >
+              View Projects
+            </Link>
+            <Link
+              href="mailto:choiikjun1101@gmail.com?subject=Hello%20Ikjun"
+              className={styles.cta_button}
+              aria-label="Contact via email (opens mail app)"
+            >
+              Contact Me
+            </Link>
+          </div>
         </div>
       </div>
       <div className={styles.bottom_container}>
-        <Link href={`/careers`} className={styles.link_template}>
-          <h2 className={styles.link_title}>
-            Careers<span className={styles.blank}></span>&rarr;
-          </h2>
-          <p className={styles.link_description}>
-            My careers since 2021.
-            <br /> Including internships and full-time jobs
+        <Link
+          href="/careers"
+          className={styles.nav_card}
+          aria-label="Go to Careers"
+        >
+          <div className={styles.nav_card_header}>
+            <h2 className={styles.nav_card_title}>Careers</h2>
+            <span className={styles.nav_card_chevron} aria-hidden>
+              →
+            </span>
+          </div>
+          <p className={styles.nav_card_desc}>
+            My careers since 2021. Including internships and full-time jobs.
           </p>
         </Link>
-        <Link href={`/experiences`} className={styles.link_template}>
-          <h2 className={styles.link_title}>
-            Experiences<span className={styles.blank}></span>&rarr;
-          </h2>
-          <p className={styles.link_description}>
-            My experiences including educations, awards, and extra activities
+        <Link
+          href="/experiences"
+          className={styles.nav_card}
+          aria-label="Go to Experiences"
+        >
+          <div className={styles.nav_card_header}>
+            <h2 className={styles.nav_card_title}>Experiences</h2>
+            <span className={styles.nav_card_chevron} aria-hidden>
+              →
+            </span>
+          </div>
+          <p className={styles.nav_card_desc}>
+            Educations, awards, and extra activities I’ve participated in.
           </p>
         </Link>
-        <Link href={`/projects`} className={styles.link_template}>
-          <h2 className={styles.link_title}>
-            Projects<span className={styles.blank}></span>&rarr;
-          </h2>
-          <p className={styles.link_description}>
-            These are my own projects.
-            <br /> Web/App services and ongoings projects
+        <Link
+          href="/projects"
+          className={styles.nav_card}
+          aria-label="Go to Projects"
+        >
+          <div className={styles.nav_card_header}>
+            <h2 className={styles.nav_card_title}>Projects</h2>
+            <span className={styles.nav_card_chevron} aria-hidden>
+              →
+            </span>
+          </div>
+          <p className={styles.nav_card_desc}>
+            My own web/app services and ongoing projects.
           </p>
         </Link>
       </div>

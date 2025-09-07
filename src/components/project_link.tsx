@@ -31,7 +31,12 @@ export default function ProjectLink({
 
   return (
     <div className={styles.icon_container}>
-      <Link href={href} target="_blank">
+      <Link
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${alt} 링크 열기 (새 창)`}
+      >
         <Image
           className={styles.icon_button}
           src={src}
@@ -39,6 +44,7 @@ export default function ProjectLink({
           width={32}
           height={32}
         />
+        <span className="sr-only">(새 창에서 열림)</span>
       </Link>
     </div>
   );

@@ -37,7 +37,12 @@ export default function LinkIcon({ linkType }: { linkType: LinkType }) {
   }
   return (
     <div className={styles.icon_container}>
-      <Link href={href} target="_blank">
+      <Link
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${alt} 프로필로 이동 (새 창)`}
+      >
         <Image
           className={styles.icon}
           src={src}
@@ -45,6 +50,7 @@ export default function LinkIcon({ linkType }: { linkType: LinkType }) {
           width={35}
           height={35}
         />
+        <span className="sr-only">(새 창에서 열림)</span>
       </Link>
     </div>
   );

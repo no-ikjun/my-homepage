@@ -20,14 +20,21 @@ export default function DetailExperience({ data }: DetailExperienceProps) {
           <h3 className={styles.content_subtitle}>
             {item.title}
             {item.link != "" ? (
-              <Link href={item.link} style={{ verticalAlign: "middle" }}>
+              <Link
+                href={item.link}
+                style={{ verticalAlign: "middle" }}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${item.title} link (새 창)`}
+              >
                 <Image
                   src="./img/link.svg"
                   width={25}
                   height={25}
-                  alt="link"
+                  alt="External link"
                   className={styles.link_icon}
                 />
+                <span className="sr-only">(새 창에서 열림)</span>
               </Link>
             ) : (
               <></>
