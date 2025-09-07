@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import { projects } from "./data";
+import { getLocale } from "next-intl/server";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -21,7 +21,11 @@ const linkIconMap: Record<string, string> = {
   website: "/img/link_icon.svg",
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const locale = await getLocale();
+  const { projects } = await import(`./data.${locale}`).catch(
+    () => import("./data.en")
+  );
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -33,7 +37,7 @@ export default function ProjectsPage() {
           <p className={styles.description}>My Own Projects Since 2023</p>
         </div>
         <div className={styles.project_grid}>
-          {projects.map((project) => (
+          {projects.map((project: any) => (
             <div className={styles.project_card} key={project.title}>
               <div className={styles.project_header}>
                 <div
@@ -58,7 +62,7 @@ export default function ProjectsPage() {
                 </div>
               </div>
               <div className={styles.tech_stack}>
-                {project.techStack.map((tech) => (
+                {project.techStack.map((tech: any) => (
                   <Image
                     key={tech}
                     src={techIconMap[tech]}
@@ -70,7 +74,7 @@ export default function ProjectsPage() {
                 ))}
               </div>
               <div className={styles.links}>
-                {project.links.map((link) => (
+                {project.links.map((link: any) => (
                   <Link
                     key={link.url}
                     href={link.url}

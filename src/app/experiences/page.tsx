@@ -1,12 +1,15 @@
 import styles from "./page.module.css";
 import ExperienceBox from "@/components/experience_box";
-import { activities, educations, awards } from "./data";
+import { getLocale } from "next-intl/server";
 import Link from "next/link";
 import AwardsBox from "@/components/awards_box";
 import EducationsBox from "@/components/educations_box";
 import ActivitiesBox from "@/components/activities_box";
 
-export default function ExperiencePage() {
+export default async function ExperiencePage() {
+  const locale = await getLocale();
+  const mod = await import(`./data.${locale}`).catch(() => import("./data.en"));
+  const { activities, educations, awards } = mod as typeof import("./data.en");
   return (
     <div className={styles.main}>
       <div className={styles.container}>

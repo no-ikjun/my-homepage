@@ -342,6 +342,13 @@
   font-weight: 500;
 }
 
+.language_switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
 .active_nav {
   color: #5cb0ff;
   font-weight: 700;
