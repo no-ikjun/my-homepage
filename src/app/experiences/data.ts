@@ -27,12 +27,15 @@ export const educations = [
 
 export const awards = [
   {
-    title: "Side With Startups@KAIST",
-    link: "https://docs.google.com/presentation/d/1cXm37OX8B42wRRq6S16i2StgV6BaVh9VDfI3NG8HTPo/edit?usp=sharing",
-    image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/profile_1.webp",
-    description: "2023.05",
-    subDescription: "🥇 1st prize",
-    content: ["UI/UX Improvement Solution Platform by Generative AI - U-in"],
+    title: "2024 KPMG Ideathon@삼정 KPMG",
+    link: "http://www.dhnews.co.kr/news/view/1065585962399224",
+    image:
+      "https://d3ob3cint7tr3s.cloudfront.net/portfolio/2024_kpmg_ideathon.jpg",
+    description: "2024.02",
+    subDescription: "🥉 3rd prize",
+    content: [
+      "Tools to improve work productivity with Generative AI - Docuflow",
+    ],
   },
   {
     title: "Gwangju Public Data Utilization Contest",
@@ -45,15 +48,12 @@ export const awards = [
     ],
   },
   {
-    title: "2024 KPMG Ideathon@삼정 KPMG",
-    link: "http://www.dhnews.co.kr/news/view/1065585962399224",
-    image:
-      "https://d3ob3cint7tr3s.cloudfront.net/portfolio/2024_kpmg_ideathon.jpg",
-    description: "2024.02",
-    subDescription: "🥉 3rd prize",
-    content: [
-      "Tools to improve work productivity with Generative AI - Docuflow",
-    ],
+    title: "Side With Startups@KAIST",
+    link: "https://docs.google.com/presentation/d/1cXm37OX8B42wRRq6S16i2StgV6BaVh9VDfI3NG8HTPo/edit?usp=sharing",
+    image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/profile_1.webp",
+    description: "2023.05",
+    subDescription: "🥇 1st prize",
+    content: ["UI/UX Improvement Solution Platform by Generative AI - U-in"],
   },
   {
     title: "2025 Impact AI Hackathon@GDG GIST",
