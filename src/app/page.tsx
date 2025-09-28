@@ -7,15 +7,18 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <Image
-          className={styles.profile_image}
-          src="/img/profile_round3.png"
-          alt="Ikjun Choi"
-          width={280}
-          height={280}
-          priority
-          sizes="(max-width: 700px) 160px, 280px"
-        />
+        <div className={styles.profile_wrap}>
+          <Image
+            className={styles.profile_image}
+            src="/img/profile_round3.png"
+            alt="Ikjun Choi"
+            width={280}
+            height={280}
+            priority
+            sizes="(max-width: 700px) 160px, 280px"
+          />
+        </div>
+
         <div className={styles.profile_container}>
           <h1 className={styles.title}>
             <span className={styles.light_title}>최익준</span>&nbsp;&nbsp;Ikjun
@@ -28,12 +31,14 @@ export default function Home() {
             end-to-end—from idea and planning to launch and continuous
             iteration.
           </p>
+
           <div className={styles.contact}>
             <LinkIcon linkType={LinkType.Mail} />
             <LinkIcon linkType={LinkType.Github} />
             <LinkIcon linkType={LinkType.LinkedIn} />
             <LinkIcon linkType={LinkType.Instagram} />
           </div>
+
           <div className={styles.cta_container}>
             <Link
               href="/projects"
@@ -52,8 +57,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       <div className={styles.bottom_container}>
-        <Link href={`/careers`} className={styles.link_template}>
+        <Link href="/careers" className={styles.link_template}>
           <h2 className={styles.link_title}>
             Careers<span className={styles.blank}></span>&rarr;
           </h2>
@@ -62,7 +68,8 @@ export default function Home() {
             <br /> Including internships and full-time jobs
           </p>
         </Link>
-        <Link href={`/experiences`} className={styles.link_template}>
+
+        <Link href="/experiences" className={styles.link_template}>
           <h2 className={styles.link_title}>
             Experiences<span className={styles.blank}></span>&rarr;
           </h2>
@@ -70,16 +77,18 @@ export default function Home() {
             My experiences including educations, awards, and extra activities
           </p>
         </Link>
-        <Link href={`/projects`} className={styles.link_template}>
+
+        <Link href="/projects" className={styles.link_template}>
           <h2 className={styles.link_title}>
             Projects<span className={styles.blank}></span>&rarr;
           </h2>
           <p className={styles.link_description}>
             These are my own projects.
-            <br /> Web/App services and ongoings projects
+            <br /> Web/App services and ongoing projects
           </p>
         </Link>
       </div>
+
       <p className={styles.copyright}>
         © 2023 Ikjun Choi. All Rights Reserved.
       </p>
