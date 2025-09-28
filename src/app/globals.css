@@ -8,6 +8,23 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 243, 244, 246;
   --background-end-rgb: 243, 244, 246;
+
+  /* UI tokens */
+  --color-primary: #4ea8ff;
+  --color-primary-contrast: #ffffff;
+  --glass-border-1: rgba(120, 180, 255, 0.45);
+  --glass-border-2: rgba(120, 180, 255, 0.15);
+  --glass-highlight: radial-gradient(
+    1200px 600px at 20% 0%,
+    rgba(135, 206, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  --bg-gradient: radial-gradient(
+    1000px 600px at 80% -10%,
+    rgba(78, 168, 255, 0.18) 0%,
+    rgba(78, 168, 255, 0.06) 35%,
+    rgba(255, 255, 255, 0) 70%
+  );
 }
 
 * {
@@ -30,38 +47,85 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: "Pretendard", "PretendardRegular", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Fira Sans", "Droid Sans", "Helvetica Neue", "Noto Sans KR",
+    "Apple SD Gothic Neo", Arial, sans-serif;
+}
+
+/* A11y utility */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 @font-face {
   font-family: "PretendardRegular";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-    format("woff");
+  src: url("/fonts/pretendard/Pretendard-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "PretendardMedium";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
-    format("woff");
+  src: url("/fonts/pretendard/Pretendard-Medium.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "PretendardBold";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
-    format("woff");
+  src: url("/fonts/pretendard/Pretendard-Bold.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "PretendardExtraBold";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff")
-    format("woff");
+  src: url("/fonts/pretendard/Pretendard-ExtraBold.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
+}
+
+/* Unified family: "Pretendard" (use this everywhere) */
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/pretendard/Pretendard-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/pretendard/Pretendard-Medium.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/pretendard/Pretendard-Bold.woff2") format("woff2");
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/pretendard/Pretendard-ExtraBold.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Mobile */

@@ -31,7 +31,7 @@
 
 .left_arrow {
   font-size: 1.2rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(93, 93, 93);
   transition: all 0.2s ease-in-out;
@@ -49,20 +49,20 @@
 }
 
 .title_container {
-  margin: 1rem 0 1rem 0;
+  margin: 1rem 0 2rem 0;
 }
 
 .title {
   margin: 1rem 0 0.5rem 0;
   font-size: 2.3rem;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 900;
 }
 
 .description {
   margin: 0 0 0.5rem 0;
   font-size: 1rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(127, 127, 127);
 }
@@ -77,14 +77,14 @@
 .content_title {
   margin-bottom: 1rem;
   font-size: 1.9rem;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 900;
 }
 
 .content_subtitle {
   margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 900;
 }
 
@@ -103,7 +103,7 @@
 .content_description {
   margin: 0 0 0.5rem 0;
   font-size: 1rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(127, 127, 127);
 }
@@ -117,7 +117,7 @@
 .content_box_title {
   margin: 0 0 0 0;
   font-size: 1.2rem;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 400;
   font-style: italic;
   color: rgb(25, 25, 25);
@@ -126,7 +126,7 @@
 .content_box_description {
   margin: 0.7rem 0 0 0;
   font-size: 1.1rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(83, 83, 83);
 }
@@ -166,7 +166,7 @@
 .education_title {
   font-size: 1.2rem;
   font-weight: 800;
-  font-family: "PretendardBold", sans-serif;
+  font-family: "Pretendard", sans-serif;
   margin: 0;
   color: #222;
 }
@@ -183,20 +183,20 @@
   font-size: 1rem;
   color: #555;
   margin: 0;
-  font-family: "PretendardRegular", sans-serif;
+  font-family: "Pretendard", sans-serif;
 }
 
 .education_subDescription {
   font-size: 0.95rem;
   color: #777;
   margin-top: 0.3rem;
-  font-family: "PretendardMedium", sans-serif;
+  font-family: "Pretendard", sans-serif;
 }
 
 .education_content_box_description {
   font-size: 0.95rem;
   color: #444;
-  font-family: "PretendardRegular", sans-serif;
+  font-family: "Pretendard", sans-serif;
   list-style-type: disc;
   list-style-position: inside;
   margin: 0.2rem 0;
@@ -259,13 +259,13 @@
 .award_title {
   font-size: 1.4rem;
   font-weight: 800;
-  font-family: "PretendardBold", sans-serif;
+  font-family: "Pretendard", sans-serif;
   margin: 0;
 }
 
 .award_description {
   font-size: 0.8rem;
-  font-family: "PretendardRegular", sans-serif;
+  font-family: "Pretendard", sans-serif;
   margin: 0;
   line-height: 1.5;
   color: rgba(218, 218, 218, 0.9);
@@ -280,13 +280,13 @@
 }
 .award_content_box_title {
   font-size: 1rem;
-  font-family: "PretendardBold", sans-serif;
+  font-family: "Pretendard", sans-serif;
   font-weight: 800;
   margin: 0;
 }
 .award_content_box_description {
   font-size: 1rem;
-  font-family: "PretendardRegular", sans-serif;
+  font-family: "Pretendard", sans-serif;
   margin: 0;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.9);
@@ -317,7 +317,7 @@
 .award_button_icon {
   font-size: 1rem;
   color: white;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   transition: transform 0.2s ease;
 }
 
@@ -376,7 +376,7 @@
 .activity_title {
   font-size: 1.1rem;
   font-weight: 700;
-  font-family: "PretendardBold", sans-serif;
+  font-family: "Pretendard", sans-serif;
   margin: 0;
   display: flex;
   align-items: center;
@@ -415,7 +415,7 @@
 .activity_item {
   font-size: 0.95rem;
   color: #333;
-  font-family: "PretendardRegular", sans-serif;
+  font-family: "Pretendard", sans-serif;
   line-height: 1.6;
 }
 
@@ -443,7 +443,7 @@
 .activity_button_icon {
   font-size: 1rem;
   color: white;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   transition: transform 0.2s ease;
 }
 
