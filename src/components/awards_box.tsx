@@ -33,8 +33,11 @@ export default function AwardsBox({ data }: AwardsBoxProps) {
                 href={item.link}
                 className={styles.award_button}
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${item.title} (새 창)`}
               >
                 <span className={styles.award_button_icon}>&rarr;</span>
+                <span className="sr-only">(새 창에서 열림)</span>
               </Link>
             )}
             <div className={styles.award_overlay}>

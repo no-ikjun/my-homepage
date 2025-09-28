@@ -28,15 +28,21 @@ export default function ProjectBox({
       <h2 className={styles.project_title}>
         {title}
         {directLink != "" ? (
-          <Link href={directLink} target="_blank">
+          <Link
+            href={directLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${title} 직접 링크 열기 (새 창)`}
+          >
             <Image
               className={styles.icon_button}
               style={{ marginLeft: "10px" }}
               src="./img/link_icon.svg"
               width={25}
               height={25}
-              alt="link"
+              alt="External link"
             />
+            <span className="sr-only">(새 창에서 열림)</span>
           </Link>
         ) : (
           <></>
