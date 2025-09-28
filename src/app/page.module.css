@@ -11,50 +11,32 @@
 .container {
   position: relative;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1.25fr;
+  border-radius: 16px;
+
+  display: flex;
   align-items: center;
+  gap: 1.5rem;
   max-width: 1100px;
   width: 100%;
-  padding: 2.25rem 2.75rem;
-  gap: 2rem;
+  padding: 2rem 2.25rem;
   margin-bottom: 2rem;
+  text-decoration: none;
+
   background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0.66),
-        rgba(255, 255, 255, 0.45)
-      )
-      padding-box,
-    linear-gradient(
-        to bottom right,
-        var(--glass-border-1),
-        var(--glass-border-2)
-      )
-      border-box;
-  border-radius: 1.25rem;
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
-}
-.container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--glass-highlight);
-  pointer-events: none;
-}
-.container::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: 1.1rem;
-  background: radial-gradient(
-    120% 140% at 110% 110%,
-    rgba(2, 6, 23, 0.08),
-    rgba(2, 6, 23, 0)
+    180deg,
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0.15)
   );
-  mix-blend-mode: multiply;
-  pointer-events: none;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  outline: 1px solid rgba(37, 99, 235, 0.28);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease,
+    outline-color 0.2s ease;
 }
 
 .profile_wrap {
@@ -95,20 +77,20 @@
   margin: 1rem 0 0.5rem 0;
   font-size: 2.25rem; /* ~36px */
   line-height: 1.2;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 900;
   text-align: left;
 }
 
 .light_title {
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-size: 2.1rem;
 }
 
 .role {
   margin: 0;
   font-size: 1.5rem;
-  font-family: "PretendardMedium";
+  font-family: "Pretendard";
   font-weight: 700;
   text-align: left;
   color: var(--color-primary);
@@ -117,7 +99,7 @@
 .description {
   margin: 0.5rem 0 0.5rem 0;
   font-size: 1.05rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   text-align: left;
   color: #374151;
@@ -136,7 +118,7 @@
   text-decoration: none;
   padding: 0.6rem 1rem;
   border-radius: 9999px;
-  font-family: "PretendardMedium";
+  font-family: "Pretendard";
   font-weight: 700;
   border: 1px solid #e5e7eb;
   color: #1f2937;
@@ -196,7 +178,7 @@
   margin: 1rem 0 0.5rem 0;
 }
 .section_title {
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-size: 1.35rem;
   color: #0f172a;
   margin: 0;
@@ -253,18 +235,18 @@
   background-position: center;
 }
 .project_title {
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-size: 1.05rem;
   margin: 0;
 }
 .project_meta {
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-size: 0.85rem;
   color: #64748b;
   margin: 0.1rem 0;
 }
 .project_desc {
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-size: 0.95rem;
   color: #334155;
 }
@@ -309,18 +291,18 @@
   background-position: center;
 }
 .award_title {
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-size: 1.05rem;
   margin: 0;
 }
 .award_meta {
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-size: 0.85rem;
   color: #64748b;
   margin: 0.1rem 0;
 }
 .award_desc {
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-size: 0.95rem;
   color: #334155;
 }
@@ -360,12 +342,12 @@
   background-position: center;
 }
 .career_company {
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-size: 1.15rem;
   margin: 0;
 }
 .career_meta {
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-size: 0.9rem;
   color: #64748b;
 }
@@ -386,71 +368,43 @@
   gap: 1.25rem;
 }
 
+
 .link_template {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  text-decoration: none;
-  color: rgb(93, 93, 93);
   position: relative;
   overflow: hidden;
-  padding: 1rem 1.5rem 1rem 1.5rem;
-  border: 1px solid transparent;
-  border-radius: 0.9rem;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-decoration: none;
+  color: rgb(93, 93, 93);
+  padding: 1.2rem 1.4rem;
   max-width: 90%;
-  min-height: 150px; /* ✅ 원하는 최소 높이 설정 */
+  min-height: 150px;
   box-sizing: border-box;
+
   background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0.65),
-        rgba(255, 255, 255, 0.42)
-      )
-      padding-box,
-    linear-gradient(
-        to bottom right,
-        var(--glass-border-1),
-        var(--glass-border-2)
-      )
-      border-box;
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  box-shadow: 0 8px 22px rgba(2, 6, 23, 0.06);
-  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    180deg,
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0.15)
+  );
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  outline: 1px solid rgba(37, 99, 235, 0.28);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease,
+    outline-color 0.2s ease;
 }
 
 .link_template:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(2, 6, 23, 0.08);
-}
-.link_template::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--glass-highlight);
-  opacity: 0.8;
-  pointer-events: none;
-}
-.link_template::after {
-  content: "";
-  position: absolute;
-  top: -20%;
-  left: -30%;
-  width: 50%;
-  height: 200%;
-  transform: rotate(20deg);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.35) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.5s ease;
-  pointer-events: none;
-}
-.link_template:hover::after {
-  opacity: 1;
-  transform: translateX(140%) rotate(20deg);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  outline-color: rgba(37, 99, 235, 0.45);
 }
 
 .link_template:hover > .link_title {
@@ -464,14 +418,14 @@
 
 .link_title {
   font-size: 1.6rem;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 900;
   margin: 0 0 0.5rem 0;
 }
 
 .link_description {
   font-size: 1.1rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(127, 127, 127);
   line-height: 1.5rem;
@@ -555,7 +509,7 @@
 }
 .nav_card_title {
   font-size: 1.5rem;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 900;
   margin: 0;
   color: #0f172a;
@@ -592,7 +546,7 @@
 }
 .nav_card_desc {
   font-size: 1.05rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(100, 116, 139);
   line-height: 1.6rem;
@@ -602,7 +556,7 @@
 .copyright {
   margin: 1rem 0 0 0;
   font-size: 1rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(154, 154, 154);
 }
@@ -615,7 +569,7 @@
 .tech_stack h3 {
   margin: 0;
   font-size: 1.1rem;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 700;
   color: rgb(50, 50, 50);
 }
@@ -627,7 +581,7 @@
 
 .tech_stack li {
   font-size: 1rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(83, 83, 83);
 }
@@ -639,7 +593,7 @@
 .links h3 {
   margin: 0;
   font-size: 1.1rem;
-  font-family: "PretendardBold";
+  font-family: "Pretendard";
   font-weight: 700;
   color: rgb(50, 50, 50);
 }
@@ -651,7 +605,7 @@
 
 .links li {
   font-size: 1rem;
-  font-family: "PretendardRegular";
+  font-family: "Pretendard";
   font-weight: 400;
   color: rgb(83, 83, 83);
 }
@@ -674,7 +628,8 @@
   }
   .container {
     margin-top: 1rem;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
     gap: 1rem;
   }
