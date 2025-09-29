@@ -1,6 +1,7 @@
 export const careers = [
   {
     title: "Sigor Inc.",
+    link: "",
     image:
       "https://media.disquiet.io/images/team/thumbnail/f218e93256f333abb30b02941acb4c031428022588fda00e6c0111277e7507ce",
     description: "2023.06 ~ 2024.02 (9 months)",
