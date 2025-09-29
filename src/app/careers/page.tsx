@@ -29,7 +29,7 @@ export default function CareersPage() {
                 <div className={styles.career_right}>
                   <div className={styles.career_header}>
                     <h3 className={styles.career_company}>
-                      {item.link ? (
+                      {item.link !== "" ? (
                         <Link
                           href={item.link}
                           target="_blank"
