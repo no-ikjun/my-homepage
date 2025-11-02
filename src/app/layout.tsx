@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   // 한국어 우선 + 영어 병기
   title: {
-    default: "최익준 | Ikjun Choi — SW 개발자 포트폴리오",
+    default: "최익준 | Ikjun Choi",
     template: "%s | 최익준 | Ikjun Choi",
   },
   // 한국어 1문장 + 영어 1문장 (160자 안팎)
