@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   // 한국어 1문장 + 영어 1문장 (160자 안팎)
   description:
-    "SW 개발자 최익준의 포트폴리오(웹·모바일). React/Next.js, Node.js 기반 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi, full-stack web & mobile apps.",
+    "SW 개발자 최익준의 포트폴리오(웹·모바일). 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi",
   // 한국어/영어 키워드
   keywords: [
     "최익준",
@@ -58,9 +58,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "최익준 | Ikjun Choi — 풀스택 개발자 포트폴리오",
-    description:
-      "React/Next.js, Node.js 기반 웹·모바일 프로젝트 포트폴리오. Portfolio of Ikjun Choi (full-stack).",
+    title: "최익준 | Ikjun Choi — SW 개발자",
+    description: "웹·모바일 프로젝트 포트폴리오. Portfolio of Ikjun Choi.",
     images: [`${SITE_URL}/profile_round3.png`],
   },
   robots: { index: true, follow: true },
