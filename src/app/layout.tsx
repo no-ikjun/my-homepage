@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/header";
+import { LanguageProvider } from "@/contexts/language-context";
 
 const inter = Inter({ subsets: ["latin"] });
 const SITE_URL = "https://ikjun.com";
@@ -77,9 +78,11 @@ export default function RootLayout({
     // 한국어 기본(코어 타겟이 한국어라면 ko 권장)
     <html lang="ko">
       <body className={inter.className}>
-        <Header />
-        {children}
-        <Analytics />
+        <LanguageProvider>
+          <Header />
+          {children}
+          <Analytics />
+        </LanguageProvider>
 
         {/* JSON-LD: Person + (선택) Website */}
         <script

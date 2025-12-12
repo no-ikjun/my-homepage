@@ -1,9 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 import LinkIcon, { LinkType } from "@/components/link_icon";
+import { useTranslations } from "@/contexts/language-context";
+import { Fragment } from "react";
 
 export default function Home() {
+  const t = useTranslations();
+
+  const renderMultiline = (text: string) =>
+    text.split("\n").map((line, idx, arr) => (
+      <Fragment key={`${line}-${idx}`}>
+        {line}
+        {idx < arr.length - 1 && <br />}
+      </Fragment>
+    ));
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>
@@ -24,13 +38,8 @@ export default function Home() {
             <span className={styles.light_title}>최익준</span>&nbsp;&nbsp;Ikjun
             Choi
           </h1>
-          <p className={styles.role}>Software Developer</p>
-          <p className={styles.description}>
-            A founder-minded developer passionate about startups, focused on
-            solving problems and executing fast. I build services
-            end-to-end—from idea and planning to launch and continuous
-            iteration.
-          </p>
+          <p className={styles.role}>{t.homeRole}</p>
+          <p className={styles.description}>{t.homeDescription}</p>
 
           <div className={styles.contact}>
             <LinkIcon linkType={LinkType.Mail} />
@@ -45,14 +54,14 @@ export default function Home() {
               className={`${styles.cta_button} ${styles.cta_primary}`}
               aria-label="View Projects"
             >
-              View Projects
+              {t.ctaViewProjects}
             </Link>
             <Link
               href="mailto:choiikjun1101@gmail.com?subject=Hello%20Ikjun"
               className={styles.cta_button}
               aria-label="Contact via email (opens mail app)"
             >
-              Contact Me
+              {t.ctaContactMe}
             </Link>
           </div>
         </div>
@@ -61,37 +70,36 @@ export default function Home() {
       <div className={styles.bottom_container}>
         <Link href="/careers" className={styles.link_template}>
           <h2 className={styles.link_title}>
-            Careers<span className={styles.blank}></span>&rarr;
+            {t.sectionCareersTitle}
+            <span className={styles.blank}></span>&rarr;
           </h2>
           <p className={styles.link_description}>
-            My careers since 2021.
-            <br /> Including internships and full-time jobs
+            {renderMultiline(t.sectionCareersDescription)}
           </p>
         </Link>
 
         <Link href="/experiences" className={styles.link_template}>
           <h2 className={styles.link_title}>
-            Experiences<span className={styles.blank}></span>&rarr;
+            {t.sectionExperiencesTitle}
+            <span className={styles.blank}></span>&rarr;
           </h2>
           <p className={styles.link_description}>
-            My experiences including educations, awards, and extra activities
+            {t.sectionExperiencesDescription}
           </p>
         </Link>
 
         <Link href="/projects" className={styles.link_template}>
           <h2 className={styles.link_title}>
-            Projects<span className={styles.blank}></span>&rarr;
+            {t.sectionProjectsTitle}
+            <span className={styles.blank}></span>&rarr;
           </h2>
           <p className={styles.link_description}>
-            These are my own projects.
-            <br /> Web/App services and ongoing projects
+            {renderMultiline(t.sectionProjectsDescription)}
           </p>
         </Link>
       </div>
 
-      <p className={styles.copyright}>
-        © 2023 Ikjun Choi. All Rights Reserved.
-      </p>
+      <p className={styles.copyright}>{t.copyright}</p>
     </main>
   );
 }

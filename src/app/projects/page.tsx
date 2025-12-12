@@ -1,7 +1,10 @@
+"use client";
+
 import styles from "./page.module.css";
 import { projects } from "./data";
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 
 const techIconMap: Record<string, string> = {
   flutter: "/img/flutter_icon.svg",
@@ -22,6 +25,9 @@ const linkIconMap: Record<string, string> = {
 };
 
 export default function ProjectsPage() {
+  const { lang } = useLanguage();
+  const t = useTranslations();
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -29,11 +35,11 @@ export default function ProjectsPage() {
           <p className={styles.left_arrow}>&larr;</p>
         </Link>
         <div className={styles.title_container}>
-          <h1 className={styles.title}>Projects</h1>
-          <p className={styles.description}>My Own Projects Since 2023</p>
+          <h1 className={styles.title}>{t.projectsPageTitle}</h1>
+          <p className={styles.description}>{t.projectsPageDescription}</p>
         </div>
         <div className={styles.project_grid}>
-          {projects.map((project) => (
+          {projects[lang].map((project) => (
             <div className={styles.project_card} key={project.title}>
               <div className={styles.project_header}>
                 <div

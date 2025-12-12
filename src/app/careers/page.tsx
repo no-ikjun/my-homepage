@@ -1,9 +1,15 @@
+"use client";
+
 import styles from "./page.module.css";
 import { careers } from "./data";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
 
 export default function CareersPage() {
+  const { lang } = useLanguage();
+  const t = useTranslations();
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -11,13 +17,11 @@ export default function CareersPage() {
           <p className={styles.left_arrow}>&larr;</p>
         </Link>
         <div className={styles.title_container}>
-          <h1 className={styles.title}>Careers</h1>
-          <p className={styles.description}>
-            My career path and professional experiences
-          </p>
+          <h1 className={styles.title}>{t.careersPageTitle}</h1>
+          <p className={styles.description}>{t.careersPageDescription}</p>
         </div>
         <div className={styles.career_list}>
-          {careers.map((item) => (
+          {careers[lang].map((item) => (
             <div className={styles.career_card} key={item.title}>
               <div className={styles.career_item}>
                 <div className={styles.career_left}>
