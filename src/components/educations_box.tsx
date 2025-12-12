@@ -2,6 +2,7 @@ import styles from "../app/experiences/page.module.css";
 import Link from "next/link";
 
 type EducationsBoxProps = {
+  title: string;
   data: {
     title: string;
     link: string;
@@ -12,10 +13,10 @@ type EducationsBoxProps = {
   }[];
 };
 
-export default function EducationsBox({ data }: EducationsBoxProps) {
+export default function EducationsBox({ title, data }: EducationsBoxProps) {
   return (
     <span>
-      <h2 className={styles.content_title}>Educations</h2>
+      <h2 className={styles.content_title}>{title}</h2>
       <div className={styles.education_container}>
         {data.map((item) => (
           <div className={styles.education_content} key={item.title}>

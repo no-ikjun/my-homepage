@@ -3,6 +3,8 @@ import styles from "../app/experiences/page.module.css";
 import Link from "next/link";
 
 type ActivitiesBoxProps = {
+  title: string;
+  moreInfoLabel: string;
   data: {
     title: string;
     link: string;
@@ -13,10 +15,14 @@ type ActivitiesBoxProps = {
   }[];
 };
 
-export default function ActivitiesBox({ data }: ActivitiesBoxProps) {
+export default function ActivitiesBox({
+  data,
+  title,
+  moreInfoLabel,
+}: ActivitiesBoxProps) {
   return (
     <span>
-      <h2 className={styles.content_title}>Activities</h2>
+      <h2 className={styles.content_title}>{title}</h2>
       <div className={styles.activities_container}>
         {data.map((item) => (
           <div className={styles.activity_row} key={item.title}>
@@ -40,7 +46,7 @@ export default function ActivitiesBox({ data }: ActivitiesBoxProps) {
                       rel="noopener noreferrer"
                     >
                       <span className={styles.activity_button_icon}>
-                        More Info →
+                        {moreInfoLabel}
                       </span>
                     </Link>
                   )}
