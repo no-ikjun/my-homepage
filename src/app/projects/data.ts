@@ -9,7 +9,7 @@ type ProjectLink = {
 type Project = {
   title: string;
   period: string;
-  iamge: string;
+  image: string;
   description: string;
   directLink: string;
   techStack: string[];
@@ -21,7 +21,7 @@ export const projects: Record<Language, Project[]> = {
     {
       title: "SPRIT",
       period: "2024.3 - (ongoing)",
-      iamge:
+      image:
         "https://play-lh.googleusercontent.com/xc7SKBJq60amNLJMphT9QBPkfbaVXtbrhGbTuexJPtxYII_A-QC2hcLHuJ96PvHqHw=w240-h480-rw",
       description: "App service that creates a steady reading habit.",
       directLink: "https://sprit-app.me",
@@ -47,7 +47,7 @@ export const projects: Record<Language, Project[]> = {
     {
       title: "DeokDam Pocket",
       period: "2023.12 - (ongoing)",
-      iamge:
+      image:
         "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
       description: "New year's Greeting Platform since 2024",
       directLink: "https://deokdam.app",
@@ -63,7 +63,7 @@ export const projects: Record<Language, Project[]> = {
     {
       title: "Wisemind",
       period: "2024.2 - 2025.7",
-      iamge: "https://analyst.ikjun.com/logo.png",
+      image: "https://analyst.ikjun.com/logo.png",
       description: "AI Financial Agent based on ChatGPT & HyperCLOVA X",
       directLink: "https://analyst.ikjun.com",
       techStack: ["React", "CloudFlare", "NestJS", "FastAPI", "AWS"],
@@ -90,7 +90,7 @@ export const projects: Record<Language, Project[]> = {
     {
       title: "스프릿",
       period: "2024.3 - 진행 중",
-      iamge:
+      image:
         "https://play-lh.googleusercontent.com/xc7SKBJq60amNLJMphT9QBPkfbaVXtbrhGbTuexJPtxYII_A-QC2hcLHuJ96PvHqHw=w240-h480-rw",
       description: "꾸준한 독서 습관을 만들어주는 앱 서비스",
       directLink: "https://sprit-app.me",
@@ -116,7 +116,7 @@ export const projects: Record<Language, Project[]> = {
     {
       title: "덕담 주머니",
       period: "2023.12 - 진행 중",
-      iamge:
+      image:
         "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
       description: "한 해를 되돌아보며 새해 덕담을 주고받는 덕담 플랫폼 서비스",
       directLink: "https://deokdam.app",
@@ -132,7 +132,7 @@ export const projects: Record<Language, Project[]> = {
     {
       title: "Wisemind",
       period: "2024.2 - 2025.7",
-      iamge: "https://analyst.ikjun.com/logo.png",
+      image: "https://analyst.ikjun.com/logo.png",
       description: "HyperCLOVA X 기반의 AI 금융 에이전트",
       directLink: "https://analyst.ikjun.com",
       techStack: ["React", "CloudFlare", "NestJS", "FastAPI", "AWS"],

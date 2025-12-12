@@ -44,7 +44,7 @@ export default function ProjectsPage() {
               <div className={styles.project_header}>
                 <div
                   className={styles.project_logo}
-                  style={{ backgroundImage: `url(${project.iamge})` }}
+                  style={{ backgroundImage: `url(${project.image})` }}
                 />
                 <div className={styles.project_info}>
                   <h3 className={styles.project_title}>
