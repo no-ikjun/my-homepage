@@ -2,6 +2,7 @@ import styles from "../app/experiences/page.module.css";
 import Link from "next/link";
 
 type AwardsBoxProps = {
+  title: string;
   data: {
     title: string;
     link: string;
@@ -12,10 +13,10 @@ type AwardsBoxProps = {
   }[];
 };
 
-export default function AwardsBox({ data }: AwardsBoxProps) {
+export default function AwardsBox({ title, data }: AwardsBoxProps) {
   return (
     <span>
-      <h2 className={styles.content_title}>Awards</h2>
+      <h2 className={styles.content_title}>{title}</h2>
       <div className={styles.award_container}>
         {data.map((item) => (
           <div

@@ -16,7 +16,7 @@ export default function DetailExperience({ data }: DetailExperienceProps) {
   return (
     <>
       {data.map((item) => (
-        <>
+        <div key={item.title}>
           <h3 className={styles.content_subtitle}>
             {item.title}
             {item.link != "" ? (
@@ -51,7 +51,7 @@ export default function DetailExperience({ data }: DetailExperienceProps) {
               ))}
             </ul>
           </div>
-        </>
+        </div>
       ))}
     </>
   );
