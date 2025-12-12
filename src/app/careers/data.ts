@@ -48,7 +48,7 @@ export const careers: Record<Language, Career[]> = {
   ],
   ko: [
     {
-      title: "시고르",
+      title: "(주)시고르자브종",
       link: "",
       image:
         "https://media.disquiet.io/images/team/thumbnail/f218e93256f333abb30b02941acb4c031428022588fda00e6c0111277e7507ce",
@@ -56,9 +56,9 @@ export const careers: Record<Language, Career[]> = {
       subDescription: "소프트웨어 개발자",
       content: [
         {
-          title: "Rushhour",
+          title: "러시아워: 지하철 빈자리 찾기",
           description:
-            "실시간 지하철 혼잡도 정보와 여석이 많은 공간을 제공하는 앱 서비스",
+            "실시간 지하철 혼잡도 정보와 여석이 많은 지하철 칸을 표시하는 앱 서비스",
           period: "2023 ~ 2024",
           content: [
             "Flutter를 활용한 크로스플랫폼 앱 개발 및 배포",

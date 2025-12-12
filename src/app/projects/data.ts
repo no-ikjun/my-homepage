@@ -88,7 +88,7 @@ export const projects: Record<Language, Project[]> = {
   ],
   ko: [
     {
-      title: "SPRIT",
+      title: "스프릿",
       period: "2024.3 - 진행 중",
       iamge:
         "https://play-lh.googleusercontent.com/xc7SKBJq60amNLJMphT9QBPkfbaVXtbrhGbTuexJPtxYII_A-QC2hcLHuJ96PvHqHw=w240-h480-rw",
@@ -114,11 +114,11 @@ export const projects: Record<Language, Project[]> = {
       ],
     },
     {
-      title: "덕담 포켓",
+      title: "덕담 주머니",
       period: "2023.12 - 진행 중",
       iamge:
         "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
-      description: "2024년부터 운영 중인 새해 인사 플랫폼",
+      description: "한 해를 되돌아보며 새해 덕담을 주고받는 덕담 플랫폼 서비스",
       directLink: "https://deokdam.app",
       techStack: ["NextJS", "TypeScript"],
       links: [
@@ -133,7 +133,7 @@ export const projects: Record<Language, Project[]> = {
       title: "Wisemind",
       period: "2024.2 - 2025.7",
       iamge: "https://analyst.ikjun.com/logo.png",
-      description: "ChatGPT와 HyperCLOVA X 기반의 AI 금융 에이전트",
+      description: "HyperCLOVA X 기반의 AI 금융 에이전트",
       directLink: "https://analyst.ikjun.com",
       techStack: ["React", "CloudFlare", "NestJS", "FastAPI", "AWS"],
       links: [
@@ -150,7 +150,7 @@ export const projects: Record<Language, Project[]> = {
         {
           type: "github",
           url: "https://github.com/no-ikjun/analyst-fe",
-          description: "프런트엔드 GitHub 저장소",
+          description: "프론트엔드 GitHub 저장소",
         },
       ],
     },

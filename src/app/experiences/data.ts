@@ -27,7 +27,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
       title: "Jeonnam Science High School",
       link: "https://jeonnam-sh.hs.jne.kr/user/indexMain.action?siteId=chonnam-sh_hs",
       image:
-        "https://i.namu.wiki/i/-HzxAZolSdwprRfrTtp0rumE3ePx8Ti8ucrnLkRcOwkFCKZjEp_wv_KmeeqD9kisGOxSGD9sS7JCAmUU12E_uUA.webp",
+        "https://i.namu.wiki/i/BAtjT1n_h4CuAIwBXlEUfXTWuZtow9R3J2Yny0bmVyllq0nx1QEnonD0oj3R9MPAtpu2EsSiV65qoTGxCdGiI5xCXcjvulJ37GQW19Y_dqF3FdJzLF4mkF0VysxBO1afiATsSeSG3vw-AYqMyrcHlg.svg",
       description: "2020.03 ~ 2023.01",
       subDescription: "👨‍🎓 Graduated at 2023.01",
       content: [
@@ -50,7 +50,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
       title: "전남과학고등학교",
       link: "https://jeonnam-sh.hs.jne.kr/user/indexMain.action?siteId=chonnam-sh_hs",
       image:
-        "https://i.namu.wiki/i/-HzxAZolSdwprRfrTtp0rumE3ePx8Ti8ucrnLkRcOwkFCKZjEp_wv_KmeeqD9kisGOxSGD9sS7JCAmUU12E_uUA.webp",
+        "https://i.namu.wiki/i/BAtjT1n_h4CuAIwBXlEUfXTWuZtow9R3J2Yny0bmVyllq0nx1QEnonD0oj3R9MPAtpu2EsSiV65qoTGxCdGiI5xCXcjvulJ37GQW19Y_dqF3FdJzLF4mkF0VysxBO1afiATsSeSG3vw-AYqMyrcHlg.svg",
       description: "2020.03 ~ 2023.01",
       subDescription: "👨‍🎓 2023.01 졸업",
       content: ["학생회 IT부 부장", "학교 운영 시스템 JshsUs(과구리) 개발"],
@@ -109,15 +109,15 @@ export const awards: Record<Language, ExperienceItem[]> = {
         "https://d3ob3cint7tr3s.cloudfront.net/portfolio/2024_kpmg_ideathon.jpg",
       description: "2024.02",
       subDescription: "🥉 3등",
-      content: ["생성형 AI로 업무 생산성을 높이는 도구 - Docuflow"],
+      content: ["AI로 업무 생산성을 높이는 도구 - Docuflow"],
     },
     {
-      title: "광주 공공데이터 활용 공모전",
+      title: "광주광역시 공공데이터 활용 창업경진대회",
       link: "https://ccei.creativekorea.or.kr/gwangju/custom/notice_view.do?no=28519&rnum=1361&kind=undefined&sPtime=undefinedb",
       image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/gwangju_data.png",
       description: "2023.07",
       subDescription: "🥈 2위 (서비스 개발 부문 우수상)",
-      content: ["시민 정치 참여 플랫폼 - Mefeto"],
+      content: ["시민의 정치 참여를 돕는 AI 플랫폼 - Mefeto"],
     },
     {
       title: "Side With Startups@KAIST",
@@ -193,13 +193,13 @@ export const activities: Record<Language, ExperienceItem[]> = {
       ],
     },
     {
-      title: "WING - GIST Developer Group",
+      title: "WING - GIST 전산 동아리",
       link: "",
       image: "https://avatars.githubusercontent.com/u/129100127?s=200&v=4",
       description: "2023.03 ~ 2024.06",
       subDescription: "주니어 개발자",
       content: [
-        "React, Next.js, Flutter 등 세션 진행",
+        "React, Next.js, Flutter 등 기술 관련 오픈 세션 진행",
         "주니어 개발자 양성 멘토링 프로그램 운영",
       ],
     },
@@ -209,8 +209,8 @@ export const activities: Record<Language, ExperienceItem[]> = {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShhKrzYFHe_ov2T_37GIfbofpwVUcZi7okhA&s",
       description: "2023.03 ~ 2023.12",
-      subDescription: "동아리원",
-      content: ["스타트업 생태계 스터디", "모의 창업 프로그램 참여"],
+      subDescription: "동아리 부원",
+      content: ["스타트업 관련 스터디", "모의 창업 프로그램 참여"],
     },
   ],
 };

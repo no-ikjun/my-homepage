@@ -66,7 +66,7 @@ export const translations: Record<Language, Translations> = {
     navProjects: "프로젝트",
     homeRole: "소프트웨어 개발자",
     homeDescription:
-      "창업가 마인드를 가진 개발자로서 문제 해결과 빠른 실행에 집중합니다. 아이디어와 기획부터 출시, 그리고 지속적인 개선까지 서비스 전 과정을 직접 구축합니다.",
+      "창업가 마인드를 가진 개발자로서 문제 해결과 빠른 실행에 집중합니다. 아이템 구상과 기획부터 출시 및 지속적인 개선까지, 엔드 투 엔드로 서비스를 구축합니다.",
     ctaViewProjects: "프로젝트 보기",
     ctaContactMe: "이메일 보내기",
     sectionCareersTitle: "실무경력",
@@ -77,19 +77,18 @@ export const translations: Record<Language, Translations> = {
       "학력, 수상, 대외활동 등 다양한 경험을 모았습니다.",
     sectionProjectsTitle: "프로젝트",
     sectionProjectsDescription:
-      "저의 개인 프로젝트입니다.\n웹/앱 서비스와 진행 중인 작업을 담았습니다.",
+      "직접 진행한 개인 프로젝트입니다.\n웹·앱 서비스 등 진행 중인 프로젝트를 포함합니다.",
     copyright: "© 2023 최익준. All Rights Reserved.",
     experiencesPageTitle: "활동경험",
-    experiencesPageDescription:
-      "학력, 수상, 대외활동 등 다양한 활동 경험을 정리했습니다.",
+    experiencesPageDescription: "지금까지의 학력, 수상, 대외활동 등 활동 경험",
     educationsTitle: "학력",
     awardsTitle: "수상",
     activitiesTitle: "대외활동",
     projectsPageTitle: "프로젝트",
-    projectsPageDescription: "2023년 이후 진행한 개인 프로젝트",
+    projectsPageDescription: "웹·앱 서비스 등 개인 프로젝트 모음",
     careersPageTitle: "실무경력",
-    careersPageDescription: "실무경력 여정과 업무 경험입니다.",
+    careersPageDescription: "커리어와 전문적인 실무 경험",
     activityMoreInfo: "자세히 보기 →",
-    languageToggleLabel: "언어 전환",
+    languageToggleLabel: "언어 변경",
   },
 };
