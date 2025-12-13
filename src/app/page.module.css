@@ -419,6 +419,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .header_logo {
@@ -437,7 +438,10 @@
 
 .header_nav {
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 1.25rem;
+  justify-content: flex-end;
+  text-align: right;
 }
 
 .header_nav_item {
@@ -449,15 +453,19 @@
 }
 
 .header_nav_item a {
+  display: block;
+  padding: 0.3rem 0;
   text-decoration: none;
   color: inherit;
   font-weight: 500;
+  text-align: right;
 }
 
 .header_actions {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-left: auto;
 }
 
 .active_nav {
@@ -491,6 +499,12 @@
   border-color: rgba(148, 163, 184, 0.8);
   background: rgba(255, 255, 255, 0.6);
   color: #0a0f1a;
+}
+
+.header_actions nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .language_dropdown {
@@ -650,16 +664,13 @@
 }
 
 @media (max-width: 768px) {
-  .header_container {
-    flex-direction: row;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    justify-content: space-between;
-    align-items: center;
+  .header {
+    padding: 0.25rem 0.75rem;
   }
-  .header_nav {
-    flex-direction: row;
-    gap: 0.7rem;
+  .header_container {
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+    gap: 0.6rem;
   }
   .nav_profile_image {
     display: block;
@@ -667,10 +678,34 @@
   .logo_name {
     display: none;
   }
+  .header_actions {
+    gap: 0.5rem;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  .header_actions nav {
+    width: 100%;
+  }
+  .header_nav {
+    gap: 0.75rem;
+    padding: 0.2rem 0.2rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .header_nav::-webkit-scrollbar {
+    display: none;
+  }
   .header_nav_item {
     font-size: 0.9rem;
+    flex: 0 0 auto;
   }
   .header_nav_item a {
+    padding: 0.25rem 0;
     font-size: 0.9rem;
+  }
+  .language_toggle {
+    padding: 0.3rem 0.65rem;
+    white-space: nowrap;
   }
 }
