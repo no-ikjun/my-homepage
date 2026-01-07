@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/header";
 import { LanguageProvider } from "@/contexts/language-context";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 const SITE_URL = "https://ikjun.com";
@@ -97,7 +98,8 @@ export default function RootLayout({
               url: SITE_URL,
               knowsLanguage: ["ko", "en"],
               sameAs: [
-                // 실제 프로필 URL들 (GitHub/LinkedIn 등) 넣으면 신뢰도↑
+                "https://github.com/no-ikjun",
+                "https://www.linkedin.com/in/ikjunchoi/",
               ],
             }),
           }}
