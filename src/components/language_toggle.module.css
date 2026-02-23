@@ -1,0 +1,105 @@
+.root {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 36px;
+  padding: 0.38rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: color-mix(in srgb, var(--bg-elevated) 74%, transparent);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: border-color var(--motion-fast), color var(--motion-fast),
+    background-color var(--motion-fast);
+}
+
+.trigger:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.trigger:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.chevron {
+  font-size: 0.72rem;
+  opacity: 0.8;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.45rem);
+  min-width: 148px;
+  padding: 0.35rem;
+  border-radius: 0.95rem;
+  border: 1px solid var(--border-soft);
+  background: color-mix(in srgb, var(--bg-glass) 92%, transparent);
+  box-shadow: var(--shadow-elevated);
+  backdrop-filter: blur(calc(var(--glass-blur) + 2px));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) + 2px));
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  z-index: 50;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  border-radius: 0.7rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 0.5rem 0.55rem;
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-align: left;
+  transition: border-color var(--motion-fast), background-color var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.item:hover {
+  border-color: var(--border-soft);
+  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+  color: var(--text-primary);
+}
+
+.item:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.itemActive {
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--accent-primary) 25%, var(--border-soft));
+  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-elevated));
+}
+
+.flag {
+  width: 20px;
+  height: 14px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .trigger {
+    min-height: 34px;
+    padding: 0.35rem 0.6rem;
+  }
+}

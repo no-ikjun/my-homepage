@@ -1,9 +1,9 @@
 "use client";
 
-import { useLanguage, useTranslations } from "@/contexts/language-context";
-import styles from "../app/page.module.css";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useTranslations, useLanguage } from "@/contexts/language-context";
+import styles from "./language_toggle.module.css";
 
 export default function LanguageToggle() {
   const { lang, setLanguage } = useLanguage();
@@ -11,72 +11,76 @@ export default function LanguageToggle() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  const buttonLabel = lang === "ko" ? "언어선택" : "Language";
-
   useEffect(() => {
-    const onClick = (e: MouseEvent) => {
+    const onPointerDown = (e: MouseEvent) => {
       if (!menuRef.current) return;
       if (!menuRef.current.contains(e.target as Node)) setOpen(false);
     };
-    if (open) document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
+
+    const onEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
+    if (open) {
+      document.addEventListener("mousedown", onPointerDown);
+      document.addEventListener("keydown", onEscape);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onEscape);
+    };
   }, [open]);
 
+  const buttonLabel = lang === "ko" ? "KO" : "EN";
+
   return (
-    <div className={styles.language_dropdown} ref={menuRef}>
+    <div className={styles.root} ref={menuRef}>
       <button
         type="button"
-        className={styles.language_toggle}
+        className={styles.trigger}
         onClick={() => setOpen((v) => !v)}
         aria-label={t.languageToggleLabel}
         aria-expanded={open}
+        aria-haspopup="menu"
       >
-        <span className={styles.language_label}>{buttonLabel}</span>
+        <span>{buttonLabel}</span>
+        <span className={styles.chevron} aria-hidden="true">
+          ▾
+        </span>
       </button>
-      {open && (
-        <div className={styles.language_menu} role="menu">
+      {open ? (
+        <div className={styles.menu} role="menu">
           <button
             type="button"
-            className={`${styles.language_menu_item} ${
-              lang === "ko" ? styles.language_menu_active : ""
-            }`}
+            className={`${styles.item} ${lang === "ko" ? styles.itemActive : ""}`}
             onClick={() => {
               setLanguage("ko");
               setOpen(false);
             }}
+            role="menuitem"
           >
-            <span className={styles.language_icon_wrap}>
-              <Image
-                src="/img/south-korea.svg"
-                alt="한국어"
-                width={20}
-                height={14}
-              />
+            <span className={styles.flag}>
+              <Image src="/img/south-korea.svg" alt="" width={20} height={14} />
             </span>
             한국어
           </button>
           <button
             type="button"
-            className={`${styles.language_menu_item} ${
-              lang === "en" ? styles.language_menu_active : ""
-            }`}
+            className={`${styles.item} ${lang === "en" ? styles.itemActive : ""}`}
             onClick={() => {
               setLanguage("en");
               setOpen(false);
             }}
+            role="menuitem"
           >
-            <span className={styles.language_icon_wrap}>
-              <Image
-                src="/img/united-states.svg"
-                alt="English"
-                width={20}
-                height={14}
-              />
+            <span className={styles.flag}>
+              <Image src="/img/united-states.svg" alt="" width={20} height={14} />
             </span>
             English
           </button>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

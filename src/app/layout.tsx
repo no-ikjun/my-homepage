@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/header";
 import { LanguageProvider } from "@/contexts/language-context";
-import Script from "next/script";
-
-const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "@/contexts/theme-context";
 const SITE_URL = "https://ikjun.com";
+const themeBootstrapScript = `
+(function () {
+  try {
+    var key = "preferredTheme";
+    var stored = window.localStorage.getItem(key);
+    var theme = (stored === "light" || stored === "dark")
+      ? stored
+      : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch (e) {}
+})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -77,13 +86,20 @@ export default function RootLayout({
 }) {
   return (
     // 한국어 기본(코어 타겟이 한국어라면 ko 권장)
-    <html lang="ko">
-      <body className={inter.className}>
-        <LanguageProvider>
-          <Header />
-          {children}
-          <Analytics />
-        </LanguageProvider>
+    <html lang="ko" suppressHydrationWarning>
+      <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeBootstrapScript,
+          }}
+        />
+        <ThemeProvider>
+          <LanguageProvider>
+            <Header />
+            {children}
+            <Analytics />
+          </LanguageProvider>
+        </ThemeProvider>
 
         {/* JSON-LD: Person + (선택) Website */}
         <script

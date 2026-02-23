@@ -1,0 +1,66 @@
+.button {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: color-mix(in srgb, var(--bg-elevated) 74%, transparent);
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--motion-fast), color var(--motion-fast),
+    background-color var(--motion-fast), transform var(--motion-fast);
+}
+
+.button:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.iconWrap {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.sun,
+.moon {
+  position: absolute;
+  inset: 0;
+  transition: opacity var(--motion-fast), transform var(--motion-fast);
+}
+
+.sun {
+  opacity: 0;
+  transform: scale(0.8) rotate(-20deg);
+}
+
+.moon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.isLight .sun {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.isLight .moon {
+  opacity: 0;
+  transform: scale(0.8) rotate(16deg);
+}
+
+@media (max-width: 700px) {
+  .button {
+    width: 34px;
+    height: 34px;
+  }
+}

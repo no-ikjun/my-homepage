@@ -1,0 +1,150 @@
+.main {
+  width: 100%;
+  padding: 6.5rem var(--space-lg) var(--space-2xl);
+}
+
+.shell {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.emptyState {
+  padding: var(--space-lg) 0;
+}
+
+.emptyKicker {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.emptyTitle {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.emptyDescription {
+  margin: var(--space-sm) 0 0;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.emptyLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.inlineLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.inlineLink:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.inlineLink:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 0.35rem;
+}
+
+.list {
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+}
+
+.list li + li {
+  margin-top: var(--space-xs);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: var(--space-md);
+  align-items: start;
+  text-decoration: none;
+  color: inherit;
+  padding: var(--space-md) 0;
+}
+
+.item:hover .itemTitle {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.item:hover .arrow {
+  color: var(--text-secondary);
+  transform: translate(1px, -1px);
+}
+
+.item:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.itemDate {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.itemBody {
+  min-width: 0;
+}
+
+.itemTitle {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  letter-spacing: -0.02em;
+}
+
+.itemSummary {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-size: 0.86rem;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.tag {
+  color: var(--text-muted);
+  font-size: 0.74rem;
+}
+
+.arrow {
+  color: var(--text-muted);
+  transition: transform var(--motion-fast), color var(--motion-fast);
+}
+
+@media (max-width: 700px) {
+  .main {
+    padding: 7.1rem 0.85rem 1.8rem;
+  }
+
+  .item {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .arrow {
+    display: none;
+  }
+}
