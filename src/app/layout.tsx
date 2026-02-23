@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import { LanguageProvider } from "@/contexts/language-context";
 import { ThemeProvider } from "@/contexts/theme-context";
 const SITE_URL = "https://ikjun.com";
@@ -97,6 +98,7 @@ export default function RootLayout({
           <LanguageProvider>
             <Header />
             {children}
+            <Footer />
             <Analytics />
           </LanguageProvider>
         </ThemeProvider>

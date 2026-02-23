@@ -156,8 +156,6 @@ export default function Home() {
           </li>
         </ul>
       </section>
-
-      <footer className={styles.footer}>{t.copyright}</footer>
     </main>
   );
 }

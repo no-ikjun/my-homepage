@@ -233,13 +233,6 @@
   transition: transform var(--motion-fast), color var(--motion-fast);
 }
 
-.footer {
-  padding-top: var(--space-xl);
-  color: var(--text-muted);
-  font-size: 0.82rem;
-  text-align: center;
-}
-
 @media (max-width: 900px) {
   .recentItem {
     grid-template-columns: 1fr;

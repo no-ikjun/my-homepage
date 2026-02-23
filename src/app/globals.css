@@ -106,6 +106,8 @@ body {
 
 body {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   color: var(--text-primary);
   background:
     radial-gradient(760px 420px at 8% -4%, var(--hero-glow-1), transparent 70%),
@@ -142,6 +144,10 @@ body::after {
     radial-gradient(360px 180px at 80% 16%, rgba(255, 255, 255, 0.03), transparent 75%);
   opacity: 0.2;
   z-index: -1;
+}
+
+main {
+  flex: 1;
 }
 
 img,
