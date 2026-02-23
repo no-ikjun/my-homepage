@@ -1,8 +1,7 @@
 .glassPanel {
   border: 1px solid var(--border-soft);
-  background: color-mix(in srgb, var(--bg-solid-panel) 92%, transparent);
+  background: var(--bg-solid-panel);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-glass);
 }
 
 .panelPaddingSm {

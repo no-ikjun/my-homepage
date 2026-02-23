@@ -44,14 +44,13 @@
   color: inherit;
   padding: var(--space-md) var(--space-lg);
   border: 1px solid var(--border-soft);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   background: var(--bg-solid-panel);
-  transition: border-color var(--motion-fast), box-shadow var(--motion-fast);
+  transition: border-color var(--motion-fast);
 }
 
 .linkRow:hover {
   border-color: var(--border-strong);
-  box-shadow: var(--shadow-glass);
 }
 
 .linkRow:hover .linkLabel {

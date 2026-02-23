@@ -27,7 +27,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
       title: "Jeonnam Science High School",
       link: "https://jeonnam-sh.hs.jne.kr/user/indexMain.action?siteId=chonnam-sh_hs",
       image:
-        "https://i.namu.wiki/i/BAtjT1n_h4CuAIwBXlEUfXTWuZtow9R3J2Yny0bmVyllq0nx1QEnonD0oj3R9MPAtpu2EsSiV65qoTGxCdGiI5xCXcjvulJ37GQW19Y_dqF3FdJzLF4mkF0VysxBO1afiATsSeSG3vw-AYqMyrcHlg.svg",
+        "https://i.namu.wiki/i/pKcu0LV55CmXEW8ZsafkIdJPJpG2eQM5zrkVootxLdayBA99XnTarXKiy-g7Rh7EqBwDAyVpi0BQnRVVNQTXtw.svg",
       description: "2020.03 ~ 2023.01",
       subDescription: "👨‍🎓 Graduated at 2023.01",
       content: [

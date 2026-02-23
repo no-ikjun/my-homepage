@@ -24,6 +24,7 @@
   padding: var(--space-xl);
   background: var(--bg-solid-panel);
   border-radius: var(--radius-xl);
+  border: 1px solid var(--border-soft);
 }
 
 .heroTop {

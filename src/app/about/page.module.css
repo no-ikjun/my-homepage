@@ -49,7 +49,8 @@
 .sectionGrid > div {
   padding: var(--space-lg);
   background: var(--bg-solid-panel);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-soft);
 }
 
 .summaryText {
@@ -93,7 +94,6 @@
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-xl);
   background: var(--bg-solid-panel);
-  box-shadow: var(--shadow-glass);
 }
 
 .careerMetaCol {
