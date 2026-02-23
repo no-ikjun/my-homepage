@@ -105,6 +105,7 @@ body {
 }
 
 body {
+  min-height: 100vh;
   color: var(--text-primary);
   background:
     radial-gradient(760px 420px at 8% -4%, var(--hero-glow-1), transparent 70%),
