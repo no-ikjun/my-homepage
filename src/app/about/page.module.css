@@ -108,7 +108,8 @@
   height: 58px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-soft);
-  background-color: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+  overflow: hidden;
+  background-color: var(--bg-solid-panel);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

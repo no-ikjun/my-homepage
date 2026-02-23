@@ -16,7 +16,7 @@
 
 .projectRow {
   display: grid;
-  grid-template-columns: 100px minmax(0, 1fr);
+  grid-template-columns: 72px minmax(0, 1fr);
   gap: var(--space-lg);
   padding: var(--space-lg);
   border: 1px solid var(--border-soft);
@@ -31,13 +31,13 @@
 
 .projectThumb {
   width: 100%;
-  max-width: 100px;
+  max-width: 72px;
   aspect-ratio: 1;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-soft);
   background-size: cover;
   background-position: center;
   background-color: var(--bg-base);
+  overflow: hidden;
 }
 
 .projectMain {
