@@ -1,10 +1,11 @@
 "use client";
 
-import styles from "./page.module.css";
-import { projects } from "./data";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import styles from "./page.module.css";
+import { projects } from "@/data/projects";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { PageHero, BadgeChip } from "@/components/ui";
 
 const techIconMap: Record<string, string> = {
   flutter: "/img/flutter_icon.svg",
@@ -29,76 +30,86 @@ export default function ProjectsPage() {
   const t = useTranslations();
 
   return (
-    <div className={styles.main}>
-      <div className={styles.container}>
-        <Link href="/" className={styles.back_button}>
-          <p className={styles.left_arrow}>&larr;</p>
-        </Link>
-        <div className={styles.title_container}>
-          <h1 className={styles.title}>{t.projectsPageTitle}</h1>
-          <p className={styles.description}>{t.projectsPageDescription}</p>
-        </div>
-        <div className={styles.project_grid}>
+    <main className={styles.main}>
+      <div className={styles.shell}>
+        <PageHero
+          title={t.projectsPageTitle}
+          description={t.projectsPageDescription}
+        />
+
+        <div className={styles.projectList}>
           {projects[lang].map((project) => (
-            <div className={styles.project_card} key={project.title}>
-              <div className={styles.project_header}>
+            <article key={project.title} className={styles.projectRow}>
+              <div className={styles.projectThumbWrap}>
                 <div
-                  className={styles.project_logo}
+                  className={styles.projectThumb}
                   style={{ backgroundImage: `url(${project.image})` }}
+                  aria-hidden="true"
                 />
-                <div className={styles.project_info}>
-                  <h3 className={styles.project_title}>
-                    <Link
-                      href={project.directLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.project_link}
-                    >
-                      {project.title} ↗
-                    </Link>
-                  </h3>
-                  <p className={styles.project_period}>{project.period}</p>
-                  <p className={styles.project_description}>
-                    {project.description}
-                  </p>
+              </div>
+
+              <div className={styles.projectMain}>
+                <div className={styles.projectHeading}>
+                  <div>
+                    <h2 className={styles.projectTitle}>
+                      <Link
+                        href={project.directLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.projectTitleLink}
+                      >
+                        {project.title} ↗
+                      </Link>
+                    </h2>
+                    <p className={styles.projectPeriod}>{project.period}</p>
+                  </div>
                 </div>
+
+                <p className={styles.projectDescription}>
+                  {project.description}
+                </p>
+
+                <div className={styles.techStack}>
+                  {project.techStack.map((tech) => (
+                    <BadgeChip key={tech} size="sm" tone="muted">
+                      <Image
+                        src={techIconMap[tech]}
+                        alt={tech}
+                        width={12}
+                        height={12}
+                        className={styles.techIcon}
+                      />
+                      {tech}
+                    </BadgeChip>
+                  ))}
+                </div>
+
+                <ul className={styles.linkList}>
+                  {project.links.map((link) => (
+                    <li key={link.url}>
+                      <Link
+                        href={link.url}
+                        className={styles.externalLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Image
+                          src={linkIconMap[link.type]}
+                          alt={link.type}
+                          width={14}
+                          height={14}
+                          className={styles.linkIcon}
+                        />
+                        <span>{link.description}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className={styles.tech_stack}>
-                {project.techStack.map((tech) => (
-                  <Image
-                    key={tech}
-                    src={techIconMap[tech]}
-                    alt={tech}
-                    width={24}
-                    height={24}
-                    className={styles.icon}
-                  />
-                ))}
-              </div>
-              <div className={styles.links}>
-                {project.links.map((link) => (
-                  <Link
-                    key={link.url}
-                    href={link.url}
-                    className={styles.link_div}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      src={linkIconMap[link.type]}
-                      alt={link.type}
-                      width={16}
-                      height={16}
-                      className={styles.icon_button}
-                    />
-                    {link.description}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

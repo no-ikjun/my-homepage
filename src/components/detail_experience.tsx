@@ -28,7 +28,7 @@ export default function DetailExperience({ data }: DetailExperienceProps) {
                 aria-label={`Open ${item.title} link (새 창)`}
               >
                 <Image
-                  src="./img/link.svg"
+                  src="/img/link.svg"
                   width={25}
                   height={25}
                   alt="External link"

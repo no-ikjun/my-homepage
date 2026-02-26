@@ -1,13 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import { LanguageProvider } from "@/contexts/language-context";
-import Script from "next/script";
-
-const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "@/contexts/theme-context";
 const SITE_URL = "https://ikjun.com";
+const themeBootstrapScript = `
+(function () {
+  try {
+    var key = "preferredTheme";
+    var stored = window.localStorage.getItem(key);
+    var theme = (stored === "light" || stored === "dark")
+      ? stored
+      : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch (e) {}
+})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -47,9 +57,9 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     // 한국어 우선 타이틀/설명 + 영어 병기
-    title: "최익준 | Ikjun Choi — SW 개발자",
+    title: "최익준 | Ikjun Choi",
     description:
-      "웹·모바일 SW 포트폴리오. React/Next.js, Node.js 프로젝트와 사례 소개. Portfolio of Ikjun Choi (full-stack web & mobile).",
+      "최익준의 포트폴리오. 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi",
     siteName: "Ikjun Choi Portfolio",
     images: [
       { url: `${SITE_URL}/profile_round3.png`, alt: "최익준 Ikjun Choi" },
@@ -60,8 +70,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "최익준 | Ikjun Choi — SW 개발자",
-    description: "웹·모바일 프로젝트 포트폴리오. Portfolio of Ikjun Choi.",
+    title: "최익준 | Ikjun Choi",
+    description:
+      "최익준의 포트폴리오. 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi",
     images: [`${SITE_URL}/profile_round3.png`],
   },
   robots: { index: true, follow: true },
@@ -77,13 +88,21 @@ export default function RootLayout({
 }) {
   return (
     // 한국어 기본(코어 타겟이 한국어라면 ko 권장)
-    <html lang="ko">
-      <body className={inter.className}>
-        <LanguageProvider>
-          <Header />
-          {children}
-          <Analytics />
-        </LanguageProvider>
+    <html lang="ko" suppressHydrationWarning>
+      <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeBootstrapScript,
+          }}
+        />
+        <ThemeProvider>
+          <LanguageProvider>
+            <Header />
+            {children}
+            <Footer />
+            <Analytics />
+          </LanguageProvider>
+        </ThemeProvider>
 
         {/* JSON-LD: Person + (선택) Website */}
         <script
