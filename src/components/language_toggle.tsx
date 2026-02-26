@@ -61,7 +61,7 @@ export default function LanguageToggle() {
             role="menuitem"
           >
             <span className={styles.flag}>
-              <Image src="/img/south-korea.svg" alt="" width={20} height={14} />
+              <Image src="/img/south-korea.svg" alt="" width={26} height={18} />
             </span>
             한국어
           </button>
@@ -75,7 +75,7 @@ export default function LanguageToggle() {
             role="menuitem"
           >
             <span className={styles.flag}>
-              <Image src="/img/united-states.svg" alt="" width={20} height={14} />
+              <Image src="/img/united-states.svg" alt="" width={26} height={18} />
             </span>
             English
           </button>
