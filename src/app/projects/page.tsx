@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { projects } from "./data";
+import { projects } from "@/data/projects";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { PageHero, BadgeChip } from "@/components/ui";
 
@@ -66,7 +66,9 @@ export default function ProjectsPage() {
                   </div>
                 </div>
 
-                <p className={styles.projectDescription}>{project.description}</p>
+                <p className={styles.projectDescription}>
+                  {project.description}
+                </p>
 
                 <div className={styles.techStack}>
                   {project.techStack.map((tech) => (

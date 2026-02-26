@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import styles from "./page.module.css";
-import { careers } from "@/app/careers/data";
-import { activities, awards, educations } from "@/app/experiences/data";
+import { careers } from "@/data/careers";
+import { activities, awards, educations } from "@/data/experiences";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { PageHero } from "@/components/ui";
 import EducationsBox from "@/components/educations_box";

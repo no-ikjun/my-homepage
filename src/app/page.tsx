@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 import LinkIcon, { LinkType } from "@/components/link_icon";
 import { BadgeChip } from "@/components/ui";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
-import { homeRecentActivities } from "./data/home-recent-activities";
+import { homeRecentActivities } from "@/data/home-recent-activities";
 
 const kindLabel: Record<"ko" | "en", Record<string, string>> = {
   ko: {
@@ -63,7 +63,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="recent-activity-title">
+      <section
+        className={styles.section}
+        aria-labelledby="recent-activity-title"
+      >
         <div className={styles.sectionHead}>
           <h2 id="recent-activity-title" className={styles.sectionTitle}>
             {t.homeRecentTitle}
@@ -125,14 +128,18 @@ export default function Home() {
           <li>
             <Link href="/about" className={styles.quickLink}>
               <span className={styles.quickLinkLabel}>{t.navAbout}</span>
-              <span className={styles.quickLinkText}>{t.aboutPageDescription}</span>
+              <span className={styles.quickLinkText}>
+                {t.aboutPageDescription}
+              </span>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>
           <li>
             <Link href="/projects" className={styles.quickLink}>
               <span className={styles.quickLinkLabel}>{t.navProjects}</span>
-              <span className={styles.quickLinkText}>{t.projectsPageDescription}</span>
+              <span className={styles.quickLinkText}>
+                {t.projectsPageDescription}
+              </span>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>
@@ -150,7 +157,9 @@ export default function Home() {
           <li>
             <Link href="/contact" className={styles.quickLink}>
               <span className={styles.quickLinkLabel}>{t.navContact}</span>
-              <span className={styles.quickLinkText}>{t.contactPageDescription}</span>
+              <span className={styles.quickLinkText}>
+                {t.contactPageDescription}
+              </span>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>
