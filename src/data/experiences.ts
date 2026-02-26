@@ -139,19 +139,48 @@ export const awards: Record<Language, ExperienceItem[]> = {
   ],
 };
 
-export const activities: Record<Language, ExperienceItem[]> = {
+export type ActivityEntry = {
+  title: string;
+  description?: string;
+  period?: string;
+  content: string[];
+};
+
+export type ActivityItem = {
+  title: string;
+  link: string;
+  image: string;
+  description: string;
+  content: ActivityEntry[];
+};
+
+export const activities: Record<Language, ActivityItem[]> = {
   en: [
     {
       title: "GSA InfoTeam",
       link: "https://introduce.gistory.me",
       image: "https://avatars.githubusercontent.com/u/54899579?s=280&v=4",
       description: "2023.03 ~ 2024.06",
-      subDescription: "Team Leader & Full Stack Developer",
       content: [
-        "Developed services for GIST students",
-        "Developed the Integrated Announcement Management Platform, Ziggle",
-        "Conducted an internal seminar for the development of organizational culture",
-        "Proceed with Devs' Night event for GIST developers",
+        {
+          title: "Team Leader",
+          content: [
+            "Contributed to the establishment and operation of a corporation",
+            "Conducted internal seminars to foster organizational culture",
+            "Planned the Devs' Night event for GIST developers",
+          ],
+        },
+        {
+          title: "Sub-Leader",
+          content: ["Managed development activities and organized them"],
+        },
+        {
+          title: "Full Stack Developer",
+          content: [
+            "Developed the Integrated Announcement Management Platform, Ziggle",
+            "Developed the GIST Chatbot service for improved information accessibility",
+          ],
+        },
       ],
     },
     {
@@ -159,10 +188,18 @@ export const activities: Record<Language, ExperienceItem[]> = {
       link: "",
       image: "https://avatars.githubusercontent.com/u/129100127?s=200&v=4",
       description: "2023.03 ~ 2024.06",
-      subDescription: "Junior Developer",
       content: [
-        "Conducted sessions about React, Next.js, Flutter, etc.",
-        "Conducted a mentoring program for training junior developers",
+        {
+          title: "Club Leader",
+          content: ["Organized and managed club activities"],
+        },
+        {
+          title: "Junior Developer",
+          content: [
+            "Conducted sessions about React, Next.js, Flutter, etc.",
+            "Conducted a mentoring program for training junior developers",
+          ],
+        },
       ],
     },
     {
@@ -171,10 +208,14 @@ export const activities: Record<Language, ExperienceItem[]> = {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShhKrzYFHe_ov2T_37GIfbofpwVUcZi7okhA&s",
       description: "2023.03 ~ 2023.12",
-      subDescription: "Club Member",
       content: [
-        "Study on the Start-up ecosystem",
-        "Participated in mock start-up program",
+        {
+          title: "Club Member",
+          content: [
+            "Study on the Start-up ecosystem",
+            "Participated in mock start-up program",
+          ],
+        },
       ],
     },
   ],
@@ -184,12 +225,26 @@ export const activities: Record<Language, ExperienceItem[]> = {
       link: "https://introduce.gistory.me",
       image: "https://avatars.githubusercontent.com/u/54899579?s=280&v=4",
       description: "2023.03 ~ 2024.06",
-      subDescription: "팀 리더 & 풀스택 개발자",
       content: [
-        "GIST 학생 대상 서비스 개발",
-        "통합 공지 관리 플랫폼 Ziggle 개발",
-        "조직 문화 정착을 위한 내부 세미나 진행",
-        "GIST 개발자 이벤트 Devs' Night 진행",
+        {
+          title: "팀 리더",
+          content: [
+            "법인 설립 기여 및 운영",
+            "조직 문화 정착을 위한 내부 세미나 진행",
+            "GIST 개발자 이벤트 Devs' Night 기획",
+          ],
+        },
+        {
+          title: "부팀장",
+          content: ["개발 활동 조직 및 관리"],
+        },
+        {
+          title: "풀스택 개발자",
+          content: [
+            "통합 공지 관리 플랫폼 Ziggle 개발",
+            "교내 정보 접근성 향상을 위한 GIST 챗봇 서비스 개발",
+          ],
+        },
       ],
     },
     {
@@ -197,10 +252,18 @@ export const activities: Record<Language, ExperienceItem[]> = {
       link: "",
       image: "https://avatars.githubusercontent.com/u/129100127?s=200&v=4",
       description: "2023.03 ~ 2024.06",
-      subDescription: "주니어 개발자",
       content: [
-        "React, Next.js, Flutter 등 기술 관련 오픈 세션 진행",
-        "주니어 개발자 양성 멘토링 프로그램 운영",
+        {
+          title: "동아리장",
+          content: ["동아리 운영 및 관리"],
+        },
+        {
+          title: "주니어 개발자",
+          content: [
+            "React, Next.js, Flutter 등 기술 관련 오픈 세션 진행",
+            "주니어 개발자 양성 멘토링 프로그램 운영",
+          ],
+        },
       ],
     },
     {
@@ -209,8 +272,12 @@ export const activities: Record<Language, ExperienceItem[]> = {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShhKrzYFHe_ov2T_37GIfbofpwVUcZi7okhA&s",
       description: "2023.03 ~ 2023.12",
-      subDescription: "동아리 부원",
-      content: ["스타트업 관련 스터디", "모의 창업 프로그램 참여"],
+      content: [
+        {
+          title: "동아리 부원",
+          content: ["스타트업 관련 스터디", "모의 창업 프로그램 참여"],
+        },
+      ],
     },
   ],
 };

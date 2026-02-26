@@ -1,17 +1,11 @@
+import type { ActivityItem } from "@/data/experiences";
 import styles from "../app/experiences/page.module.css";
 import Link from "next/link";
 
 type ActivitiesBoxProps = {
   title: string;
   moreInfoLabel: string;
-  data: {
-    title: string;
-    link: string;
-    image: string;
-    description: string;
-    subDescription: string;
-    content: string[];
-  }[];
+  data: ActivityItem[];
 };
 
 export default function ActivitiesBox({
@@ -32,7 +26,7 @@ export default function ActivitiesBox({
                   style={{
                     backgroundImage: `url(${item.image})`,
                   }}
-                ></div>
+                />
               )}
               <div>
                 <h3 className={styles.activity_title}>
@@ -54,16 +48,28 @@ export default function ActivitiesBox({
               </div>
             </div>
             <div className={styles.activity_right}>
-              <span className={styles.activity_role}>
-                {item.subDescription}
-              </span>
-              <ul className={styles.activity_list}>
-                {item.content.map((c) => (
-                  <li key={c} className={styles.activity_item}>
-                    {c}
-                  </li>
-                ))}
-              </ul>
+              {item.content.map((entry) => (
+                <div key={entry.title} className={styles.activity_entry}>
+                  <h4 className={styles.activity_entry_title}>{entry.title}</h4>
+                  {entry.period && (
+                    <span className={styles.activity_entry_period}>
+                      {entry.period}
+                    </span>
+                  )}
+                  {entry.description && (
+                    <p className={styles.activity_entry_description}>
+                      {entry.description}
+                    </p>
+                  )}
+                  <ul className={styles.activity_list}>
+                    {entry.content.map((c) => (
+                      <li key={c} className={styles.activity_item}>
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         ))}

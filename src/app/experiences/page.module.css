@@ -297,21 +297,37 @@
 .activity_right {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: var(--space-md);
 }
 
-.activity_role {
-  width: fit-content;
+.activity_entry + .activity_entry {
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-soft);
+}
+
+.activity_entry_title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.93rem;
+  letter-spacing: -0.02em;
+}
+
+.activity_entry_period {
+  display: block;
+  margin: var(--space-xs) 0 0;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+}
+
+.activity_entry_description {
+  margin: var(--space-xs) 0 0;
   color: var(--text-secondary);
-  padding: 0;
-  font-size: 0.82rem;
-  font-weight: 600;
-  border: none;
-  background: transparent;
+  font-size: 0.84rem;
+  line-height: 1.5;
 }
 
 .activity_list {
-  margin: 0;
+  margin: var(--space-xs) 0 0;
   padding-left: 1rem;
 }
 
