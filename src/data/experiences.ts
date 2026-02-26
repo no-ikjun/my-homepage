@@ -164,6 +164,7 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "Team Leader",
+          period: "2024",
           content: [
             "Contributed to the establishment and operation of a corporation",
             "Conducted internal seminars to foster organizational culture",
@@ -172,10 +173,12 @@ export const activities: Record<Language, ActivityItem[]> = {
         },
         {
           title: "Sub-Leader",
+          period: "2026",
           content: ["Managed development activities and organized them"],
         },
         {
           title: "Full Stack Developer",
+          period: "2023 - 2026",
           content: [
             "Developed the Integrated Announcement Management Platform, Ziggle",
             "Developed the GIST Chatbot service for improved information accessibility",
@@ -191,10 +194,12 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "Club Leader",
+          period: "2026",
           content: ["Organized and managed club activities"],
         },
         {
           title: "Junior Developer",
+          period: "2023",
           content: [
             "Conducted sessions about React, Next.js, Flutter, etc.",
             "Conducted a mentoring program for training junior developers",
@@ -211,6 +216,7 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "Club Member",
+          period: "2023",
           content: [
             "Study on the Start-up ecosystem",
             "Participated in mock start-up program",
@@ -228,6 +234,7 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "팀 리더",
+          period: "2024",
           content: [
             "법인 설립 기여 및 운영",
             "조직 문화 정착을 위한 내부 세미나 진행",
@@ -236,10 +243,12 @@ export const activities: Record<Language, ActivityItem[]> = {
         },
         {
           title: "부팀장",
+          period: "2023 - 2024",
           content: ["개발 활동 조직 및 관리"],
         },
         {
           title: "풀스택 개발자",
+          period: "2023 - 2024",
           content: [
             "통합 공지 관리 플랫폼 Ziggle 개발",
             "교내 정보 접근성 향상을 위한 GIST 챗봇 서비스 개발",
@@ -255,10 +264,12 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "동아리장",
+          period: "2024",
           content: ["동아리 운영 및 관리"],
         },
         {
           title: "주니어 개발자",
+          period: "2023 - 2024",
           content: [
             "React, Next.js, Flutter 등 기술 관련 오픈 세션 진행",
             "주니어 개발자 양성 멘토링 프로그램 운영",
@@ -275,6 +286,7 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "동아리 부원",
+          period: "2023",
           content: ["스타트업 관련 스터디", "모의 창업 프로그램 참여"],
         },
       ],
