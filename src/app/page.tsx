@@ -79,6 +79,7 @@ export default function Home() {
             return (
               <li key={item.id} className={styles.recentItem}>
                 <span className={styles.recentDate}>{item.date}</span>
+                <span className={styles.timelineDot} aria-hidden="true" />
                 {item.internal ? (
                   <Link href={item.href} className={styles.recentLink}>
                     <div className={styles.recentBody}>

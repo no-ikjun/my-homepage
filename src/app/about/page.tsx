@@ -73,53 +73,56 @@ export default function AboutPage() {
             <p className={styles.sectionDescription}>{t.careersPageDescription}</p>
           </div>
 
-          <div className={styles.careerList}>
-            {careerItems.map((item) => (
-              <article key={item.title} className={styles.careerRow}>
-                <div className={styles.careerMetaCol}>
-                  <div
-                    className={styles.careerLogo}
-                    style={{ backgroundImage: `url(${item.image})` }}
-                    aria-hidden="true"
-                  />
-                  <div>
-                    <h3 className={styles.careerTitle}>
-                      {item.link ? (
-                        <Link
-                          href={item.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.inlineLink}
-                        >
-                          {item.title} ↗
-                        </Link>
-                      ) : (
-                        item.title
-                      )}
-                    </h3>
-                    <p className={styles.careerDate}>{item.description}</p>
-                    <p className={styles.careerRole}>{item.subDescription}</p>
+          <div className={styles.careerPanel}>
+            <ul className={styles.careerList}>
+              {careerItems.map((item) => (
+                <li key={item.title} className={styles.careerItem}>
+                  <span className={styles.careerTimeline} aria-hidden="true" />
+                  <div className={styles.careerLeftCol}>
+                    <span className={styles.careerPeriod}>{item.description}</span>
+                    <div className={styles.careerCompany}>
+                      <div
+                        className={styles.careerLogo}
+                        style={{ backgroundImage: `url(${item.image})` }}
+                        aria-hidden="true"
+                      />
+                      <div>
+                        <h3 className={styles.careerTitle}>
+                          {item.link ? (
+                            <Link
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.inlineLink}
+                            >
+                              {item.title} ↗
+                            </Link>
+                          ) : (
+                            item.title
+                          )}
+                        </h3>
+                        <p className={styles.careerRole}>{item.subDescription}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                <div className={styles.careerContentCol}>
-                  {item.content.map((project) => (
-                    <div key={project.title} className={styles.projectEntry}>
-                      <div className={styles.projectEntryTop}>
+                  <div className={styles.careerProjectsCol}>
+                    {item.content.map((project) => (
+                      <div key={project.title} className={styles.projectEntry}>
                         <h4 className={styles.projectEntryTitle}>{project.title}</h4>
                         <span className={styles.projectEntryPeriod}>{project.period}</span>
+                        <p className={styles.projectEntryDescription}>{project.description}</p>
+                        <ul className={styles.projectEntryList}>
+                          {project.content.map((point) => (
+                            <li key={point}>{point}</li>
+                          ))}
+                        </ul>
                       </div>
-                      <p className={styles.projectEntryDescription}>{project.description}</p>
-                      <ul className={styles.projectEntryList}>
-                        {project.content.map((point) => (
-                          <li key={point}>{point}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            ))}
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

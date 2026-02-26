@@ -102,15 +102,26 @@
 }
 
 .recentList {
+  position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+.recentList::before {
+  content: "";
+  position: absolute;
+  left: calc(128px + var(--space-sm) + 9px);
+  top: calc(var(--space-sm) + 0.35rem + 4px);
+  bottom: calc(var(--space-sm) + 0.35rem + 4px);
+  width: 2px;
+  background: var(--border-soft);
+}
+
 .recentItem {
   display: grid;
-  grid-template-columns: 128px minmax(0, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: 128px 20px minmax(0, 1fr);
+  gap: 0 var(--space-sm);
   padding: var(--space-sm) 0;
 }
 
@@ -119,6 +130,23 @@
   font-size: 0.79rem;
   line-height: 1.45;
   padding-top: 0.12rem;
+  text-align: right;
+}
+
+.timelineDot {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.35rem;
+}
+
+.timelineDot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  z-index: 1;
+  flex-shrink: 0;
 }
 
 .recentLink {
@@ -239,8 +267,17 @@
     gap: var(--space-xs);
   }
 
+  .recentList::before {
+    display: none;
+  }
+
+  .timelineDot {
+    display: none;
+  }
+
   .recentDate {
     padding-top: 0;
+    text-align: left;
   }
 
   .quickLink {
