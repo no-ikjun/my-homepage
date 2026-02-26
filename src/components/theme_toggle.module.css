@@ -11,13 +11,12 @@
   cursor: pointer;
   position: relative;
   transition: border-color var(--motion-fast), color var(--motion-fast),
-    background-color var(--motion-fast), transform var(--motion-fast);
+    background-color var(--motion-fast);
 }
 
 .button:hover {
   border-color: var(--border-strong);
   color: var(--text-primary);
-  transform: translateY(-1px);
 }
 
 .button:focus-visible {
