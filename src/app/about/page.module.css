@@ -1,0 +1,304 @@
+.main {
+  width: 100%;
+  padding: 6.5rem var(--space-lg) var(--space-2xl);
+}
+
+.shell {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.section {
+  padding: var(--space-lg) 0;
+  scroll-margin-top: 6.5rem;
+}
+
+.section + .section {
+  padding-top: var(--space-xl);
+}
+
+.sectionHeaderRow {
+  margin-bottom: var(--space-md);
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.sectionDescription {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-md);
+}
+
+.sectionGrid > div {
+  padding: var(--space-lg);
+  background: var(--bg-solid-panel);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-soft);
+}
+
+.summaryText {
+  display: grid;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.summaryText p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-size: 0.93rem;
+}
+
+.principlesList {
+  margin: var(--space-sm) 0 0;
+  padding-left: var(--space-lg);
+  color: var(--text-secondary);
+}
+
+.principlesList li {
+  line-height: 1.55;
+  font-size: 0.9rem;
+}
+
+.principlesList li + li {
+  margin-top: var(--space-xs);
+}
+
+.careerPanel {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  background: var(--bg-solid-panel);
+}
+
+.careerList {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.careerList::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 2px;
+  background: var(--border-soft);
+}
+
+.careerItem {
+  display: grid;
+  grid-template-columns: 20px 200px minmax(0, 1fr);
+  gap: 0 var(--space-lg);
+  padding: var(--space-md) 0;
+  align-items: start;
+}
+
+.careerItem:first-child {
+  padding-top: 0;
+}
+
+.careerItem:last-child {
+  padding-bottom: 0;
+}
+
+/* 파란 점과 기간이 한 줄에 맞도록 */
+.careerTimeline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.2rem;
+}
+
+.careerTimeline::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.careerPeriod {
+  color: var(--text-muted);
+  font-size: 0.79rem;
+  line-height: 1.2;
+  text-align: left;
+  margin: 0;
+  padding-top: 3px;
+}
+
+.careerLeftCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.careerCompany {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.careerProjectsCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+  margin-top: 1.75rem;
+}
+
+.careerLogo {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+  background-color: var(--bg-solid-panel);
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.careerTitle {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.inlineLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.inlineLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.careerDate {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+}
+
+.careerRole {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+}
+
+.careerContentCol {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.projectEntry + .projectEntry {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-soft);
+}
+
+.projectEntryTitle {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.93rem;
+  letter-spacing: -0.02em;
+}
+
+.projectEntryPeriod {
+  display: block;
+  margin: var(--space-xs) 0 0;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+}
+
+.projectEntryDescription {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.projectEntryList {
+  margin: var(--space-xs) 0 0;
+  padding-left: var(--space-lg);
+  color: var(--text-secondary);
+}
+
+.projectEntryList li {
+  font-size: 0.83rem;
+  line-height: 1.45;
+}
+
+.projectEntryList li + li {
+  margin-top: var(--space-xs);
+}
+
+@media (max-width: 900px) {
+  .sectionGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .careerItem {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .careerList::before {
+    display: none;
+  }
+
+  .careerTimeline {
+    display: none;
+  }
+
+  .careerPeriod {
+    padding-top: 0;
+    text-align: left;
+  }
+}
+
+@media (max-width: 700px) {
+  .main {
+    padding: 6.75rem 0.85rem 1.8rem;
+  }
+
+  .section {
+    scroll-margin-top: 6.75rem;
+  }
+
+  .careerCompany {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .careerLogo {
+    width: 52px;
+    height: 52px;
+  }
+}

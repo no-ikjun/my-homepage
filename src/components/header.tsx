@@ -1,76 +1,89 @@
 "use client";
-import Link from "next/link";
-import styles from "../app/page.module.css";
+
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import LanguageToggle from "./language_toggle";
+import ThemeToggle from "./theme_toggle";
 import { useTranslations } from "@/contexts/language-context";
+import styles from "./header.module.css";
+
+const navItems: {
+  href: string;
+  key: "navHome" | "navAbout" | "navProjects" | "navWritings" | "navContact";
+}[] = [
+  { href: "/", key: "navHome" },
+  { href: "/about", key: "navAbout" },
+  { href: "/projects", key: "navProjects" },
+  { href: "/writings", key: "navWritings" },
+  { href: "/contact", key: "navContact" },
+];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
   const t = useTranslations();
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <header className={`${styles.header} ${scrolled ? styles.header_scrolled : ""}`}>
-      <div className={styles.header_container}>
-        <Link href={"/"} className={styles.header_logo} aria-label="Go to home">
-          <span className={styles.logo_name}>ikjun.com</span>
-          <Image
-            className={styles.nav_profile_image}
-            src="/img/profile_round3.png"
-            alt="Ikjun Choi"
-            width={30}
-            height={30}
-            priority
-          />
-        </Link>
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
-        <div className={styles.header_actions}>
-          <nav aria-label="Primary">
-            <ul className={styles.header_nav}>
-              <li className={styles.header_nav_item}>
-                <Link
-                  href="/careers"
-                  // className={isActive("/careers") ? styles.active_nav : undefined}
-                  // aria-current={isActive("/careers") ? "page" : undefined}
-                >
-                  {t.navCareers}
-                </Link>
-              </li>
-              <li className={styles.header_nav_item}>
-                <Link
-                  href="/experiences"
-                  // className={
-                  //   isActive("/experiences") ? styles.active_nav : undefined
-                  // }
-                  // aria-current={isActive("/experiences") ? "page" : undefined}
-                >
-                  {t.navExperiences}
-                </Link>
-              </li>
-              <li className={styles.header_nav_item}>
-                <Link
-                  href="/projects"
-                  // className={
-                  //   isActive("/projects") ? styles.active_nav : undefined
-                  // }
-                  // aria-current={isActive("/projects") ? "page" : undefined}
-                >
-                  {t.navProjects}
-                </Link>
-              </li>
-            </ul>
+  const navLinks = (
+    <ul className={styles.navList}>
+      {navItems.map(({ href, key }) => (
+        <li key={href}>
+          <Link
+            href={href}
+            className={`${styles.navLink} ${
+              isActive(href) ? styles.navLinkActive : ""
+            }`}
+            aria-current={isActive(href) ? "page" : undefined}
+          >
+            {t[key]}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+
+  return (
+    <header className={styles.header}>
+      <div
+        className={`${styles.headerDock} ${scrolled ? styles.headerDockScrolled : ""}`}
+      >
+        <div className={styles.headerTop}>
+          <Link href="/" className={styles.brand} aria-label="Go to home">
+            <span className={styles.brandAvatarWrap}>
+              <Image
+                className={styles.brandAvatar}
+                src="/img/profile_round3.png"
+                alt="Ikjun Choi"
+                width={30}
+                height={30}
+                priority
+              />
+            </span>
+            <span className={styles.brandText}>
+              <span className={styles.brandName}>Ikjun Choi</span>
+              <span className={styles.brandRole}>Product Engineer</span>
+            </span>
+          </Link>
+          <nav aria-label="Primary" className={styles.nav}>
+            {navLinks}
           </nav>
-          <LanguageToggle />
+          <div className={styles.utilityWrap}>
+            <ThemeToggle />
+            <LanguageToggle />
+          </div>
         </div>
       </div>
     </header>

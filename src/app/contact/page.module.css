@@ -1,0 +1,115 @@
+.main {
+  width: 100%;
+  padding: 6.5rem var(--space-lg) var(--space-2xl);
+}
+
+.shell {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: var(--space-lg) 0;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sectionDescription {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+  font-size: 0.86rem;
+}
+
+.linkList {
+  list-style: none;
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.linkRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-md);
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  background: var(--bg-solid-panel);
+  transition: border-color var(--motion-fast);
+}
+
+.linkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+  flex-shrink: 0;
+}
+
+.linkIcon img {
+  opacity: 0.85;
+  filter: var(--icon-filter);
+}
+
+.linkRow:hover {
+  border-color: var(--border-strong);
+}
+
+.linkRow:hover .linkLabel {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.linkRow:hover .linkArrow {
+  color: var(--text-secondary);
+  transform: translate(1px, -1px);
+}
+
+.linkRow:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.linkLabel {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.linkDescription {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-muted);
+  line-height: 1.45;
+  font-size: 0.84rem;
+}
+
+.linkArrow {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: transform var(--motion-fast), color var(--motion-fast);
+}
+
+@media (max-width: 700px) {
+  .main {
+    padding: 6.75rem 0.85rem 1.8rem;
+  }
+
+  .linkRow {
+    padding: var(--space-md);
+  }
+}
