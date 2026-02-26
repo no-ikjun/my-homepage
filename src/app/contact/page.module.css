@@ -37,7 +37,7 @@
 
 .linkRow {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: var(--space-md);
   align-items: center;
   text-decoration: none;
@@ -47,6 +47,22 @@
   border-radius: var(--radius-xl);
   background: var(--bg-solid-panel);
   transition: border-color var(--motion-fast);
+}
+
+.linkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+  flex-shrink: 0;
+}
+
+.linkIcon img {
+  opacity: 0.85;
+  filter: var(--icon-filter);
 }
 
 .linkRow:hover {

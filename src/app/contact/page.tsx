@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { useTranslations } from "@/contexts/language-context";
@@ -12,6 +13,7 @@ const contactLinks = [
     href: "mailto:choiikjun1101@gmail.com",
     description: "choiikjun1101@gmail.com",
     external: true,
+    icon: "/img/mail_icon.svg",
   },
   {
     key: "linkedin",
@@ -19,6 +21,7 @@ const contactLinks = [
     href: "https://www.linkedin.com/in/ikjunchoi/",
     description: "Professional profile and direct messages",
     external: true,
+    icon: "/img/linkedin_icon.svg",
   },
   {
     key: "github",
@@ -26,6 +29,7 @@ const contactLinks = [
     href: "https://github.com/no-ikjun",
     description: "Projects, repositories, and technical activity",
     external: true,
+    icon: "/img/github_icon.svg",
   },
   {
     key: "instagram",
@@ -33,6 +37,7 @@ const contactLinks = [
     href: "https://www.instagram.com/__ikjun/",
     description: "Casual updates and personal posts",
     external: true,
+    icon: "/img/instagram_icon.svg",
   },
 ];
 
@@ -60,6 +65,14 @@ export default function ContactPage() {
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
                 >
+                  <span className={styles.linkIcon}>
+                    <Image
+                      src={item.icon}
+                      alt=""
+                      width={22}
+                      height={22}
+                    />
+                  </span>
                   <div className={styles.linkMain}>
                     <h3 className={styles.linkLabel}>{item.label}</h3>
                     <p className={styles.linkDescription}>{item.description}</p>
