@@ -57,9 +57,9 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     // 한국어 우선 타이틀/설명 + 영어 병기
-    title: "최익준 | Ikjun Choi — SW 개발자",
+    title: "최익준 | Ikjun Choi",
     description:
-      "웹·모바일 SW 포트폴리오. React/Next.js, Node.js 프로젝트와 사례 소개. Portfolio of Ikjun Choi (full-stack web & mobile).",
+      "최익준의 포트폴리오. 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi",
     siteName: "Ikjun Choi Portfolio",
     images: [
       { url: `${SITE_URL}/profile_round3.png`, alt: "최익준 Ikjun Choi" },
@@ -70,8 +70,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "최익준 | Ikjun Choi — SW 개발자",
-    description: "웹·모바일 프로젝트 포트폴리오. Portfolio of Ikjun Choi.",
+    title: "최익준 | Ikjun Choi",
+    description:
+      "최익준의 포트폴리오. 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi",
     images: [`${SITE_URL}/profile_round3.png`],
   },
   robots: { index: true, follow: true },
