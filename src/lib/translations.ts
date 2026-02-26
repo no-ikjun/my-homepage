@@ -56,7 +56,7 @@ export const translations: Record<Language, Translations> = {
     navCareers: "Careers",
     navExperiences: "Experiences",
     navProjects: "Projects",
-    navWritings: "Writings",
+    navWritings: "Blog",
     navContact: "Contact",
     homeRole: "Product Engineer",
     homeDescription:
@@ -112,8 +112,8 @@ export const translations: Record<Language, Translations> = {
     navCareers: "실무경력",
     navExperiences: "활동경험",
     navProjects: "프로젝트",
-    navWritings: "글",
-    navContact: "연락",
+    navWritings: "블로그",
+    navContact: "연락처",
     homeRole: "Product Engineer",
     homeDescription:
       "문제 인식부터 기획, 설계, 개발, 배포, 운영까지를 하나의 연속된 흐름으로 바라보며 서비스를 만드는 개발자입니다. 기능 구현 자체에 집중하기보다 문제의 본질을 이해하고, 빠른 실행과 사용자 피드백을 통해 해결책을 가장 빠르게 검증하는 방식을 우선합니다.\n\nimage.png개인 및 소규모 팀 환경에서 여러 서비스를 엔드 투 엔드로 구축·운영하며, 제한된 자원 속에서 높은 임팩트를 내는 선택을 해왔습니다. 초기에는 완성도보다 검증 가능성을 중시하고, 출시 이후에는 사용자 행동을 바탕으로 구조와 기능을 지속적으로 개선하며 프론트엔드·백엔드·인프라 전반을 다룹니다.",
@@ -152,9 +152,9 @@ export const translations: Record<Language, Translations> = {
     aboutSummaryDescription:
       "빠른 실행과 반복 개선을 중요하게 생각하며, 아이디어부터 출시까지 엔드 투 엔드로 제품을 만듭니다.",
     aboutWorkingStyleTitle: "일하는 방식",
-    contactPageTitle: "연락",
+    contactPageTitle: "연락처",
     contactPageDescription:
-      "이메일이 가장 빠르며, 아래 링크드인/깃허브/인스타그램으로도 연락할 수 있습니다.",
+      "이메일이 가장 빠르며, 아래 링크를 통해 연락할 수 있습니다.",
     contactLinksTitle: "연락처 및 링크",
     contactLinksDescription:
       "제품 개발, 스타트업 협업, 기술 관련 이야기 모두 환영합니다.",
