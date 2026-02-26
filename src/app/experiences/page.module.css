@@ -254,8 +254,8 @@
 
 .activity_row {
   display: grid;
-  grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.15fr);
-  gap: 0.75rem;
+  grid-template-columns: minmax(180px, 0.38fr) minmax(0, 1fr);
+  gap: var(--space-md);
   padding: 0.8rem 0;
   background: transparent;
 }
