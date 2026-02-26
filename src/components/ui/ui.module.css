@@ -177,7 +177,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  padding-bottom: var(--space-lg);
+  padding-bottom: 0;
 }
 
 .pageHeroTitleRow {
@@ -239,7 +239,16 @@
     width: 100%;
   }
 
+  .pageHero {
+    gap: var(--space-xs);
+    padding-bottom: 0;
+  }
+
   .pageHeroTitle {
-    font-size: clamp(1.5rem, 8vw, 2.15rem);
+    font-size: clamp(1.35rem, 6vw, 1.85rem);
+  }
+
+  .pageHeroDescription {
+    font-size: 0.9rem;
   }
 }

@@ -9,6 +9,14 @@ import ThemeToggle from "./theme_toggle";
 import { useTranslations } from "@/contexts/language-context";
 import styles from "./header.module.css";
 
+const navItems: { href: string; key: "navHome" | "navAbout" | "navProjects" | "navWritings" | "navContact" }[] = [
+  { href: "/", key: "navHome" },
+  { href: "/about", key: "navAbout" },
+  { href: "/projects", key: "navProjects" },
+  { href: "/writings", key: "navWritings" },
+  { href: "/contact", key: "navContact" },
+];
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -26,89 +34,49 @@ export default function Header() {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
+  const navLinks = (
+    <ul className={styles.navList}>
+      {navItems.map(({ href, key }) => (
+        <li key={href}>
+          <Link
+            href={href}
+            className={`${styles.navLink} ${
+              isActive(href) ? styles.navLinkActive : ""
+            }`}
+            aria-current={isActive(href) ? "page" : undefined}
+          >
+            {t[key]}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <header className={styles.header}>
       <div
         className={`${styles.headerDock} ${scrolled ? styles.headerDockScrolled : ""}`}
       >
-        <Link href="/" className={styles.brand} aria-label="Go to home">
-          <span className={styles.brandAvatarWrap}>
-            <Image
-              className={styles.brandAvatar}
-              src="/img/profile_round3.png"
-              alt="Ikjun Choi"
-              width={30}
-              height={30}
-              priority
-            />
-          </span>
-          <span className={styles.brandText}>
-            <span className={styles.brandName}>Ikjun Choi</span>
-            <span className={styles.brandRole}>Software Developer</span>
-          </span>
-        </Link>
-
-        <div className={styles.navWrap}>
-          <nav aria-label="Primary">
-            <ul className={styles.navList}>
-              <li>
-                <Link
-                  href="/"
-                  className={`${styles.navLink} ${
-                    isActive("/") ? styles.navLinkActive : ""
-                  }`}
-                  aria-current={isActive("/") ? "page" : undefined}
-                >
-                  {t.navHome}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className={`${styles.navLink} ${
-                    isActive("/about") ? styles.navLinkActive : ""
-                  }`}
-                  aria-current={isActive("/about") ? "page" : undefined}
-                >
-                  {t.navAbout}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/projects"
-                  className={`${styles.navLink} ${
-                    isActive("/projects") ? styles.navLinkActive : ""
-                  }`}
-                  aria-current={isActive("/projects") ? "page" : undefined}
-                >
-                  {t.navProjects}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/writings"
-                  className={`${styles.navLink} ${
-                    isActive("/writings") ? styles.navLinkActive : ""
-                  }`}
-                  aria-current={isActive("/writings") ? "page" : undefined}
-                >
-                  {t.navWritings}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className={`${styles.navLink} ${
-                    isActive("/contact") ? styles.navLinkActive : ""
-                  }`}
-                  aria-current={isActive("/contact") ? "page" : undefined}
-                >
-                  {t.navContact}
-                </Link>
-              </li>
-            </ul>
+        <div className={styles.headerTop}>
+          <Link href="/" className={styles.brand} aria-label="Go to home">
+            <span className={styles.brandAvatarWrap}>
+              <Image
+                className={styles.brandAvatar}
+                src="/img/profile_round3.png"
+                alt="Ikjun Choi"
+                width={30}
+                height={30}
+                priority
+              />
+            </span>
+            <span className={styles.brandText}>
+              <span className={styles.brandName}>Ikjun Choi</span>
+              <span className={styles.brandRole}>Software Developer</span>
+            </span>
+          </Link>
+          <nav aria-label="Primary" className={styles.nav}>
+            {navLinks}
           </nav>
-
           <div className={styles.utilityWrap}>
             <ThemeToggle />
             <LanguageToggle />
