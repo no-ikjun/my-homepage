@@ -10,7 +10,6 @@ export default async function WritingsPage() {
     <main className={styles.main}>
       <div className={styles.shell}>
         <PageHero
-          kicker="Writings"
           title="Writing Notes & Essays"
           description="Product building, engineering decisions, and things I am learning in the process."
         />

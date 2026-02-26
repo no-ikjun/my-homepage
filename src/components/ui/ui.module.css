@@ -180,14 +180,6 @@
   padding-bottom: var(--space-lg);
 }
 
-.pageHeroKicker {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.76rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
 .pageHeroTitleRow {
   display: flex;
   align-items: flex-end;

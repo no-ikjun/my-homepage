@@ -33,7 +33,6 @@ export default function ProjectsPage() {
     <main className={styles.main}>
       <div className={styles.shell}>
         <PageHero
-          kicker={t.navProjects}
           title={t.projectsPageTitle}
           description={t.projectsPageDescription}
         />

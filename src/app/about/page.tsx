@@ -32,7 +32,6 @@ export default function AboutPage() {
     <main className={styles.main}>
       <div className={styles.shell}>
         <PageHero
-          kicker={t.navAbout}
           title={t.aboutPageTitle}
           description={t.aboutPageDescription}
         />

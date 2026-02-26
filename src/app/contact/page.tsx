@@ -43,7 +43,6 @@ export default function ContactPage() {
     <main className={styles.main}>
       <div className={styles.shell}>
         <PageHero
-          kicker={t.navContact}
           title={t.contactPageTitle}
           description={t.contactPageDescription}
         />
