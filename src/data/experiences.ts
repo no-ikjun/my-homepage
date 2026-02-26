@@ -27,7 +27,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
       title: "Jeonnam Science High School",
       link: "https://jeonnam-sh.hs.jne.kr/user/indexMain.action?siteId=chonnam-sh_hs",
       image:
-        "https://i.namu.wiki/i/pKcu0LV55CmXEW8ZsafkIdJPJpG2eQM5zrkVootxLdayBA99XnTarXKiy-g7Rh7EqBwDAyVpi0BQnRVVNQTXtw.svg",
+        "https://media.licdn.com/dms/image/v2/C560BAQHrM8ZTilgExg/company-logo_200_200/company-logo_200_200/0/1630661133483?e=1773878400&v=beta&t=eiBLelTVI3ejyFgVP_dctkB1a7s5sThEZcxcnkif3lo",
       description: "2020.03 ~ 2023.01",
       subDescription: "👨‍🎓 Graduated at 2023.01",
       content: [
@@ -50,7 +50,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
       title: "전남과학고등학교",
       link: "https://jeonnam-sh.hs.jne.kr/user/indexMain.action?siteId=chonnam-sh_hs",
       image:
-        "https://i.namu.wiki/i/BAtjT1n_h4CuAIwBXlEUfXTWuZtow9R3J2Yny0bmVyllq0nx1QEnonD0oj3R9MPAtpu2EsSiV65qoTGxCdGiI5xCXcjvulJ37GQW19Y_dqF3FdJzLF4mkF0VysxBO1afiATsSeSG3vw-AYqMyrcHlg.svg",
+        "https://media.licdn.com/dms/image/v2/C560BAQHrM8ZTilgExg/company-logo_200_200/company-logo_200_200/0/1630661133483?e=1773878400&v=beta&t=eiBLelTVI3ejyFgVP_dctkB1a7s5sThEZcxcnkif3lo",
       description: "2020.03 ~ 2023.01",
       subDescription: "👨‍🎓 2023.01 졸업",
       content: ["학생회 IT부 부장", "학교 운영 시스템 JshsUs(과구리) 개발"],
