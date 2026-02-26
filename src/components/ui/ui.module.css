@@ -234,6 +234,50 @@
   line-height: 1.45;
 }
 
+/* Icon + text row (e.g. location, link with label) */
+.iconWithTextRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.iconWithTextIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  opacity: 0.9;
+}
+
+.iconWithTextIcon img {
+  opacity: 0.85;
+  filter: var(--icon-filter);
+}
+
+.iconWithTextLabel {
+  min-width: 0;
+}
+
+.iconWithTextLink {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 0.35rem;
+  transition: color var(--motion-fast);
+}
+
+.iconWithTextLink:hover {
+  color: var(--text-primary);
+}
+
+.iconWithTextLink:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 @media (max-width: 700px) {
   .button {
     width: 100%;

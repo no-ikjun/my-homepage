@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
-import LinkIcon, { LinkType } from "@/components/link_icon";
-import { BadgeChip } from "@/components/ui";
+import { BadgeChip, IconWithText } from "@/components/ui";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { homeRecentActivities } from "@/data/home-recent-activities";
 
@@ -42,23 +41,53 @@ export default function Home() {
               width={300}
               height={300}
               priority
-              sizes="72px"
+              sizes="(max-width: 700px) 96px, 128px"
             />
             <div className={styles.heroIdentity}>
+              <BadgeChip tone="accent" size="sm" className={styles.heroBadge}>
+                {t.homeRole}
+              </BadgeChip>
               <h1 className={styles.heroName}>Ikjun Choi</h1>
               <p className={styles.heroNameKr}>최익준</p>
             </div>
+            <div className={styles.heroMeta}>
+              <IconWithText icon="location-pin">{t.homeLocation}</IconWithText>
+              <IconWithText icon="graduation-cap">{t.homeEducation}</IconWithText>
+              <IconWithText icon="mail" href="mailto:choiikjun1101@gmail.com">
+                {t.homeLinkEmail}
+              </IconWithText>
+              <IconWithText
+                icon="github"
+                href="https://github.com/no-ikjun"
+                external
+              >
+                {t.homeLinkGithub}
+              </IconWithText>
+              <IconWithText
+                icon="linkedin"
+                href="https://www.linkedin.com/in/ikjunchoi/"
+                external
+              >
+                {t.homeLinkLinkedIn}
+              </IconWithText>
+            </div>
           </div>
 
-          <BadgeChip tone="accent">{t.homeRole}</BadgeChip>
-
-          <p className={styles.heroDescription}>{t.homeDescription}</p>
-
-          <div className={styles.socialRow} aria-label="Social links">
-            <LinkIcon linkType={LinkType.Mail} />
-            <LinkIcon linkType={LinkType.Github} />
-            <LinkIcon linkType={LinkType.LinkedIn} />
-            <LinkIcon linkType={LinkType.Instagram} />
+          <div className={styles.heroAboutSection}>
+            <div className={styles.heroAboutHead}>
+              <h2 className={styles.heroAboutTitle}>{t.homeAboutTitle}</h2>
+              <span className={styles.heroAboutLine} aria-hidden />
+            </div>
+            <div className={styles.heroDescriptionWrap}>
+              {t.homeDescription
+              .split(/\n\n+/)
+              .filter(Boolean)
+              .map((paragraph, i) => (
+                <p key={i} className={styles.heroDescription}>
+                  {paragraph.trim()}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </section>

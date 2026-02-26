@@ -12,6 +12,12 @@ type Translations = {
   homeDescription: string;
   ctaViewProjects: string;
   ctaContactMe: string;
+  homeLocation: string;
+  homeEducation: string;
+  homeLinkEmail: string;
+  homeLinkGithub: string;
+  homeLinkLinkedIn: string;
+  homeAboutTitle: string;
   homeRecentTitle: string;
   homeQuickLinksTitle: string;
   sectionCareersTitle: string;
@@ -54,9 +60,15 @@ export const translations: Record<Language, Translations> = {
     navContact: "Contact",
     homeRole: "Product Engineer",
     homeDescription:
-      "A founder-minded developer passionate about startups, focused on solving problems and executing fast. I build services end-to-end—from idea and planning to launch and continuous iteration.",
+      "I am a developer who builds services by treating problem identification, planning, design, development, deployment, and operation as one continuous flow. Rather than focusing solely on feature implementation, I prioritize understanding the root of a problem and identifying the fastest way to validate a solution through rapid execution and user feedback.\n\nI have built and operated multiple services end to end in individual and small team environments, making high-impact decisions under limited resources. I focus on testability over perfection early on, and continuously improve structure and features after launch based on user behavior, working across frontend, backend, and infrastructure.",
     ctaViewProjects: "View Projects",
     ctaContactMe: "Contact Me",
+    homeLocation: "Gwangju, South Korea",
+    homeEducation: "GIST(Gwangju Institute of Science and Technology)",
+    homeLinkEmail: "choiikjun1101@gmail.com",
+    homeLinkGithub: "no-ikjun",
+    homeLinkLinkedIn: "ikjunchoi",
+    homeAboutTitle: "About Me",
     homeRecentTitle: "Recent Activity",
     homeQuickLinksTitle: "Quick Links",
     sectionCareersTitle: "Careers",
@@ -104,9 +116,15 @@ export const translations: Record<Language, Translations> = {
     navContact: "연락",
     homeRole: "Product Engineer",
     homeDescription:
-      "창업가 마인드를 가진 개발자로서 문제 해결과 빠른 실행에 집중합니다. 아이템 구상과 기획부터 출시 및 지속적인 개선까지, 엔드 투 엔드로 서비스를 구축합니다.",
+      "문제 인식부터 기획, 설계, 개발, 배포, 운영까지를 하나의 연속된 흐름으로 바라보며 서비스를 만드는 개발자입니다. 기능 구현 자체에 집중하기보다 문제의 본질을 이해하고, 빠른 실행과 사용자 피드백을 통해 해결책을 가장 빠르게 검증하는 방식을 우선합니다.\n\nimage.png개인 및 소규모 팀 환경에서 여러 서비스를 엔드 투 엔드로 구축·운영하며, 제한된 자원 속에서 높은 임팩트를 내는 선택을 해왔습니다. 초기에는 완성도보다 검증 가능성을 중시하고, 출시 이후에는 사용자 행동을 바탕으로 구조와 기능을 지속적으로 개선하며 프론트엔드·백엔드·인프라 전반을 다룹니다.",
     ctaViewProjects: "프로젝트 보기",
     ctaContactMe: "이메일 보내기",
+    homeLocation: "광주, 대한민국",
+    homeEducation: "GIST(광주과학기술원)",
+    homeLinkEmail: "choiikjun1101@gmail.com",
+    homeLinkGithub: "no-ikjun",
+    homeLinkLinkedIn: "ikjunchoi",
+    homeAboutTitle: "About Me",
     homeRecentTitle: "최근 활동",
     homeQuickLinksTitle: "바로가기",
     sectionCareersTitle: "실무경력",

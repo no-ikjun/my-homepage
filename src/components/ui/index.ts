@@ -4,3 +4,4 @@ export { default as ActionButton } from "./action-button";
 export { default as BackLink } from "./back-link";
 export { default as PageHero } from "./page-hero";
 export { default as SectionShell } from "./section-shell";
+export { default as IconWithText } from "./icon-with-text";
