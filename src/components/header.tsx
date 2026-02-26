@@ -9,7 +9,10 @@ import ThemeToggle from "./theme_toggle";
 import { useTranslations } from "@/contexts/language-context";
 import styles from "./header.module.css";
 
-const navItems: { href: string; key: "navHome" | "navAbout" | "navProjects" | "navWritings" | "navContact" }[] = [
+const navItems: {
+  href: string;
+  key: "navHome" | "navAbout" | "navProjects" | "navWritings" | "navContact";
+}[] = [
   { href: "/", key: "navHome" },
   { href: "/about", key: "navAbout" },
   { href: "/projects", key: "navProjects" },
@@ -71,7 +74,7 @@ export default function Header() {
             </span>
             <span className={styles.brandText}>
               <span className={styles.brandName}>Ikjun Choi</span>
-              <span className={styles.brandRole}>Software Developer</span>
+              <span className={styles.brandRole}>Product Engineer</span>
             </span>
           </Link>
           <nav aria-label="Primary" className={styles.nav}>
