@@ -13,7 +13,6 @@ type Translations = {
   ctaViewProjects: string;
   ctaContactMe: string;
   homeRecentTitle: string;
-  homeRecentDescription: string;
   homeQuickLinksTitle: string;
   sectionCareersTitle: string;
   sectionCareersDescription: string;
@@ -30,7 +29,6 @@ type Translations = {
   projectsPageTitle: string;
   projectsPageDescription: string;
   careersPageTitle: string;
-  careersPageDescription: string;
   aboutPageTitle: string;
   aboutPageDescription: string;
   aboutSummaryTitle: string;
@@ -60,8 +58,6 @@ export const translations: Record<Language, Translations> = {
     ctaViewProjects: "View Projects",
     ctaContactMe: "Contact Me",
     homeRecentTitle: "Recent Activity",
-    homeRecentDescription:
-      "A curated log of recent work, awards, and projects I have been focused on.",
     homeQuickLinksTitle: "Quick Links",
     sectionCareersTitle: "Careers",
     sectionCareersDescription:
@@ -81,7 +77,6 @@ export const translations: Record<Language, Translations> = {
     projectsPageTitle: "Projects",
     projectsPageDescription: "My Own Projects Since 2023",
     careersPageTitle: "Careers",
-    careersPageDescription: "My career path and professional experiences",
     aboutPageTitle: "About",
     aboutPageDescription:
       "A consolidated view of my career path, education, awards, and activities.",
@@ -113,8 +108,6 @@ export const translations: Record<Language, Translations> = {
     ctaViewProjects: "프로젝트 보기",
     ctaContactMe: "이메일 보내기",
     homeRecentTitle: "최근 활동",
-    homeRecentDescription:
-      "최근에 집중했던 프로젝트, 수상, 실무/대외활동을 간단히 정리했습니다.",
     homeQuickLinksTitle: "바로가기",
     sectionCareersTitle: "실무경력",
     sectionCareersDescription:
@@ -134,7 +127,6 @@ export const translations: Record<Language, Translations> = {
     projectsPageTitle: "프로젝트",
     projectsPageDescription: "웹·앱 서비스 등 개인 프로젝트 모음",
     careersPageTitle: "실무경력",
-    careersPageDescription: "커리어와 전문적인 실무 경험",
     aboutPageTitle: "소개",
     aboutPageDescription:
       "커리어, 학력, 수상, 대외활동을 한 페이지에서 볼 수 있도록 정리했습니다.",

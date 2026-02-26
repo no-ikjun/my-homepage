@@ -70,7 +70,6 @@ export default function AboutPage() {
         <section id="career" className={styles.section}>
           <div className={styles.sectionHeaderRow}>
             <h2 className={styles.sectionTitle}>{t.sectionCareersTitle}</h2>
-            <p className={styles.sectionDescription}>{t.careersPageDescription}</p>
           </div>
 
           <div className={styles.careerPanel}>

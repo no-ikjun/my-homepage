@@ -71,7 +71,6 @@ export default function Home() {
           <h2 id="recent-activity-title" className={styles.sectionTitle}>
             {t.homeRecentTitle}
           </h2>
-          <p className={styles.sectionDescription}>{t.homeRecentDescription}</p>
         </div>
 
         <ul className={styles.recentList}>
