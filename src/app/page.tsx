@@ -24,6 +24,35 @@ const kindLabel: Record<"ko" | "en", Record<string, string>> = {
   },
 };
 
+const quickLinkIcons = {
+  about: (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M20 21a8 8 0 0 0-16 0" />
+    </svg>
+  ),
+  projects: (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+    </svg>
+  ),
+  writings: (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+      <line x1="10" y1="9" x2="8" y2="9" />
+    </svg>
+  ),
+  contact: (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+  ),
+};
+
 export default function Home() {
   const t = useTranslations();
   const { lang } = useLanguage();
@@ -155,40 +184,42 @@ export default function Home() {
 
         <ul className={styles.quickLinkList}>
           <li>
-            <Link href="/about" className={styles.quickLink}>
-              <span className={styles.quickLinkLabel}>{t.navAbout}</span>
-              <span className={styles.quickLinkText}>
-                {t.aboutPageDescription}
-              </span>
+            <Link href="/about" className={styles.quickLinkCard}>
+              <span className={styles.quickLinkIcon}>{quickLinkIcons.about}</span>
+              <div className={styles.quickLinkMain}>
+                <h3 className={styles.quickLinkLabel}>{t.navAbout}</h3>
+                <p className={styles.quickLinkText}>{t.aboutPageDescription}</p>
+              </div>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>
           <li>
-            <Link href="/projects" className={styles.quickLink}>
-              <span className={styles.quickLinkLabel}>{t.navProjects}</span>
-              <span className={styles.quickLinkText}>
-                {t.projectsPageDescription}
-              </span>
+            <Link href="/projects" className={styles.quickLinkCard}>
+              <span className={styles.quickLinkIcon}>{quickLinkIcons.projects}</span>
+              <div className={styles.quickLinkMain}>
+                <h3 className={styles.quickLinkLabel}>{t.navProjects}</h3>
+                <p className={styles.quickLinkText}>{t.projectsPageDescription}</p>
+              </div>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>
           <li>
-            <Link href="/writings" className={styles.quickLink}>
-              <span className={styles.quickLinkLabel}>{t.navWritings}</span>
-              <span className={styles.quickLinkText}>
-                {lang === "ko"
-                  ? "개발과 제품 개발 과정에서 배운 점을 정리하는 글 아카이브입니다."
-                  : "A writing archive for technical notes and product-building lessons."}
-              </span>
+            <Link href="/writings" className={styles.quickLinkCard}>
+              <span className={styles.quickLinkIcon}>{quickLinkIcons.writings}</span>
+              <div className={styles.quickLinkMain}>
+                <h3 className={styles.quickLinkLabel}>{t.navWritings}</h3>
+                <p className={styles.quickLinkText}>{t.writingsPageDescription}</p>
+              </div>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>
           <li>
-            <Link href="/contact" className={styles.quickLink}>
-              <span className={styles.quickLinkLabel}>{t.navContact}</span>
-              <span className={styles.quickLinkText}>
-                {t.contactPageDescription}
-              </span>
+            <Link href="/contact" className={styles.quickLinkCard}>
+              <span className={styles.quickLinkIcon}>{quickLinkIcons.contact}</span>
+              <div className={styles.quickLinkMain}>
+                <h3 className={styles.quickLinkLabel}>{t.navContact}</h3>
+                <p className={styles.quickLinkText}>{t.contactPageDescription}</p>
+              </div>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>

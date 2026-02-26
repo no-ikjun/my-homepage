@@ -269,49 +269,81 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  display: grid;
+  gap: var(--space-sm);
 }
 
-.quickLink {
+.quickLinkCard {
   display: grid;
-  grid-template-columns: 120px 1fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: var(--space-md);
-  align-items: baseline;
+  align-items: center;
   text-decoration: none;
   color: inherit;
-  padding: var(--space-sm) 0;
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  background: var(--bg-solid-panel);
+  transition: border-color var(--motion-fast);
 }
 
-.quickLink:hover .quickLinkLabel {
+.quickLinkCard:hover {
+  border-color: var(--border-strong);
+}
+
+.quickLinkCard:hover .quickLinkLabel {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.quickLink:hover .quickLinkArrow {
+.quickLinkCard:hover .quickLinkArrow {
   color: var(--text-secondary);
   transform: translate(1px, -1px);
 }
 
-.quickLink:focus-visible {
+.quickLinkCard:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
-  border-radius: 0.35rem;
+}
+
+.quickLinkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.quickLinkIcon svg {
+  opacity: 0.85;
+}
+
+.quickLinkMain {
+  min-width: 0;
 }
 
 .quickLinkLabel {
+  margin: 0;
   color: var(--text-primary);
-  font-size: 0.94rem;
+  font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .quickLinkText {
+  margin: var(--space-xs) 0 0;
   color: var(--text-muted);
   font-size: 0.84rem;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .quickLinkArrow {
   color: var(--text-muted);
+  font-size: 1.1rem;
   transition: transform var(--motion-fast), color var(--motion-fast);
 }
 
@@ -334,14 +366,6 @@
     text-align: left;
   }
 
-  .quickLink {
-    grid-template-columns: 1fr auto;
-    gap: var(--space-sm);
-  }
-
-  .quickLinkText {
-    grid-column: 1 / -1;
-  }
 }
 
 @media (max-width: 700px) {
@@ -379,5 +403,9 @@
   .recentArrow,
   .quickLinkArrow {
     display: none;
+  }
+
+  .quickLinkCard {
+    padding: var(--space-md);
   }
 }

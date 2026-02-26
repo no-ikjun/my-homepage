@@ -37,6 +37,7 @@ type Translations = {
   careersPageTitle: string;
   aboutPageTitle: string;
   aboutPageDescription: string;
+  writingsPageDescription: string;
   aboutSummaryTitle: string;
   aboutSummaryDescription: string;
   aboutWorkingStyleTitle: string;
@@ -80,7 +81,7 @@ export const translations: Record<Language, Translations> = {
     sectionProjectsTitle: "Projects",
     sectionProjectsDescription:
       "These are my own projects.\nWeb/App services and ongoing projects",
-    copyright: "© 2023 Ikjun Choi. All Rights Reserved.",
+    copyright: "© 2026 Ikjun Choi. All Rights Reserved.",
     experiencesPageTitle: "Experiences",
     experiencesPageDescription: "Experiences and activities that I have done",
     educationsTitle: "Educations",
@@ -92,6 +93,8 @@ export const translations: Record<Language, Translations> = {
     aboutPageTitle: "About",
     aboutPageDescription:
       "A consolidated view of my career path, education, awards, and activities.",
+    writingsPageDescription:
+      "A writing archive for technical notes and product-building lessons.",
     aboutSummaryTitle: "Summary",
     aboutSummaryDescription:
       "I build products end-to-end with a strong bias toward shipping and iteration, especially in startup-like environments.",
@@ -136,7 +139,7 @@ export const translations: Record<Language, Translations> = {
     sectionProjectsTitle: "프로젝트",
     sectionProjectsDescription:
       "직접 진행한 개인 프로젝트입니다.\n웹·앱 서비스 등 진행 중인 프로젝트를 포함합니다.",
-    copyright: "© 2023 최익준. All Rights Reserved.",
+    copyright: "© 2026 Ikjun Choi. All Rights Reserved.",
     experiencesPageTitle: "활동경험",
     experiencesPageDescription: "지금까지의 학력, 수상, 대외활동 등 활동 경험",
     educationsTitle: "학력",
@@ -148,6 +151,8 @@ export const translations: Record<Language, Translations> = {
     aboutPageTitle: "소개",
     aboutPageDescription:
       "커리어, 학력, 수상, 대외활동을 한 페이지에서 볼 수 있도록 정리했습니다.",
+    writingsPageDescription:
+      "개발과 제품 개발 과정에서 배운 점을 정리하는 글 아카이브입니다.",
     aboutSummaryTitle: "요약",
     aboutSummaryDescription:
       "빠른 실행과 반복 개선을 중요하게 생각하며, 아이디어부터 출시까지 엔드 투 엔드로 제품을 만듭니다.",
