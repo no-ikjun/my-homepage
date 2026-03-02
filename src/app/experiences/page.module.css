@@ -216,35 +216,36 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-.award_button {
+.award_cta {
   position: absolute;
   z-index: 2;
-  top: 0.55rem;
-  right: 0.2rem;
-  width: 1.7rem;
-  height: 1.7rem;
+  top: 0.5rem;
+  right: 0.5rem;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  padding: 0.4rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(8, 14, 25, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.14);
   color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
   text-decoration: none;
-  transition: background-color var(--motion-fast);
+  transition: background-color var(--motion-fast), border-color var(--motion-fast);
 }
 
-.award_button:hover {
-  background: rgba(8, 14, 25, 0.32);
+.award_cta:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-.award_button:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.28);
+.award_cta:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.4);
   outline-offset: 2px;
 }
 
-.award_button_icon {
-  font-size: 0.84rem;
+.award_cta_label {
+  line-height: 1.2;
 }
 
 .activities_container {
