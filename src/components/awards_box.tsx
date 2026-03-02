@@ -1,5 +1,8 @@
+"use client";
+
 import styles from "../app/experiences/page.module.css";
 import Link from "next/link";
+import { useTranslations } from "@/contexts/language-context";
 
 type AwardsBoxProps = {
   title: string;
@@ -14,6 +17,8 @@ type AwardsBoxProps = {
 };
 
 export default function AwardsBox({ title, data }: AwardsBoxProps) {
+  const t = useTranslations();
+
   return (
     <span>
       <h2 className={styles.content_title}>{title}</h2>
@@ -32,12 +37,14 @@ export default function AwardsBox({ title, data }: AwardsBoxProps) {
             {item.link !== "" && (
               <Link
                 href={item.link}
-                className={styles.award_button}
+                className={styles.award_cta}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Open ${item.title} (새 창)`}
+                aria-label={`${item.title} - ${t.activityMoreInfo} (새 창)`}
               >
-                <span className={styles.award_button_icon}>&rarr;</span>
+                <span className={styles.award_cta_label}>
+                  {t.activityMoreInfo}
+                </span>
                 <span className="sr-only">(새 창에서 열림)</span>
               </Link>
             )}
