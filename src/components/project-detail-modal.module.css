@@ -1,0 +1,237 @@
+.modalContent {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-height: 0;
+}
+
+.cardTop,
+.cardBottom {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  background: var(--bg-solid-panel);
+  box-shadow: var(--shadow-glass);
+}
+
+.cardTop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+}
+
+.cardBottom {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-height: 0;
+  max-height: min(400px, 50vh);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.35) transparent;
+}
+
+.cardBottom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cardBottom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cardBottom::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+}
+
+.cardBottom::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+html[data-theme="dark"] .cardBottom {
+  scrollbar-color: rgba(148, 163, 184, 0.25) transparent;
+}
+
+html[data-theme="dark"] .cardBottom::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+}
+
+html[data-theme="dark"] .cardBottom::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+.headerTop {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-xl);
+}
+
+.heroImage {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-xl);
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-base);
+}
+
+.headerMeta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.period {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.techIcon,
+.linkIcon {
+  filter: var(--icon-filter);
+}
+
+.linkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.externalLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.84rem;
+}
+
+.externalLink:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.externalLink:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 0.35rem;
+}
+
+
+.description {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.featureList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.featureItem {
+  position: relative;
+  padding-left: var(--space-lg);
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.featureItem::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+
+.visitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color var(--motion-fast);
+  background: var(--accent-primary);
+  color: var(--accent-contrast);
+  border: none;
+}
+
+.visitButton:hover {
+  background: color-mix(in srgb, var(--accent-primary) 85%, black);
+}
+
+.visitButton:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .modalContent {
+    padding: var(--space-md);
+  }
+
+  .cardTop,
+  .cardBottom {
+    padding: var(--space-lg);
+  }
+
+  .headerTop {
+    flex-direction: column;
+  }
+
+  .heroImage {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+    aspect-ratio: 1;
+  }
+}

@@ -50,6 +50,11 @@ type Translations = {
   activityMoreInfo: string;
   languageToggleLabel: string;
   themeToggleLabel: string;
+  projectDetailFeatures: string;
+  projectDetailVisitSite: string;
+  projectDetailIntro: string;
+  projectDetailRole: string;
+  projectDetailLinks: string;
 };
 
 export const translations: Record<Language, Translations> = {
@@ -113,6 +118,11 @@ export const translations: Record<Language, Translations> = {
     activityMoreInfo: "More Info →",
     languageToggleLabel: "Switch language",
     themeToggleLabel: "Toggle dark mode",
+    projectDetailFeatures: "Key Features",
+    projectDetailVisitSite: "Visit Site",
+    projectDetailIntro: "Service Introduction",
+    projectDetailRole: "My Role",
+    projectDetailLinks: "Links",
   },
   ko: {
     navHome: "홈",
@@ -174,5 +184,10 @@ export const translations: Record<Language, Translations> = {
     activityMoreInfo: "자세히 보기 →",
     languageToggleLabel: "언어 변경",
     themeToggleLabel: "다크모드 전환",
+    projectDetailFeatures: "주요 기능",
+    projectDetailVisitSite: "사이트 방문",
+    projectDetailIntro: "서비스 소개",
+    projectDetailRole: "맡은 역할",
+    projectDetailLinks: "링크",
   },
 };

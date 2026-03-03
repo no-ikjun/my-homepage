@@ -278,6 +278,38 @@
   outline-offset: 2px;
 }
 
+/* Modal */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.modalPanel {
+  max-width: 560px;
+  width: 100%;
+  max-height: calc(100vh - var(--space-2xl));
+  overflow-y: auto;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-2xl);
+  background: var(--bg-solid-panel);
+  box-shadow: var(--shadow-elevated);
+}
+
+.modalTitle {
+  margin: 0;
+  padding: var(--space-lg) var(--space-xl) 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
 @media (max-width: 700px) {
   .button {
     width: 100%;
@@ -294,5 +326,9 @@
 
   .pageHeroDescription {
     font-size: 0.9rem;
+  }
+
+  .modalBackdrop {
+    padding: var(--space-md);
   }
 }
