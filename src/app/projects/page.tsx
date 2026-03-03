@@ -25,7 +25,7 @@ export default function ProjectsPage() {
           {projects[lang].map((project) => (
             <article
               key={project.title}
-              className={styles.projectRow}
+              className={styles.projectCard}
               onClick={() => setSelectedProject(project)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -37,18 +37,31 @@ export default function ProjectsPage() {
               tabIndex={0}
               aria-label={`${project.title} - ${project.summary}`}
             >
-              <div className={styles.projectThumbWrap}>
+              <span className={styles.projectCardArrow} aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </span>
+              <div className={styles.projectCardInner}>
                 <div
                   className={styles.projectThumb}
                   style={{ backgroundImage: `url(${project.image})` }}
                   aria-hidden="true"
                 />
-              </div>
-
-              <div className={styles.projectMain}>
-                <h2 className={styles.projectTitle}>{project.title}</h2>
-                <p className={styles.projectPeriod}>{project.period}</p>
-                <p className={styles.projectSummary}>{project.summary}</p>
+                <div className={styles.projectCardBody}>
+                  <h2 className={styles.projectTitle}>{project.title}</h2>
+                  <p className={styles.projectPeriod}>{project.period}</p>
+                  <p className={styles.projectSummary}>{project.summary}</p>
+                </div>
               </div>
             </article>
           ))}
