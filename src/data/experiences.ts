@@ -243,7 +243,7 @@ export const activities: Record<Language, ActivityItem[]> = {
         },
         {
           title: "부팀장",
-          period: "2023 - 2024",
+          period: "2026",
           content: ["개발 활동 조직 및 관리"],
         },
         {
