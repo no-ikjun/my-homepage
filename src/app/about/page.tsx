@@ -39,19 +39,17 @@ export default function AboutPage() {
         <section className={styles.section}>
           <div className={styles.sectionGrid}>
             <div>
-              <h2 className={styles.sectionTitle}>{t.aboutSummaryTitle}</h2>
-              <p className={styles.sectionDescription}>{t.aboutSummaryDescription}</p>
-              <div className={styles.summaryText}>
-                <p>
-                  {lang === "ko"
-                    ? "스타트업 환경에 가까운 문제를 좋아하고, 제품 기획부터 개발·출시·개선까지 이어지는 흐름을 직접 다루는 것을 선호합니다."
-                    : "I enjoy startup-like problems and prefer owning the flow from product planning to engineering, launch, and iteration."}
-                </p>
-                <p>
-                  {lang === "ko"
-                    ? "웹과 모바일 모두를 다루며, 팀 상황에 따라 프론트엔드·백엔드·데이터/AI 영역까지 넓게 대응합니다."
-                    : "I work across web and mobile, and expand into backend, data, and AI work when the product context requires it."}
-                </p>
+              <h2 className={styles.sectionTitle}>{t.aboutInterestsTitle}</h2>
+              <p className={styles.sectionDescription}>
+                {t.aboutInterestsDescription}
+              </p>
+              <div className={styles.interestsText}>
+                {t.aboutInterestsContent
+                  .split(/\n\n+/)
+                  .filter(Boolean)
+                  .map((paragraph, i) => (
+                    <p key={i}>{paragraph.trim()}</p>
+                  ))}
               </div>
             </div>
 

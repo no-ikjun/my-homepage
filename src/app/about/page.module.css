@@ -66,6 +66,19 @@
   font-size: 0.93rem;
 }
 
+.interestsText {
+  display: grid;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.interestsText p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-size: 0.93rem;
+}
+
 .principlesList {
   margin: var(--space-sm) 0 0;
   padding-left: var(--space-lg);
