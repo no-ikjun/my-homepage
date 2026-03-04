@@ -56,6 +56,8 @@ type Translations = {
   projectDetailRole: string;
   projectDetailLinks: string;
   projectViewDetails: string;
+  projectsTeamTitle: string;
+  projectsIndividualTitle: string;
 };
 
 export const translations: Record<Language, Translations> = {
@@ -125,6 +127,8 @@ export const translations: Record<Language, Translations> = {
     projectDetailRole: "My Role",
     projectDetailLinks: "Links",
     projectViewDetails: "View Details",
+    projectsTeamTitle: "Team Projects",
+    projectsIndividualTitle: "Individual Projects",
   },
   ko: {
     navHome: "홈",
@@ -192,5 +196,7 @@ export const translations: Record<Language, Translations> = {
     projectDetailRole: "맡은 역할",
     projectDetailLinks: "링크",
     projectViewDetails: "자세히 보기",
+    projectsTeamTitle: "팀 프로젝트",
+    projectsIndividualTitle: "개인 프로젝트",
   },
 };

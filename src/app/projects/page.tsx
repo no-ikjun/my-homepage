@@ -21,51 +21,113 @@ export default function ProjectsPage() {
           description={t.projectsPageDescription}
         />
 
-        <div className={styles.projectList}>
-          {projects[lang].map((project) => (
-            <article
-              key={project.title}
-              className={styles.projectCard}
-              onClick={() => setSelectedProject(project)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setSelectedProject(project);
-                }
-              }}
-              role="button"
-              tabIndex={0}
-              aria-label={`${project.title} - ${project.summary}`}
-            >
-              <span className={styles.projectCardArrow} aria-hidden="true">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </span>
-              <div className={styles.projectCardInner}>
-                <div
-                  className={styles.projectThumb}
-                  style={{ backgroundImage: `url(${project.image})` }}
-                  aria-hidden="true"
-                />
-                <div className={styles.projectCardBody}>
-                  <h2 className={styles.projectTitle}>{project.title}</h2>
-                  <p className={styles.projectPeriod}>{project.period}</p>
-                  <p className={styles.projectSummary}>{project.summary}</p>
+        <section
+          className={styles.projectSection}
+          aria-labelledby="individual-projects-title"
+        >
+          <h2 id="individual-projects-title" className={styles.sectionTitle}>
+            {t.projectsIndividualTitle}
+          </h2>
+          <div className={styles.projectList}>
+            {projects[lang].individual.map((project) => (
+              <article
+                key={project.title}
+                className={styles.projectCard}
+                onClick={() => setSelectedProject(project)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedProject(project);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`${project.title} - ${project.summary}`}
+              >
+                <span className={styles.projectCardArrow} aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </span>
+                <div className={styles.projectCardInner}>
+                  <div
+                    className={styles.projectThumb}
+                    style={{ backgroundImage: `url(${project.image})` }}
+                    aria-hidden="true"
+                  />
+                  <div className={styles.projectCardBody}>
+                    <h2 className={styles.projectTitle}>{project.title}</h2>
+                    <p className={styles.projectPeriod}>{project.period}</p>
+                    <p className={styles.projectSummary}>{project.summary}</p>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section
+          className={styles.projectSection}
+          aria-labelledby="team-projects-title"
+        >
+          <h2 id="team-projects-title" className={styles.sectionTitle}>
+            {t.projectsTeamTitle}
+          </h2>
+          <div className={styles.projectList}>
+            {projects[lang].team.map((project) => (
+              <article
+                key={project.title}
+                className={styles.projectCard}
+                onClick={() => setSelectedProject(project)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedProject(project);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`${project.title} - ${project.summary}`}
+              >
+                <span className={styles.projectCardArrow} aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </span>
+                <div className={styles.projectCardInner}>
+                  <div
+                    className={styles.projectThumb}
+                    style={{ backgroundImage: `url(${project.image})` }}
+                    aria-hidden="true"
+                  />
+                  <div className={styles.projectCardBody}>
+                    <h2 className={styles.projectTitle}>{project.title}</h2>
+                    <p className={styles.projectPeriod}>{project.period}</p>
+                    <p className={styles.projectSummary}>{project.summary}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
 
       <ProjectDetailModal

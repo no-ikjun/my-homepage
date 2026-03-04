@@ -42,19 +42,19 @@ export default function ProjectDetailModal({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} className={styles.modalContent}>
-      <div className={styles.cardTop}>
-        <div className={styles.headerTop}>
-          <div
-            className={styles.heroImage}
-            style={{ backgroundImage: `url(${project.image})` }}
-            aria-hidden="true"
-          />
-          <div className={styles.headerMeta}>
-            <h2 className={styles.title}>{project.title}</h2>
-            <p className={styles.period}>{project.period}</p>
-            <div className={styles.techStack}>
-              {project.techStack.map((tech) => (
-                <BadgeChip key={tech} size="sm" tone="muted">
+      <div className={styles.header}>
+        <div
+          className={styles.heroImage}
+          style={{ backgroundImage: `url(${project.image})` }}
+          aria-hidden="true"
+        />
+        <div className={styles.headerMeta}>
+          <h2 className={styles.title}>{project.title}</h2>
+          <p className={styles.period}>{project.period}</p>
+          <div className={styles.techStack}>
+            {project.techStack.map((tech) => (
+              <BadgeChip key={tech} size="sm" tone="muted">
+                {techIconMap[tech] && (
                   <Image
                     src={techIconMap[tech]}
                     alt={tech}
@@ -62,27 +62,26 @@ export default function ProjectDetailModal({
                     height={12}
                     className={styles.techIcon}
                   />
-                  {tech}
-                </BadgeChip>
-              ))}
-            </div>
+                )}
+                {tech}
+              </BadgeChip>
+            ))}
           </div>
+          <a
+            href={project.directLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.visitButton}
+          >
+            {t.projectDetailVisitSite} ↗
+          </a>
         </div>
-        <a
-          href={project.directLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.visitButton}
-        >
-          {t.projectDetailVisitSite} ↗
-        </a>
       </div>
 
-      <div className={styles.cardBottom}>
-        <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>{t.projectDetailIntro}</h3>
-          <p className={styles.description}>{project.description}</p>
-        </section>
+      <div className={styles.divider} />
+
+      <div className={styles.body}>
+        <p className={styles.description}>{project.description}</p>
 
         {project.features.length > 0 && (
           <section className={styles.section}>
@@ -110,30 +109,32 @@ export default function ProjectDetailModal({
           </section>
         )}
 
-        <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>{t.projectDetailLinks}</h3>
-          <ul className={styles.linkList}>
-          {project.links.map((link) => (
-            <li key={link.url}>
-              <Link
-                href={link.url}
-                className={styles.externalLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={linkIconMap[link.type]}
-                  alt={link.type}
-                  width={14}
-                  height={14}
-                  className={styles.linkIcon}
-                />
-                <span>{link.description}</span>
-              </Link>
-            </li>
-          ))}
-          </ul>
-        </section>
+        {project.links.length > 0 && (
+          <section className={styles.section}>
+            <h3 className={styles.sectionTitle}>{t.projectDetailLinks}</h3>
+            <ul className={styles.linkList}>
+              {project.links.map((link) => (
+                <li key={link.url}>
+                  <Link
+                    href={link.url}
+                    className={styles.externalLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={linkIconMap[link.type]}
+                      alt={link.type}
+                      width={14}
+                      height={14}
+                      className={styles.linkIcon}
+                    />
+                    <span>{link.description}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </Modal>
   );
