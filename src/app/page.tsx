@@ -26,18 +26,51 @@ const kindLabel: Record<"ko" | "en", Record<string, string>> = {
 
 const quickLinkIcons = {
   about: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
       <circle cx="12" cy="8" r="4" />
       <path d="M20 21a8 8 0 0 0-16 0" />
     </svg>
   ),
   projects: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
       <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
     </svg>
   ),
   writings: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
       <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
       <polyline points="14 2 14 8 20 8" />
       <line x1="16" y1="13" x2="8" y2="13" />
@@ -46,7 +79,18 @@ const quickLinkIcons = {
     </svg>
   ),
   contact: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
       <rect width="20" height="16" x="2" y="4" rx="2" />
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
     </svg>
@@ -76,12 +120,15 @@ export default function Home() {
               <BadgeChip tone="accent" size="sm" className={styles.heroBadge}>
                 {t.homeRole}
               </BadgeChip>
+              {/* <p className={styles.heroTagline}>{t.homeResearchInterest}</p> */}
               <h1 className={styles.heroName}>Ikjun Choi</h1>
               <p className={styles.heroNameKr}>최익준</p>
             </div>
             <div className={styles.heroMeta}>
               <IconWithText icon="location-pin">{t.homeLocation}</IconWithText>
-              <IconWithText icon="graduation-cap">{t.homeEducation}</IconWithText>
+              <IconWithText icon="graduation-cap">
+                {t.homeEducation}
+              </IconWithText>
               <IconWithText icon="mail" href="mailto:choiikjun1101@gmail.com">
                 {t.homeLinkEmail}
               </IconWithText>
@@ -109,13 +156,13 @@ export default function Home() {
             </div>
             <div className={styles.heroDescriptionWrap}>
               {t.homeDescription
-              .split(/\n\n+/)
-              .filter(Boolean)
-              .map((paragraph, i) => (
-                <p key={i} className={styles.heroDescription}>
-                  {paragraph.trim()}
-                </p>
-              ))}
+                .split(/\n\n+/)
+                .filter(Boolean)
+                .map((paragraph, i) => (
+                  <p key={i} className={styles.heroDescription}>
+                    {paragraph.trim()}
+                  </p>
+                ))}
             </div>
           </div>
         </div>
@@ -185,7 +232,9 @@ export default function Home() {
         <ul className={styles.quickLinkList}>
           <li>
             <Link href="/about" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>{quickLinkIcons.about}</span>
+              <span className={styles.quickLinkIcon}>
+                {quickLinkIcons.about}
+              </span>
               <div className={styles.quickLinkMain}>
                 <h3 className={styles.quickLinkLabel}>{t.navAbout}</h3>
                 <p className={styles.quickLinkText}>{t.aboutPageDescription}</p>
@@ -195,30 +244,42 @@ export default function Home() {
           </li>
           <li>
             <Link href="/projects" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>{quickLinkIcons.projects}</span>
+              <span className={styles.quickLinkIcon}>
+                {quickLinkIcons.projects}
+              </span>
               <div className={styles.quickLinkMain}>
                 <h3 className={styles.quickLinkLabel}>{t.navProjects}</h3>
-                <p className={styles.quickLinkText}>{t.projectsPageDescription}</p>
+                <p className={styles.quickLinkText}>
+                  {t.projectsPageDescription}
+                </p>
               </div>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>
           <li>
             <Link href="/writings" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>{quickLinkIcons.writings}</span>
+              <span className={styles.quickLinkIcon}>
+                {quickLinkIcons.writings}
+              </span>
               <div className={styles.quickLinkMain}>
                 <h3 className={styles.quickLinkLabel}>{t.navWritings}</h3>
-                <p className={styles.quickLinkText}>{t.writingsPageDescription}</p>
+                <p className={styles.quickLinkText}>
+                  {t.writingsPageDescription}
+                </p>
               </div>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>
           </li>
           <li>
             <Link href="/contact" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>{quickLinkIcons.contact}</span>
+              <span className={styles.quickLinkIcon}>
+                {quickLinkIcons.contact}
+              </span>
               <div className={styles.quickLinkMain}>
                 <h3 className={styles.quickLinkLabel}>{t.navContact}</h3>
-                <p className={styles.quickLinkText}>{t.contactPageDescription}</p>
+                <p className={styles.quickLinkText}>
+                  {t.contactPageDescription}
+                </p>
               </div>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>

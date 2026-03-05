@@ -9,7 +9,7 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       kind: "activity",
       title: "GIST 전산동아리 WING 동아리장",
       summary: "GIST 전산동아리 WING의 동아리장을 맡게 되었습니다.",
-      href: "/about#experiences",
+      href: "/about#activities",
       internal: true,
     },
     {
@@ -18,7 +18,7 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       kind: "activity",
       title: "GSA InfoTeam 부팀장",
       summary: "GIST 개발 자치회 Infoteam의 부팀장을 맡게 되었습니다.",
-      href: "/about#experiences",
+      href: "/about#activities",
       internal: true,
     },
     {
@@ -27,7 +27,7 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       kind: "career",
       title: "(주)스테리 제품 개발자",
       summary: "(주)스테리의 제품 개발자로 활동하고 있습니다.",
-      href: "/about#careers",
+      href: "/about#career",
       internal: true,
     },
     {
@@ -47,7 +47,7 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       kind: "activity",
       title: "GIST Computer Club WING Leader",
       summary: "WING Club Leader of GIST Computer Club.",
-      href: "/about#experiences",
+      href: "/about#activities",
       internal: true,
     },
     {
@@ -56,7 +56,7 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       kind: "activity",
       title: "GSA InfoTeam Sub-Leader",
       summary: "Sub-Leader of GSA InfoTeam.",
-      href: "/about#experiences",
+      href: "/about#activities",
       internal: true,
     },
     {
@@ -65,7 +65,7 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       kind: "career",
       title: "Sterri Inc. Product Developer",
       summary: "Product Developer of Sterri Inc.",
-      href: "/about#careers",
+      href: "/about#career",
       internal: true,
     },
     {

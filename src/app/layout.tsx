@@ -26,10 +26,9 @@ export const metadata: Metadata = {
     default: "최익준 | Ikjun Choi",
     template: "%s | 최익준 | Ikjun Choi",
   },
-  // 한국어 1문장 + 영어 1문장 (160자 안팎)
+  // 개발자 + AI 연구 관심
   description:
-    "SW 개발자 최익준의 포트폴리오(웹·모바일). 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi",
-  // 한국어/영어 키워드
+    "SW 개발자 최익준. AI 연구에 관심 있습니다. Portfolio of Ikjun Choi — Developer, interested in AI research.",
   keywords: [
     "최익준",
     "풀스택 개발자",
@@ -44,6 +43,8 @@ export const metadata: Metadata = {
     "SW 개발자",
     "Full-stack developer",
     "Portfolio",
+    "AI research",
+    "인공지능 연구",
   ],
   icons: { icon: "/favicon.ico" },
   // 잘못된 hreflang 제거: 서로 다른 URL 없으면 languages 넣지 말기
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     // 한국어 우선 타이틀/설명 + 영어 병기
     title: "최익준 | Ikjun Choi",
     description:
-      "최익준의 포트폴리오. 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi",
+      "SW 개발자 최익준. AI 연구에 관심 있습니다. Portfolio of Ikjun Choi — Developer, interested in AI research.",
     siteName: "Ikjun Choi Portfolio",
     images: [
       { url: `${SITE_URL}/profile_round3.png`, alt: "최익준 Ikjun Choi" },
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "최익준 | Ikjun Choi",
     description:
-      "최익준의 포트폴리오. 프로젝트와 사례를 확인하세요. Portfolio of Ikjun Choi",
+      "SW 개발자 최익준. AI 연구에 관심 있습니다. Portfolio of Ikjun Choi — Developer, interested in AI research.",
     images: [`${SITE_URL}/profile_round3.png`],
   },
   robots: { index: true, follow: true },

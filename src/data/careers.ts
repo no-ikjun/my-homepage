@@ -34,7 +34,7 @@ export const careers: Record<Language, Career[]> = {
           content: [
             "Development of a REST API using NestJS",
             "Development of frontend using Next.js",
-            "Collection and processing of streamer data for AI learning using Python",
+            "Collection and processing of streamer data for analytics and ML pipeline using Python",
             "Management of cloud services using AWS",
           ],
         },
@@ -84,7 +84,7 @@ export const careers: Record<Language, Career[]> = {
           content: [
             "NestJS 활용 REST API 개발",
             "Next.js 활용 프론트엔드 개발",
-            "AI 학습을 위한 스트리머 데이터 수집 및 처리",
+            "분석 및 ML 파이프라인을 위한 스트리머 데이터 수집·처리",
             "AWS 활용 클라우드 서비스 관리",
           ],
         },
