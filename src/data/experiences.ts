@@ -97,7 +97,7 @@ export const awards: Record<Language, ExperienceItem[]> = {
       description: "2025.05",
       subDescription: "🥈 2nd prize (GIST 인공지능연구소장상)",
       content: [
-        "AI-based news article platform to solve eco-chamber phenomenon - Agora",
+        "AI-based news article platform to solve eco chamber phenomenon - Agora",
       ],
     },
   ],

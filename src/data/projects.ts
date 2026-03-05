@@ -31,7 +31,7 @@ const teamProjectsEn: Project[] = [
     image: "https://chatbot.gistory.me/logo.svg",
     summary: "Intelligent chatbot service for GIST students.",
     description:
-      "GIST Chatbot is an intelligent chatbot based on GIST's official information. It learns from academic notices, freshman introduction materials, academic handbooks, and other official school data to provide the most accurate and fast answers to school-related questions.",
+      "GIST Chatbot is an intelligent chatbot based on GIST's official information. It searches through academic notices, freshman introduction materials, academic handbooks, and other official school data to provide accurate and fast answers to school-related questions.",
     directLink: "https://chatbot.gistory.me",
     techStack: ["React", "TypeScript", "NestJS", "docker"],
     features: [
@@ -106,7 +106,7 @@ const teamProjectsKo: Project[] = [
     image: "https://chatbot.gistory.me/logo.svg",
     summary: "GIST 학생들을 위한 정보 제공 챗봇 서비스",
     description:
-      "GIST 챗봇은 GIST의 공식 정보를 기반으로 한 지능형 챗봇입니다. 학사 공지, 신입생 소개 자료, 학사 편람 등 공식 자료를 직접 학습하여 학교 관련 질문에 가장 정확하고 빠른 답변을 제공합니다.",
+      "GIST 챗봇은 GIST의 공식 정보를 기반으로 한 지능형 챗봇입니다. 학사 공지, 신입생 소개 자료, 학사 편람 등 공식 자료를 검색하여 학교 관련 질문에 정확하고 빠른 답변을 제공합니다.",
     directLink: "https://chatbot.gistory.me",
     techStack: ["React", "TypeScript", "NestJS", "docker"],
     features: [
@@ -190,7 +190,12 @@ export const projects: Record<Language, ProjectsByType> = {
           "Reading time reminder",
           "Share reading status via social posts",
         ],
-        role: ["Service planning", "App development", "Backend development", "UI design"],
+        role: [
+          "Service planning",
+          "App development",
+          "Backend development",
+          "UI design",
+        ],
         links: [
           {
             type: "github",
@@ -238,9 +243,9 @@ export const projects: Record<Language, ProjectsByType> = {
         title: "Wisemind",
         period: "2024.2 - 2025.7",
         image: "https://analyst.ikjun.com/logo.png",
-        summary: "AI Financial Agent based on ChatGPT & HyperCLOVA X",
+        summary: "LLM-powered financial analysis assistant based on ChatGPT & HyperCLOVA X",
         description:
-          "Wisemind is an AI-powered financial analysis agent that leverages ChatGPT and HyperCLOVA X to provide intelligent financial insights and recommendations. It processes financial data and delivers actionable analysis through a conversational interface.",
+          "Wisemind is an LLM-powered financial analysis assistant that leverages ChatGPT and HyperCLOVA X APIs to provide intelligent financial insights and recommendations. It processes financial data and delivers actionable analysis through a conversational interface.",
         directLink: "https://analyst.ikjun.com",
         techStack: ["React", "CloudFlare", "NestJS", "FastAPI", "AWS"],
         features: [
@@ -319,7 +324,7 @@ export const projects: Record<Language, ProjectsByType> = {
         directLink: "https://deokdam.app",
         techStack: ["NextJS", "TypeScript", "PostgreSQL"],
         features: [
-          "닥담 공유 그룹 생성 및 관리",
+          "덕담 공유 그룹 생성 및 관리",
           "덕담 공유 및 조회",
           "한 해 회고 및 새해 계획 작성",
           "미래의 나와 대화하기 (AI)",
@@ -337,9 +342,9 @@ export const projects: Record<Language, ProjectsByType> = {
         title: "Wisemind",
         period: "2024.2 - 2025.7",
         image: "https://analyst.ikjun.com/logo.png",
-        summary: "HyperCLOVA X 기반의 AI 금융 에이전트",
+        summary: "ChatGPT·HyperCLOVA X 기반 LLM 금융 분석 어시스턴트",
         description:
-          "Wisemind는 ChatGPT와 HyperCLOVA X를 활용한 AI 기반 금융 분석 에이전트입니다. 금융 데이터를 처리하고 대화형 인터페이스를 통해 실행 가능한 분석 결과를 제공합니다.",
+          "Wisemind는 ChatGPT와 HyperCLOVA X API를 활용한 LLM 기반 금융 분석 어시스턴트입니다. 금융 데이터를 처리하고 대화형 인터페이스를 통해 실행 가능한 분석 결과를 제공합니다.",
         directLink: "https://analyst.ikjun.com",
         techStack: ["React", "CloudFlare", "NestJS", "FastAPI", "AWS"],
         features: [
