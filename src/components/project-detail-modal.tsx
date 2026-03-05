@@ -19,6 +19,7 @@ const techIconMap: Record<string, string> = {
   Figma: "/img/figma_icon.svg",
   TypeScript: "/img/typescript_icon.svg",
   FastAPI: "/img/fastapi_icon.svg",
+  PostgreSQL: "/img/postgresql_icon.svg",
 };
 
 const linkIconMap: Record<string, string> = {

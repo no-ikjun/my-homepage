@@ -27,128 +27,146 @@ export type ProjectsByType = {
 const teamProjectsEn: Project[] = [
   {
     title: "GIST Chatbot",
-    period: "2024 - (ongoing)",
+    period: "2026.01 - (ongoing)",
     image: "https://chatbot.gistory.me/logo.svg",
     summary: "Intelligent chatbot service for GIST students.",
     description:
-      "GIST Chatbot is an intelligent chatbot based on GIST's official information. It learns from academic notices, freshman introduction materials, academic handbooks, and other official school data to provide the most accurate and fast answers to school-related questions. The iframe-based widget ensures stable service without CSS/JS conflicts with the host page.",
+      "GIST Chatbot is an intelligent chatbot based on GIST's official information. It learns from academic notices, freshman introduction materials, academic handbooks, and other official school data to provide the most accurate and fast answers to school-related questions.",
     directLink: "https://chatbot.gistory.me",
-    techStack: ["NextJS", "React", "TypeScript"],
+    techStack: ["React", "TypeScript", "NestJS", "docker"],
     features: [
-      "Simple installation with a single script tag",
-      "Fully isolated iframe structure for zero CSS/JS conflicts",
-      "Flexible customization via data attributes",
-      "Powerful JavaScript API for real-time widget control",
-      "Secure communication with postMessage and origin verification",
+      "Iframe-based isolated structure for easy integration",
+      "Fast response speed and accurate answers",
+      "File upload and document chunking system",
+      "Per-service dashboard functionality",
     ],
-    role: ["Frontend development", "Widget development"],
+    role: [
+      "Answer generation system development",
+      "Full-stack development",
+      "UI design",
+    ],
     links: [
       {
-        type: "website",
-        url: "https://chatbot.gistory.me",
-        description: "Service website",
+        type: "github",
+        url: "https://github.com/gsainfoteam/chatbot-be",
+        description: "Backend (MCP Client) GitHub repository",
+      },
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/chatbot-fe",
+        description: "Frontend GitHub repository",
+      },
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/chatbot-mcp",
+        description: "MCP Server GitHub repository",
       },
     ],
   },
   {
-    title: "Project Beta",
-    period: "2023.9 - 2024.6",
-    image: "https://placehold.co/120x120/6366f1/ffffff?text=Beta",
-    summary: "AI-powered analytics dashboard for business insights.",
+    title: "Ziggle",
+    period: "2023.06 - 2024.03",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGS9Rtr8I_jmELL0ypuXR6Ykdji8VWsQhKJQ&s",
+    summary: "Integrated notice management platform for GIST students.",
     description:
-      "Project Beta provides an AI-powered analytics dashboard that helps businesses visualize and interpret their data. It features predictive analytics and customizable report generation.",
-    directLink: "#",
-    techStack: ["React", "Python", "FastAPI", "PostgreSQL"],
+      "Ziggle is an integrated notice management platform developed by Infoteam for GIST students. It helps students easily check and manage notices.",
+    directLink: "https://ziggle.gistory.me",
+    techStack: ["React", "flutter", "NestJS", "PostgreSQL"],
     features: [
-      "Real-time data visualization",
-      "Predictive analytics with ML models",
-      "Custom report builder",
-      "Team sharing and permissions",
+      "Notice creation and management",
+      "Category-based notice browsing and search",
+      "New notice notifications",
     ],
-    role: ["Backend development", "Data pipeline"],
-    links: [{ type: "github", url: "#", description: "GitHub repository" }],
-  },
-  {
-    title: "Project Gamma",
-    period: "2024.3 - (ongoing)",
-    image: "https://placehold.co/120x120/4f46e5/ffffff?text=Gamma",
-    summary: "Mobile-first health tracking application.",
-    description:
-      "Project Gamma is a mobile-first application that helps users track their health metrics, set fitness goals, and connect with wellness communities.",
-    directLink: "#",
-    techStack: ["React", "Flutter", "Node.js", "MongoDB"],
-    features: [
-      "Health metrics tracking",
-      "Goal setting and reminders",
-      "Community challenges",
-      "Wearable device integration",
+    role: ["Initial planning", "Backend development", "UI design"],
+    links: [
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/ziggle-flutter",
+        description: "App GitHub repository",
+      },
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/ziggle-be",
+        description: "Backend GitHub repository",
+      },
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/ziggle-fe",
+        description: "Frontend GitHub repository",
+      },
     ],
-    role: ["Full-stack development", "Mobile app"],
-    links: [{ type: "github", url: "#", description: "GitHub repository" }],
   },
 ];
 
 const teamProjectsKo: Project[] = [
   {
     title: "GIST 챗봇",
-    period: "2024 - (진행 중)",
+    period: "2026.01 - 진행 중",
     image: "https://chatbot.gistory.me/logo.svg",
     summary: "GIST 학생들을 위한 정보 제공 챗봇 서비스",
     description:
-      "GIST 챗봇은 GIST의 공식 정보를 기반으로 한 지능형 챗봇입니다. 학사 공지, 신입생 소개 자료, 학사 편람 등 공식 자료를 직접 학습하여 학교 관련 질문에 가장 정확하고 빠른 답변을 제공합니다. iframe 기반 위젯으로 호스트 페이지와 CSS/JS 충돌 없이 안정적인 서비스를 제공합니다.",
+      "GIST 챗봇은 GIST의 공식 정보를 기반으로 한 지능형 챗봇입니다. 학사 공지, 신입생 소개 자료, 학사 편람 등 공식 자료를 직접 학습하여 학교 관련 질문에 가장 정확하고 빠른 답변을 제공합니다.",
     directLink: "https://chatbot.gistory.me",
-    techStack: ["NextJS", "React", "TypeScript"],
+    techStack: ["React", "TypeScript", "NestJS", "docker"],
     features: [
-      "스크립트 한 줄로 간편 설치",
-      "iframe 기반 완전 분리 구조로 CSS/JS 충돌 없음",
-      "data 속성으로 유연한 커스터마이징",
-      "위젯 상태·메시지 실시간 제어를 위한 JavaScript API",
-      "postMessage와 origin 검증으로 안전한 통신",
+      "iframe 기반 분리 구조로 간편한 연동 지원",
+      "빠른 응답 속도와 정확한 답변 제공",
+      "파일 업로드 및 문서 chunking 시스템",
+      "서비스별 대시보드 기능 제공",
     ],
-    role: ["프론트엔드 개발", "위젯 개발"],
+    role: ["답변 생성 시스템 개발", "풀스택 개발", "UI 디자인"],
     links: [
       {
-        type: "website",
-        url: "https://chatbot.gistory.me",
-        description: "서비스 웹사이트",
+        type: "github",
+        url: "https://github.com/gsainfoteam/chatbot-be",
+        description: "Backend(MCP Client) GitHub 저장소",
+      },
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/chatbot-fe",
+        description: "Frontend GitHub 저장소",
+      },
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/chatbot-mcp",
+        description: "MCP Server GitHub 저장소",
       },
     ],
   },
   {
-    title: "프로젝트 베타",
-    period: "2023.9 - 2024.6",
-    image: "https://placehold.co/120x120/6366f1/ffffff?text=Beta",
-    summary: "비즈니스 인사이트를 위한 AI 기반 분석 대시보드",
+    title: "지글 (Ziggle) ",
+    period: "2023.06 - 2024.03",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGS9Rtr8I_jmELL0ypuXR6Ykdji8VWsQhKJQ&s",
+    summary: "GIST 학생들을 위한 통합 공지 관리 플랫폼",
     description:
-      "프로젝트 베타는 기업이 데이터를 시각화하고 해석할 수 있도록 돕는 AI 기반 분석 대시보드를 제공합니다. 예측 분석과 맞춤형 리포트 생성 기능을 포함합니다.",
-    directLink: "#",
-    techStack: ["React", "Python", "FastAPI", "PostgreSQL"],
+      "지글은 Infoteam에서 개발한 GIST 학생들을 위한 통합 공지 관리 플랫폼입니다. 학생들이 공지를 쉽게 확인하고 관리할 수 있도록 돕습니다.",
+    directLink: "https://ziggle.gistory.me",
+    techStack: ["React", "flutter", "NestJS", "PostgreSQL"],
     features: [
-      "실시간 데이터 시각화",
-      "ML 모델 기반 예측 분석",
-      "맞춤형 리포트 빌더",
-      "팀 공유 및 권한 관리",
+      "공지 작성 및 관리 기능",
+      "유형별 공지 확인 및 검색 기능",
+      "신규 공지 알림",
     ],
-    role: ["백엔드 개발", "데이터 파이프라인"],
-    links: [{ type: "github", url: "#", description: "GitHub 저장소" }],
-  },
-  {
-    title: "프로젝트 감마",
-    period: "2024.3 - 진행 중",
-    image: "https://placehold.co/120x120/4f46e5/ffffff?text=Gamma",
-    summary: "모바일 기반 건강 추적 애플리케이션",
-    description:
-      "프로젝트 감마는 사용자가 건강 지표를 추적하고, 운동 목표를 설정하며, 웰니스 커뮤니티와 연결할 수 있는 모바일 우선 애플리케이션입니다.",
-    directLink: "#",
-    techStack: ["React", "Flutter", "Node.js", "MongoDB"],
-    features: [
-      "건강 지표 추적",
-      "목표 설정 및 알림",
-      "커뮤니티 챌린지",
-      "웨어러블 기기 연동",
+    role: ["초기 기획", "백엔드 개발", "UI 디자인"],
+    links: [
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/ziggle-flutter",
+        description: "App GitHub 저장소",
+      },
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/ziggle-be",
+        description: "Backend GitHub 저장소",
+      },
+      {
+        type: "github",
+        url: "https://github.com/gsainfoteam/ziggle-fe",
+        description: "Frontend GitHub 저장소",
+      },
     ],
-    role: ["풀스택 개발", "모바일 앱"],
-    links: [{ type: "github", url: "#", description: "GitHub 저장소" }],
   },
 ];
 
@@ -169,16 +187,15 @@ export const projects: Record<Language, ProjectsByType> = {
         features: [
           "Reading habit tracking and statistics",
           "Goal setting and achievement system",
-          "Cross-platform mobile app (Flutter)",
-          "REST API backend with NestJS",
-          "Deployed on AWS with Docker",
+          "Reading time reminder",
+          "Share reading status via social posts",
         ],
-        role: ["Full-stack development", "App development"],
+        role: ["Service planning", "App development", "Backend development", "UI design"],
         links: [
           {
             type: "github",
             url: "https://github.com/no-ikjun/sprit",
-            description: "APP GitHub repository",
+            description: "App GitHub repository",
           },
           {
             type: "github",
@@ -188,7 +205,7 @@ export const projects: Record<Language, ProjectsByType> = {
           {
             type: "website",
             url: "https://disquiet.io/product/%EC%8A%A4%ED%94%84%EB%A6%BF",
-            description: "Disquiet project url",
+            description: "Disquiet project page",
           },
         ],
       },
@@ -197,16 +214,16 @@ export const projects: Record<Language, ProjectsByType> = {
         period: "2023.12 - (ongoing)",
         image:
           "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
-        summary: "New year's Greeting Platform since 2024",
+        summary: "New Year's greeting platform since 2024",
         description:
-          "DeokDam Pocket is a platform where users can exchange New Year's greetings (덕담) with friends and family. It allows users to look back on the past year and share meaningful messages for the new year.",
+          "DeokDam Pocket is a platform where users can exchange New Year's greetings (Deokdam) with friends and family. It allows users to look back on the past year and share meaningful messages for the new year.",
         directLink: "https://deokdam.app",
-        techStack: ["NextJS", "TypeScript"],
+        techStack: ["NextJS", "TypeScript", "PostgreSQL"],
         features: [
-          "New Year's greeting card creation and sharing",
-          "Year-in-review summary",
-          "Social sharing and invitation system",
-          "Responsive web design",
+          "Deokdam sharing group creation and management",
+          "Deokdam sharing and viewing",
+          "Year-in-review and New Year's resolutions",
+          "Talk to future me (AI)",
         ],
         role: ["Full-stack development", "Planning"],
         links: [
@@ -269,11 +286,10 @@ export const projects: Record<Language, ProjectsByType> = {
         features: [
           "독서 습관 추적 및 통계",
           "목표 설정 및 달성 시스템",
-          "크로스 플랫폼 모바일 앱 (Flutter)",
-          "NestJS 기반 REST API 백엔드",
-          "Docker와 AWS 배포",
+          "독서 시간 알림 기능",
+          "소셜 게시물을 통한 독서 상황 공유",
         ],
-        role: ["풀스택 개발", "앱 개발"],
+        role: ["서비스 기획", "앱 개발", "백엔드 개발", "UI 디자인"],
         links: [
           {
             type: "github",
@@ -301,12 +317,12 @@ export const projects: Record<Language, ProjectsByType> = {
         description:
           "덕담 주머니는 친구와 가족과 새해 덕담을 주고받을 수 있는 플랫폼입니다. 한 해를 돌아보고 새해를 위한 의미 있는 메시지를 공유할 수 있습니다.",
         directLink: "https://deokdam.app",
-        techStack: ["NextJS", "TypeScript"],
+        techStack: ["NextJS", "TypeScript", "PostgreSQL"],
         features: [
-          "새해 덕담 카드 생성 및 공유",
-          "한 해 회고 요약",
-          "소셜 공유 및 초대 시스템",
-          "반응형 웹 디자인",
+          "닥담 공유 그룹 생성 및 관리",
+          "덕담 공유 및 조회",
+          "한 해 회고 및 새해 계획 작성",
+          "미래의 나와 대화하기 (AI)",
         ],
         role: ["풀스택 개발", "기획"],
         links: [
