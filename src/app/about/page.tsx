@@ -20,11 +20,13 @@ export default function AboutPage() {
       ? [
           "문제를 먼저 정의하고, 해결책은 가능한 단순하게 설계합니다.",
           "작게 만들고 빠르게 검증하는 반복을 선호합니다.",
+          "가설을 세우고 실험으로 검증하는 방식을 중요하게 생각합니다.",
           "제품 관점과 개발 관점을 함께 보고 의사결정합니다.",
         ]
       : [
           "Define the problem first, then design the simplest possible solution.",
           "Prefer small releases and fast validation loops.",
+          "Value forming hypotheses and validating them through experiments.",
           "Make decisions from both product and engineering perspectives.",
         ];
 
