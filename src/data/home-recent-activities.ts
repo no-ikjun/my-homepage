@@ -13,7 +13,7 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       internal: true,
     },
     {
-      id: "gsa-infoteam-sub-leader",
+      id: "gsa-infoteam-deputy-leader",
       date: "2026.01-(ongoing)",
       kind: "activity",
       title: "GSA InfoTeam 부팀장",
@@ -51,11 +51,11 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       internal: true,
     },
     {
-      id: "gsa-infoteam-sub-leader",
+      id: "gsa-infoteam-deputy-leader",
       date: "2026.01-(ongoing)",
       kind: "activity",
-      title: "GSA InfoTeam Sub-Leader",
-      summary: "Sub-Leader of GSA InfoTeam.",
+      title: "GSA InfoTeam Deputy Leader",
+      summary: "Deputy Leader of GSA InfoTeam.",
       href: "/about#activities",
       internal: true,
     },

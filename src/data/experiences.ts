@@ -172,7 +172,7 @@ export const activities: Record<Language, ActivityItem[]> = {
           ],
         },
         {
-          title: "Sub-Leader",
+          title: "Deputy Leader",
           period: "2026",
           content: ["Managed development activities and organized them"],
         },
