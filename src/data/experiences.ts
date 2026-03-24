@@ -26,8 +26,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
     {
       title: "Jeonnam Science High School",
       link: "https://jeonnam-sh.hs.jne.kr/user/indexMain.action?siteId=chonnam-sh_hs",
-      image:
-        "https://media.licdn.com/dms/image/v2/C560BAQHrM8ZTilgExg/company-logo_200_200/company-logo_200_200/0/1630661133483?e=1773878400&v=beta&t=eiBLelTVI3ejyFgVP_dctkB1a7s5sThEZcxcnkif3lo",
+      image: "https://d3ob3cint7tr3s.cloudfront.net/jshs.png",
       description: "2020.03 ~ 2023.01",
       subDescription: "👨‍🎓 Graduated at 2023.01",
       content: [
@@ -49,8 +48,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
     {
       title: "전남과학고등학교",
       link: "https://jeonnam-sh.hs.jne.kr/user/indexMain.action?siteId=chonnam-sh_hs",
-      image:
-        "https://media.licdn.com/dms/image/v2/C560BAQHrM8ZTilgExg/company-logo_200_200/company-logo_200_200/0/1630661133483?e=1773878400&v=beta&t=eiBLelTVI3ejyFgVP_dctkB1a7s5sThEZcxcnkif3lo",
+      image: "https://d3ob3cint7tr3s.cloudfront.net/jshs.png",
       description: "2020.03 ~ 2023.01",
       subDescription: "👨‍🎓 2023.01 졸업",
       content: ["학생회 IT부 부장", "학교 운영 시스템 JshsUs(과구리) 개발"],
