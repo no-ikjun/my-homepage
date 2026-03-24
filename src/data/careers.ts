@@ -21,8 +21,7 @@ export const careers: Record<Language, Career[]> = {
     {
       title: "Sterri Inc.",
       link: "https://sterri.io",
-      image:
-        "https://media.licdn.com/dms/image/v2/D560BAQE_Mp-R4WWGTg/company-logo_200_200/company-logo_200_200/0/1730446889180/sterri_logo?e=1773878400&v=beta&t=y4Ol62XBHFmTTvjDphf8URHL--p5HpUO51DIPnPVPcY",
+      image: "https://d3ob3cint7tr3s.cloudfront.net/sterri_logo.jpeg",
       description: "2026.01 - (ongoing)",
       subDescription: "Product Developer (Full Stack)",
       content: [
@@ -72,8 +71,7 @@ export const careers: Record<Language, Career[]> = {
     {
       title: "(주)스테리",
       link: "https://sterri.io",
-      image:
-        "https://media.licdn.com/dms/image/v2/D560BAQE_Mp-R4WWGTg/company-logo_200_200/company-logo_200_200/0/1730446889180/sterri_logo?e=1773878400&v=beta&t=y4Ol62XBHFmTTvjDphf8URHL--p5HpUO51DIPnPVPcY",
+      image: "https://d3ob3cint7tr3s.cloudfront.net/sterri_logo.jpeg",
       description: "2026.01 - (ongoing)",
       subDescription: "제품 개발자 (Full Stack)",
       content: [
