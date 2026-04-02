@@ -4,6 +4,15 @@ import type { RecentActivityItem } from "@/types/home";
 export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
   ko: [
     {
+      id: "real-lab-gist-research-intern",
+      date: "2026.03 - (ongoing)",
+      kind: "career",
+      title: "Real-Lab 연구 인턴",
+      summary: "GIST의 Real-Lab에서 연구 인턴을 맡게 되었습니다.",
+      href: "/about#career",
+      internal: true,
+    },
+    {
       id: "wing-club-leader",
       date: "2026.02-(ongoing)",
       kind: "activity",
@@ -21,26 +30,17 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       href: "/about#activities",
       internal: true,
     },
+  ],
+  en: [
     {
-      id: "sterri-product-developer",
-      date: "2026.01-(ongoing)",
+      id: "real-lab-gist-research-intern",
+      date: "2026.03 - (ongoing)",
       kind: "career",
-      title: "(주)스테리 제품 개발자",
-      summary: "(주)스테리의 제품 개발자로 활동하고 있습니다.",
+      title: "Real-Lab Research Intern",
+      summary: "Research Intern in Real-Lab in GIST.",
       href: "/about#career",
       internal: true,
     },
-    {
-      id: "impact-ai-hackathon",
-      date: "2025.05",
-      kind: "award",
-      title: "2025 Impact AI 해커톤",
-      summary: "Impact AI 해커톤에서 GIST 인공지능연구소장상을 수상했습니다.",
-      href: "/about#awards",
-      internal: true,
-    },
-  ],
-  en: [
     {
       id: "wing-club-leader",
       date: "2026.02-(ongoing)",
@@ -57,25 +57,6 @@ export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
       title: "GSA InfoTeam Deputy Leader",
       summary: "Deputy Leader of GSA InfoTeam.",
       href: "/about#activities",
-      internal: true,
-    },
-    {
-      id: "sterri-product-developer",
-      date: "2026.01-(ongoing)",
-      kind: "career",
-      title: "Sterri Inc. Product Developer",
-      summary: "Product Developer of Sterri Inc.",
-      href: "/about#career",
-      internal: true,
-    },
-    {
-      id: "impact-ai-hackathon",
-      date: "2025.05",
-      kind: "award",
-      title: "2025 Impact AI Hackathon",
-      summary:
-        "Won the GIST AI Research Institute Director's Award at the Impact AI Hackathon.",
-      href: "/about#awards",
       internal: true,
     },
   ],

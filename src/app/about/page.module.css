@@ -175,6 +175,11 @@
   align-items: center;
 }
 
+/* 로고 없을 때 52px 열을 두지 않음 (빈 열에 텍스트가 끼는 문제 방지) */
+.careerCompanyNoLogo {
+  grid-template-columns: 1fr;
+}
+
 .careerProjectsCol {
   display: flex;
   flex-direction: column;

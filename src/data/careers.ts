@@ -19,6 +19,21 @@ type Career = {
 export const careers: Record<Language, Career[]> = {
   en: [
     {
+      title: "Real-Lab@GIST",
+      link: "https://real-lab-gist.framer.website",
+      image: "",
+      description: "2026.03 - (ongoing)",
+      subDescription: "Research Intern",
+      content: [
+        {
+          title: "Generative AI Research Intern",
+          description: "Undergraduate Research Intern in Real-Lab@GIST",
+          period: "2026.03 - (ongoing)",
+          content: ["Advised by Prof. Kwanyoung Kim"],
+        },
+      ],
+    },
+    {
       title: "Sterri Inc.",
       link: "https://sterri.io",
       image: "https://d3ob3cint7tr3s.cloudfront.net/sterri_logo.jpeg",
@@ -68,6 +83,21 @@ export const careers: Record<Language, Career[]> = {
     },
   ],
   ko: [
+    {
+      title: "Real-Lab@GIST",
+      link: "https://real-lab-gist.framer.website",
+      image: "",
+      description: "2026.03 - (ongoing)",
+      subDescription: "연구 인턴",
+      content: [
+        {
+          title: "Generative AI 연구 인턴",
+          description: "Undergraduate Research Intern in Real-Lab@GIST",
+          period: "2026.03 - (ongoing)",
+          content: ["Advised by Prof. Kwanyoung Kim"],
+        },
+      ],
+    },
     {
       title: "(주)스테리",
       link: "https://sterri.io",
