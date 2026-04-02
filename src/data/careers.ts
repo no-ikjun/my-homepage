@@ -22,14 +22,14 @@ export const careers: Record<Language, Career[]> = {
       title: "Sterri Inc.",
       link: "https://sterri.io",
       image: "https://d3ob3cint7tr3s.cloudfront.net/sterri_logo.jpeg",
-      description: "2026.01 - (ongoing)",
+      description: "2026.01 - 2026.03",
       subDescription: "Product Developer (Full Stack)",
       content: [
         {
           title: "Warru (와르르)",
           description:
             "Streamer platform for effective event progression and management",
-          period: "2026.01 - (ongoing)",
+          period: "2026.01 - 2026.03",
           content: [
             "Development of a REST API using NestJS",
             "Development of frontend using Next.js",
@@ -72,13 +72,13 @@ export const careers: Record<Language, Career[]> = {
       title: "(주)스테리",
       link: "https://sterri.io",
       image: "https://d3ob3cint7tr3s.cloudfront.net/sterri_logo.jpeg",
-      description: "2026.01 - (ongoing)",
+      description: "2026.01 - 2026.03",
       subDescription: "제품 개발자 (Full Stack)",
       content: [
         {
           title: "스트리머를 위한 이벤트 플랫폼, 와르르",
           description: "효과적인 이벤트 진행 및 관리를 위한 스트리머 플랫폼",
-          period: "2026.01 - (ongoing)",
+          period: "2026.01 - 2026.03",
           content: [
             "NestJS 활용 REST API 개발",
             "Next.js 활용 프론트엔드 개발",
