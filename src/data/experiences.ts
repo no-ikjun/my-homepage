@@ -262,7 +262,7 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "동아리장",
-          period: "2024",
+          period: "2026",
           content: ["동아리 운영 및 관리"],
         },
         {

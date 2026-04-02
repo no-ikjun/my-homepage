@@ -56,7 +56,9 @@ export default function AboutPage() {
             </div>
 
             <div>
-              <h2 className={styles.sectionTitle}>{t.aboutWorkingStyleTitle}</h2>
+              <h2 className={styles.sectionTitle}>
+                {t.aboutWorkingStyleTitle}
+              </h2>
               <ul className={styles.principlesList}>
                 {workingPrinciples.map((item) => (
                   <li key={item}>{item}</li>
@@ -77,13 +79,23 @@ export default function AboutPage() {
                 <li key={item.title} className={styles.careerItem}>
                   <span className={styles.careerTimeline} aria-hidden="true" />
                   <div className={styles.careerLeftCol}>
-                    <span className={styles.careerPeriod}>{item.description}</span>
-                    <div className={styles.careerCompany}>
-                      <div
-                        className={styles.careerLogo}
-                        style={{ backgroundImage: `url(${item.image})` }}
-                        aria-hidden="true"
-                      />
+                    <span className={styles.careerPeriod}>
+                      {item.description}
+                    </span>
+                    <div
+                      className={
+                        item.image?.trim()
+                          ? styles.careerCompany
+                          : `${styles.careerCompany} ${styles.careerCompanyNoLogo}`
+                      }
+                    >
+                      {item.image?.trim() ? (
+                        <div
+                          className={styles.careerLogo}
+                          style={{ backgroundImage: `url(${item.image})` }}
+                          aria-hidden="true"
+                        />
+                      ) : null}
                       <div>
                         <h3 className={styles.careerTitle}>
                           {item.link ? (
@@ -99,7 +111,9 @@ export default function AboutPage() {
                             item.title
                           )}
                         </h3>
-                        <p className={styles.careerRole}>{item.subDescription}</p>
+                        <p className={styles.careerRole}>
+                          {item.subDescription}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -107,9 +121,15 @@ export default function AboutPage() {
                   <div className={styles.careerProjectsCol}>
                     {item.content.map((project) => (
                       <div key={project.title} className={styles.projectEntry}>
-                        <h4 className={styles.projectEntryTitle}>{project.title}</h4>
-                        <span className={styles.projectEntryPeriod}>{project.period}</span>
-                        <p className={styles.projectEntryDescription}>{project.description}</p>
+                        <h4 className={styles.projectEntryTitle}>
+                          {project.title}
+                        </h4>
+                        <span className={styles.projectEntryPeriod}>
+                          {project.period}
+                        </span>
+                        <p className={styles.projectEntryDescription}>
+                          {project.description}
+                        </p>
                         <ul className={styles.projectEntryList}>
                           {project.content.map((point) => (
                             <li key={point}>{point}</li>
