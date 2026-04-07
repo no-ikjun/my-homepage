@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { getPublishedWritings, getWritingBySlug } from "@/lib/writings";
+import { SITE_URL } from "@/lib/site";
 import { BadgeChip } from "@/components/ui";
 
 type WritingDetailPageProps = {
@@ -19,9 +20,29 @@ export async function generateMetadata({ params }: WritingDetailPageProps): Prom
     return { title: "Writing" };
   }
 
+  const { title, summary, slug, date } = entry.metadata;
+  const url = `${SITE_URL}/writings/${slug}`;
+  const publishedTime = /^\d{4}-\d{2}-\d{2}/.test(date) ? `${date}T00:00:00+09:00` : undefined;
+
   return {
-    title: entry.metadata.title,
-    description: entry.metadata.summary,
+    title,
+    description: summary || title,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description: summary || title,
+      publishedTime,
+      tags: entry.metadata.tags,
+      images: [{ url: `${SITE_URL}/img/profile_round3.png`, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: summary || title,
+      images: [`${SITE_URL}/img/profile_round3.png`],
+    },
   };
 }
 
