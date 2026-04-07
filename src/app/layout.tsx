@@ -5,7 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { LanguageProvider } from "@/contexts/language-context";
 import { ThemeProvider } from "@/contexts/theme-context";
-const SITE_URL = "https://ikjun.com";
+import { SITE_URL } from "@/lib/site";
 const themeBootstrapScript = `
 (function () {
   try {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     "AI research",
     "인공지능 연구",
   ],
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: "/img/profile_round3.png" },
   // 잘못된 hreflang 제거: 서로 다른 URL 없으면 languages 넣지 말기
   alternates: {
     canonical: SITE_URL,
@@ -63,8 +63,8 @@ export const metadata: Metadata = {
       "SW 개발자 최익준. AI 연구에 관심 있습니다. Portfolio of Ikjun Choi — Developer, interested in AI research.",
     siteName: "Ikjun Choi Portfolio",
     images: [
-      { url: `${SITE_URL}/profile_round3.png`, alt: "최익준 Ikjun Choi" },
-      { url: `${SITE_URL}/profile_round.png`, alt: "최익준 Ikjun Choi" },
+      { url: `${SITE_URL}/img/profile_round3.png`, alt: "최익준 Ikjun Choi" },
+      { url: `${SITE_URL}/img/profile_round.png`, alt: "최익준 Ikjun Choi" },
     ],
     locale: "ko_KR",
     alternateLocale: ["en_US"],
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: "최익준 | Ikjun Choi",
     description:
       "SW 개발자 최익준. AI 연구에 관심 있습니다. Portfolio of Ikjun Choi — Developer, interested in AI research.",
-    images: [`${SITE_URL}/profile_round3.png`],
+    images: [`${SITE_URL}/img/profile_round3.png`],
   },
   robots: { index: true, follow: true },
   verification: {
