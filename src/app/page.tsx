@@ -3,9 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { BadgeChip, IconWithText } from "@/components/ui";
+import {
+  ActionButton,
+  BadgeChip,
+  IconWithText,
+  ProjectVisual,
+} from "@/components/ui";
 import { useLanguage, useTranslations } from "@/contexts/language-context";
 import { homeRecentActivities } from "@/data/home-recent-activities";
+import { projects } from "@/data/projects";
 
 const kindLabel: Record<"ko" | "en", Record<string, string>> = {
   ko: {
@@ -101,70 +107,132 @@ export default function Home() {
   const t = useTranslations();
   const { lang } = useLanguage();
   const recentItems = homeRecentActivities[lang];
+  const featuredProjects = [
+    ...projects[lang].individual,
+    ...projects[lang].team,
+  ].filter((project) => project.featured).slice(0, 3);
 
   return (
     <main className={styles.main}>
-      <section className={styles.heroSection}>
-        <div className={styles.heroCard}>
-          <div className={styles.heroTop}>
-            <Image
-              className={styles.profileImage}
-              src="/img/profile_round3.png"
-              alt="Ikjun Choi"
-              width={300}
-              height={300}
-              priority
-              sizes="(max-width: 700px) 96px, 128px"
-            />
-            <div className={styles.heroIdentity}>
-              <BadgeChip tone="accent" size="sm" className={styles.heroBadge}>
-                {t.homeRole}
-              </BadgeChip>
-              {/* <p className={styles.heroTagline}>{t.homeResearchInterest}</p> */}
-              <h1 className={styles.heroName}>Ikjun Choi</h1>
-              <p className={styles.heroNameKr}>최익준</p>
+      <section className={styles.heroSection} aria-labelledby="home-title">
+        <div className={styles.heroPanel}>
+          <div className={styles.heroMain}>
+            <div className={styles.heroIdentityRow}>
+              <Image
+                className={styles.profileImage}
+                src="/img/profile_round3.png"
+                alt="Ikjun Choi"
+                width={300}
+                height={300}
+                priority
+                sizes="(max-width: 700px) 94px, 132px"
+              />
+              <div className={styles.heroIdentity}>
+                <BadgeChip tone="accent" size="sm" className={styles.heroBadge}>
+                  {t.homeRole}
+                </BadgeChip>
+                <h1 id="home-title" className={styles.heroName}>
+                  Ikjun Choi
+                </h1>
+                <p className={styles.heroNameKr}>최익준</p>
+              </div>
             </div>
-            <div className={styles.heroMeta}>
-              <IconWithText icon="location-pin">{t.homeLocation}</IconWithText>
-              <IconWithText icon="graduation-cap">
-                {t.homeEducation}
-              </IconWithText>
-              <IconWithText icon="mail" href="mailto:choiikjun1101@gmail.com">
-                {t.homeLinkEmail}
-              </IconWithText>
-              <IconWithText
-                icon="github"
-                href="https://github.com/no-ikjun"
-                external
-              >
-                {t.homeLinkGithub}
-              </IconWithText>
-              <IconWithText
-                icon="linkedin"
-                href="https://www.linkedin.com/in/ikjunchoi/"
-                external
-              >
-                {t.homeLinkLinkedIn}
-              </IconWithText>
+
+            <div className={styles.heroCopy}>
+              <p className={styles.heroLead}>{t.homeHeroLead}</p>
+              <p className={styles.heroSupport}>{t.homeHeroSupport}</p>
             </div>
+
+            <div className={styles.heroActions}>
+              <ActionButton href="/projects" variant="primary">
+                {t.ctaViewProjects}
+              </ActionButton>
+              <ActionButton href="/contact">{t.ctaContactMe}</ActionButton>
+            </div>
+
+            <ul className={styles.signalList} aria-label="Focus areas">
+              <li>{t.homeSignalProduct}</li>
+              <li>{t.homeSignalAi}</li>
+              <li>{t.homeSignalEndToEnd}</li>
+            </ul>
           </div>
 
-          <div className={styles.heroAboutSection}>
-            <div className={styles.heroAboutHead}>
-              <h2 className={styles.heroAboutTitle}>{t.homeAboutTitle}</h2>
-              <span className={styles.heroAboutLine} aria-hidden />
-            </div>
-            <div className={styles.heroDescriptionWrap}>
-              {t.homeDescription
-                .split(/\n\n+/)
-                .filter(Boolean)
-                .map((paragraph, i) => (
-                  <p key={i} className={styles.heroDescription}>
-                    {paragraph.trim()}
-                  </p>
-                ))}
-            </div>
+          <aside className={styles.heroMeta} aria-label="Profile links">
+            <IconWithText icon="location-pin">{t.homeLocation}</IconWithText>
+            <IconWithText icon="graduation-cap">{t.homeEducation}</IconWithText>
+            <IconWithText icon="mail" href="mailto:choiikjun1101@gmail.com">
+              {t.homeLinkEmail}
+            </IconWithText>
+            <IconWithText
+              icon="github"
+              href="https://github.com/no-ikjun"
+              external
+            >
+              {t.homeLinkGithub}
+            </IconWithText>
+            <IconWithText
+              icon="linkedin"
+              href="https://www.linkedin.com/in/ikjunchoi/"
+              external
+            >
+              {t.homeLinkLinkedIn}
+            </IconWithText>
+          </aside>
+        </div>
+      </section>
+
+      <section
+        className={styles.section}
+        aria-labelledby="selected-work-title"
+      >
+        <div className={styles.sectionHead}>
+          <div>
+            <h2 id="selected-work-title" className={styles.sectionTitle}>
+              {t.homeSelectedWorkTitle}
+            </h2>
+            <p className={styles.sectionDescription}>
+              {t.homeSelectedWorkDescription}
+            </p>
           </div>
+          <Link href="/projects" className={styles.sectionLink}>
+            {t.ctaViewProjects}
+          </Link>
+        </div>
+
+        <div className={styles.featuredGrid}>
+          {featuredProjects.map((project) => (
+            <Link
+              href="/projects"
+              key={project.title}
+              className={styles.featuredCard}
+            >
+              <ProjectVisual
+                title={project.title}
+                image={project.image}
+                alt={project.imageAlt}
+                size="lg"
+                className={styles.featuredVisual}
+              />
+              <div className={styles.featuredBody}>
+                <div className={styles.featuredMeta}>
+                  <span>{project.period}</span>
+                  <span>{project.role[0]}</span>
+                </div>
+                <h3 className={styles.featuredTitle}>{project.title}</h3>
+                <p className={styles.featuredSummary}>
+                  {project.impact ?? project.summary}
+                </p>
+                <div className={styles.featuredStack}>
+                  {project.techStack.slice(0, 3).map((tech) => (
+                    <BadgeChip key={tech} size="sm" tone="muted">
+                      {tech}
+                    </BadgeChip>
+                  ))}
+                </div>
+              </div>
+              <span className={styles.cardAction}>{t.homeViewProject}</span>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -173,29 +241,39 @@ export default function Home() {
         aria-labelledby="recent-activity-title"
       >
         <div className={styles.sectionHead}>
-          <h2 id="recent-activity-title" className={styles.sectionTitle}>
-            {t.homeRecentTitle}
-          </h2>
+          <div>
+            <h2 id="recent-activity-title" className={styles.sectionTitle}>
+              {t.homeRecentTitle}
+            </h2>
+            <p className={styles.sectionDescription}>
+              {t.homeRecentDescription}
+            </p>
+          </div>
         </div>
 
         <ul className={styles.recentList}>
           {recentItems.map((item) => {
-            return (
-              <li key={item.id} className={styles.recentItem}>
+            const content = (
+              <>
                 <span className={styles.recentDate}>{item.date}</span>
-                <span className={styles.timelineDot} aria-hidden="true" />
+                <div className={styles.recentBody}>
+                  <div className={styles.recentTopLine}>
+                    <BadgeChip size="sm" tone="muted">
+                      {kindLabel[lang][item.kind] ?? item.kind}
+                    </BadgeChip>
+                    <h3 className={styles.recentTitle}>{item.title}</h3>
+                  </div>
+                  <p className={styles.recentSummary}>{item.summary}</p>
+                </div>
+                <span className={styles.recentArrow}>↗</span>
+              </>
+            );
+
+            return (
+              <li key={item.id}>
                 {item.internal ? (
                   <Link href={item.href} className={styles.recentLink}>
-                    <div className={styles.recentBody}>
-                      <div className={styles.recentTopLine}>
-                        <BadgeChip size="sm" tone="muted">
-                          {kindLabel[lang][item.kind] ?? item.kind}
-                        </BadgeChip>
-                        <h3 className={styles.recentTitle}>{item.title}</h3>
-                      </div>
-                      <p className={styles.recentSummary}>{item.summary}</p>
-                    </div>
-                    <span className={styles.recentArrow}>↗</span>
+                    {content}
                   </Link>
                 ) : (
                   <a
@@ -204,16 +282,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <div className={styles.recentBody}>
-                      <div className={styles.recentTopLine}>
-                        <BadgeChip size="sm" tone="muted">
-                          {kindLabel[lang][item.kind] ?? item.kind}
-                        </BadgeChip>
-                        <h3 className={styles.recentTitle}>{item.title}</h3>
-                      </div>
-                      <p className={styles.recentSummary}>{item.summary}</p>
-                    </div>
-                    <span className={styles.recentArrow}>↗</span>
+                    {content}
                   </a>
                 )}
               </li>
@@ -224,9 +293,14 @@ export default function Home() {
 
       <section className={styles.section} aria-labelledby="quick-links-title">
         <div className={styles.sectionHead}>
-          <h2 id="quick-links-title" className={styles.sectionTitle}>
-            {t.homeQuickLinksTitle}
-          </h2>
+          <div>
+            <h2 id="quick-links-title" className={styles.sectionTitle}>
+              {t.homeQuickLinksTitle}
+            </h2>
+            <p className={styles.sectionDescription}>
+              {t.homeQuickLinksDescription}
+            </p>
+          </div>
         </div>
 
         <ul className={styles.quickLinkList}>
@@ -238,20 +312,6 @@ export default function Home() {
               <div className={styles.quickLinkMain}>
                 <h3 className={styles.quickLinkLabel}>{t.navAbout}</h3>
                 <p className={styles.quickLinkText}>{t.aboutPageDescription}</p>
-              </div>
-              <span className={styles.quickLinkArrow}>↗</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/projects" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>
-                {quickLinkIcons.projects}
-              </span>
-              <div className={styles.quickLinkMain}>
-                <h3 className={styles.quickLinkLabel}>{t.navProjects}</h3>
-                <p className={styles.quickLinkText}>
-                  {t.projectsPageDescription}
-                </p>
               </div>
               <span className={styles.quickLinkArrow}>↗</span>
             </Link>

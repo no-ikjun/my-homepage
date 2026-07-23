@@ -1,4 +1,4 @@
-import styles from "../app/experiences/page.module.css";
+import styles from "./profile-sections.module.css";
 import DetailExperience from "./detail_experience";
 
 type ExperienceBoxProps = {

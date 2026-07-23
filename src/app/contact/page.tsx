@@ -3,45 +3,82 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { useTranslations } from "@/contexts/language-context";
-import { PageHero } from "@/components/ui";
+import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { ActionButton, PageHero } from "@/components/ui";
 
-const contactLinks = [
-  {
-    key: "email",
-    label: "Email",
-    href: "mailto:choiikjun1101@gmail.com",
-    description: "choiikjun1101@gmail.com",
-    external: true,
-    icon: "/img/mail_icon.svg",
-  },
-  {
-    key: "linkedin",
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/ikjunchoi/",
-    description: "Professional profile and direct messages",
-    external: true,
-    icon: "/img/linkedin_icon.svg",
-  },
-  {
-    key: "github",
-    label: "GitHub",
-    href: "https://github.com/no-ikjun",
-    description: "Projects, repositories, and technical activity",
-    external: true,
-    icon: "/img/github_icon.svg",
-  },
-  {
-    key: "instagram",
-    label: "Instagram",
-    href: "https://www.instagram.com/__ikjun/",
-    description: "Casual updates and personal posts",
-    external: true,
-    icon: "/img/instagram_icon.svg",
-  },
-];
+const contactLinks = {
+  en: [
+    {
+      key: "email",
+      label: "Email",
+      href: "mailto:choiikjun1101@gmail.com",
+      description: "choiikjun1101@gmail.com",
+      external: true,
+      icon: "/img/mail_icon.svg",
+    },
+    {
+      key: "linkedin",
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/ikjunchoi/",
+      description: "Professional profile and direct messages",
+      external: true,
+      icon: "/img/linkedin_icon.svg",
+    },
+    {
+      key: "github",
+      label: "GitHub",
+      href: "https://github.com/no-ikjun",
+      description: "Projects, repositories, and technical activity",
+      external: true,
+      icon: "/img/github_icon.svg",
+    },
+    {
+      key: "instagram",
+      label: "Instagram",
+      href: "https://www.instagram.com/__ikjun/",
+      description: "Casual updates and personal posts",
+      external: true,
+      icon: "/img/instagram_icon.svg",
+    },
+  ],
+  ko: [
+    {
+      key: "email",
+      label: "Email",
+      href: "mailto:choiikjun1101@gmail.com",
+      description: "choiikjun1101@gmail.com",
+      external: true,
+      icon: "/img/mail_icon.svg",
+    },
+    {
+      key: "linkedin",
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/ikjunchoi/",
+      description: "프로필과 커리어 관련 메시지",
+      external: true,
+      icon: "/img/linkedin_icon.svg",
+    },
+    {
+      key: "github",
+      label: "GitHub",
+      href: "https://github.com/no-ikjun",
+      description: "프로젝트, 저장소, 기술 활동",
+      external: true,
+      icon: "/img/github_icon.svg",
+    },
+    {
+      key: "instagram",
+      label: "Instagram",
+      href: "https://www.instagram.com/__ikjun/",
+      description: "개인적인 소식과 일상 기록",
+      external: true,
+      icon: "/img/instagram_icon.svg",
+    },
+  ],
+};
 
 export default function ContactPage() {
+  const { lang } = useLanguage();
   const t = useTranslations();
 
   return (
@@ -52,12 +89,32 @@ export default function ContactPage() {
           description={t.contactPageDescription}
         />
 
+        <section className={styles.primaryContact} aria-label="Primary contact">
+          <div>
+            <p className={styles.primaryKicker}>{t.contactLinksTitle}</p>
+            <h2 className={styles.primaryTitle}>{t.contactPrimaryTitle}</h2>
+            <p className={styles.primaryDescription}>
+              {t.contactPrimaryDescription}
+            </p>
+          </div>
+          <div className={styles.primaryAction}>
+            <ActionButton
+              href="mailto:choiikjun1101@gmail.com"
+              variant="primary"
+              ariaLabel={t.contactEmailCta}
+            >
+              {t.contactEmailCta}
+            </ActionButton>
+            <p>{t.contactResponseNote}</p>
+          </div>
+        </section>
+
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>{t.contactLinksTitle}</h2>
           <p className={styles.sectionDescription}>{t.contactLinksDescription}</p>
 
           <ul className={styles.linkList}>
-            {contactLinks.map((item) => (
+            {contactLinks[lang].map((item) => (
               <li key={item.key}>
                 <Link
                   href={item.href}

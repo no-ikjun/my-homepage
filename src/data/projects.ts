@@ -10,13 +10,16 @@ export type Project = {
   title: string;
   period: string;
   image: string;
+  imageAlt?: string;
   summary: string;
+  impact?: string;
   description: string;
   directLink: string;
   techStack: string[];
   links: ProjectLink[];
   features: string[];
   role: string[];
+  featured?: boolean;
 };
 
 export type ProjectsByType = {
@@ -29,7 +32,9 @@ const teamProjectsEn: Project[] = [
     title: "GIST Chatbot",
     period: "2026.01 - (ongoing)",
     image: "https://chatbot.gistory.me/logo.svg",
+    imageAlt: "GIST Chatbot logo",
     summary: "Intelligent chatbot service for GIST students.",
+    impact: "Searches official school documents to answer student questions with an AI interface.",
     description:
       "GIST Chatbot is an intelligent chatbot based on GIST's official information. It searches through academic notices, freshman introduction materials, academic handbooks, and other official school data to provide accurate and fast answers to school-related questions.",
     directLink: "https://chatbot.gistory.me",
@@ -68,7 +73,9 @@ const teamProjectsEn: Project[] = [
     period: "2023.06 - 2024.03",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGS9Rtr8I_jmELL0ypuXR6Ykdji8VWsQhKJQ&s",
+    imageAlt: "Ziggle service logo",
     summary: "Integrated notice management platform for GIST students.",
+    impact: "Centralized school notices across web and app surfaces for GIST students.",
     description:
       "Ziggle is an integrated notice management platform developed by Infoteam for GIST students. It helps students easily check and manage notices.",
     directLink: "https://ziggle.gistory.me",
@@ -104,7 +111,9 @@ const teamProjectsKo: Project[] = [
     title: "GIST 챗봇",
     period: "2026.01 - 진행 중",
     image: "https://chatbot.gistory.me/logo.svg",
+    imageAlt: "GIST 챗봇 로고",
     summary: "GIST 학생들을 위한 정보 제공 챗봇 서비스",
+    impact: "학교 공식 문서를 검색해 학생 질문에 답하는 AI 인터페이스를 구현했습니다.",
     description:
       "GIST 챗봇은 GIST의 공식 정보를 기반으로 한 지능형 챗봇입니다. 학사 공지, 신입생 소개 자료, 학사 편람 등 공식 자료를 검색하여 학교 관련 질문에 정확하고 빠른 답변을 제공합니다.",
     directLink: "https://chatbot.gistory.me",
@@ -139,7 +148,9 @@ const teamProjectsKo: Project[] = [
     period: "2023.06 - 2024.03",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGS9Rtr8I_jmELL0ypuXR6Ykdji8VWsQhKJQ&s",
+    imageAlt: "지글 서비스 로고",
     summary: "GIST 학생들을 위한 통합 공지 관리 플랫폼",
+    impact: "웹과 앱에서 GIST 공지를 한곳에 모아 확인할 수 있는 플랫폼을 만들었습니다.",
     description:
       "지글은 Infoteam에서 개발한 GIST 학생들을 위한 통합 공지 관리 플랫폼입니다. 학생들이 공지를 쉽게 확인하고 관리할 수 있도록 돕습니다.",
     directLink: "https://ziggle.gistory.me",
@@ -179,7 +190,9 @@ export const projects: Record<Language, ProjectsByType> = {
         period: "2024.3 - (ongoing)",
         image:
           "https://play-lh.googleusercontent.com/xc7SKBJq60amNLJMphT9QBPkfbaVXtbrhGbTuexJPtxYII_A-QC2hcLHuJ96PvHqHw=w240-h480-rw",
+        imageAlt: "SPRIT app icon",
         summary: "App service that creates a steady reading habit.",
+        impact: "Planned, designed, and built a mobile reading habit product end to end.",
         description:
           "SPRIT is a mobile app that helps users build and maintain consistent reading habits. It provides features like reading tracking, goal setting, and community engagement to motivate users to read more regularly.",
         directLink: "https://sprit-app.me",
@@ -196,6 +209,7 @@ export const projects: Record<Language, ProjectsByType> = {
           "Backend development",
           "UI design",
         ],
+        featured: true,
         links: [
           {
             type: "github",
@@ -219,7 +233,9 @@ export const projects: Record<Language, ProjectsByType> = {
         period: "2023.12 - (ongoing)",
         image:
           "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
+        imageAlt: "DeokDam Pocket product thumbnail",
         summary: "New Year's greeting platform since 2024",
+        impact: "Operated a seasonal web product for exchanging New Year's greetings.",
         description:
           "DeokDam Pocket is a platform where users can exchange New Year's greetings (Deokdam) with friends and family. It allows users to look back on the past year and share meaningful messages for the new year.",
         directLink: "https://deokdam.app",
@@ -231,6 +247,7 @@ export const projects: Record<Language, ProjectsByType> = {
           "Talk to future me (AI)",
         ],
         role: ["Full-stack development", "Planning"],
+        featured: true,
         links: [
           {
             type: "github",
@@ -243,7 +260,9 @@ export const projects: Record<Language, ProjectsByType> = {
         title: "Wisemind",
         period: "2024.2 - 2025.7",
         image: "https://analyst.ikjun.com/logo.png",
+        imageAlt: "Wisemind logo",
         summary: "LLM-powered financial analysis assistant based on ChatGPT & HyperCLOVA X",
+        impact: "Connected LLM APIs with backend and analysis flows for financial insight generation.",
         description:
           "Wisemind is an LLM-powered financial analysis assistant that leverages ChatGPT and HyperCLOVA X APIs to provide intelligent financial insights and recommendations. It processes financial data and delivers actionable analysis through a conversational interface.",
         directLink: "https://analyst.ikjun.com",
@@ -255,6 +274,7 @@ export const projects: Record<Language, ProjectsByType> = {
           "Multi-repository architecture (FE, BE, AI server)",
         ],
         role: ["Full-stack development", "AI integration"],
+        featured: true,
         links: [
           {
             type: "github",
@@ -283,7 +303,9 @@ export const projects: Record<Language, ProjectsByType> = {
         period: "2024.3 - 진행 중",
         image:
           "https://play-lh.googleusercontent.com/xc7SKBJq60amNLJMphT9QBPkfbaVXtbrhGbTuexJPtxYII_A-QC2hcLHuJ96PvHqHw=w240-h480-rw",
+        imageAlt: "스프릿 앱 아이콘",
         summary: "꾸준한 독서 습관을 만들어주는 앱 서비스",
+        impact: "독서 습관 모바일 서비스를 기획, 디자인, 개발까지 엔드 투 엔드로 만들었습니다.",
         description:
           "스프릿은 사용자가 꾸준한 독서 습관을 만들고 유지할 수 있도록 돕는 모바일 앱입니다. 독서 기록, 목표 설정, 커뮤니티 참여 등의 기능을 통해 더 자주 읽도록 동기를 부여합니다.",
         directLink: "https://sprit-app.me",
@@ -295,6 +317,7 @@ export const projects: Record<Language, ProjectsByType> = {
           "소셜 게시물을 통한 독서 상황 공유",
         ],
         role: ["서비스 기획", "앱 개발", "백엔드 개발", "UI 디자인"],
+        featured: true,
         links: [
           {
             type: "github",
@@ -318,7 +341,9 @@ export const projects: Record<Language, ProjectsByType> = {
         period: "2023.12 - 진행 중",
         image:
           "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
+        imageAlt: "덕담 주머니 제품 썸네일",
         summary: "한 해를 되돌아보며 새해 덕담을 주고받는 덕담 플랫폼 서비스",
+        impact: "새해 덕담을 주고받는 시즌성 웹 서비스를 기획하고 운영했습니다.",
         description:
           "덕담 주머니는 친구와 가족과 새해 덕담을 주고받을 수 있는 플랫폼입니다. 한 해를 돌아보고 새해를 위한 의미 있는 메시지를 공유할 수 있습니다.",
         directLink: "https://deokdam.app",
@@ -330,6 +355,7 @@ export const projects: Record<Language, ProjectsByType> = {
           "미래의 나와 대화하기 (AI)",
         ],
         role: ["풀스택 개발", "기획"],
+        featured: true,
         links: [
           {
             type: "github",
@@ -342,7 +368,9 @@ export const projects: Record<Language, ProjectsByType> = {
         title: "Wisemind",
         period: "2024.2 - 2025.7",
         image: "https://analyst.ikjun.com/logo.png",
+        imageAlt: "Wisemind 로고",
         summary: "ChatGPT·HyperCLOVA X 기반 LLM 금융 분석 어시스턴트",
+        impact: "LLM API와 백엔드, 분석 플로우를 연결해 금융 분석 결과를 생성했습니다.",
         description:
           "Wisemind는 ChatGPT와 HyperCLOVA X API를 활용한 LLM 기반 금융 분석 어시스턴트입니다. 금융 데이터를 처리하고 대화형 인터페이스를 통해 실행 가능한 분석 결과를 제공합니다.",
         directLink: "https://analyst.ikjun.com",
@@ -354,6 +382,7 @@ export const projects: Record<Language, ProjectsByType> = {
           "멀티 레포지토리 아키텍처 (FE, BE, AI 서버)",
         ],
         role: ["풀스택 개발", "AI 연동"],
+        featured: true,
         links: [
           {
             type: "github",

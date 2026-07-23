@@ -20,13 +20,8 @@ html[data-theme="dark"] .header {
 }
 
 .heroImage {
-  flex-shrink: 0;
-  width: 88px;
-  height: 88px;
-  border-radius: var(--radius-xl);
-  background-size: cover;
-  background-position: center;
-  background-color: var(--bg-base);
+  width: 104px;
+  height: 104px;
   box-shadow:
     0 2px 8px rgba(15, 23, 42, 0.08),
     0 0 0 1px rgba(148, 163, 184, 0.12);
@@ -45,7 +40,7 @@ html[data-theme="dark"] .header {
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   line-height: 1.25;
 }
 
@@ -107,7 +102,7 @@ html[data-theme="dark"] .header {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-  max-height: min(380px, 48vh);
+  max-height: min(520px, 58vh);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
@@ -164,7 +159,7 @@ html[data-theme="dark"] .body::-webkit-scrollbar-thumb:hover {
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
 }
 
 .sectionTitle::before {

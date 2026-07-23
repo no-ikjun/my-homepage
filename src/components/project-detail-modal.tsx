@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Modal from "./ui/modal";
-import { BadgeChip } from "./ui";
+import { BadgeChip, ProjectVisual } from "./ui";
 import { useTranslations } from "@/contexts/language-context";
 import type { Project } from "@/data/projects";
 import styles from "./project-detail-modal.module.css";
@@ -44,10 +44,12 @@ export default function ProjectDetailModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose} className={styles.modalContent}>
       <div className={styles.header}>
-        <div
+        <ProjectVisual
+          title={project.title}
+          image={project.image}
+          alt={project.imageAlt}
+          size="lg"
           className={styles.heroImage}
-          style={{ backgroundImage: `url(${project.image})` }}
-          aria-hidden="true"
         />
         <div className={styles.headerMeta}>
           <h2 className={styles.title}>{project.title}</h2>

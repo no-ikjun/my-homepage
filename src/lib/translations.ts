@@ -11,6 +11,11 @@ type Translations = {
   homeRole: string;
   homeResearchInterest: string;
   homeDescription: string;
+  homeHeroLead: string;
+  homeHeroSupport: string;
+  homeSignalProduct: string;
+  homeSignalAi: string;
+  homeSignalEndToEnd: string;
   ctaViewProjects: string;
   ctaContactMe: string;
   homeLocation: string;
@@ -20,7 +25,12 @@ type Translations = {
   homeLinkLinkedIn: string;
   homeAboutTitle: string;
   homeRecentTitle: string;
+  homeRecentDescription: string;
+  homeSelectedWorkTitle: string;
+  homeSelectedWorkDescription: string;
+  homeViewProject: string;
   homeQuickLinksTitle: string;
+  homeQuickLinksDescription: string;
   sectionCareersTitle: string;
   sectionCareersDescription: string;
   sectionExperiencesTitle: string;
@@ -38,6 +48,7 @@ type Translations = {
   careersPageTitle: string;
   aboutPageTitle: string;
   aboutPageDescription: string;
+  writingsPageTitle: string;
   writingsPageDescription: string;
   aboutInterestsTitle: string;
   aboutInterestsDescription: string;
@@ -58,6 +69,19 @@ type Translations = {
   projectViewDetails: string;
   projectsTeamTitle: string;
   projectsIndividualTitle: string;
+  contactPrimaryTitle: string;
+  contactPrimaryDescription: string;
+  contactEmailCta: string;
+  contactResponseNote: string;
+  writingsEmptyKicker: string;
+  writingsEmptyTitle: string;
+  writingsEmptyDescription: string;
+  writingsEmptyTopicsTitle: string;
+  writingsEmptyTopicProduct: string;
+  writingsEmptyTopicEngineering: string;
+  writingsEmptyTopicAi: string;
+  writingsEmptyProjectsLink: string;
+  writingsEmptyAboutLink: string;
 };
 
 export const translations: Record<Language, Translations> = {
@@ -73,6 +97,13 @@ export const translations: Record<Language, Translations> = {
     homeResearchInterest: "Interested in AI Research",
     homeDescription:
       "I am a developer who builds services by viewing problem identification, planning, design, development, deployment, and operation as a continuous process. Recently, I have been actively planning and implementing projects that leverage large language models (LLMs), with a strong interest in how AI technologies can be applied to solve real user problems. Rather than simply utilizing models, I focus on understanding how AI can translate into meaningful value in real-world environments and on bridging the gap between advanced AI capabilities and practical applications.\n\nIn individual and small team environments, I have built and operated multiple services end to end, validating ideas through rapid experimentation and user feedback even under limited resources. Through implementing systems for information analysis, content generation, and recommendation, I prioritize real-world usefulness and continuous improvement over model performance alone. I work across frontend, backend, and infrastructure, gaining experience in translating technology into practical, user-facing services.",
+    homeHeroLead:
+      "I build AI-assisted products from problem definition to launch.",
+    homeHeroSupport:
+      "My work connects product planning, full-stack development, and LLM-based systems into practical services that real users can try and improve.",
+    homeSignalProduct: "Product planning",
+    homeSignalAi: "LLM services",
+    homeSignalEndToEnd: "End-to-end build",
     ctaViewProjects: "View Projects",
     ctaContactMe: "Contact Me",
     homeLocation: "Gwangju, South Korea",
@@ -82,7 +113,15 @@ export const translations: Record<Language, Translations> = {
     homeLinkLinkedIn: "ikjunchoi",
     homeAboutTitle: "About Me",
     homeRecentTitle: "Recent Activity",
+    homeRecentDescription:
+      "Current roles and activities that shape what I am building now.",
+    homeSelectedWorkTitle: "Selected Work",
+    homeSelectedWorkDescription:
+      "A few projects that best show how I turn product ideas and AI capabilities into usable services.",
+    homeViewProject: "View details",
     homeQuickLinksTitle: "Quick Links",
+    homeQuickLinksDescription:
+      "Explore the deeper context behind the work, writing, and contact channels.",
     sectionCareersTitle: "Careers",
     sectionCareersDescription:
       "My careers since 2021.\nIncluding internships and full-time jobs",
@@ -104,8 +143,9 @@ export const translations: Record<Language, Translations> = {
     aboutPageTitle: "About",
     aboutPageDescription:
       "A consolidated view of my career path, education, awards, and activities.",
+    writingsPageTitle: "Writing Notes & Essays",
     writingsPageDescription:
-      "A writing archive for technical notes and product-building lessons.",
+      "Product building, engineering decisions, and things I am learning in the process.",
     aboutInterestsTitle: "Interests",
     aboutInterestsDescription:
       "I am interested in translating AI technologies into real-world services through rapid execution and product development.",
@@ -129,6 +169,21 @@ export const translations: Record<Language, Translations> = {
     projectViewDetails: "View Details",
     projectsTeamTitle: "Team Projects",
     projectsIndividualTitle: "Individual Projects",
+    contactPrimaryTitle: "Start with email",
+    contactPrimaryDescription:
+      "For product engineering, AI product ideas, startup collaboration, or technical conversations, email is the clearest way to reach me.",
+    contactEmailCta: "Send Email",
+    contactResponseNote: "I usually respond fastest to concise context and a clear next step.",
+    writingsEmptyKicker: "Coming Soon",
+    writingsEmptyTitle: "No published writing yet",
+    writingsEmptyDescription:
+      "This section is being prepared as a small archive for technical notes, product-building lessons, and AI service experiments.",
+    writingsEmptyTopicsTitle: "Planned topics",
+    writingsEmptyTopicProduct: "Product decisions from small releases",
+    writingsEmptyTopicEngineering: "Full-stack implementation notes",
+    writingsEmptyTopicAi: "LLM service experiments and reflections",
+    writingsEmptyProjectsLink: "View Projects",
+    writingsEmptyAboutLink: "About Me",
   },
   ko: {
     navHome: "홈",
@@ -142,6 +197,13 @@ export const translations: Record<Language, Translations> = {
     homeResearchInterest: "AI 연구에 관심",
     homeDescription:
       "문제 인식부터 기획, 설계, 개발, 배포, 운영까지를 하나의 연속된 흐름으로 바라보며 서비스를 만드는 개발자입니다. 최근에는 LLM을 활용한 다양한 프로젝트를 직접 기획하고 구현하며, 인공지능 기술이 실제 사용자 문제 해결 과정에 어떻게 적용될 수 있는지에 큰 관심을 가지고 있습니다. 단순히 모델을 활용하는 데 그치지 않고, AI 기술이 현실 환경에서 의미 있는 가치로 이어지기까지의 과정과 그 사이의 간극을 줄이는 방법을 고민합니다.\n\n개인 및 소규모 팀 환경에서 여러 서비스를 엔드 투 엔드로 구축·운영하며, 제한된 자원 속에서도 빠른 실험과 사용자 피드백을 통해 아이디어를 검증해왔습니다. 특히 정보 분석, 콘텐츠 생성, 추천 시스템 등을 구현하며 모델 성능 자체보다 실제 사용 맥락에서의 유용성과 지속적인 개선 가능성을 중요하게 생각합니다. 프론트엔드·백엔드·인프라 전반을 아우르며 기술을 실제 서비스로 연결하는 경험을 쌓아가고 있습니다.",
+    homeHeroLead:
+      "문제 정의부터 출시까지 연결되는 AI 제품을 만듭니다.",
+    homeHeroSupport:
+      "제품 기획, 풀스택 개발, LLM 기반 시스템을 실제 사용자가 써볼 수 있는 서비스로 연결하는 데 집중합니다.",
+    homeSignalProduct: "제품 기획",
+    homeSignalAi: "LLM 서비스",
+    homeSignalEndToEnd: "엔드 투 엔드 개발",
     ctaViewProjects: "프로젝트 보기",
     ctaContactMe: "이메일 보내기",
     homeLocation: "광주, 대한민국",
@@ -151,7 +213,15 @@ export const translations: Record<Language, Translations> = {
     homeLinkLinkedIn: "ikjunchoi",
     homeAboutTitle: "About Me",
     homeRecentTitle: "최근 활동",
+    homeRecentDescription:
+      "현재 맡고 있는 역할과 지금의 작업 방향을 보여주는 활동입니다.",
+    homeSelectedWorkTitle: "대표 작업",
+    homeSelectedWorkDescription:
+      "제품 아이디어와 AI 기술을 실제 서비스로 연결한 작업을 골라 정리했습니다.",
+    homeViewProject: "자세히 보기",
     homeQuickLinksTitle: "바로가기",
+    homeQuickLinksDescription:
+      "작업의 맥락, 글, 연락 채널을 더 자세히 살펴볼 수 있습니다.",
     sectionCareersTitle: "실무경력",
     sectionCareersDescription:
       "2021년부터의 실무경력을 정리했습니다.\n인턴십과 계약직, 정규직 경험을 포함합니다.",
@@ -173,8 +243,9 @@ export const translations: Record<Language, Translations> = {
     aboutPageTitle: "소개",
     aboutPageDescription:
       "커리어, 학력, 수상, 대외활동을 한 페이지에서 볼 수 있도록 정리했습니다.",
+    writingsPageTitle: "글과 기록",
     writingsPageDescription:
-      "개발과 제품 개발 과정에서 배운 점을 정리하는 글 아카이브입니다.",
+      "제품 개발, 기술 선택, 실제로 만들며 배운 점을 정리하는 공간입니다.",
     aboutInterestsTitle: "관심 분야",
     aboutInterestsDescription:
       "빠른 실행과 제품 개발을 통해 AI 기술을 실제 서비스로 연결하는 데 관심이 있습니다.",
@@ -198,5 +269,21 @@ export const translations: Record<Language, Translations> = {
     projectViewDetails: "자세히 보기",
     projectsTeamTitle: "팀 프로젝트",
     projectsIndividualTitle: "개인 프로젝트",
+    contactPrimaryTitle: "이메일로 시작하기",
+    contactPrimaryDescription:
+      "제품 개발, AI 제품 아이디어, 스타트업 협업, 기술 관련 대화는 이메일로 가장 명확하게 이어갈 수 있습니다.",
+    contactEmailCta: "이메일 보내기",
+    contactResponseNote:
+      "간단한 맥락과 다음 액션이 함께 있으면 가장 빠르게 답장할 수 있습니다.",
+    writingsEmptyKicker: "준비 중",
+    writingsEmptyTitle: "아직 공개된 글이 없습니다",
+    writingsEmptyDescription:
+      "기술 노트, 제품 개발 회고, AI 서비스 실험을 정리하는 작은 아카이브로 준비하고 있습니다.",
+    writingsEmptyTopicsTitle: "준비 중인 주제",
+    writingsEmptyTopicProduct: "작게 출시하며 내린 제품 의사결정",
+    writingsEmptyTopicEngineering: "풀스택 구현 과정의 기술 노트",
+    writingsEmptyTopicAi: "LLM 서비스 실험과 회고",
+    writingsEmptyProjectsLink: "프로젝트 보기",
+    writingsEmptyAboutLink: "소개 보기",
   },
 };

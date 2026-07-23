@@ -4,7 +4,7 @@
 }
 
 .shell {
-  max-width: 980px;
+  max-width: 1040px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -28,8 +28,8 @@
   margin: 0;
   color: var(--text-primary);
   font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  letter-spacing: 0;
   line-height: 1.2;
 }
 
@@ -43,14 +43,24 @@
 .sectionGrid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .sectionGrid > div {
+  position: relative;
   padding: var(--space-lg);
   background: var(--bg-solid-panel);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+.sectionGrid > div::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: color-mix(in srgb, var(--accent-primary) 52%, transparent);
 }
 
 .summaryText {
@@ -97,7 +107,7 @@
 .careerPanel {
   padding: var(--space-lg);
   border: 1px solid var(--border-soft);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   background: var(--bg-solid-panel);
 }
 
@@ -205,7 +215,7 @@
   color: var(--text-primary);
   font-size: 1rem;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .inlineLink {
@@ -244,7 +254,7 @@
   margin: 0;
   color: var(--text-primary);
   font-size: 0.93rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .projectEntryPeriod {

@@ -107,7 +107,7 @@
   margin: 0;
   color: var(--text-primary);
   font-size: 1.18rem;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 .companyLink {
@@ -144,7 +144,7 @@
   margin: 0;
   color: var(--text-primary);
   font-size: 1rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .projectDescription {

@@ -88,7 +88,7 @@
 .brandName {
   font-weight: 700;
   font-size: 0.93rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--text-primary);
   line-height: 1.1;
 }
