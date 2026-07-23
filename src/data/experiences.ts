@@ -182,7 +182,7 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "Team Leader",
-          period: "2026",
+          period: "2024",
           content: [
             "Contributed to the establishment and operation of a corporation",
             "Conducted internal seminars to foster organizational culture",
