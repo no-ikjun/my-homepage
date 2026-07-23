@@ -13,6 +13,7 @@ const kindLabel: Record<"ko" | "en", Record<string, string>> = {
     project: "프로젝트",
     award: "수상",
     activity: "활동",
+    education: "학업",
     writing: "글",
   },
   en: {
@@ -20,6 +21,7 @@ const kindLabel: Record<"ko" | "en", Record<string, string>> = {
     project: "Project",
     award: "Award",
     activity: "Activity",
+    education: "Education",
     writing: "Writing",
   },
 };

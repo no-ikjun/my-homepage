@@ -57,8 +57,7 @@ export const careers: Record<Language, Career[]> = {
     {
       title: "Sigor Inc.",
       link: "",
-      image:
-        "https://media.disquiet.io/images/team/thumbnail/f218e93256f333abb30b02941acb4c031428022588fda00e6c0111277e7507ce",
+      image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/sigor.jpg",
       description: "2023.06 - 2024.02",
       subDescription: "Software Developer",
       content: [
@@ -121,8 +120,7 @@ export const careers: Record<Language, Career[]> = {
     {
       title: "(주)시고르자브종",
       link: "",
-      image:
-        "https://media.disquiet.io/images/team/thumbnail/f218e93256f333abb30b02941acb4c031428022588fda00e6c0111277e7507ce",
+      image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/sigor.jpg",
       description: "2023.06 - 2024.02",
       subDescription: "소프트웨어 개발자",
       content: [

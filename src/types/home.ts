@@ -3,6 +3,7 @@ export type RecentActivityKind =
   | "project"
   | "award"
   | "activity"
+  | "education"
   | "writing";
 
 export type RecentActivityItem = {

@@ -59,6 +59,17 @@ export const educations: Record<Language, ExperienceItem[]> = {
 export const awards: Record<Language, ExperienceItem[]> = {
   en: [
     {
+      title: "AI Engineer World's Fair Hackathon",
+      link: "https://cerebralvalley.ai/e/aiewf-hackathon-2026",
+      image:
+        "https://d3ob3cint7tr3s.cloudfront.net/portfolio/ai_world_fair_hackathon.webp",
+      description: "2026.06",
+      subDescription: "🥉 3rd Place",
+      content: [
+        "Generative AI-Powered Continual-Learning Computer Automation Platform — Rote",
+      ],
+    },
+    {
       title: "2024 KPMG Ideathon@삼정 KPMG",
       link: "http://www.dhnews.co.kr/news/view/1065585962399224",
       image:
@@ -100,6 +111,15 @@ export const awards: Record<Language, ExperienceItem[]> = {
     },
   ],
   ko: [
+    {
+      title: "AI Engineer World's Fair Hackathon",
+      link: "https://cerebralvalley.ai/e/aiewf-hackathon-2026",
+      image:
+        "https://d3ob3cint7tr3s.cloudfront.net/portfolio/ai_world_fair_hackathon.webp",
+      description: "2026.06",
+      subDescription: "🥉 3위",
+      content: ["생성형 AI 기반 지속 학습형 컴퓨터 자동화 플랫폼 - Rote"],
+    },
     {
       title: "2024 KPMG 아이디어톤@삼정 KPMG",
       link: "http://www.dhnews.co.kr/news/view/1065585962399224",
@@ -162,7 +182,7 @@ export const activities: Record<Language, ActivityItem[]> = {
       content: [
         {
           title: "Team Leader",
-          period: "2026",
+          period: "2024",
           content: [
             "Contributed to the establishment and operation of a corporation",
             "Conducted internal seminars to foster organizational culture",
