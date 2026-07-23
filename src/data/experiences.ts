@@ -59,7 +59,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
 export const awards: Record<Language, ExperienceItem[]> = {
   en: [
     {
-      title: "AI Engineer World's Fair Hackathon 2026",
+      title: "AI Engineer World's Fair Hackathon",
       link: "https://cerebralvalley.ai/e/aiewf-hackathon-2026",
       image:
         "https://d3ob3cint7tr3s.cloudfront.net/portfolio/ai_world_fair_hackathon.webp",
@@ -112,7 +112,7 @@ export const awards: Record<Language, ExperienceItem[]> = {
   ],
   ko: [
     {
-      title: "AI Engineer World's Fair Hackathon 2026",
+      title: "AI Engineer World's Fair Hackathon",
       link: "https://cerebralvalley.ai/e/aiewf-hackathon-2026",
       image:
         "https://d3ob3cint7tr3s.cloudfront.net/portfolio/ai_world_fair_hackathon.webp",
