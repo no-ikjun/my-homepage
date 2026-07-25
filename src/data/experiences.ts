@@ -66,7 +66,7 @@ export const awards: Record<Language, ExperienceItem[]> = {
       description: "2026.06",
       subDescription: "🥉 3rd Place",
       content: [
-        "Generative AI-Powered Continual-Learning Computer Automation Platform — Rote",
+        "Generative AI-Powered Continual-Learning Computer Automation Platform - Rote",
       ],
     },
     {
