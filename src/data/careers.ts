@@ -21,7 +21,7 @@ export const careers: Record<Language, Career[]> = {
     {
       title: "Real-Lab@GIST",
       link: "https://real-lab-gist.framer.website",
-      image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/gist_full.svg",
+      image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/gist_white.jpg",
       description: "2026.03 - (ongoing)",
       subDescription: "Research Intern",
       content: [
@@ -85,7 +85,7 @@ export const careers: Record<Language, Career[]> = {
     {
       title: "Real-Lab@GIST",
       link: "https://real-lab-gist.framer.website",
-      image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/gist_full.svg",
+      image: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/gist_white.jpg",
       description: "2026.03 - (ongoing)",
       subDescription: "연구 인턴",
       content: [
