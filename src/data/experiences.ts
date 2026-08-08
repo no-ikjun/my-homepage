@@ -24,6 +24,18 @@ export const educations: Record<Language, ExperienceItem[]> = {
       ],
     },
     {
+      title: "University of California, Berkeley",
+      link: "https://www.berkeley.edu/",
+      image:
+        "https://d3ob3cint7tr3s.cloudfront.net/portfolio/Seal_of_University_of_California,_Berkeley.svg",
+      description: "2026.06 ~ 2026.08",
+      subDescription: "Summer Session",
+      content: [
+        "Electrical Engineering and Computer Science",
+        "CS161 Computer Security | CS188 Introduction to Artificial Intelligence",
+      ],
+    },
+    {
       title: "Jeonnam Science High School",
       link: "https://jeonnam-sh.hs.jne.kr/user/indexMain.action?siteId=chonnam-sh_hs",
       image: "https://d3ob3cint7tr3s.cloudfront.net/jshs.png",
@@ -44,6 +56,18 @@ export const educations: Record<Language, ExperienceItem[]> = {
       description: "2023.03 ~ 현재",
       subDescription: "학부 재학 중",
       content: ["전기전자컴퓨터공학부", "경영·경제 부전공"],
+    },
+    {
+      title: "UC Berkeley",
+      link: "https://www.berkeley.edu/",
+      image:
+        "https://d3ob3cint7tr3s.cloudfront.net/portfolio/Seal_of_University_of_California,_Berkeley.svg",
+      description: "2026.06 ~ 2026.08",
+      subDescription: "Summer Session",
+      content: [
+        "CS161 Computer Security",
+        "CS188 Introduction to Artificial Intelligence",
+      ],
     },
     {
       title: "전남과학고등학교",
