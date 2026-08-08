@@ -19,7 +19,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
       description: "2023.03 ~ Present",
       subDescription: "Undergraduate Student",
       content: [
-        "School of Electrical Engineering and Computer Science",
+        "Department of Electrical Engineering and Computer Science",
         "Minor in Business Administration and Economics",
       ],
     },
@@ -55,7 +55,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmHbkACkvDSPbiL-OLgmDS0X1hZzksvtBl5g&s",
       description: "2023.03 ~ 현재",
       subDescription: "학부 재학 중",
-      content: ["전기전자컴퓨터공학부", "경영·경제 부전공"],
+      content: ["AI대학 전기전자컴퓨터공학과", "경영·경제 부전공"],
     },
     {
       title: "UC Berkeley",
