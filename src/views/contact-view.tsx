@@ -1,9 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./page.module.css";
-import { useTranslations } from "@/contexts/language-context";
+import styles from "./contact.module.css";
+import { translations } from "@/lib/translations";
+import { type Locale } from "@/lib/locale";
 import { PageHero } from "@/components/ui";
 
 const contactLinks = [
@@ -41,8 +40,8 @@ const contactLinks = [
   },
 ];
 
-export default function ContactPage() {
-  const t = useTranslations();
+export default function ContactView({ locale }: { locale: Locale }) {
+  const t = translations[locale];
 
   return (
     <main className={styles.main}>

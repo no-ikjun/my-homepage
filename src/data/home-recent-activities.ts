@@ -1,7 +1,7 @@
-import { type Language } from "@/types/language";
+import { type Locale } from "@/lib/locale";
 import type { RecentActivityItem } from "@/types/home";
 
-export const homeRecentActivities: Record<Language, RecentActivityItem[]> = {
+export const homeRecentActivities: Record<Locale, RecentActivityItem[]> = {
   ko: [
     {
       id: "ai-world-fair-hackathon-2026",

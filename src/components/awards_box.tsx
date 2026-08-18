@@ -1,11 +1,9 @@
-"use client";
-
 import styles from "./experience.module.css";
 import Link from "next/link";
-import { useTranslations } from "@/contexts/language-context";
 
 type AwardsBoxProps = {
   title: string;
+  moreInfoLabel: string;
   data: {
     title: string;
     link: string;
@@ -16,8 +14,11 @@ type AwardsBoxProps = {
   }[];
 };
 
-export default function AwardsBox({ title, data }: AwardsBoxProps) {
-  const t = useTranslations();
+export default function AwardsBox({
+  title,
+  data,
+  moreInfoLabel,
+}: AwardsBoxProps) {
 
   return (
     <span>
@@ -40,10 +41,10 @@ export default function AwardsBox({ title, data }: AwardsBoxProps) {
                 className={styles.award_cta}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${item.title} - ${t.activityMoreInfo} (새 창)`}
+                aria-label={`${item.title} - ${moreInfoLabel} (새 창)`}
               >
                 <span className={styles.award_cta_label}>
-                  {t.activityMoreInfo}
+                  {moreInfoLabel}
                 </span>
                 <span className="sr-only">(새 창에서 열림)</span>
               </Link>

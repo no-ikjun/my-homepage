@@ -1,4 +1,4 @@
-import { type Language } from "@/types/language";
+import { type Locale } from "@/lib/locale";
 
 type CareerProject = {
   title: string;
@@ -16,7 +16,7 @@ type Career = {
   content: CareerProject[];
 };
 
-export const careers: Record<Language, Career[]> = {
+export const careers: Record<Locale, Career[]> = {
   en: [
     {
       title: "Real-Lab@GIST",

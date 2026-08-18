@@ -16,7 +16,9 @@
   font-weight: 600;
   font-size: 0.84rem;
   cursor: pointer;
-  transition: border-color var(--motion-fast), color var(--motion-fast),
+  transition:
+    border-color var(--motion-fast),
+    color var(--motion-fast),
     background-color var(--motion-fast);
 }
 
@@ -67,7 +69,10 @@
   font-size: 0.84rem;
   font-weight: 600;
   text-align: left;
-  transition: border-color var(--motion-fast), background-color var(--motion-fast),
+  text-decoration: none;
+  transition:
+    border-color var(--motion-fast),
+    background-color var(--motion-fast),
     color var(--motion-fast);
 }
 
@@ -84,7 +89,11 @@
 
 .itemActive {
   color: var(--text-primary);
-  border-color: color-mix(in srgb, var(--accent-primary) 25%, var(--border-soft));
+  border-color: color-mix(
+    in srgb,
+    var(--accent-primary) 25%,
+    var(--border-soft)
+  );
   background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-elevated));
 }
 

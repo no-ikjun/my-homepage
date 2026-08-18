@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Modal from "./ui/modal";
 import { BadgeChip } from "./ui";
-import { useTranslations } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
+import { type Locale } from "@/lib/locale";
 import type { Project } from "@/data/projects";
 import styles from "./project-detail-modal.module.css";
 
@@ -28,17 +29,19 @@ const linkIconMap: Record<string, string> = {
 };
 
 type ProjectDetailModalProps = {
+  locale: Locale;
   project: Project | null;
   isOpen: boolean;
   onClose: () => void;
 };
 
 export default function ProjectDetailModal({
+  locale,
   project,
   isOpen,
   onClose,
 }: ProjectDetailModalProps) {
-  const t = useTranslations();
+  const t = translations[locale];
   if (!project) return null;
 
   return (

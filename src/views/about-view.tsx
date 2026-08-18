@@ -1,18 +1,17 @@
-"use client";
-
 import Link from "next/link";
-import styles from "./page.module.css";
+import styles from "./about.module.css";
 import { careers } from "@/data/careers";
 import { activities, awards, educations } from "@/data/experiences";
-import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
+import { type Locale } from "@/lib/locale";
 import { PageHero } from "@/components/ui";
 import EducationsBox from "@/components/educations_box";
 import AwardsBox from "@/components/awards_box";
 import ActivitiesBox from "@/components/activities_box";
 
-export default function AboutPage() {
-  const { lang } = useLanguage();
-  const t = useTranslations();
+export default function AboutView({ locale }: { locale: Locale }) {
+  const t = translations[locale];
+  const lang = locale;
   const careerItems = careers[lang];
 
   const workingPrinciples =
@@ -149,7 +148,11 @@ export default function AboutPage() {
         </section>
 
         <section id="awards" className={styles.section}>
-          <AwardsBox title={t.awardsTitle} data={awards[lang]} />
+          <AwardsBox
+            title={t.awardsTitle}
+            data={awards[lang]}
+            moreInfoLabel={t.activityMoreInfo}
+          />
         </section>
 
         <section id="activities" className={styles.section}>

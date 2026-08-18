@@ -1,10 +1,9 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./page.module.css";
+import styles from "./home.module.css";
 import { BadgeChip, IconWithText } from "@/components/ui";
-import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
+import { type Locale } from "@/lib/locale";
 import { homeRecentActivities } from "@/data/home-recent-activities";
 
 const kindLabel: Record<"ko" | "en", Record<string, string>> = {
@@ -99,9 +98,9 @@ const quickLinkIcons = {
   ),
 };
 
-export default function Home() {
-  const t = useTranslations();
-  const { lang } = useLanguage();
+export default function HomeView({ locale }: { locale: Locale }) {
+  const t = translations[locale];
+  const lang = locale;
   const recentItems = homeRecentActivities[lang];
 
   return (

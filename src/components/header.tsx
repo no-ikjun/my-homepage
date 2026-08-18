@@ -4,26 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import LanguageToggle from "./language_toggle";
+import LanguageSwitch from "./language_switch";
 import ThemeToggle from "./theme_toggle";
-import { useTranslations } from "@/contexts/language-context";
 import styles from "./header.module.css";
 
-const navItems: {
-  href: string;
-  key: "navHome" | "navAbout" | "navProjects" | "navWritings" | "navContact";
-}[] = [
-  { href: "/", key: "navHome" },
-  { href: "/about", key: "navAbout" },
-  { href: "/projects", key: "navProjects" },
-  { href: "/writings", key: "navWritings" },
-  { href: "/contact", key: "navContact" },
-];
+export type HeaderNavItem = { href: string; label: string };
 
-export default function Header() {
+type HeaderProps = {
+  homeHref: string;
+  nav: HeaderNavItem[];
+  themeLabel: string;
+  languageLabel: string;
+};
+
+export default function Header({
+  homeHref,
+  nav,
+  themeLabel,
+  languageLabel,
+}: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const t = useTranslations();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -33,27 +34,9 @@ export default function Header() {
   }, []);
 
   const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
+    if (href === homeHref) return pathname === homeHref;
     return pathname === href || pathname.startsWith(`${href}/`);
   };
-
-  const navLinks = (
-    <ul className={styles.navList}>
-      {navItems.map(({ href, key }) => (
-        <li key={href}>
-          <Link
-            href={href}
-            className={`${styles.navLink} ${
-              isActive(href) ? styles.navLinkActive : ""
-            }`}
-            aria-current={isActive(href) ? "page" : undefined}
-          >
-            {t[key]}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
 
   return (
     <header className={styles.header}>
@@ -61,7 +44,7 @@ export default function Header() {
         className={`${styles.headerDock} ${scrolled ? styles.headerDockScrolled : ""}`}
       >
         <div className={styles.headerTop}>
-          <Link href="/" className={styles.brand} aria-label="Go to home">
+          <Link href={homeHref} className={styles.brand} aria-label="Go to home">
             <span className={styles.brandAvatarWrap}>
               <Image
                 className={styles.brandAvatar}
@@ -78,11 +61,25 @@ export default function Header() {
             </span>
           </Link>
           <nav aria-label="Primary" className={styles.nav}>
-            {navLinks}
+            <ul className={styles.navList}>
+              {nav.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className={`${styles.navLink} ${
+                      isActive(href) ? styles.navLinkActive : ""
+                    }`}
+                    aria-current={isActive(href) ? "page" : undefined}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
           <div className={styles.utilityWrap}>
-            <ThemeToggle />
-            <LanguageToggle />
+            <ThemeToggle label={themeLabel} />
+            <LanguageSwitch label={languageLabel} />
           </div>
         </div>
       </div>

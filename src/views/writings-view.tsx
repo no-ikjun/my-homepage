@@ -1,32 +1,39 @@
 import Link from "next/link";
-import styles from "./page.module.css";
+import styles from "./writings.module.css";
 import { getPublishedWritings } from "@/lib/writings";
 import { PageHero, BadgeChip } from "@/components/ui";
+import { translations } from "@/lib/translations";
+import { localePath, type Locale } from "@/lib/locale";
 
-export default async function WritingsPage() {
+export default async function WritingsView({ locale }: { locale: Locale }) {
+  const t = translations[locale];
   const writings = await getPublishedWritings();
 
   return (
     <main className={styles.main}>
       <div className={styles.shell}>
         <PageHero
-          title="Writing Notes & Essays"
-          description="Product building, engineering decisions, and things I am learning in the process."
+          title={t.writingsPageTitle}
+          description={t.writingsPageDescription}
         />
 
         {writings.length === 0 ? (
-          <section className={styles.emptyState} aria-label="No writings yet">
-            <p className={styles.emptyKicker}>Coming Soon</p>
-            <h2 className={styles.emptyTitle}>No published writing yet</h2>
-            <p className={styles.emptyDescription}>
-              I am preparing this section for short technical notes and product development essays.
-            </p>
+          <section className={styles.emptyState} aria-label={t.writingsEmptyTitle}>
+            <p className={styles.emptyKicker}>{t.writingsEmptyKicker}</p>
+            <h2 className={styles.emptyTitle}>{t.writingsEmptyTitle}</h2>
+            <p className={styles.emptyDescription}>{t.writingsEmptyDescription}</p>
             <div className={styles.emptyLinks}>
-              <Link href="/projects" className={styles.inlineLink}>
-                View Projects ↗
+              <Link
+                href={localePath(locale, "/projects")}
+                className={styles.inlineLink}
+              >
+                {t.navProjects} ↗
               </Link>
-              <Link href="/about" className={styles.inlineLink}>
-                About Me ↗
+              <Link
+                href={localePath(locale, "/about")}
+                className={styles.inlineLink}
+              >
+                {t.navAbout} ↗
               </Link>
             </div>
           </section>

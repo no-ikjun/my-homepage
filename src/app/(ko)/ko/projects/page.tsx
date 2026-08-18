@@ -1,16 +1,14 @@
+import ProjectsView from "@/views/projects-view";
 import { pageMetadata } from "@/lib/metadata";
 import { translations } from "@/lib/translations";
 
 export const metadata = pageMetadata({
-  title: "Projects",
+  locale: "ko",
+  title: translations.ko.projectsPageTitle,
   description: translations.ko.projectsPageDescription,
   path: "/projects",
 });
 
-export default function ProjectsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+export default function Page() {
+  return <ProjectsView locale="ko" />;
 }

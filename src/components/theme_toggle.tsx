@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslations } from "@/contexts/language-context";
 import { useTheme } from "@/contexts/theme-context";
 import styles from "./theme_toggle.module.css";
 
@@ -33,18 +32,17 @@ function MoonIcon() {
   );
 }
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ label }: { label: string }) {
   const { theme, toggleTheme } = useTheme();
-  const t = useTranslations();
   const isLight = theme === "light";
 
   return (
     <button
       type="button"
       className={`${styles.button} ${isLight ? styles.isLight : ""}`}
-      aria-label={t.themeToggleLabel}
+      aria-label={label}
       onClick={toggleTheme}
-      title={t.themeToggleLabel}
+      title={label}
     >
       <span className={styles.iconWrap}>
         <span className={styles.sun}>

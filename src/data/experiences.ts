@@ -1,4 +1,4 @@
-import { type Language } from "@/types/language";
+import { type Locale } from "@/lib/locale";
 
 type ExperienceItem = {
   title: string;
@@ -9,7 +9,7 @@ type ExperienceItem = {
   content: string[];
 };
 
-export const educations: Record<Language, ExperienceItem[]> = {
+export const educations: Record<Locale, ExperienceItem[]> = {
   en: [
     {
       title: "Gwangju Institute of Science and Technology",
@@ -80,7 +80,7 @@ export const educations: Record<Language, ExperienceItem[]> = {
   ],
 };
 
-export const awards: Record<Language, ExperienceItem[]> = {
+export const awards: Record<Locale, ExperienceItem[]> = {
   en: [
     {
       title: "AI Engineer World's Fair Hackathon",
@@ -196,7 +196,7 @@ export type ActivityItem = {
   content: ActivityEntry[];
 };
 
-export const activities: Record<Language, ActivityItem[]> = {
+export const activities: Record<Locale, ActivityItem[]> = {
   en: [
     {
       title: "GSA InfoTeam",

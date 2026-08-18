@@ -1,43 +1,57 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "./site";
+import { localePath, OG_LOCALE, type Locale } from "./locale";
 
 const NAME_SUFFIX = "Ikjun Choi (최익준)";
+const SITE_NAME = "Ikjun Choi Portfolio";
 const OG_IMAGE = {
   url: `${SITE_URL}/img/profile_round3.png`,
-  alt: "최익준 Ikjun Choi",
+  alt: "Ikjun Choi 최익준",
 };
 
 /**
- * Build metadata for a single page.
+ * Every page must build its metadata through this helper.
  *
  * Next.js merges metadata shallowly, so anything a page does not restate is
- * inherited from the root layout. Leaving `alternates` and `openGraph` to be
- * inherited is what made every route declare the home page as its canonical
- * URL - use this helper on every page so each one is self-referential.
+ * inherited from its root layout. Letting `alternates` be inherited is what
+ * previously made every route declare the home page as its canonical URL.
+ *
+ * `path` is the locale-neutral path ("/", "/about"); the canonical and the
+ * en/ko hreflang pair are derived from it.
  */
 export function pageMetadata({
+  locale,
   title,
   description,
   path,
 }: {
-  title: string;
+  locale: Locale;
+  title?: string;
   description: string;
   path: string;
 }): Metadata {
-  const fullTitle = `${title} | ${NAME_SUFFIX}`;
+  const fullTitle = title ? `${title} | ${NAME_SUFFIX}` : NAME_SUFFIX;
+  const canonical = localePath(locale, path);
 
   return {
-    title,
+    ...(title ? { title } : {}),
     description,
-    alternates: { canonical: path },
+    alternates: {
+      canonical,
+      languages: {
+        en: localePath("en", path),
+        ko: localePath("ko", path),
+        "x-default": localePath("en", path),
+      },
+    },
     openGraph: {
       type: "website",
-      siteName: "Ikjun Choi Portfolio",
-      locale: "ko_KR",
-      alternateLocale: ["en_US"],
+      siteName: SITE_NAME,
+      locale: OG_LOCALE[locale],
+      alternateLocale: [OG_LOCALE[locale === "en" ? "ko" : "en"]],
       title: fullTitle,
       description,
-      url: path,
+      url: canonical,
       images: [OG_IMAGE],
     },
     twitter: {
@@ -46,5 +60,36 @@ export function pageMetadata({
       description,
       images: [OG_IMAGE.url],
     },
+  };
+}
+
+/** Metadata shared by both root layouts (title template, keywords, icons...). */
+export function rootMetadata(locale: Locale): Metadata {
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: NAME_SUFFIX,
+      template: `%s | ${NAME_SUFFIX}`,
+    },
+    keywords: [
+      "Ikjun Choi",
+      "최익준",
+      "Product Engineer",
+      "Full-stack developer",
+      "Portfolio",
+      "AI research",
+      "생성형 AI",
+      "인공지능 연구",
+      "소프트웨어 개발자",
+      "풀스택 개발자",
+      "React",
+      "Next.js",
+    ],
+    icons: { icon: "/img/profile_round3.png" },
+    robots: { index: true, follow: true },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    },
+    other: { "og:locale": OG_LOCALE[locale] },
   };
 }

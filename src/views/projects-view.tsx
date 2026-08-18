@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./page.module.css";
+import styles from "./projects.module.css";
 import { projects } from "@/data/projects";
-import { useLanguage, useTranslations } from "@/contexts/language-context";
+import { translations } from "@/lib/translations";
+import { type Locale } from "@/lib/locale";
 import { PageHero } from "@/components/ui";
 import ProjectDetailModal from "@/components/project-detail-modal";
 import type { Project } from "@/data/projects";
 
-export default function ProjectsPage() {
-  const { lang } = useLanguage();
-  const t = useTranslations();
+export default function ProjectsView({ locale }: { locale: Locale }) {
+  const t = translations[locale];
+  const lang = locale;
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
@@ -131,6 +132,7 @@ export default function ProjectsPage() {
       </div>
 
       <ProjectDetailModal
+        locale={locale}
         project={selectedProject}
         isOpen={!!selectedProject}
         onClose={() => setSelectedProject(null)}

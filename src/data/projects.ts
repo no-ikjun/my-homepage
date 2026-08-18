@@ -1,4 +1,4 @@
-import { type Language } from "@/types/language";
+import { type Locale } from "@/lib/locale";
 
 type ProjectLink = {
   type: "github" | "website";
@@ -170,7 +170,7 @@ const teamProjectsKo: Project[] = [
   },
 ];
 
-export const projects: Record<Language, ProjectsByType> = {
+export const projects: Record<Locale, ProjectsByType> = {
   en: {
     team: teamProjectsEn,
     individual: [

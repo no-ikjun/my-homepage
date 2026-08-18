@@ -1,4 +1,4 @@
-import { type Language } from "@/types/language";
+import { type Locale } from "@/lib/locale";
 
 type Translations = {
   navHome: string;
@@ -6,6 +6,7 @@ type Translations = {
   navProjects: string;
   navWritings: string;
   navContact: string;
+  siteDescription: string;
   homeRole: string;
   homeResearchInterest: string;
   homeDescription: string;
@@ -26,7 +27,11 @@ type Translations = {
   projectsPageDescription: string;
   aboutPageTitle: string;
   aboutPageDescription: string;
+  writingsPageTitle: string;
   writingsPageDescription: string;
+  writingsEmptyKicker: string;
+  writingsEmptyTitle: string;
+  writingsEmptyDescription: string;
   aboutInterestsTitle: string;
   aboutInterestsDescription: string;
   aboutInterestsContent: string;
@@ -46,13 +51,15 @@ type Translations = {
   projectsIndividualTitle: string;
 };
 
-export const translations: Record<Language, Translations> = {
+export const translations: Record<Locale, Translations> = {
   en: {
     navHome: "Home",
     navAbout: "About",
     navProjects: "Projects",
     navWritings: "Blog",
     navContact: "Contact",
+    siteDescription:
+      "Portfolio of Ikjun Choi — Product Engineer researching generative AI and diffusion language models.",
     homeRole: "Product Engineer",
     homeResearchInterest: "Interested in AI Research",
     homeDescription:
@@ -75,8 +82,13 @@ export const translations: Record<Language, Translations> = {
     aboutPageTitle: "About",
     aboutPageDescription:
       "A consolidated view of my career path, education, awards, and activities.",
+    writingsPageTitle: "Writing Notes & Essays",
     writingsPageDescription:
       "A writing archive for technical notes and product-building lessons.",
+    writingsEmptyKicker: "Coming Soon",
+    writingsEmptyTitle: "No published writing yet",
+    writingsEmptyDescription:
+      "I am preparing this section for short technical notes and product development essays.",
     aboutInterestsTitle: "Interests",
     aboutInterestsDescription:
       "I am interested in translating AI technologies into real-world services through rapid execution and product development.",
@@ -105,6 +117,8 @@ export const translations: Record<Language, Translations> = {
     navProjects: "프로젝트",
     navWritings: "블로그",
     navContact: "연락처",
+    siteDescription:
+      "최익준 포트폴리오 — 생성형 AI와 Diffusion Language Model을 연구하는 Product Engineer입니다.",
     homeRole: "Product Engineer",
     homeResearchInterest: "AI 연구에 관심",
     homeDescription:
@@ -127,8 +141,13 @@ export const translations: Record<Language, Translations> = {
     aboutPageTitle: "소개",
     aboutPageDescription:
       "커리어, 학력, 수상, 대외활동을 한 페이지에서 볼 수 있도록 정리했습니다.",
+    writingsPageTitle: "글과 기록",
     writingsPageDescription:
       "개발과 제품 개발 과정에서 배운 점을 정리하는 글 아카이브입니다.",
+    writingsEmptyKicker: "준비 중",
+    writingsEmptyTitle: "아직 발행한 글이 없습니다",
+    writingsEmptyDescription:
+      "기술 기록과 제품 개발 과정에서 배운 점을 정리해 올릴 예정입니다.",
     aboutInterestsTitle: "관심 분야",
     aboutInterestsDescription:
       "빠른 실행과 제품 개발을 통해 AI 기술을 실제 서비스로 연결하는 데 관심이 있습니다.",
