@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
+import { translations } from "@/lib/translations";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
-};
+  description: translations.ko.contactPageDescription,
+  path: "/contact",
+});
 
 export default function ContactLayout({
   children,

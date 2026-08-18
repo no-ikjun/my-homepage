@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   // 한국어 우선 + 영어 병기
   title: {
-    default: "최익준 | Ikjun Choi",
-    template: "%s | 최익준 | Ikjun Choi",
+    default: "Ikjun Choi (최익준)",
+    template: "%s | Ikjun Choi (최익준)",
   },
   // 개발자 + AI 연구 관심
   description:
@@ -47,18 +47,17 @@ export const metadata: Metadata = {
     "인공지능 연구",
   ],
   icons: { icon: "/img/profile_round3.png" },
-  // 잘못된 hreflang 제거: 서로 다른 URL 없으면 languages 넣지 말기
+  // NOTE: metadata is inherited by every nested route, so anything here that is
+  // specific to "/" must be restated per page - see src/lib/metadata.ts.
+  // Sub-pages set their own canonical / openGraph via pageMetadata().
   alternates: {
-    canonical: SITE_URL,
-    languages: {
-      "x-default": SITE_URL,
-    },
+    canonical: "/",
   },
   openGraph: {
     type: "website",
-    url: SITE_URL,
+    url: "/",
     // 한국어 우선 타이틀/설명 + 영어 병기
-    title: "최익준 | Ikjun Choi",
+    title: "Ikjun Choi (최익준)",
     description:
       "SW 개발자 최익준. AI 연구에 관심 있습니다. Portfolio of Ikjun Choi — Developer, interested in AI research.",
     siteName: "Ikjun Choi Portfolio",
@@ -71,7 +70,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "최익준 | Ikjun Choi",
+    title: "Ikjun Choi (최익준)",
     description:
       "SW 개발자 최익준. AI 연구에 관심 있습니다. Portfolio of Ikjun Choi — Developer, interested in AI research.",
     images: [`${SITE_URL}/img/profile_round3.png`],
