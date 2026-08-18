@@ -1,5 +1,5 @@
 import type { ActivityItem } from "@/data/experiences";
-import styles from "../app/experiences/page.module.css";
+import styles from "./experience.module.css";
 import Link from "next/link";
 
 type ActivitiesBoxProps = {

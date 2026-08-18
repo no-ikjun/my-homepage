@@ -3,16 +3,12 @@ import { type Language } from "@/types/language";
 type Translations = {
   navHome: string;
   navAbout: string;
-  navCareers: string;
-  navExperiences: string;
   navProjects: string;
   navWritings: string;
   navContact: string;
   homeRole: string;
   homeResearchInterest: string;
   homeDescription: string;
-  ctaViewProjects: string;
-  ctaContactMe: string;
   homeLocation: string;
   homeEducation: string;
   homeLinkEmail: string;
@@ -22,20 +18,12 @@ type Translations = {
   homeRecentTitle: string;
   homeQuickLinksTitle: string;
   sectionCareersTitle: string;
-  sectionCareersDescription: string;
-  sectionExperiencesTitle: string;
-  sectionExperiencesDescription: string;
-  sectionProjectsTitle: string;
-  sectionProjectsDescription: string;
   copyright: string;
-  experiencesPageTitle: string;
-  experiencesPageDescription: string;
   educationsTitle: string;
   awardsTitle: string;
   activitiesTitle: string;
   projectsPageTitle: string;
   projectsPageDescription: string;
-  careersPageTitle: string;
   aboutPageTitle: string;
   aboutPageDescription: string;
   writingsPageDescription: string;
@@ -52,10 +40,8 @@ type Translations = {
   themeToggleLabel: string;
   projectDetailFeatures: string;
   projectDetailVisitSite: string;
-  projectDetailIntro: string;
   projectDetailRole: string;
   projectDetailLinks: string;
-  projectViewDetails: string;
   projectsTeamTitle: string;
   projectsIndividualTitle: string;
 };
@@ -64,8 +50,6 @@ export const translations: Record<Language, Translations> = {
   en: {
     navHome: "Home",
     navAbout: "About",
-    navCareers: "Careers",
-    navExperiences: "Experiences",
     navProjects: "Projects",
     navWritings: "Blog",
     navContact: "Contact",
@@ -73,8 +57,6 @@ export const translations: Record<Language, Translations> = {
     homeResearchInterest: "Interested in AI Research",
     homeDescription:
       "I research generative AI and diffusion language models, exploring more effective and practical approaches to language model training and generation.\n\nBeyond understanding how models work, I am interested in validating research ideas through experiments and translating them into real systems. My experience across frontend, backend, and infrastructure enables me to connect AI research with real-world problems.",
-    ctaViewProjects: "View Projects",
-    ctaContactMe: "Contact Me",
     homeLocation: "Gwangju, South Korea",
     homeEducation: "GIST(Gwangju Institute of Science and Technology)",
     homeLinkEmail: "choiikjun1101@gmail.com",
@@ -84,23 +66,12 @@ export const translations: Record<Language, Translations> = {
     homeRecentTitle: "Recent Activity",
     homeQuickLinksTitle: "Quick Links",
     sectionCareersTitle: "Careers",
-    sectionCareersDescription:
-      "My careers since 2021.\nIncluding internships and full-time jobs",
-    sectionExperiencesTitle: "Experiences",
-    sectionExperiencesDescription:
-      "My experiences including educations, awards, and extra activities",
-    sectionProjectsTitle: "Projects",
-    sectionProjectsDescription:
-      "These are my own projects.\nWeb/App services and ongoing projects",
     copyright: "© 2026 Ikjun Choi. All Rights Reserved.",
-    experiencesPageTitle: "Experiences",
-    experiencesPageDescription: "Experiences and activities that I have done",
     educationsTitle: "Educations",
     awardsTitle: "Awards",
     activitiesTitle: "Activities",
     projectsPageTitle: "Projects",
     projectsPageDescription: "My Own Projects Since 2023",
-    careersPageTitle: "Careers",
     aboutPageTitle: "About",
     aboutPageDescription:
       "A consolidated view of my career path, education, awards, and activities.",
@@ -123,18 +94,14 @@ export const translations: Record<Language, Translations> = {
     themeToggleLabel: "Toggle dark mode",
     projectDetailFeatures: "Key Features",
     projectDetailVisitSite: "Visit Site",
-    projectDetailIntro: "Service Introduction",
     projectDetailRole: "My Role",
     projectDetailLinks: "Links",
-    projectViewDetails: "View Details",
     projectsTeamTitle: "Team Projects",
     projectsIndividualTitle: "Individual Projects",
   },
   ko: {
     navHome: "홈",
     navAbout: "소개",
-    navCareers: "실무경력",
-    navExperiences: "활동경험",
     navProjects: "프로젝트",
     navWritings: "블로그",
     navContact: "연락처",
@@ -142,8 +109,6 @@ export const translations: Record<Language, Translations> = {
     homeResearchInterest: "AI 연구에 관심",
     homeDescription:
       "생성형 AI와 Diffusion Language Model을 연구하며, 더 효과적이고 실용적인 언어 모델의 학습과 생성 방법을 탐구하고 있습니다.\n\n모델의 동작 원리를 이해하는 데서 그치지 않고, 연구 아이디어를 실험으로 검증하고 실제 시스템으로 구현하는 과정에도 관심이 있습니다. 프론트엔드, 백엔드, 인프라를 아우르는 개발 경험을 바탕으로 AI 연구와 현실의 문제 사이를 연결하고자 합니다.",
-    ctaViewProjects: "프로젝트 보기",
-    ctaContactMe: "이메일 보내기",
     homeLocation: "광주, 대한민국",
     homeEducation: "GIST(광주과학기술원)",
     homeLinkEmail: "choiikjun1101@gmail.com",
@@ -153,23 +118,12 @@ export const translations: Record<Language, Translations> = {
     homeRecentTitle: "최근 활동",
     homeQuickLinksTitle: "바로가기",
     sectionCareersTitle: "실무경력",
-    sectionCareersDescription:
-      "2021년부터의 실무경력을 정리했습니다.\n인턴십과 계약직, 정규직 경험을 포함합니다.",
-    sectionExperiencesTitle: "활동경험",
-    sectionExperiencesDescription:
-      "학력, 수상, 대외활동 등 다양한 경험을 모았습니다.",
-    sectionProjectsTitle: "프로젝트",
-    sectionProjectsDescription:
-      "직접 진행한 개인 프로젝트입니다.\n웹·앱 서비스 등 진행 중인 프로젝트를 포함합니다.",
     copyright: "© 2026 Ikjun Choi. All Rights Reserved.",
-    experiencesPageTitle: "활동경험",
-    experiencesPageDescription: "지금까지의 학력, 수상, 대외활동 등 활동 경험",
     educationsTitle: "학력",
     awardsTitle: "수상",
     activitiesTitle: "대외활동",
     projectsPageTitle: "프로젝트",
     projectsPageDescription: "웹·앱 서비스 등 개인 프로젝트 모음",
-    careersPageTitle: "실무경력",
     aboutPageTitle: "소개",
     aboutPageDescription:
       "커리어, 학력, 수상, 대외활동을 한 페이지에서 볼 수 있도록 정리했습니다.",
@@ -192,10 +146,8 @@ export const translations: Record<Language, Translations> = {
     themeToggleLabel: "다크모드 전환",
     projectDetailFeatures: "주요 기능",
     projectDetailVisitSite: "사이트 방문",
-    projectDetailIntro: "서비스 소개",
     projectDetailRole: "맡은 역할",
     projectDetailLinks: "링크",
-    projectViewDetails: "자세히 보기",
     projectsTeamTitle: "팀 프로젝트",
     projectsIndividualTitle: "개인 프로젝트",
   },

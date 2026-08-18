@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "../app/experiences/page.module.css";
+import styles from "./experience.module.css";
 import Link from "next/link";
 import { useTranslations } from "@/contexts/language-context";
 

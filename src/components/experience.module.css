@@ -1,78 +1,9 @@
-.main {
-  width: 100%;
-  padding: 6.4rem 1rem 2rem;
-}
-
-.shell {
-  max-width: 980px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.headerRow {
-  display: flex;
-}
-
-.heroWrap {
-  overflow: hidden;
-}
-
-.contentGrid {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.sectionPanel {
-  overflow: hidden;
-}
-
-.awardsPanel {
-  background: transparent;
-}
-
 .content_title {
   margin: 0 0 0.8rem;
   color: var(--text-primary);
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-}
-
-.content_subtitle {
-  margin: 0 0 0.45rem;
-  color: var(--text-primary);
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.content_description {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.88rem;
-}
-
-.content_box {
-  margin-top: 0.6rem;
-  border-left: 2px solid var(--border-strong);
-  padding-left: 0.75rem;
-}
-
-.content_box_title {
-  margin: 0;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-.content_box_description {
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.link_icon {
-  filter: var(--icon-filter);
-  opacity: 0.85;
 }
 
 .education_container {
@@ -370,10 +301,6 @@
 }
 
 @media (max-width: 700px) {
-  .main {
-    padding: 6.75rem 0.85rem 1.8rem;
-  }
-
   .education_content {
     grid-template-columns: 1fr;
     gap: 0.6rem;
