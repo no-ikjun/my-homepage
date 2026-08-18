@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./about.module.css";
 import { careers } from "@/data/careers";
@@ -91,9 +92,16 @@ export default function AboutView({ locale }: { locale: Locale }) {
                       {item.image?.trim() ? (
                         <div
                           className={styles.careerLogo}
-                          style={{ backgroundImage: `url(${item.image})` }}
                           aria-hidden="true"
-                        />
+                        >
+                          <Image
+                            src={item.image}
+                            alt=""
+                            fill
+                            sizes="52px"
+                            className={styles.coverImage}
+                          />
+                        </div>
                       ) : null}
                       <div>
                         <h3 className={styles.careerTitle}>

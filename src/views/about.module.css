@@ -189,6 +189,7 @@
 }
 
 .careerLogo {
+  position: relative;
   width: 52px;
   height: 52px;
   border-radius: var(--radius-md);
@@ -319,4 +320,8 @@
     width: 52px;
     height: 52px;
   }
+}
+
+.coverImage {
+  object-fit: cover;
 }

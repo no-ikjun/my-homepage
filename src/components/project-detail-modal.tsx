@@ -47,11 +47,15 @@ export default function ProjectDetailModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose} className={styles.modalContent}>
       <div className={styles.header}>
-        <div
-          className={styles.heroImage}
-          style={{ backgroundImage: `url(${project.image})` }}
-          aria-hidden="true"
-        />
+        <div className={styles.heroImage} aria-hidden="true">
+          <Image
+            src={project.image}
+            alt=""
+            fill
+            sizes="88px"
+            className={styles.coverImage}
+          />
+        </div>
         <div className={styles.headerMeta}>
           <h2 className={styles.title}>{project.title}</h2>
           <p className={styles.period}>{project.period}</p>

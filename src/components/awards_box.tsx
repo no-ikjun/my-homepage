@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./experience.module.css";
 import Link from "next/link";
 
@@ -25,16 +26,14 @@ export default function AwardsBox({
       <h2 className={styles.content_title}>{title}</h2>
       <div className={styles.award_container}>
         {data.map((item) => (
-          <div
-            className={styles.award_content}
-            key={item.title}
-            style={{
-              backgroundImage: `url(${item.image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              position: "relative",
-            }}
-          >
+          <div className={styles.award_content} key={item.title}>
+            <Image
+              src={item.image}
+              alt=""
+              fill
+              sizes="(max-width: 700px) 100vw, 50vw"
+              className={styles.cover_image}
+            />
             {item.link !== "" && (
               <Link
                 href={item.link}

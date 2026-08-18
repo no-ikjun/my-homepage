@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./experience.module.css";
 import Link from "next/link";
 
@@ -20,14 +21,15 @@ export default function EducationsBox({ title, data }: EducationsBoxProps) {
       <div className={styles.education_container}>
         {data.map((item) => (
           <div className={styles.education_content} key={item.title}>
-            <div
-              className={styles.education_image}
-              style={{
-                backgroundImage: `url(${item.image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></div>
+            <div className={styles.education_image}>
+              <Image
+                src={item.image}
+                alt=""
+                fill
+                sizes="68px"
+                className={styles.cover_image}
+              />
+            </div>
             <div className={styles.education_text}>
               <h3 className={styles.education_title}>
                 <Link

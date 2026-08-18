@@ -67,7 +67,7 @@ const teamProjectsEn: Project[] = [
     title: "Ziggle",
     period: "2023.06 - 2024.03",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGS9Rtr8I_jmELL0ypuXR6Ykdji8VWsQhKJQ&s",
+      "/img/logo_ziggle.jpg",
     summary: "Integrated notice management platform for GIST students.",
     description:
       "Ziggle is an integrated notice management platform developed by Infoteam for GIST students. It helps students easily check and manage notices.",
@@ -138,7 +138,7 @@ const teamProjectsKo: Project[] = [
     title: "지글 (Ziggle) ",
     period: "2023.06 - 2024.03",
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGS9Rtr8I_jmELL0ypuXR6Ykdji8VWsQhKJQ&s",
+      "/img/logo_ziggle.jpg",
     summary: "GIST 학생들을 위한 통합 공지 관리 플랫폼",
     description:
       "지글은 Infoteam에서 개발한 GIST 학생들을 위한 통합 공지 관리 플랫폼입니다. 학생들이 공지를 쉽게 확인하고 관리할 수 있도록 돕습니다.",
@@ -217,8 +217,7 @@ export const projects: Record<Locale, ProjectsByType> = {
       {
         title: "DeokDam Pocket",
         period: "2023.12 - (ongoing)",
-        image:
-          "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
+        image: "",
         summary: "New Year's greeting platform since 2024",
         description:
           "DeokDam Pocket is a platform where users can exchange New Year's greetings (Deokdam) with friends and family. It allows users to look back on the past year and share meaningful messages for the new year.",
@@ -316,8 +315,7 @@ export const projects: Record<Locale, ProjectsByType> = {
       {
         title: "덕담 주머니",
         period: "2023.12 - 진행 중",
-        image:
-          "https://media.disquiet.io/images/product/thumbnail/bb7531256d61c4750454e1d77de083920706f4a3b89bf4f16998f02684bcd641",
+        image: "",
         summary: "한 해를 되돌아보며 새해 덕담을 주고받는 덕담 플랫폼 서비스",
         description:
           "덕담 주머니는 친구와 가족과 새해 덕담을 주고받을 수 있는 플랫폼입니다. 한 해를 돌아보고 새해를 위한 의미 있는 메시지를 공유할 수 있습니다.",

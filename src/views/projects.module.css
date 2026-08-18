@@ -63,6 +63,8 @@
 }
 
 .projectThumb {
+  position: relative;
+  overflow: hidden;
   flex-shrink: 0;
   width: 72px;
   height: 72px;
@@ -128,4 +130,8 @@
     grid-template-columns: 1fr;
     gap: var(--space-md);
   }
+}
+
+.coverImage {
+  object-fit: cover;
 }

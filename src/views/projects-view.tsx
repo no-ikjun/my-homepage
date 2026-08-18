@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import styles from "./projects.module.css";
 import { projects } from "@/data/projects";
 import { translations } from "@/lib/translations";
@@ -45,11 +46,17 @@ function ProjectCard({
         </svg>
       </span>
       <div className={styles.projectCardInner}>
-        <div
-          className={styles.projectThumb}
-          style={{ backgroundImage: `url(${project.image})` }}
-          aria-hidden="true"
-        />
+        <div className={styles.projectThumb} aria-hidden="true">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt=""
+              fill
+              sizes="72px"
+              className={styles.coverImage}
+            />
+          ) : null}
+        </div>
         <div className={styles.projectCardBody}>
           <h2 className={styles.projectTitle}>{project.title}</h2>
           <p className={styles.projectPeriod}>{project.period}</p>

@@ -20,6 +20,8 @@ html[data-theme="dark"] .header {
 }
 
 .heroImage {
+  position: relative;
+  overflow: hidden;
   flex-shrink: 0;
   width: 88px;
   height: 88px;
@@ -252,4 +254,8 @@ html[data-theme="dark"] .body::-webkit-scrollbar-thumb:hover {
   .body {
     padding: var(--space-md) var(--space-lg) var(--space-lg);
   }
+}
+
+.coverImage {
+  object-fit: cover;
 }

@@ -15,7 +15,7 @@ export const educations: Record<Locale, ExperienceItem[]> = {
       title: "Gwangju Institute of Science and Technology",
       link: "https://www.gist.ac.kr/kr/main.html",
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmHbkACkvDSPbiL-OLgmDS0X1hZzksvtBl5g&s",
+        "/img/logo_gist.png",
       description: "2023.03 ~ Present",
       subDescription: "Undergraduate Student",
       content: [
@@ -52,7 +52,7 @@ export const educations: Record<Locale, ExperienceItem[]> = {
       title: "광주과학기술원(GIST)",
       link: "https://www.gist.ac.kr/kr/main.html",
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmHbkACkvDSPbiL-OLgmDS0X1hZzksvtBl5g&s",
+        "/img/logo_gist.png",
       description: "2023.03 ~ 현재",
       subDescription: "학부 재학 중",
       content: ["AI대학 전기전자컴퓨터공학과", "경영·경제 부전공"],
@@ -253,7 +253,7 @@ export const activities: Record<Locale, ActivityItem[]> = {
       title: "MOP",
       link: "",
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShhKrzYFHe_ov2T_37GIfbofpwVUcZi7okhA&s",
+        "/img/logo_mop.png",
       description: "2023.03 ~ 2023.12",
       content: [
         {
@@ -323,7 +323,7 @@ export const activities: Record<Locale, ActivityItem[]> = {
       title: "MOP",
       link: "",
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShhKrzYFHe_ov2T_37GIfbofpwVUcZi7okhA&s",
+        "/img/logo_mop.png",
       description: "2023.03 ~ 2023.12",
       content: [
         {

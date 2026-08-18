@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ActivityItem } from "@/data/experiences";
 import styles from "./experience.module.css";
 import Link from "next/link";
@@ -21,12 +22,15 @@ export default function ActivitiesBox({
           <div className={styles.activity_row} key={item.title}>
             <div className={styles.activity_left}>
               {item.image && (
-                <div
-                  className={styles.activity_logo}
-                  style={{
-                    backgroundImage: `url(${item.image})`,
-                  }}
-                />
+                <div className={styles.activity_logo}>
+                  <Image
+                    src={item.image}
+                    alt=""
+                    fill
+                    sizes="52px"
+                    className={styles.cover_image}
+                  />
+                </div>
               )}
               <div>
                 <h3 className={styles.activity_title}>
