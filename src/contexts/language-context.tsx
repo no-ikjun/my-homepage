@@ -23,6 +23,10 @@ const STORAGE_KEY = "preferredLanguage";
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Language>(DEFAULT_LANGUAGE);
 
+  // Unlike the theme, the language has no pre-hydration bootstrap script, so it
+  // can only be resolved on the client. This goes away once language moves to
+  // /[locale] route segments and is known on the server.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "ko" || stored === "en") {
@@ -35,6 +39,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setLang(browserLang);
     document.documentElement.lang = browserLang;
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     document.documentElement.lang = lang;

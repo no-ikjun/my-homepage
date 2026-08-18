@@ -33,18 +33,21 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof document === "undefined") return "light";
-    const preset = document.documentElement.dataset.theme;
-    return preset === "dark" || preset === "light" ? preset : "light";
-  });
+  // Start from the same value the server rendered with. Reading the real theme
+  // here instead would make the first client render disagree with the server
+  // markup, and React does not patch up attribute mismatches during hydration -
+  // the toggle icon would stay stuck on the server value. The effect below
+  // corrects the state right after mount, which does re-render.
+  const [theme, setThemeState] = useState<Theme>("light");
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     const initialTheme = stored === "light" || stored === "dark" ? stored : getSystemTheme();
     setThemeState(initialTheme);
     applyTheme(initialTheme);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const setTheme = useCallback((nextTheme: Theme) => {
     setThemeState(nextTheme);

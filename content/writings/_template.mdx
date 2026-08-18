@@ -1,0 +1,21 @@
+export const metadata = {
+  title: "Post template",
+  date: "1970-01-01",
+  summary: "Unpublished starter template. Copy this file to begin a new post.",
+  tags: [],
+  published: false,
+};
+
+Copy this file to `content/writings/<slug>.mdx`, set `published: true`, and write.
+
+Keep this template in place: Turbopack resolves the MDX imports in
+`src/lib/writings.ts` through a directory context, and the production build
+fails to resolve `../../content/writings/*.mdx` when the directory contains no
+MDX file at all.
+
+## Heading
+
+Body text, a [link](https://example.com), and `inline code`.
+
+- list item
+- another item

@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/site";
 import { BadgeChip } from "@/components/ui";
 
 type WritingDetailPageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -15,7 +15,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: WritingDetailPageProps): Promise<Metadata> {
-  const entry = await getWritingBySlug(params.slug);
+  const { slug: slugParam } = await params;
+  const entry = await getWritingBySlug(slugParam);
   if (!entry || entry.metadata.published === false) {
     return { title: "Writing" };
   }
@@ -47,7 +48,8 @@ export async function generateMetadata({ params }: WritingDetailPageProps): Prom
 }
 
 export default async function WritingDetailPage({ params }: WritingDetailPageProps) {
-  const entry = await getWritingBySlug(params.slug);
+  const { slug } = await params;
+  const entry = await getWritingBySlug(slug);
   if (!entry || entry.metadata.published === false) {
     notFound();
   }
