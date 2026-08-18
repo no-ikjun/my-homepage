@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./home.module.css";
 import { BadgeChip, IconWithText } from "@/components/ui";
 import { translations } from "@/lib/translations";
-import { type Locale } from "@/lib/locale";
+import { localePath, type Locale } from "@/lib/locale";
 import { homeRecentActivities } from "@/data/home-recent-activities";
 
 const kindLabel: Record<"ko" | "en", Record<string, string>> = {
@@ -103,6 +103,33 @@ export default function HomeView({ locale }: { locale: Locale }) {
   const lang = locale;
   const recentItems = homeRecentActivities[lang];
 
+  const quickLinks = [
+    {
+      path: "/about",
+      icon: quickLinkIcons.about,
+      label: t.navAbout,
+      text: t.aboutPageDescription,
+    },
+    {
+      path: "/projects",
+      icon: quickLinkIcons.projects,
+      label: t.navProjects,
+      text: t.projectsPageDescription,
+    },
+    {
+      path: "/writings",
+      icon: quickLinkIcons.writings,
+      label: t.navWritings,
+      text: t.writingsPageDescription,
+    },
+    {
+      path: "/contact",
+      icon: quickLinkIcons.contact,
+      label: t.navContact,
+      text: t.contactPageDescription,
+    },
+  ];
+
   return (
     <main className={styles.main}>
       <section className={styles.heroSection}>
@@ -181,22 +208,31 @@ export default function HomeView({ locale }: { locale: Locale }) {
 
         <ul className={styles.recentList}>
           {recentItems.map((item) => {
+            const body = (
+              <>
+                <div className={styles.recentBody}>
+                  <div className={styles.recentTopLine}>
+                    <BadgeChip size="sm" tone="muted">
+                      {kindLabel[lang][item.kind] ?? item.kind}
+                    </BadgeChip>
+                    <h3 className={styles.recentTitle}>{item.title}</h3>
+                  </div>
+                  <p className={styles.recentSummary}>{item.summary}</p>
+                </div>
+                <span className={styles.recentArrow}>↗</span>
+              </>
+            );
+
             return (
               <li key={item.id} className={styles.recentItem}>
                 <span className={styles.recentDate}>{item.date}</span>
                 <span className={styles.timelineDot} aria-hidden="true" />
                 {item.internal ? (
-                  <Link href={item.href} className={styles.recentLink}>
-                    <div className={styles.recentBody}>
-                      <div className={styles.recentTopLine}>
-                        <BadgeChip size="sm" tone="muted">
-                          {kindLabel[lang][item.kind] ?? item.kind}
-                        </BadgeChip>
-                        <h3 className={styles.recentTitle}>{item.title}</h3>
-                      </div>
-                      <p className={styles.recentSummary}>{item.summary}</p>
-                    </div>
-                    <span className={styles.recentArrow}>↗</span>
+                  <Link
+                    href={localePath(locale, item.href)}
+                    className={styles.recentLink}
+                  >
+                    {body}
                   </Link>
                 ) : (
                   <a
@@ -205,16 +241,7 @@ export default function HomeView({ locale }: { locale: Locale }) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <div className={styles.recentBody}>
-                      <div className={styles.recentTopLine}>
-                        <BadgeChip size="sm" tone="muted">
-                          {kindLabel[lang][item.kind] ?? item.kind}
-                        </BadgeChip>
-                        <h3 className={styles.recentTitle}>{item.title}</h3>
-                      </div>
-                      <p className={styles.recentSummary}>{item.summary}</p>
-                    </div>
-                    <span className={styles.recentArrow}>↗</span>
+                    {body}
                   </a>
                 )}
               </li>
@@ -231,60 +258,21 @@ export default function HomeView({ locale }: { locale: Locale }) {
         </div>
 
         <ul className={styles.quickLinkList}>
-          <li>
-            <Link href="/about" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>
-                {quickLinkIcons.about}
-              </span>
-              <div className={styles.quickLinkMain}>
-                <h3 className={styles.quickLinkLabel}>{t.navAbout}</h3>
-                <p className={styles.quickLinkText}>{t.aboutPageDescription}</p>
-              </div>
-              <span className={styles.quickLinkArrow}>↗</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/projects" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>
-                {quickLinkIcons.projects}
-              </span>
-              <div className={styles.quickLinkMain}>
-                <h3 className={styles.quickLinkLabel}>{t.navProjects}</h3>
-                <p className={styles.quickLinkText}>
-                  {t.projectsPageDescription}
-                </p>
-              </div>
-              <span className={styles.quickLinkArrow}>↗</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/writings" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>
-                {quickLinkIcons.writings}
-              </span>
-              <div className={styles.quickLinkMain}>
-                <h3 className={styles.quickLinkLabel}>{t.navWritings}</h3>
-                <p className={styles.quickLinkText}>
-                  {t.writingsPageDescription}
-                </p>
-              </div>
-              <span className={styles.quickLinkArrow}>↗</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className={styles.quickLinkCard}>
-              <span className={styles.quickLinkIcon}>
-                {quickLinkIcons.contact}
-              </span>
-              <div className={styles.quickLinkMain}>
-                <h3 className={styles.quickLinkLabel}>{t.navContact}</h3>
-                <p className={styles.quickLinkText}>
-                  {t.contactPageDescription}
-                </p>
-              </div>
-              <span className={styles.quickLinkArrow}>↗</span>
-            </Link>
-          </li>
+          {quickLinks.map((link) => (
+            <li key={link.path}>
+              <Link
+                href={localePath(locale, link.path)}
+                className={styles.quickLinkCard}
+              >
+                <span className={styles.quickLinkIcon}>{link.icon}</span>
+                <div className={styles.quickLinkMain}>
+                  <h3 className={styles.quickLinkLabel}>{link.label}</h3>
+                  <p className={styles.quickLinkText}>{link.text}</p>
+                </div>
+                <span className={styles.quickLinkArrow}>↗</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </section>
     </main>
