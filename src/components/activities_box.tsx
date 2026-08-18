@@ -15,7 +15,7 @@ export default function ActivitiesBox({
   moreInfoLabel,
 }: ActivitiesBoxProps) {
   return (
-    <span>
+    <>
       <h2 className={styles.content_title}>{title}</h2>
       <div className={styles.activities_container}>
         {data.map((item) => (
@@ -78,6 +78,6 @@ export default function ActivitiesBox({
           </div>
         ))}
       </div>
-    </span>
+    </>
   );
 }

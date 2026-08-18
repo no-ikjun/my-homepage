@@ -9,6 +9,8 @@ type ModalProps = {
   onClose: () => void;
   children: ReactNode;
   title?: string;
+  /** id of a heading rendered by the caller, used as the dialog's accessible name. */
+  labelledBy?: string;
   className?: string;
 };
 
@@ -17,6 +19,7 @@ export default function Modal({
   onClose,
   children,
   title,
+  labelledBy,
   className = "",
 }: ModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -41,28 +44,37 @@ export default function Modal({
     if (!isOpen || !panelRef.current) return;
 
     const panel = panelRef.current;
-    const focusable = panel.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
+    const SELECTOR =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    // Queried on every Tab rather than once on open, so the trap stays correct
+    // when the dialog's content changes while it is open.
+    const focusableNow = () =>
+      Array.from(panel.querySelectorAll<HTMLElement>(SELECTOR)).filter(
+        (el) => !el.hasAttribute("disabled") && el.offsetParent !== null
+      );
 
     const handleTab = (e: KeyboardEvent) => {
       if (e.key !== "Tab") return;
+      const focusable = focusableNow();
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
       if (e.shiftKey) {
         if (document.activeElement === first) {
           e.preventDefault();
-          last?.focus();
+          last.focus();
         }
       } else {
         if (document.activeElement === last) {
           e.preventDefault();
-          first?.focus();
+          first.focus();
         }
       }
     };
 
-    first?.focus();
+    focusableNow()[0]?.focus();
     panel.addEventListener("keydown", handleTab);
     return () => panel.removeEventListener("keydown", handleTab);
   }, [isOpen]);
@@ -85,7 +97,7 @@ export default function Modal({
             ref={panelRef}
             role="dialog"
             aria-modal="true"
-            aria-labelledby={title ? "modal-title" : undefined}
+            aria-labelledby={labelledBy ?? (title ? "modal-title" : undefined)}
             className={`${styles.modalPanel} ${className}`.trim()}
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}

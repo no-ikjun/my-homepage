@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./contact.module.css";
 import { translations } from "@/lib/translations";
 import { type Locale } from "@/lib/locale";
@@ -11,7 +10,6 @@ const contactLinks = [
     label: "Email",
     href: "mailto:choiikjun1101@gmail.com",
     description: "choiikjun1101@gmail.com",
-    external: true,
     icon: "/img/mail_icon.svg",
   },
   {
@@ -19,7 +17,6 @@ const contactLinks = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/ikjunchoi/",
     description: "Professional profile and direct messages",
-    external: true,
     icon: "/img/linkedin_icon.svg",
   },
   {
@@ -27,7 +24,6 @@ const contactLinks = [
     label: "GitHub",
     href: "https://github.com/no-ikjun",
     description: "Projects, repositories, and technical activity",
-    external: true,
     icon: "/img/github_icon.svg",
   },
   {
@@ -35,7 +31,6 @@ const contactLinks = [
     label: "Instagram",
     href: "https://www.instagram.com/__ikjun/",
     description: "Casual updates and personal posts",
-    external: true,
     icon: "/img/instagram_icon.svg",
   },
 ];
@@ -58,11 +53,12 @@ export default function ContactView({ locale }: { locale: Locale }) {
           <ul className={styles.linkList}>
             {contactLinks.map((item) => (
               <li key={item.key}>
-                <Link
+                <a
                   href={item.href}
                   className={styles.linkRow}
-                  target={item.external ? "_blank" : undefined}
-                  rel={item.external ? "noopener noreferrer" : undefined}
+                  {...(item.href.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                 >
                   <span className={styles.linkIcon}>
                     <Image
@@ -77,7 +73,7 @@ export default function ContactView({ locale }: { locale: Locale }) {
                     <p className={styles.linkDescription}>{item.description}</p>
                   </div>
                   <span className={styles.linkArrow}>↗</span>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

@@ -45,7 +45,12 @@ export default function ProjectDetailModal({
   if (!project) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} className={styles.modalContent}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      labelledBy="project-modal-title"
+      className={styles.modalContent}
+    >
       <div className={styles.header}>
         <div className={styles.heroImage} aria-hidden="true">
           <Image
@@ -57,7 +62,9 @@ export default function ProjectDetailModal({
           />
         </div>
         <div className={styles.headerMeta}>
-          <h2 className={styles.title}>{project.title}</h2>
+          <h2 id="project-modal-title" className={styles.title}>
+            {project.title}
+          </h2>
           <p className={styles.period}>{project.period}</p>
           <div className={styles.techStack}>
             {project.techStack.map((tech) => (

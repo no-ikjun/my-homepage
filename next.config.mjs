@@ -7,6 +7,25 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  // Conservative security headers. A full CSP is intentionally left out: the
+  // theme bootstrap and JSON-LD are inline <script> tags and would need a nonce
+  // or hash before script-src could be locked down.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
+  },
   images: {
     // Hosts allowed for next/image optimisation. Keep in sync with the
     // `image` fields in src/data/*.ts - an unlisted host throws at request time.

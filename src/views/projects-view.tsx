@@ -18,17 +18,10 @@ function ProjectCard({
   onSelect: (project: Project) => void;
 }) {
   return (
-    <article
+    <button
+      type="button"
       className={styles.projectCard}
       onClick={() => onSelect(project)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onSelect(project);
-        }
-      }}
-      role="button"
-      tabIndex={0}
       aria-label={`${project.title} - ${project.summary}`}
     >
       <span className={styles.projectCardArrow} aria-hidden="true">
@@ -58,12 +51,12 @@ function ProjectCard({
           ) : null}
         </div>
         <div className={styles.projectCardBody}>
-          <h2 className={styles.projectTitle}>{project.title}</h2>
+          <h3 className={styles.projectTitle}>{project.title}</h3>
           <p className={styles.projectPeriod}>{project.period}</p>
           <p className={styles.projectSummary}>{project.summary}</p>
         </div>
       </div>
-    </article>
+    </button>
   );
 }
 

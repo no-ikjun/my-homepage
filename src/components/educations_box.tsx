@@ -16,7 +16,7 @@ type EducationsBoxProps = {
 
 export default function EducationsBox({ title, data }: EducationsBoxProps) {
   return (
-    <span>
+    <>
       <h2 className={styles.content_title}>{title}</h2>
       <div className={styles.education_container}>
         {data.map((item) => (
@@ -58,6 +58,6 @@ export default function EducationsBox({ title, data }: EducationsBoxProps) {
           </div>
         ))}
       </div>
-    </span>
+    </>
   );
 }
