@@ -20,8 +20,10 @@
   border: 1px solid var(--border-soft);
   background: color-mix(in srgb, var(--bg-glass) 88%, transparent);
   box-shadow: var(--shadow-glass);
+  /* Do not hand-write -webkit-backdrop-filter here: Lightning CSS treats it
+     as the same property and keeps only the last one, dropping the standard
+     declaration. The build adds the prefix itself. */
   backdrop-filter: blur(calc(var(--glass-blur) + 2px)) saturate(130%);
-  -webkit-backdrop-filter: blur(calc(var(--glass-blur) + 2px)) saturate(130%);
   pointer-events: auto;
   transition:
     border-color var(--motion-fast),

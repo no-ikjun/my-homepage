@@ -38,21 +38,26 @@
 }
 
 .menu {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 0.45rem);
+  /* Portalled to document.body (see language_switch.tsx) and positioned from
+     the trigger's rect, so it must be fixed and sit above the header. */
+  position: fixed;
+  /* `left` is the trigger's right edge; pull the menu back by its own width so
+     it stays right-aligned without measuring the viewport. */
+  transform: translateX(-100%);
+  z-index: 200;
   min-width: 148px;
   padding: 0.35rem;
   border-radius: 0.95rem;
   border: 1px solid var(--border-soft);
   background: color-mix(in srgb, var(--bg-glass) 92%, transparent);
   box-shadow: var(--shadow-elevated);
+  /* Do not hand-write -webkit-backdrop-filter here: Lightning CSS treats it
+     as the same property and keeps only the last one, dropping the standard
+     declaration. The build adds the prefix itself. */
   backdrop-filter: blur(calc(var(--glass-blur) + 2px));
-  -webkit-backdrop-filter: blur(calc(var(--glass-blur) + 2px));
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  z-index: 50;
 }
 
 .item {
