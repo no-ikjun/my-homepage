@@ -2,6 +2,8 @@
   position: relative;
 }
 
+/* Same rule as the theme toggle: a fill on the header material, not a second
+   translucent surface. */
 .trigger {
   display: inline-flex;
   align-items: center;
@@ -9,22 +11,41 @@
   gap: 0.35rem;
   min-height: 36px;
   padding: 0.38rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-soft);
-  background: color-mix(in srgb, var(--bg-elevated) 74%, transparent);
-  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--fill-tertiary);
+  color: var(--label-secondary);
   font-weight: 600;
   font-size: 0.84rem;
+  letter-spacing: 0.004em;
   cursor: pointer;
+  position: relative;
   transition:
-    border-color var(--motion-fast),
     color var(--motion-fast),
-    background-color var(--motion-fast);
+    background-color var(--motion-fast),
+    transform var(--motion-press);
+}
+
+/* Same 44px reach as the theme toggle, and capped the same way so the two
+   hit areas never overlap inside the dock. */
+.trigger::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% + 6px);
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
+/* Feedback belongs on the press, not the release. */
+.trigger:active {
+  transform: scale(var(--press-scale-control));
 }
 
 .trigger:hover {
-  color: var(--text-primary);
-  border-color: var(--border-strong);
+  color: var(--label-primary);
+  background: var(--fill-secondary);
 }
 
 .trigger:focus-visible {
@@ -37,24 +58,36 @@
   opacity: 0.8;
 }
 
-.menu {
-  /* Portalled to document.body (see language_switch.tsx) and positioned from
-     the trigger's rect, so it must be fixed and sit above the header. */
+/* Portalled to document.body (see language_switch.tsx) and positioned from the
+   trigger's rect, so it must be fixed and sit above the header.
+   `left` is the trigger's right edge; pulling the anchor back by its own width
+   keeps the menu right-aligned without measuring the viewport. The translate
+   lives here so the menu's own transform is free to animate. */
+.menuAnchor {
   position: fixed;
-  /* `left` is the trigger's right edge; pull the menu back by its own width so
-     it stays right-aligned without measuring the viewport. */
   transform: translateX(-100%);
   z-index: 200;
+}
+
+.menu {
+  /* The trigger sits just above this corner, so growth starts there. */
+  transform-origin: 100% 0;
   min-width: 148px;
   padding: 0.35rem;
-  border-radius: 0.95rem;
-  border: 1px solid var(--border-soft);
-  background: color-mix(in srgb, var(--bg-glass) 92%, transparent);
-  box-shadow: var(--shadow-elevated);
-  /* Do not hand-write -webkit-backdrop-filter here: Lightning CSS treats it
-     as the same property and keeps only the last one, dropping the standard
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--separator);
+  /* A menu is a small floating surface over page content, so it takes the
+     thickest material: it has to stay readable over whatever scrolls beneath.
+     It is portalled to <body> precisely so it blurs the page rather than the
+     header dock's own Backdrop Root - see language_switch.tsx.
+     Do not hand-write -webkit-backdrop-filter here: Lightning CSS treats it as
+     the same property and keeps only the last one, dropping the standard
      declaration. The build adds the prefix itself. */
-  backdrop-filter: blur(calc(var(--glass-blur) + 2px));
+  background: var(--material-thick);
+  box-shadow:
+    var(--shadow-raised),
+    inset 0 1px 0 var(--material-edge);
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -65,10 +98,11 @@
   align-items: center;
   gap: 0.55rem;
   width: 100%;
-  border-radius: 0.7rem;
-  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  border: none;
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--label-secondary);
+  letter-spacing: 0.004em;
   padding: 0.5rem 0.55rem;
   cursor: pointer;
   font-size: 0.84rem;
@@ -76,15 +110,18 @@
   text-align: left;
   text-decoration: none;
   transition:
-    border-color var(--motion-fast),
     background-color var(--motion-fast),
-    color var(--motion-fast);
+    color var(--motion-fast),
+    transform var(--motion-press);
+}
+
+.item:active {
+  transform: scale(var(--press-scale-control));
 }
 
 .item:hover {
-  border-color: var(--border-soft);
-  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
-  color: var(--text-primary);
+  background: var(--fill-tertiary);
+  color: var(--label-primary);
 }
 
 .item:focus-visible {
@@ -92,14 +129,19 @@
   outline-offset: 1px;
 }
 
-.itemActive {
-  color: var(--text-primary);
-  border-color: color-mix(
-    in srgb,
-    var(--accent-primary) 25%,
-    var(--border-soft)
-  );
-  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-elevated));
+.itemActive,
+.itemActive:hover {
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 14%, transparent);
+}
+
+/* Blur is exactly what a reader who asked for less transparency does not want,
+   and blur(0px) would still cost a compositing layer and a Backdrop Root. The
+   opaque backgrounds come from the material tokens in globals.css. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .menu {
+    backdrop-filter: none;
+  }
 }
 
 .flag {

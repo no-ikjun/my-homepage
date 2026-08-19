@@ -1,6 +1,6 @@
 .main {
   width: 100%;
-  padding: 6.5rem var(--space-lg) var(--space-2xl);
+  padding: var(--page-top) var(--space-lg) var(--page-bottom);
 }
 
 .shell {
@@ -43,19 +43,24 @@
   text-align: left;
   position: relative;
   display: flex;
-  border: 1px solid var(--border-soft);
+  border: none;
   border-radius: var(--radius-xl);
-  background: var(--bg-solid-panel);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   overflow: hidden;
   transition:
-    border-color var(--motion-fast),
-    box-shadow var(--motion-fast);
+    box-shadow var(--motion-fast),
+    transform var(--motion-press);
+}
+
+/* Feedback belongs on the press, not the release. */
+.projectCard:active {
+  transform: scale(var(--press-scale-card));
 }
 
 .projectCard:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-elevated);
+  box-shadow: var(--shadow-raised);
 }
 
 .projectCard:focus-visible {
@@ -81,7 +86,7 @@
   border-radius: var(--radius-lg);
   background-size: cover;
   background-position: center;
-  background-color: var(--bg-base);
+  background-color: var(--fill-tertiary);
 }
 
 .projectCardBody {
@@ -132,7 +137,7 @@
 
 @media (max-width: 700px) {
   .main {
-    padding: 6.75rem 0.85rem 1.8rem;
+    padding: var(--page-top) 0.85rem var(--page-bottom);
   }
 
   .projectList {

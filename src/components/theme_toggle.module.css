@@ -1,22 +1,46 @@
+/* Sits on the header material, so it is a fill rather than a surface of its
+   own - a translucent control stacked on translucent chrome would smear. */
 .button {
   width: 36px;
   height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  border: 1px solid var(--border-soft);
-  background: color-mix(in srgb, var(--bg-elevated) 74%, transparent);
-  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--fill-tertiary);
+  color: var(--label-secondary);
   cursor: pointer;
   position: relative;
-  transition: border-color var(--motion-fast), color var(--motion-fast),
-    background-color var(--motion-fast);
+  transition:
+    color var(--motion-fast),
+    background-color var(--motion-fast),
+    transform var(--motion-press);
+}
+
+/* The pill is 36px so it sits comfortably in the dock, but the target it
+   answers to is 44px tall. The extra reach is invisible.
+   Horizontal growth is capped at 3px a side: the dock's 0.4rem gap is all the
+   room there is, and overlapping the neighbour's pseudo-element would hand it
+   presses meant for this one. */
+.button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% + 6px);
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
+/* Feedback belongs on the press, not the release. */
+.button:active {
+  transform: scale(var(--press-scale-control));
 }
 
 .button:hover {
-  border-color: var(--border-strong);
-  color: var(--text-primary);
+  background: var(--fill-secondary);
+  color: var(--label-primary);
 }
 
 .button:focus-visible {

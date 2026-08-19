@@ -1,6 +1,7 @@
 import SiteShell from "@/components/site-shell";
-import { rootMetadata } from "@/lib/metadata";
+import { rootMetadata, rootViewport } from "@/lib/metadata";
 
+export const viewport = rootViewport;
 export const metadata = rootMetadata("ko");
 
 export default function KoRootLayout({

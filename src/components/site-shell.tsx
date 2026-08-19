@@ -7,7 +7,15 @@ import { SITE_URL } from "@/lib/site";
 import { translations } from "@/lib/translations";
 import { HTML_LANG, localePath, type Locale } from "@/lib/locale";
 
-const themeBootstrapScript = `
+/**
+ * Runs before paint so the theme never flashes.
+ *
+ * The empty touchstart listener is not dead code: Safari on iOS only applies
+ * :active styles to elements that have a touch listener somewhere up their
+ * ancestor chain. Without it every press state in the app is silently dropped
+ * on the one platform this design is modelled on.
+ */
+const bootstrapScript = `
 (function () {
   try {
     var key = "preferredTheme";
@@ -17,6 +25,9 @@ const themeBootstrapScript = `
       : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
+  } catch (e) {}
+  try {
+    document.body.addEventListener("touchstart", function () {}, { passive: true });
   } catch (e) {}
 })();`;
 
@@ -49,26 +60,30 @@ export default function SiteShell({
   const t = translations[locale];
 
   const nav: HeaderNavItem[] = [
-    { href: localePath(locale, "/"), label: t.navHome },
-    { href: localePath(locale, "/about"), label: t.navAbout },
-    { href: localePath(locale, "/projects"), label: t.navProjects },
-    { href: localePath(locale, "/writings"), label: t.navWritings },
-    { href: localePath(locale, "/contact"), label: t.navContact },
+    { id: "home", href: localePath(locale, "/"), label: t.navHome },
+    { id: "about", href: localePath(locale, "/about"), label: t.navAbout },
+    { id: "projects", href: localePath(locale, "/projects"), label: t.navProjects },
+    { id: "writings", href: localePath(locale, "/writings"), label: t.navWritings },
+    { id: "contact", href: localePath(locale, "/contact"), label: t.navContact },
   ];
 
   return (
     <html lang={HTML_LANG[locale]} suppressHydrationWarning>
       <body>
-        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootstrapScript }} />
         <ThemeProvider>
-          <Header
-            homeHref={localePath(locale, "/")}
-            nav={nav}
-            themeLabel={t.themeToggleLabel}
-            languageLabel={t.languageToggleLabel}
-          />
-          {children}
-          <Footer text={t.copyright} />
+          {/* Everything a sheet pushes back. Portalled layers - the dialog and
+              the language menu - deliberately live outside it. */}
+          <div className="app-shell">
+            <Header
+              homeHref={localePath(locale, "/")}
+              nav={nav}
+              themeLabel={t.themeToggleLabel}
+              languageLabel={t.languageToggleLabel}
+            />
+            {children}
+            <Footer text={t.copyright} />
+          </div>
           <Analytics />
         </ThemeProvider>
 

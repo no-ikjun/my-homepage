@@ -15,13 +15,13 @@ function ProjectCard({
   onSelect,
 }: {
   project: Project;
-  onSelect: (project: Project) => void;
+  onSelect: (project: Project, trigger: HTMLElement) => void;
 }) {
   return (
     <button
       type="button"
       className={styles.projectCard}
-      onClick={() => onSelect(project)}
+      onClick={(event) => onSelect(project, event.currentTarget)}
       aria-label={`${project.title} - ${project.summary}`}
     >
       <span className={styles.projectCardArrow} aria-hidden="true">
@@ -63,7 +63,13 @@ function ProjectCard({
 export default function ProjectsView({ locale }: { locale: Locale }) {
   const t = translations[locale];
   const lang = locale;
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  // `selected` outlives the close so the dialog has something to animate out;
+  // clearing it on close would unmount the dialog before its exit could run.
+  const [selected, setSelected] = useState<{
+    project: Project;
+    trigger: HTMLElement;
+  } | null>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   const sections = [
     {
@@ -100,7 +106,10 @@ export default function ProjectsView({ locale }: { locale: Locale }) {
                 <ProjectCard
                   key={project.title}
                   project={project}
-                  onSelect={setSelectedProject}
+                  onSelect={(item, trigger) => {
+                    setSelected({ project: item, trigger });
+                    setIsDetailOpen(true);
+                  }}
                 />
               ))}
             </div>
@@ -110,9 +119,10 @@ export default function ProjectsView({ locale }: { locale: Locale }) {
 
       <ProjectDetailModal
         locale={locale}
-        project={selectedProject}
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
+        project={selected?.project ?? null}
+        originEl={selected?.trigger ?? null}
+        isOpen={isDetailOpen}
+        onClose={() => setIsDetailOpen(false)}
       />
     </main>
   );

@@ -4,11 +4,38 @@
   left: 0;
   right: 0;
   z-index: 120;
-  padding: 0.9rem 0.9rem 0;
+  padding: calc(0.9rem + var(--inset-top)) calc(0.9rem + var(--inset-right)) 0
+    calc(0.9rem + var(--inset-left));
   pointer-events: none;
 }
 
+/* Scroll edge effect. Rather than dropping a 1px divider under the chrome,
+   content softly blurs out as it passes beneath the floating dock - and only
+   once it actually reaches it, so a page scrolled to the top has no edge at
+   all. The mask fades the blur to nothing before the strip ends.
+   Do not hand-write -webkit-backdrop-filter here: Lightning CSS treats it as
+   the same property and keeps only the last one, dropping the standard
+   declaration. The build adds the prefix itself. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(100% + 1.5rem);
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+  opacity: 0;
+  transition: opacity var(--motion-medium);
+}
+
+.headerScrolled::before {
+  opacity: 1;
+}
+
 .headerDock {
+  position: relative;
+  /* Above the edge-effect strip painted by .header::before. */
+  z-index: 1;
   max-width: 1160px;
   margin: 0 auto;
   display: flex;
@@ -16,20 +43,18 @@
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.55rem 0.65rem 0.55rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-soft);
-  background: color-mix(in srgb, var(--bg-glass) 88%, transparent);
-  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--separator);
+  background: var(--material-regular);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 1px 0 var(--material-edge);
   /* Do not hand-write -webkit-backdrop-filter here: Lightning CSS treats it
      as the same property and keeps only the last one, dropping the standard
      declaration. The build adds the prefix itself. */
-  backdrop-filter: blur(calc(var(--glass-blur) + 2px)) saturate(130%);
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
   pointer-events: auto;
-  transition:
-    border-color var(--motion-fast),
-    box-shadow var(--motion-fast),
-    background-color var(--motion-fast),
-    transform var(--motion-fast);
+  transition: box-shadow var(--motion-medium);
 }
 
 .headerTop {
@@ -48,9 +73,13 @@
   justify-content: flex-end;
 }
 
+/* The dock lifts as content slides under it. The border stays put - the
+   separation is carried by the edge effect and the shadow, not by a line
+   that snaps to a darker colour. */
 .headerDockScrolled {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-elevated);
+  box-shadow:
+    var(--shadow-raised),
+    inset 0 1px 0 var(--material-edge);
 }
 
 .brand {
@@ -95,9 +124,12 @@
   line-height: 1.1;
 }
 
+/* On a material, flat grey text loses legibility as the backdrop changes.
+   One step up the label ramp plus a touch of tracking holds it. */
 .brandRole {
   font-size: 0.72rem;
-  color: var(--text-muted);
+  color: var(--label-secondary);
+  letter-spacing: 0.006em;
   line-height: 1.15;
 }
 
@@ -118,23 +150,24 @@
   min-height: 36px;
   padding: 0.42rem 0.75rem;
   text-decoration: none;
-  color: var(--text-secondary);
-  border-radius: 999px;
+  color: var(--label-secondary);
+  border-radius: var(--radius-pill);
   border: 1px solid transparent;
   font-size: 0.88rem;
   font-weight: 600;
+  letter-spacing: 0.004em;
   white-space: nowrap;
   transition:
     color var(--motion-fast),
     background-color var(--motion-fast),
-    border-color var(--motion-fast),
-    transform var(--motion-fast);
+    transform var(--motion-press);
 }
 
+/* A fill, not another translucent surface: stacking a light material on a
+   material is what collapses legibility. */
 .navLink:hover {
-  color: var(--text-primary);
-  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
-  border-color: var(--border-soft);
+  color: var(--label-primary);
+  background: var(--fill-tertiary);
 }
 
 .navLink:focus-visible {
@@ -142,20 +175,22 @@
   outline-offset: 2px;
 }
 
-.navLinkActive {
-  color: var(--text-primary);
-  border-color: color-mix(
-    in srgb,
-    var(--accent-primary) 24%,
-    var(--border-soft)
-  );
-  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-elevated));
+.navLinkActive,
+.navLinkActive:hover {
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 14%, transparent);
 }
 
 .utilityWrap {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+}
+
+/* The phone's primary nav. display: none rather than visibility keeps it out
+   of the accessibility tree, so only one of the two navs is ever exposed. */
+.tabBar {
+  display: none;
 }
 
 @media (max-width: 860px) {
@@ -185,31 +220,89 @@
   }
 
   .headerTop {
-    flex-wrap: wrap;
     gap: 0.3rem;
   }
 
   .brand {
-    order: 1;
     flex-shrink: 0;
     min-width: 0;
   }
 
   .utilityWrap {
-    order: 2;
     flex-shrink: 0;
     margin-left: auto;
   }
 
+  /* Moved to the tab bar. */
   .nav {
-    order: 3;
-    flex-basis: 100%;
-    margin: 0;
-    padding-top: 0.25rem;
-    min-width: 0;
+    display: none;
+  }
+
+  .tabBar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 120;
     display: flex;
-    justify-content: center;
+    align-items: stretch;
+    padding:
+      0.3rem calc(var(--space-xs) + var(--inset-right))
+      var(--inset-bottom) calc(var(--space-xs) + var(--inset-left));
+    background: var(--material-thick);
+    /* Structural chrome, so it takes the heaviest material - it separates a
+       region rather than drawing attention to itself.
+       Do not hand-write -webkit-backdrop-filter here: Lightning CSS treats it
+       as the same property and keeps only the last one, dropping the standard
+       declaration. The build adds the prefix itself. */
+    backdrop-filter: blur(var(--material-blur))
+      saturate(var(--material-saturate));
+    border-top: 1px solid var(--separator);
+  }
+
+  .tabItem {
+    flex: 1 1 0;
+    min-width: 0;
+    /* Comfortably past the 44px minimum, before the safe-area inset. */
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 0.2rem 0.1rem;
+    text-decoration: none;
+    color: var(--label-tertiary);
+    transition:
+      color var(--motion-fast),
+      transform var(--motion-press);
+  }
+
+  .tabItem:active {
+    transform: scale(var(--press-scale-control));
+  }
+
+  .tabItem:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: -3px;
+    border-radius: var(--radius-md);
+  }
+
+  .tabItemActive {
+    color: var(--accent-primary);
+  }
+
+  .tabLabel {
+    font-size: 0.625rem;
+    font-weight: 600;
+    /* Small text wants a touch of positive tracking, and this sits on a
+       material where it needs every bit of legibility it can get. */
+    letter-spacing: 0.012em;
+    line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .brandAvatarWrap {
@@ -230,25 +323,41 @@
     text-overflow: ellipsis;
   }
 
-  .navList {
-    justify-content: center;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 0.2rem;
-    padding-bottom: 0.05rem;
-    margin: 0 -0.15rem;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+}
+
+/* Blur is exactly what a reader who asked for less transparency does not want,
+   and blur(0px) would still cost a compositing layer and a Backdrop Root. The
+   opaque backgrounds come from the material tokens in globals.css. */
+@media (prefers-reduced-transparency: reduce) {
+  .headerDock,
+  .tabBar {
+    backdrop-filter: none;
   }
 
-  .navList::-webkit-scrollbar {
+  /* Without translucency there is nothing for the edge effect to soften; the
+     dock's own solid surface does the separating. */
+  .header::before {
     display: none;
   }
+}
 
-  .navLink {
-    flex-shrink: 0;
-    min-height: 28px;
-    padding: 0.25rem 0.45rem;
-    font-size: 0.78rem;
+@media (prefers-contrast: more) {
+  .headerDock,
+  .tabBar {
+    backdrop-filter: none;
   }
+
+  .header::before {
+    display: none;
+  }
+}
+
+/* Feedback belongs on the press, not the release. */
+.navLink:active,
+.brand:active {
+  transform: scale(var(--press-scale-control));
+}
+
+.brand {
+  transition: transform var(--motion-press);
 }

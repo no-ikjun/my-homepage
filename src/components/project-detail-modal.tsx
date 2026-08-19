@@ -33,6 +33,8 @@ type ProjectDetailModalProps = {
   project: Project | null;
   isOpen: boolean;
   onClose: () => void;
+  /** The card this was opened from, so the dialog grows out of it. */
+  originEl?: HTMLElement | null;
 };
 
 export default function ProjectDetailModal({
@@ -40,6 +42,7 @@ export default function ProjectDetailModal({
   project,
   isOpen,
   onClose,
+  originEl = null,
 }: ProjectDetailModalProps) {
   const t = translations[locale];
   if (!project) return null;
@@ -50,6 +53,7 @@ export default function ProjectDetailModal({
       onClose={onClose}
       labelledBy="project-modal-title"
       className={styles.modalContent}
+      originEl={originEl}
     >
       <div className={styles.header}>
         <div className={styles.heroImage} aria-hidden="true">

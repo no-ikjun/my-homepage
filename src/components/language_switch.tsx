@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { springs } from "@/lib/motion";
 import {
   localeFromPathname,
   localePath,
@@ -36,6 +38,7 @@ export default function LanguageSwitch({ label }: { label: string }) {
   const current = localeFromPathname(pathname);
   const neutral = neutralPath(pathname);
 
+  const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -87,34 +90,55 @@ export default function LanguageSwitch({ label }: { label: string }) {
 
   const buttonLabel = current === "ko" ? "KO" : "EN";
 
-  const menu =
-    open && pos ? (
-      <div
-        ref={menuRef}
-        className={styles.menu}
-        style={{ top: pos.top, left: pos.left }}
-        role="menu"
-      >
-        {OPTIONS.map((option) => (
-          <Link
-            key={option.locale}
-            href={localePath(option.locale, neutral)}
-            hrefLang={option.locale}
-            role="menuitem"
-            aria-current={option.locale === current ? "true" : undefined}
-            className={`${styles.item} ${
-              option.locale === current ? styles.itemActive : ""
-            }`}
-            onClick={() => setOpen(false)}
+  const menu = (
+    <AnimatePresence>
+      {open && pos ? (
+        // Two elements: the anchor holds the right-alignment translate, the
+        // menu holds the animation. One transform property, two jobs, so they
+        // are kept on separate boxes rather than fighting over it.
+        <div
+          className={styles.menuAnchor}
+          style={{ top: pos.top, left: pos.left }}
+        >
+          <motion.div
+            ref={menuRef}
+            className={styles.menu}
+            role="menu"
+            // Grows out of the trigger's own corner and shrinks back into it,
+            // so it is obvious which control this belongs to. Under reduced
+            // motion it simply cross-fades there instead.
+            initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: reduceMotion ? 1 : 0.92 }}
+            transition={
+              reduceMotion
+                ? { duration: 0.16, ease: "easeOut" }
+                : springs.standard
+            }
           >
-            <span className={styles.flag}>
-              <Image src={option.flag} alt="" width={26} height={18} />
-            </span>
-            {option.label}
-          </Link>
-        ))}
-      </div>
-    ) : null;
+            {OPTIONS.map((option) => (
+              <Link
+                key={option.locale}
+                href={localePath(option.locale, neutral)}
+                hrefLang={option.locale}
+                role="menuitem"
+                aria-current={option.locale === current ? "true" : undefined}
+                className={`${styles.item} ${
+                  option.locale === current ? styles.itemActive : ""
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                <span className={styles.flag}>
+                  <Image src={option.flag} alt="" width={26} height={18} />
+                </span>
+                {option.label}
+              </Link>
+            ))}
+          </motion.div>
+        </div>
+      ) : null}
+    </AnimatePresence>
+  );
 
   return (
     <div className={styles.root} ref={rootRef}>
@@ -132,7 +156,9 @@ export default function LanguageSwitch({ label }: { label: string }) {
           ▾
         </span>
       </button>
-      {menu ? createPortal(menu, document.body) : null}
+      {typeof document === "undefined"
+        ? null
+        : createPortal(menu, document.body)}
     </div>
   );
 }

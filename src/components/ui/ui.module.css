@@ -120,20 +120,45 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-lg);
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(4px);
+}
+
+/* The dimming is its own layer rather than the backdrop's background so a drag
+   can lift it independently of the dialog's enter and exit. It stays out of
+   the way of pointers, so a tap beside the panel still reaches the backdrop
+   and closes it.
+   A modal task dims the layer behind it so attention has one place to go. The
+   blur is deliberately softer than a material's: this layer should recede, not
+   read as a surface of its own.
+   Do not hand-write -webkit-backdrop-filter here: Lightning CSS treats it as
+   the same property and keeps only the last one, dropping the standard
+   declaration. The build adds the prefix itself. */
+.modalScrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--scrim);
+  backdrop-filter: blur(var(--scrim-blur));
+}
+
+/* Carries the enter and exit transform, which leaves the panel's own transform
+   free for the drag - the two compose instead of fighting over one property.
+   Sized to the panel so a click beside it lands on the backdrop. */
+.modalPositioner {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
 }
 
 .modalPanel {
   position: relative;
-  max-width: 560px;
   width: 100%;
   max-height: calc(100vh - var(--space-2xl));
   overflow-y: auto;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-2xl);
-  background: var(--bg-solid-panel);
-  box-shadow: var(--shadow-elevated);
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-sheet);
+  background: var(--bg-card);
+  /* A large surface reads as thicker than a chip: deeper shadow, more spread. */
+  box-shadow: var(--shadow-sheet);
 }
 
 .modalCloseBtn {
@@ -156,7 +181,13 @@
   transition:
     opacity var(--motion-fast),
     background-color var(--motion-fast),
-    color var(--motion-fast);
+    color var(--motion-fast),
+    transform var(--motion-press);
+}
+
+/* Feedback belongs on the press, not the release. */
+.modalCloseBtn:active {
+  transform: scale(var(--press-scale-control));
 }
 
 .modalCloseBtn:hover {
@@ -192,7 +223,65 @@
     font-size: 0.9rem;
   }
 
+  /* Below this width the dialog becomes a bottom sheet: it arrives from the
+     bottom edge, and it leaves the same way. Must match SHEET_QUERY in
+     modal.tsx. */
   .modalBackdrop {
-    padding: var(--space-md);
+    align-items: flex-end;
+    padding: 0;
   }
+
+  .modalPositioner {
+    max-width: none;
+  }
+
+  .modalPanel {
+    /* Stop short of the top edge: the layer underneath stays visible, so it is
+       obvious there is something to go back to. */
+    max-height: 88vh;
+    overflow: hidden;
+    border-bottom: none;
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    padding-bottom: var(--inset-bottom);
+  }
+
+  /* Clear of the grabber strip. */
+  .modalCloseBtn {
+    top: calc(28px + var(--space-sm));
+  }
+}
+
+/* Blur is exactly what a reader who asked for less transparency does not want,
+   and blur(0px) would still cost a compositing layer and a Backdrop Root. The
+   opaque backgrounds come from the material tokens in globals.css. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .modalScrim {
+    backdrop-filter: none;
+  }
+}
+
+/* Both the affordance and the drag surface. The sheet body scrolls natively,
+   and a gesture starting there would have to be wrestled off the scroll
+   container - so the grab lives here, where nothing competes for it. */
+.sheetGrabber {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  cursor: grab;
+  /* The browser must not claim the vertical pan on this strip. */
+  touch-action: none;
+}
+
+.sheetGrabber:active {
+  cursor: grabbing;
+}
+
+.sheetGrabberBar {
+  width: 36px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--fill-primary);
 }

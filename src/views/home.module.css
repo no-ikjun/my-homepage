@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 980px;
   margin: 0 auto;
-  padding: 6.5rem var(--space-lg) var(--space-2xl);
+  padding: var(--page-top) var(--space-lg) var(--page-bottom);
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
@@ -22,9 +22,9 @@
   flex-direction: column;
   gap: var(--space-md);
   padding: var(--space-xl);
-  background: var(--bg-solid-panel);
+  background: var(--bg-card);
   border-radius: var(--radius-xl);
-  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
 }
 
 .heroTop {
@@ -50,8 +50,7 @@
   flex-shrink: 0;
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--bg-elevated) 65%, transparent);
-  border: 1px solid var(--border-soft);
+  background: var(--fill-quaternary);
 }
 
 .profileImage {
@@ -210,7 +209,19 @@
   flex-shrink: 0;
 }
 
+/* A row highlights rather than shrinking: the card around it is the thing with
+   edges, and scaling one row inside it reads as a glitch. */
+.quickLinkCard:active {
+  background: var(--fill-quaternary);
+}
+
+/* Not in a grouped list - this one is its own block, so it gives way. */
+.recentLink:active {
+  transform: scale(var(--press-scale-card));
+}
+
 .recentLink {
+  transition: transform var(--motion-press);
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--space-sm);
@@ -274,15 +285,23 @@
     color var(--motion-fast);
 }
 
+/* An inset grouped list: one card, rows separated by hairlines rather than by
+   gaps. Cheaper to scan than a stack of separate cards, and it is the shape
+   iOS uses for exactly this - a short list of places to go. */
 .quickLinkList {
+  --row-inset: calc(var(--space-lg) + 40px + var(--space-md));
+
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: var(--space-sm);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
 }
 
 .quickLinkCard {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: var(--space-md);
@@ -290,14 +309,23 @@
   text-decoration: none;
   color: inherit;
   padding: var(--space-md) var(--space-lg);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-xl);
-  background: var(--bg-solid-panel);
-  transition: border-color var(--motion-fast);
+  transition: background-color var(--motion-press);
+}
+
+/* iOS starts the separator at the leading edge of the text, not of the row, so
+   the icon column reads as one continuous run down the list. */
+.quickLinkList > li + li > .quickLinkCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--row-inset);
+  right: 0;
+  height: 1px;
+  background: var(--separator);
 }
 
 .quickLinkCard:hover {
-  border-color: var(--border-strong);
+  background: var(--fill-quaternary);
 }
 
 .quickLinkCard:hover .quickLinkLabel {
@@ -322,9 +350,9 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+  background: var(--fill-tertiary);
   flex-shrink: 0;
-  color: var(--text-muted);
+  color: var(--label-tertiary);
 }
 
 .quickLinkIcon svg {
@@ -380,7 +408,7 @@
 
 @media (max-width: 700px) {
   .main {
-    padding: 6.75rem 0.85rem 1.8rem;
+    padding: var(--page-top) 0.85rem var(--page-bottom);
     gap: var(--space-lg);
   }
 
@@ -413,6 +441,10 @@
   .recentArrow,
   .quickLinkArrow {
     display: none;
+  }
+
+  .quickLinkList {
+    --row-inset: calc(var(--space-md) + 40px + var(--space-md));
   }
 
   .quickLinkCard {

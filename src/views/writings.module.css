@@ -1,6 +1,6 @@
 .main {
   width: 100%;
-  padding: 6.5rem var(--space-lg) var(--space-2xl);
+  padding: var(--page-top) var(--space-lg) var(--page-bottom);
 }
 
 .shell {
@@ -58,24 +58,50 @@
   border-radius: 0.35rem;
 }
 
+/* An inset grouped list: one card, rows separated by hairlines rather than by
+   gaps. Cheaper to scan than a stack of separate cards, and it is the shape
+   iOS uses for exactly this - a short list of places to go. */
 .list {
+  --row-inset: var(--space-lg);
+
   list-style: none;
   margin: var(--space-lg) 0 0;
   padding: 0;
-}
-
-.list li + li {
-  margin-top: var(--space-xs);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
 }
 
 .item {
+  position: relative;
   display: grid;
   grid-template-columns: 120px 1fr auto;
   gap: var(--space-md);
   align-items: start;
   text-decoration: none;
   color: inherit;
-  padding: var(--space-md) 0;
+  padding: var(--space-md) var(--space-lg);
+  transition: background-color var(--motion-press);
+}
+
+/* iOS starts the separator at the leading edge of the text, not of the row, so
+   the icon column reads as one continuous run down the list. */
+.list > li + li > .item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--row-inset);
+  right: 0;
+  height: 1px;
+  background: var(--separator);
+}
+
+/* A row highlights rather than shrinking: the card around it is the thing with
+   edges, and scaling one row inside it reads as a glitch. */
+.item:active,
+.item:hover {
+  background: var(--fill-quaternary);
 }
 
 .item:hover .itemTitle {
@@ -136,12 +162,17 @@
 
 @media (max-width: 700px) {
   .main {
-    padding: 6.75rem 0.85rem 1.8rem;
+    padding: var(--page-top) 0.85rem var(--page-bottom);
+  }
+
+  .list {
+    --row-inset: var(--space-md);
   }
 
   .item {
     grid-template-columns: 1fr;
     gap: var(--space-xs);
+    padding: var(--space-md);
   }
 
   .arrow {

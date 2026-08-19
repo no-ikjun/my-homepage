@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { SITE_URL } from "./site";
 import { localePath, OG_LOCALE, type Locale } from "./locale";
 
@@ -62,6 +62,24 @@ export function pageMetadata({
     },
   };
 }
+
+/**
+ * Shared by both root layouts.
+ *
+ * `viewportFit: "cover"` is what makes env(safe-area-inset-*) resolve to
+ * anything other than 0px, which the layout tokens in globals.css depend on.
+ *
+ * The theme colours mirror --bg-grouped. They key off prefers-color-scheme
+ * rather than the stored preference, since <meta> cannot follow the runtime
+ * data-theme attribute.
+ */
+export const rootViewport: Viewport = {
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2f2f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
 
 /** Metadata shared by both root layouts (title template, keywords, icons...). */
 export function rootMetadata(locale: Locale): Metadata {

@@ -1,6 +1,6 @@
 .main {
   width: 100%;
-  padding: 6.5rem var(--space-lg) var(--space-2xl);
+  padding: var(--page-top) var(--space-lg) var(--page-bottom);
 }
 
 .shell {
@@ -13,7 +13,7 @@
 
 .section {
   padding: var(--space-lg) 0;
-  scroll-margin-top: 6.5rem;
+  scroll-margin-top: var(--page-top);
 }
 
 .section + .section {
@@ -46,11 +46,13 @@
   gap: var(--space-md);
 }
 
+/* A card on iOS is a raised surface, not an outlined box: the background shift
+   plus a soft shadow does the separating, so no border is needed. */
 .sectionGrid > div {
   padding: var(--space-lg);
-  background: var(--bg-solid-panel);
+  background: var(--bg-card);
   border-radius: var(--radius-xl);
-  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-card);
 }
 
 .summaryText {
@@ -96,9 +98,9 @@
 
 .careerPanel {
   padding: var(--space-lg);
-  border: 1px solid var(--border-soft);
   border-radius: var(--radius-xl);
-  background: var(--bg-solid-panel);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
 }
 
 .careerList {
@@ -193,9 +195,8 @@
   width: 52px;
   height: 52px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-soft);
   overflow: hidden;
-  background-color: var(--bg-solid-panel);
+  background-color: var(--fill-tertiary);
   background-size: cover;
   background-position: center;
   flex-shrink: 0;
@@ -304,11 +305,11 @@
 
 @media (max-width: 700px) {
   .main {
-    padding: 6.75rem 0.85rem 1.8rem;
+    padding: var(--page-top) 0.85rem var(--page-bottom);
   }
 
   .section {
-    scroll-margin-top: 6.75rem;
+    scroll-margin-top: var(--page-top);
   }
 
   .careerCompany {
