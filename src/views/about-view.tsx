@@ -24,18 +24,17 @@ export default function AboutView({ locale }: { locale: Locale }) {
     <main className="mx-auto w-full max-w-page px-6">
       <PageHeader title={t.title} description={t.description} className="pb-10 md:pb-12" />
 
-      <div className="max-w-content space-y-5 text-base leading-relaxed text-pretty md:text-lg">
+      <div className="max-w-content space-y-4 text-lg leading-relaxed text-pretty">
         {pick(profile.about, locale).map((p) => (
           <p key={p}>{p}</p>
         ))}
       </div>
 
-      <section className="mt-16 grid gap-10 md:grid-cols-2 md:gap-12">
+      <section className="mt-14 grid gap-10 md:grid-cols-2 md:gap-12">
         {tracks.map((track) => (
           <div key={pick(track.title, "en")}>
             <SectionHeading className="mb-3">{pick(track.title, locale)}</SectionHeading>
-            <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{pick(track.body, locale)}</p>
-            <ul className="mt-4 space-y-1.5 text-sm leading-relaxed">
+            <ul className="space-y-1.5 text-sm leading-relaxed">
               {pick(track.items, locale).map((item) => (
                 <li key={item} className="text-pretty">{item}</li>
               ))}
