@@ -77,6 +77,7 @@ const en = {
       emptyTitle: "Nothing published yet",
       emptyDescription: "Short technical notes and essays are on the way.",
       back: "All writing",
+      onThisPage: "On this page",
     },
     contact: {
       title: "Contact",
@@ -168,6 +169,7 @@ const ko: typeof en = {
       emptyTitle: "아직 발행한 글이 없습니다",
       emptyDescription: "짧은 기술 노트와 에세이를 준비하고 있습니다.",
       back: "모든 글",
+      onThisPage: "목차",
     },
     contact: {
       title: "연락처",

@@ -24,11 +24,12 @@ export default function ContactView({ locale }: { locale: Locale }) {
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
-      <PageHeader title={t.title} description={t.description}>
-        <p className="mt-6 text-base leading-relaxed text-muted-foreground text-pretty">{t.lead}</p>
-      </PageHeader>
+      <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] md:gap-16">
+        <PageHeader title={t.title} description={t.description} className="pb-0 md:pb-0">
+          <p className="mt-6 text-base leading-relaxed text-muted-foreground text-pretty">{t.lead}</p>
+        </PageHeader>
 
-      <ul className="max-w-content divide-y divide-border">
+      <ul className="divide-y divide-border md:pt-10">
         {profile.channels.map((ch) => {
           const Icon = ICON[ch.id];
           const external = ch.href.startsWith("http");
@@ -57,6 +58,7 @@ export default function ContactView({ locale }: { locale: Locale }) {
           );
         })}
       </ul>
+      </div>
     </main>
   );
 }

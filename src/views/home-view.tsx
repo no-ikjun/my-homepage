@@ -173,6 +173,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
               <li key={w.slug}>
                 <Link
                   href={`/writings/${w.slug}`}
+                  lang={w.lang}
                   className="group -mx-3 flex items-baseline justify-between gap-4 rounded-lg px-3 py-3 transition-colors hover:bg-foreground/[0.03]"
                 >
                   <span className="min-w-0">

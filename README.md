@@ -60,7 +60,7 @@ export const metadata = {
 
 Stack names get a brand mark and tint from `src/components/tech-badge.tsx` (backed by `simple-icons`); unknown names render as a neutral chip. Gallery entries currently point at `/img/placeholder-screenshot.svg` until real screenshots are added.
 
-**A post.** Copy `content/writings/_template.mdx`, set `published: true`. Posts live at `/writings/<slug>` in one language.
+**A post.** Copy `content/writings/_template.mdx`, set `published: true` and `lang` (`"en"` or `"ko"`). Posts live at `/writings/<slug>` in one language; the TOC is built from `##`/`###` headings.
 
 **The Now block.** Edit `profile.now` and bump `profile.nowUpdated`.
 

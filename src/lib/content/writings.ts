@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { ComponentType } from "react";
-import type { WritingEntry, WritingMeta } from "@/types/writing";
+import GithubSlugger from "github-slugger";
+import type { WritingEntry, WritingHeading, WritingMeta } from "@/types/writing";
 
 const WRITINGS_DIR = path.join(process.cwd(), "content", "writings");
 
@@ -36,6 +37,7 @@ function toMeta(slug: string, metadata?: Partial<WritingMeta>): WritingMeta {
     summary: metadata?.summary ?? "",
     tags: metadata?.tags ?? [],
     published: metadata?.published ?? true,
+    lang: metadata?.lang ?? "en",
   };
 }
 
@@ -55,6 +57,32 @@ export async function getAllWritingMetas() {
 export async function getPublishedWritings() {
   const metas = await getAllWritingMetas();
   return metas.filter((meta) => meta.published !== false);
+}
+
+/**
+ * h2/h3 headings of a post, with the same ids rehype-slug assigns, for the
+ * table of contents. Parsed from the raw source; fenced code is skipped.
+ */
+export async function getWritingHeadings(slug: string): Promise<WritingHeading[]> {
+  const files = await listMdxFiles();
+  const file = files.find((name) => name === `${slug}.mdx` || name === `${slug}.md`);
+  if (!file) return [];
+  const source = await fs.readFile(path.join(WRITINGS_DIR, file), "utf8");
+  const slugger = new GithubSlugger();
+  const headings: WritingHeading[] = [];
+  let inFence = false;
+  for (const line of source.split("\n")) {
+    if (/^\s*(```|~~~)/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    const m = /^(#{2,3})\s+(.+?)\s*#*\s*$/.exec(line);
+    if (!m) continue;
+    const text = m[2].replace(/[*_`]/g, "");
+    headings.push({ id: slugger.slug(text), text, depth: m[1].length as 2 | 3 });
+  }
+  return headings;
 }
 
 export async function getWritingBySlug(slug: string): Promise<WritingEntry | null> {

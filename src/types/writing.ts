@@ -7,6 +7,14 @@ export type WritingMeta = {
   summary: string;
   tags?: string[];
   published?: boolean;
+  /** Language the post is written in; sets the lang attribute for wrapping and screen readers. */
+  lang?: "en" | "ko";
+};
+
+export type WritingHeading = {
+  id: string;
+  text: string;
+  depth: 2 | 3;
 };
 
 export type WritingEntry = {

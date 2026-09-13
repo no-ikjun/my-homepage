@@ -179,8 +179,9 @@ html[data-theme="dark"] {
     text-rendering: optimizeLegibility;
   }
 
-  /* Korean wraps between words, never inside one. */
-  html[lang="ko"] {
+  /* Korean wraps between words, never inside one - for the ko site and for
+     Korean posts under the en layout alike. */
+  :lang(ko) {
     word-break: keep-all;
     overflow-wrap: anywhere;
   }
@@ -239,6 +240,10 @@ html[data-theme="dark"] {
 
   & > * + * {
     margin-top: 1.25em;
+  }
+  & h2,
+  & h3 {
+    scroll-margin-top: 6rem;
   }
   & h2 {
     margin-top: 2.5em;

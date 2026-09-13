@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
-import { getPublishedWritings, getWritingBySlug } from "@/lib/content/writings";
+import { Toc } from "@/components/toc";
+import { getPublishedWritings, getWritingBySlug, getWritingHeadings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
 import { formatDate } from "@/lib/format";
 import { SITE_URL } from "@/lib/site";
@@ -52,10 +53,11 @@ export default async function WritingDetailPage({ params }: Props) {
   if (!entry || entry.metadata.published === false) notFound();
 
   const { Content, metadata } = entry;
+  const headings = await getWritingHeadings(slug);
   const t = dictionary.en.pages.writings;
 
   return (
-    <main className="mx-auto w-full max-w-page px-6">
+    <main className="mx-auto w-full max-w-page px-6" lang={metadata.lang}>
       <Link
         href="/writings"
         className="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -85,9 +87,14 @@ export default async function WritingDetailPage({ params }: Props) {
         ) : null}
       </header>
 
-      <article className="prose-custom mt-10">
-        <Content />
-      </article>
+      <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_14rem] lg:gap-16">
+        <article className="prose-custom min-w-0">
+          <Content />
+        </article>
+        <aside className="hidden lg:sticky lg:top-28 lg:block lg:self-start">
+          <Toc headings={headings} label={t.onThisPage} />
+        </aside>
+      </div>
     </main>
   );
 }
