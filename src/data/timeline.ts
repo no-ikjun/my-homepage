@@ -17,6 +17,8 @@ export type TimelineItem = {
   org: Localized<string>;
   orgUrl?: string;
   logo?: string;
+  /** Schools mostly use circular seals; "round" crops the logo to a circle. */
+  logoShape?: "square" | "round";
   /** Role, degree, or placement */
   title: Localized<string>;
   /** "YYYY-MM" */
@@ -115,6 +117,7 @@ export const timeline: TimelineItem[] = [
     org: { en: "Gwangju Institute of Science and Technology", ko: "광주과학기술원 (GIST)" },
     orgUrl: "https://www.gist.ac.kr",
     logo: "/img/logo_gist.png",
+    logoShape: "round",
     title: { en: "B.S. in Electrical Engineering and Computer Science", ko: "전기전자컴퓨터공학 학사 과정" },
     start: "2023-03",
     highlights: {
@@ -128,6 +131,7 @@ export const timeline: TimelineItem[] = [
     org: { en: "University of California, Berkeley", ko: "UC Berkeley" },
     orgUrl: "https://www.berkeley.edu/",
     logo: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/Seal_of_University_of_California,_Berkeley.svg",
+    logoShape: "round",
     title: { en: "Summer Session, EECS", ko: "Summer Session, EECS" },
     start: "2026-06",
     end: "2026-08",
@@ -142,6 +146,7 @@ export const timeline: TimelineItem[] = [
     org: { en: "Jeonnam Science High School", ko: "전남과학고등학교" },
     orgUrl: "https://jeonnam-sh.hs.jne.kr",
     logo: "https://d3ob3cint7tr3s.cloudfront.net/jshs.png",
+    logoShape: "round",
     title: { en: "Graduated", ko: "졸업" },
     start: "2020-03",
     end: "2023-01",

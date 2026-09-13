@@ -5,20 +5,21 @@ import { formatPeriod } from "@/lib/format";
 import { pick } from "@/lib/i18n";
 import { type Locale } from "@/lib/locale";
 
-function Logo({ src, alt }: { src?: string; alt: string }) {
+function Logo({ src, alt, shape = "square" }: { src?: string; alt: string; shape?: "square" | "round" }) {
+  const radius = shape === "round" ? "rounded-full" : "rounded-xl";
   if (!src) {
     return (
       <span
         aria-hidden
-        className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted text-sm font-medium text-muted-foreground"
+        className={`flex size-14 shrink-0 items-center justify-center border border-border bg-muted text-lg font-medium text-muted-foreground ${radius}`}
       >
         {alt.slice(0, 1)}
       </span>
     );
   }
   return (
-    <span className="relative block size-10 shrink-0 overflow-hidden rounded-lg border border-border bg-card">
-      <Image src={src} alt="" fill sizes="40px" className="object-cover" />
+    <span className={`relative block size-14 shrink-0 overflow-hidden border border-border bg-card ${radius}`}>
+      <Image src={src} alt="" fill sizes="56px" className="object-cover" />
     </span>
   );
 }
@@ -48,12 +49,12 @@ export function TimelineList({ items, locale }: { items: TimelineItem[]; locale:
         const org = pick(item.org, locale);
         return (
           <li key={item.id} className="grid gap-3 py-7 first:pt-0 last:pb-0 md:grid-cols-[10rem_1fr] md:gap-6">
-            <p className="text-sm text-muted-foreground tabular-nums md:pt-2.5">
+            <p className="text-sm text-muted-foreground tabular-nums md:pt-4">
               {formatPeriod(item.start, item.end, locale)}
             </p>
 
             <div className="flex gap-4">
-              <Logo src={item.logo} alt={org} />
+              <Logo src={item.logo} alt={org} shape={item.logoShape} />
               <div className="min-w-0 flex-1">
                 <h3 className="font-medium leading-snug">
                   {item.orgUrl ? (
