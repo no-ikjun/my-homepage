@@ -50,7 +50,7 @@ export const metadata = {
   stack: ["…"],
   links: [{ label: "…", href: "…" }],
   image: "/img/…",         // logo; remote hosts must be in next.config.mjs
-  gallery: [               // screenshots at the top of the detail page
+  gallery: [               // first entry is also the card cover (16:10 works best)
     { src: "/img/projects/<slug>/1.png", alt: "…" },
   ],
   featured: true,          // shows on the home page (max 3)

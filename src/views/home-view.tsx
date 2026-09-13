@@ -2,11 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { AwardGrid } from "@/components/award-grid";
 import { Reveal } from "@/components/motion/reveal";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { profile } from "@/data/profile";
+import { timelineByKind } from "@/data/timeline";
 import { getFeaturedProjects } from "@/lib/content/projects";
 import { getPublishedWritings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
@@ -22,37 +24,28 @@ export default async function HomeView({ locale }: { locale: Locale }) {
     getPublishedWritings(),
   ]);
   const recentWritings = writings.slice(0, 3);
+  const awards = timelineByKind("award").slice(0, 3);
+  const [lead, ...rest] = featured;
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
       {/* ---------------------------------------------------------- hero */}
-      <Reveal as="section" className="max-w-content pt-10 md:pt-16">
-        <div className="flex items-center gap-3">
-          <Image
-            src={profile.avatar}
-            alt={pick(profile.name, locale)}
-            width={48}
-            height={48}
-            priority
-            className="size-12 rounded-full object-cover"
-          />
-          <div className="leading-tight">
-            <p className="font-medium">{pick(profile.name, locale)}</p>
-            <p className="text-sm text-muted-foreground">{pick(profile.affiliation, locale)}</p>
+      <Reveal as="section" className="grid items-center gap-10 pt-6 md:grid-cols-[1fr_auto] md:gap-16 md:pt-14">
+        <div className="order-2 max-w-content md:order-1">
+          <p className="font-medium">{pick(profile.name, locale)}</p>
+          <p className="text-sm text-muted-foreground">{pick(profile.affiliation, locale)}</p>
+
+          <h1 className="mt-6 text-4xl leading-[1.08] font-semibold tracking-tight text-balance md:text-5xl">
+            {pick(profile.headline, locale)}
+          </h1>
+
+          <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground text-pretty">
+            {pick(profile.intro, locale).map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </div>
-        </div>
 
-        <h1 className="mt-8 text-4xl leading-[1.08] font-semibold tracking-tight text-balance md:text-5xl">
-          {pick(profile.headline, locale)}
-        </h1>
-
-        <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground text-pretty">
-          {pick(profile.intro, locale).map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </div>
-
-        <div className="mt-8 flex flex-wrap items-center gap-2">
+          <div className="mt-8 flex flex-wrap items-center gap-2">
           {profile.links.map((link) => {
             const Icon = LINK_ICON[link.id];
             const external = link.href.startsWith("http");
@@ -74,7 +67,17 @@ export default async function HomeView({ locale }: { locale: Locale }) {
               <ArrowRight data-icon="inline-end" />
             </Link>
           </Button>
+          </div>
         </div>
+
+        <Image
+          src={profile.avatar}
+          alt={pick(profile.name, locale)}
+          width={288}
+          height={288}
+          priority
+          className="order-1 size-32 rounded-full object-cover md:order-2 md:size-60 lg:size-72"
+        />
       </Reveal>
 
       {/* ----------------------------------------------------------- now */}
@@ -128,13 +131,31 @@ export default async function HomeView({ locale }: { locale: Locale }) {
           >
             {t.home.selectedWork}
           </SectionHeading>
-          <ul className="grid gap-4 md:grid-cols-3">
-            {featured.map((p) => (
-              <li key={p.slug} className="flex">
-                <ProjectCard project={p} locale={locale} className="flex-1" />
-              </li>
-            ))}
-          </ul>
+          <div className="space-y-4">
+            <ProjectCard project={lead} locale={locale} feature />
+            {rest.length ? (
+              <ul className="grid gap-4 md:grid-cols-2">
+                {rest.map((p) => (
+                  <li key={p.slug} className="flex">
+                    <ProjectCard project={p} locale={locale} className="flex-1" />
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        </Reveal>
+      ) : null}
+
+      {/* --------------------------------------------------------- awards */}
+      {awards.length ? (
+        <Reveal as="section" delay={0.2} className="mt-20" aria-labelledby="awards-heading">
+          <SectionHeading
+            id="awards-heading"
+            action={{ href: localePath(locale, "/about#awards"), label: t.home.allAwards }}
+          >
+            {t.home.awards}
+          </SectionHeading>
+          <AwardGrid items={awards} locale={locale} />
         </Reveal>
       ) : null}
 
