@@ -2,6 +2,20 @@ import createMDX from "@next/mdx";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
+  // Plugins are named as strings so the config stays serialisable for Turbopack.
+  options: {
+    remarkPlugins: [["remark-gfm", {}]],
+    rehypePlugins: [
+      [
+        "rehype-pretty-code",
+        {
+          theme: { light: "github-light", dark: "github-dark" },
+          keepBackground: false,
+          defaultLang: "plaintext",
+        },
+      ],
+    ],
+  },
 });
 
 /** @type {import('next').NextConfig} */

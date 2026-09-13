@@ -314,9 +314,25 @@ html[data-theme="dark"] {
     line-height: 1.6;
   }
   & pre code {
+    display: grid;
     padding: 0;
     background: none;
     font-size: inherit;
+  }
+  /* rehype-pretty-code emits both theme colours; pick one per theme. */
+  & pre [data-line] {
+    padding-inline: 0;
+  }
+  & code[data-theme] span {
+    color: var(--shiki-light);
+  }
+  & figure[data-rehype-pretty-code-figure] {
+    margin: 0;
+  }
+  & figcaption[data-rehype-pretty-code-title] {
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
   }
   & hr {
     margin-block: 3em;
@@ -340,6 +356,10 @@ html[data-theme="dark"] {
   & th {
     font-weight: 600;
   }
+}
+
+html[data-theme="dark"] .prose-custom code[data-theme] span {
+  color: var(--shiki-dark);
 }
 
 @utility text-balance {
