@@ -1,280 +1,195 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./home.module.css";
-import { BadgeChip, IconWithText } from "@/components/ui";
-import { translations } from "@/lib/translations";
+import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { Reveal } from "@/components/motion/reveal";
+import { ProjectCard } from "@/components/project-card";
+import { SectionHeading } from "@/components/section-heading";
+import { Button } from "@/components/ui/button";
+import { profile } from "@/data/profile";
+import { getFeaturedProjects } from "@/lib/content/projects";
+import { getPublishedWritings } from "@/lib/content/writings";
+import { dictionary } from "@/lib/dictionary";
+import { formatMonth } from "@/lib/format";
+import { pick } from "@/lib/i18n";
 import { localePath, type Locale } from "@/lib/locale";
-import { homeRecentActivities } from "@/data/home-recent-activities";
 
-const kindLabel: Record<"ko" | "en", Record<string, string>> = {
-  ko: {
-    career: "실무",
-    project: "프로젝트",
-    award: "수상",
-    activity: "활동",
-    education: "학업",
-    writing: "글",
-  },
-  en: {
-    career: "Career",
-    project: "Project",
-    award: "Award",
-    activity: "Activity",
-    education: "Education",
-    writing: "Writing",
-  },
-};
+const LINK_ICON = { email: Mail, github: GitHubIcon, linkedin: LinkedInIcon } as const;
 
-const quickLinkIcons = {
-  about: (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <circle cx="12" cy="8" r="4" />
-      <path d="M20 21a8 8 0 0 0-16 0" />
-    </svg>
-  ),
-  projects: (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-    </svg>
-  ),
-  writings: (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-      <polyline points="14 2 14 8 20 8" />
-      <line x1="16" y1="13" x2="8" y2="13" />
-      <line x1="16" y1="17" x2="8" y2="17" />
-      <line x1="10" y1="9" x2="8" y2="9" />
-    </svg>
-  ),
-  contact: (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  ),
-};
-
-export default function HomeView({ locale }: { locale: Locale }) {
-  const t = translations[locale];
-  const lang = locale;
-  const recentItems = homeRecentActivities[lang];
-
-  const quickLinks = [
-    {
-      path: "/about",
-      icon: quickLinkIcons.about,
-      label: t.navAbout,
-      text: t.aboutPageDescription,
-    },
-    {
-      path: "/projects",
-      icon: quickLinkIcons.projects,
-      label: t.navProjects,
-      text: t.projectsPageDescription,
-    },
-    {
-      path: "/writings",
-      icon: quickLinkIcons.writings,
-      label: t.navWritings,
-      text: t.writingsPageDescription,
-    },
-    {
-      path: "/contact",
-      icon: quickLinkIcons.contact,
-      label: t.navContact,
-      text: t.contactPageDescription,
-    },
-  ];
+export default async function HomeView({ locale }: { locale: Locale }) {
+  const t = dictionary[locale];
+  const [featured, writings] = await Promise.all([
+    getFeaturedProjects(locale, 3),
+    getPublishedWritings(),
+  ]);
+  const recentWritings = writings.slice(0, 3);
 
   return (
-    <main className={styles.main}>
-      <section className={styles.heroSection}>
-        <div className={styles.heroCard}>
-          <div className={styles.heroTop}>
-            <Image
-              className={styles.profileImage}
-              src="/img/profile_round3.png"
-              alt="Ikjun Choi"
-              width={300}
-              height={300}
-              priority
-              sizes="(max-width: 700px) 96px, 128px"
-            />
-            <div className={styles.heroIdentity}>
-              <BadgeChip tone="accent" size="sm" className={styles.heroBadge}>
-                {t.homeRole}
-              </BadgeChip>
-              {/* <p className={styles.heroTagline}>{t.homeResearchInterest}</p> */}
-              <h1 className={styles.heroName}>Ikjun Choi</h1>
-              <p className={styles.heroNameKr}>최익준</p>
-            </div>
-            <div className={styles.heroMeta}>
-              <IconWithText icon="location-pin">{t.homeLocation}</IconWithText>
-              <IconWithText icon="graduation-cap">
-                {t.homeEducation}
-              </IconWithText>
-              <IconWithText icon="mail" href="mailto:choiikjun1101@gmail.com">
-                {t.homeLinkEmail}
-              </IconWithText>
-              <IconWithText
-                icon="github"
-                href="https://github.com/no-ikjun"
-                external
-              >
-                {t.homeLinkGithub}
-              </IconWithText>
-              <IconWithText
-                icon="linkedin"
-                href="https://www.linkedin.com/in/ikjunchoi/"
-                external
-              >
-                {t.homeLinkLinkedIn}
-              </IconWithText>
-            </div>
-          </div>
-
-          <div className={styles.heroAboutSection}>
-            <div className={styles.heroAboutHead}>
-              <h2 className={styles.heroAboutTitle}>{t.homeAboutTitle}</h2>
-              <span className={styles.heroAboutLine} aria-hidden />
-            </div>
-            <div className={styles.heroDescriptionWrap}>
-              {t.homeDescription
-                .split(/\n\n+/)
-                .filter(Boolean)
-                .map((paragraph, i) => (
-                  <p key={i} className={styles.heroDescription}>
-                    {paragraph.trim()}
-                  </p>
-                ))}
-            </div>
+    <main className="mx-auto w-full max-w-page px-6">
+      {/* ---------------------------------------------------------- hero */}
+      <Reveal as="section" className="max-w-content pt-10 md:pt-16">
+        <div className="flex items-center gap-3">
+          <Image
+            src={profile.avatar}
+            alt={pick(profile.name, locale)}
+            width={48}
+            height={48}
+            priority
+            className="size-12 rounded-full object-cover"
+          />
+          <div className="leading-tight">
+            <p className="font-medium">{pick(profile.name, locale)}</p>
+            <p className="text-sm text-muted-foreground">{pick(profile.affiliation, locale)}</p>
           </div>
         </div>
-      </section>
 
-      <section
-        className={styles.section}
-        aria-labelledby="recent-activity-title"
-      >
-        <div className={styles.sectionHead}>
-          <h2 id="recent-activity-title" className={styles.sectionTitle}>
-            {t.homeRecentTitle}
-          </h2>
+        <h1 className="mt-8 text-4xl leading-[1.08] font-semibold tracking-tight text-balance md:text-5xl">
+          {pick(profile.headline, locale)}
+        </h1>
+
+        <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground text-pretty">
+          {pick(profile.intro, locale).map((p) => (
+            <p key={p}>{p}</p>
+          ))}
         </div>
 
-        <ul className={styles.recentList}>
-          {recentItems.map((item) => {
-            const body = (
+        <div className="mt-8 flex flex-wrap items-center gap-2">
+          {profile.links.map((link) => {
+            const Icon = LINK_ICON[link.id];
+            const external = link.href.startsWith("http");
+            return (
+              <Button key={link.id} asChild variant="outline" size="sm" className="rounded-full">
+                <a
+                  href={link.href}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  <Icon data-icon="inline-start" />
+                  {link.label}
+                </a>
+              </Button>
+            );
+          })}
+          <Button asChild variant="ghost" size="sm" className="rounded-full">
+            <Link href={localePath(locale, "/about")}>
+              {t.home.moreAbout}
+              <ArrowRight data-icon="inline-end" />
+            </Link>
+          </Button>
+        </div>
+      </Reveal>
+
+      {/* ----------------------------------------------------------- now */}
+      <Reveal as="section" delay={0.08} className="mt-20" aria-labelledby="now-heading">
+        <SectionHeading
+          id="now-heading"
+          aside={`${t.home.updated} ${formatMonth(profile.nowUpdated, locale)}`}
+        >
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand/60 motion-reduce:hidden" />
+            <span className="relative inline-flex size-2 rounded-full bg-brand" />
+          </span>
+          {t.home.now}
+        </SectionHeading>
+
+        <ul className="divide-y divide-border border-y border-border">
+          {profile.now.map((item) => {
+            const title = pick(item.title, locale);
+            const detail = pick(item.detail, locale);
+            const inner = (
               <>
-                <div className={styles.recentBody}>
-                  <div className={styles.recentTopLine}>
-                    <BadgeChip size="sm" tone="muted">
-                      {kindLabel[lang][item.kind] ?? item.kind}
-                    </BadgeChip>
-                    <h3 className={styles.recentTitle}>{item.title}</h3>
-                  </div>
-                  <p className={styles.recentSummary}>{item.summary}</p>
-                </div>
-                <span className={styles.recentArrow}>↗</span>
+                <span className="font-mono text-xs tracking-wide text-muted-foreground uppercase md:pt-1">
+                  {t.home.nowKinds[item.kind]}
+                </span>
+                <span className="min-w-0">
+                  <span className="flex items-center gap-1.5 font-medium">
+                    {title}
+                    {item.href ? (
+                      <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                    ) : null}
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {detail}
+                  </span>
+                </span>
               </>
             );
-
+            const cls = "group grid gap-1 py-5 md:grid-cols-[9rem_1fr] md:gap-6";
             return (
-              <li key={item.id} className={styles.recentItem}>
-                <span className={styles.recentDate}>{item.date}</span>
-                <span className={styles.timelineDot} aria-hidden="true" />
-                {item.internal ? (
-                  <Link
-                    href={localePath(locale, item.href)}
-                    className={styles.recentLink}
-                  >
-                    {body}
+              <li key={item.id}>
+                {item.href ? (
+                  <Link href={localePath(locale, item.href)} className={`${cls} -mx-3 rounded-lg px-3 transition-colors hover:bg-foreground/[0.03]`}>
+                    {inner}
                   </Link>
                 ) : (
-                  <a
-                    href={item.href}
-                    className={styles.recentLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {body}
-                  </a>
+                  <div className={cls}>{inner}</div>
                 )}
               </li>
             );
           })}
         </ul>
-      </section>
+      </Reveal>
 
-      <section className={styles.section} aria-labelledby="quick-links-title">
-        <div className={styles.sectionHead}>
-          <h2 id="quick-links-title" className={styles.sectionTitle}>
-            {t.homeQuickLinksTitle}
-          </h2>
+      {/* ------------------------------------------------- selected work */}
+      {featured.length ? (
+        <Reveal as="section" delay={0.16} className="mt-20" aria-labelledby="work-heading">
+          <SectionHeading
+            id="work-heading"
+            action={{ href: localePath(locale, "/projects"), label: t.home.allProjects }}
+          >
+            {t.home.selectedWork}
+          </SectionHeading>
+          <ul className="grid gap-4 md:grid-cols-3">
+            {featured.map((p) => (
+              <li key={p.slug} className="flex">
+                <ProjectCard project={p} locale={locale} className="flex-1" />
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      ) : null}
+
+      {/* -------------------------------------------------------- writing */}
+      {recentWritings.length ? (
+        <Reveal as="section" delay={0.24} className="mt-20" aria-labelledby="writing-heading">
+          <SectionHeading
+            id="writing-heading"
+            action={{ href: localePath(locale, "/writings"), label: t.home.allWriting }}
+          >
+            {t.home.writing}
+          </SectionHeading>
+          <ul className="divide-y divide-border border-y border-border">
+            {recentWritings.map((w) => (
+              <li key={w.slug}>
+                <Link
+                  href={`/writings/${w.slug}`}
+                  className="group -mx-3 flex items-baseline justify-between gap-4 rounded-lg px-3 py-4 transition-colors hover:bg-foreground/[0.03]"
+                >
+                  <span className="min-w-0">
+                    <span className="block font-medium">{w.title}</span>
+                    {w.summary ? (
+                      <span className="mt-0.5 line-clamp-1 block text-sm text-muted-foreground">{w.summary}</span>
+                    ) : null}
+                  </span>
+                  <span className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums">{w.date}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      ) : null}
+
+      {/* -------------------------------------------------------- contact */}
+      <Reveal as="section" delay={0.3} className="mt-24">
+        <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-border bg-card p-6 md:flex-row md:items-center">
+          <p className="text-lg font-medium tracking-tight text-balance">{t.home.contactLead}</p>
+          <Button asChild className="rounded-full">
+            <a href={profile.links[0].href}>
+              <Mail data-icon="inline-start" />
+              {t.home.emailMe}
+            </a>
+          </Button>
         </div>
-
-        <ul className={styles.quickLinkList}>
-          {quickLinks.map((link) => (
-            <li key={link.path}>
-              <Link
-                href={localePath(locale, link.path)}
-                className={styles.quickLinkCard}
-              >
-                <span className={styles.quickLinkIcon}>{link.icon}</span>
-                <div className={styles.quickLinkMain}>
-                  <h3 className={styles.quickLinkLabel}>{link.label}</h3>
-                  <p className={styles.quickLinkText}>{link.text}</p>
-                </div>
-                <span className={styles.quickLinkArrow}>↗</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      </Reveal>
     </main>
   );
 }
