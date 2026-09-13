@@ -28,12 +28,12 @@ export default async function WritingsView({ locale }: { locale: Locale }) {
           </div>
         </section>
       ) : (
-        <ul className="max-w-content space-y-2">
+        <ul className="max-w-content divide-y divide-border">
           {writings.map((w) => (
             <li key={w.slug}>
               <Link
                 href={`/writings/${w.slug}`}
-                className="group -mx-3 grid gap-1 rounded-lg px-3 py-3 transition-colors hover:bg-foreground/[0.03] md:grid-cols-[9rem_1fr] md:gap-6"
+                className="group -mx-3 grid gap-1 rounded-lg px-3 py-4 transition-colors hover:bg-foreground/[0.03] md:grid-cols-[9rem_1fr] md:gap-6"
               >
                 <time
                   dateTime={w.date}

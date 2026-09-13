@@ -43,11 +43,11 @@ function Highlights({ items }: { items: string[] }) {
  */
 export function TimelineList({ items, locale }: { items: TimelineItem[]; locale: Locale }) {
   return (
-    <ul className="space-y-10">
+    <ul className="divide-y divide-border">
       {items.map((item) => {
         const org = pick(item.org, locale);
         return (
-          <li key={item.id} className="grid gap-3 md:grid-cols-[10rem_1fr] md:gap-6">
+          <li key={item.id} className="grid gap-3 py-7 first:pt-0 last:pb-0 md:grid-cols-[10rem_1fr] md:gap-6">
             <p className="text-sm text-muted-foreground tabular-nums md:pt-2.5">
               {formatPeriod(item.start, item.end, locale)}
             </p>

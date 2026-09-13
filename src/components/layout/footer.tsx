@@ -15,7 +15,7 @@ export function Footer({ locale }: { locale: Locale }) {
   const t = dictionary[locale];
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-32">
+    <footer className="mt-28 border-t border-border">
       <div className="mx-auto flex w-full max-w-page flex-col gap-4 px-6 py-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <p>
           © {year} {pick(profile.name, "en")}. {t.footer.rights}
