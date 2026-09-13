@@ -27,8 +27,10 @@ export type ProjectFrontmatter = {
   role: string[];
   stack: string[];
   links?: ProjectLink[];
-  /** Logo or cover; local path or an allowed remote host */
+  /** Logo; local path or an allowed remote host */
   image?: string;
+  /** Screenshots shown at the top of the detail page */
+  gallery?: { src: string; alt: string }[];
   /** Surfaces the project on the home page */
   featured?: boolean;
   /** Lower first among featured / same start month */

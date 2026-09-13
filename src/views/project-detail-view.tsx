@@ -1,4 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
+import { ProjectIcon } from "@/components/project-icon";
+import { TechBadge } from "@/components/tech-badge";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { dictionary } from "@/lib/dictionary";
 import { formatPeriod } from "@/lib/format";
@@ -37,6 +40,7 @@ export default function ProjectDetailView({
       </Link>
 
       <header className="mt-6 max-w-content">
+        <ProjectIcon src={meta.image} title={meta.title} size={56} className="mb-5" />
         <p className="text-sm text-muted-foreground">
           <span className={cn(meta.kind === "research" && "text-brand")}>{t.project.kind[meta.kind]}</span>
           <span aria-hidden> · </span>
@@ -47,6 +51,26 @@ export default function ProjectDetailView({
         </h1>
         <p className="mt-3 text-lg text-muted-foreground text-pretty">{meta.summary}</p>
       </header>
+
+      {meta.gallery?.length ? (
+        <ul className="mt-10 grid gap-3 sm:grid-cols-2">
+          {meta.gallery.map((shot, i) => (
+            <li
+              key={`${shot.src}-${i}`}
+              className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-muted"
+            >
+              <Image
+                src={shot.src}
+                alt={shot.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+                priority={i === 0}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : null}
 
       <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_16rem] lg:gap-16">
         <article className="prose-custom min-w-0">
@@ -69,8 +93,8 @@ export default function ProjectDetailView({
               <Meta label={d.stack}>
                 <ul className="flex flex-wrap gap-1.5">
                   {meta.stack.map((s) => (
-                    <li key={s} className="rounded-md bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
-                      {s}
+                    <li key={s}>
+                      <TechBadge name={s} />
                     </li>
                   ))}
                 </ul>

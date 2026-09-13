@@ -49,11 +49,16 @@ export const metadata = {
   role: ["…"],
   stack: ["…"],
   links: [{ label: "…", href: "…" }],
-  image: "/img/…",         // optional; remote hosts must be in next.config.mjs
+  image: "/img/…",         // logo; remote hosts must be in next.config.mjs
+  gallery: [               // screenshots at the top of the detail page
+    { src: "/img/projects/<slug>/1.png", alt: "…" },
+  ],
   featured: true,          // shows on the home page (max 3)
   order: 0,                // lower first
 };
 ```
+
+Stack names get a brand mark and tint from `src/components/tech-badge.tsx` (backed by `simple-icons`); unknown names render as a neutral chip. Gallery entries currently point at `/img/placeholder-screenshot.svg` until real screenshots are added.
 
 **A post.** Copy `content/writings/_template.mdx`, set `published: true`. Posts live at `/writings/<slug>` in one language.
 

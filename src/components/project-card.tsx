@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { ProjectIcon } from "@/components/project-icon";
+import { TechBadge } from "@/components/tech-badge";
 import { dictionary } from "@/lib/dictionary";
 import { formatPeriod } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/locale";
@@ -24,25 +26,26 @@ export function ProjectCard({
         className,
       )}
     >
-      <p className="text-sm text-muted-foreground">
-        <span className={cn(project.kind === "research" && "text-brand")}>{t.project.kind[project.kind]}</span>
-        <span aria-hidden> · </span>
-        <span className="tabular-nums">{formatPeriod(project.start, project.end, locale)}</span>
-      </p>
+      <div className="flex items-start justify-between gap-3">
+        <ProjectIcon src={project.image} title={project.title} size={44} />
+        <ArrowUpRight className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover:translate-x-px group-hover:-translate-y-px group-hover:opacity-100" />
+      </div>
 
       <div className="flex-1 space-y-1.5">
-        <h3 className="flex items-start justify-between gap-2 text-base font-semibold tracking-tight">
-          <span className="text-balance">{project.title}</span>
-          <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-muted-foreground opacity-0 transition-[opacity,transform] group-hover:translate-x-px group-hover:-translate-y-px group-hover:opacity-100" />
-        </h3>
+        <h3 className="text-base font-semibold tracking-tight text-balance">{project.title}</h3>
+        <p className="text-sm text-muted-foreground">
+          <span className={cn(project.kind === "research" && "text-brand")}>{t.project.kind[project.kind]}</span>
+          <span aria-hidden> · </span>
+          <span className="tabular-nums">{formatPeriod(project.start, project.end, locale)}</span>
+        </p>
         <p className="line-clamp-3 text-sm text-muted-foreground text-pretty">{project.summary}</p>
       </div>
 
       {project.stack.length ? (
-        <ul className="flex flex-wrap gap-1.5 text-xs text-muted-foreground">
+        <ul className="flex flex-wrap gap-1.5">
           {project.stack.slice(0, 4).map((s) => (
-            <li key={s} className="rounded-md bg-muted px-1.5 py-0.5">
-              {s}
+            <li key={s}>
+              <TechBadge name={s} />
             </li>
           ))}
         </ul>
