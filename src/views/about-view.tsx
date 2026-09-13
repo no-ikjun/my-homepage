@@ -1,6 +1,7 @@
-import Image from "next/image";
-import { CodeXml, FlaskConical, GraduationCap, MapPin } from "lucide-react";
+import Link from "next/link";
+import { CodeXml, FlaskConical } from "lucide-react";
 import { AwardGrid } from "@/components/award-grid";
+import { PageHeader } from "@/components/page-header";
 import { SectionHeading } from "@/components/section-heading";
 import { TechBadge } from "@/components/tech-badge";
 import { TimelineList } from "@/components/timeline-list";
@@ -27,39 +28,26 @@ export default function AboutView({ locale }: { locale: Locale }) {
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
-      {/* Profile block doubles as the page header. */}
-      <header className="flex flex-col gap-6 pt-6 sm:flex-row sm:items-start sm:gap-8 md:pt-10">
-        <Image
-          src={profile.avatar}
-          alt={pick(profile.name, locale)}
-          width={112}
-          height={112}
-          priority
-          className="size-24 shrink-0 rounded-full object-cover sm:size-28"
-        />
-        <div className="min-w-0 max-w-content">
-          <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
-            {pick(profile.name, locale)}
-          </h1>
-          <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
-            <li className="inline-flex items-center gap-1.5">
-              <GraduationCap className="size-4" />
-              {pick(profile.affiliation, locale)}
-            </li>
-            <li className="inline-flex items-center gap-1.5">
-              <MapPin className="size-4" />
-              {pick(profile.location, locale)}
-            </li>
-          </ul>
-          <div className="mt-5 space-y-3 text-lg leading-relaxed text-pretty">
-            {pick(profile.about, locale).map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-          </div>
-        </div>
-      </header>
+      <PageHeader title={t.title} description={t.description} className="pb-6 md:pb-8">
+        {/* Jump links: this page is long and these are its real sections. */}
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {kinds.map((kind) => {
+            const key = SECTION_KEY[kind];
+            return (
+              <li key={key}>
+                <Link
+                  href={`#${key}`}
+                  className="inline-flex h-8 items-center rounded-full border border-border px-3 text-sm text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+                >
+                  {t[key]}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </PageHeader>
 
-      <section className="mt-12 grid gap-4 md:grid-cols-2">
+      <section className="grid gap-4 md:grid-cols-2">
         {tracks.map(({ Icon, ...track }) => (
           <div
             key={pick(track.title, "en")}

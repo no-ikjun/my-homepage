@@ -82,16 +82,6 @@ export const profile = {
     },
   ] satisfies NowItem[],
 
-  /** The About page intro. Two sentences, no more. */
-  about: {
-    en: [
-      "I research diffusion language models at Real-Lab and build products on the side, and I'd like to keep doing both.",
-    ],
-    ko: [
-      "Real-Lab에서 Diffusion Language Model을 연구하고, 그 옆에서 제품을 만듭니다. 둘 다 계속할 생각입니다.",
-    ],
-  } satisfies Localized<string[]>,
-
   /** The two tracks, side by side on the About page. */
   tracks: {
     research: {

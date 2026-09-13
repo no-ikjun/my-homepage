@@ -48,7 +48,7 @@ const en = {
   pages: {
     about: {
       title: "About",
-      description: "Research and engineering, and how the two ended up together.",
+      description: "What I work on, and where I've worked and studied.",
       career: "Experience",
       education: "Education",
       awards: "Awards",
@@ -138,7 +138,7 @@ const ko: typeof en = {
   pages: {
     about: {
       title: "소개",
-      description: "연구와 엔지니어링, 그리고 그 둘이 어떻게 함께 가게 됐는지.",
+      description: "하고 있는 일, 그리고 일하고 배워 온 곳들.",
       career: "경력",
       education: "학력",
       awards: "수상",
