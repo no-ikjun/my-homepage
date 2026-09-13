@@ -21,14 +21,13 @@ export default function AboutView({ locale }: { locale: Locale }) {
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
-      <div className="grid gap-6 pb-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] md:gap-16 md:pb-16">
-        <PageHeader title={t.title} description={t.description} className="pb-0 md:pb-0" />
-        <div className="space-y-4 text-base leading-relaxed text-muted-foreground text-pretty md:pt-12">
+      <PageHeader title={t.title} description={t.description}>
+        <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground text-pretty">
           {pick(profile.intro, locale).map((p) => (
             <p key={p}>{p}</p>
           ))}
         </div>
-      </div>
+      </PageHeader>
 
       <section className="grid gap-10 md:grid-cols-2">
         <div>
