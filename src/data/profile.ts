@@ -85,10 +85,10 @@ export const profile = {
   /** The About page intro. Two sentences, no more. */
   about: {
     en: [
-      "EECS undergraduate at GIST. I research diffusion language models at Real-Lab and build products on the side, and I'd like to keep doing both.",
+      "I research diffusion language models at Real-Lab and build products on the side, and I'd like to keep doing both.",
     ],
     ko: [
-      "GIST 전기전자컴퓨터공학과 학부생. Real-Lab에서 Diffusion Language Model을 연구하고, 그 옆에서 제품을 만듭니다. 둘 다 계속할 생각입니다.",
+      "Real-Lab에서 Diffusion Language Model을 연구하고, 그 옆에서 제품을 만듭니다. 둘 다 계속할 생각입니다.",
     ],
   } satisfies Localized<string[]>,
 
@@ -108,23 +108,25 @@ export const profile = {
           "벤치마크가 아니라 실제 사용을 반영하는 평가",
         ],
       },
+      stack: ["PyTorch", "Hugging Face", "Python"],
     },
     engineering: {
       title: { en: "Engineering", ko: "엔지니어링" },
       items: {
         en: [
-          "Next.js, NestJS and Flutter in production",
+          "Shipping and running web and mobile products people use",
           "Retrieval and LLM features that hold up with real users",
           "Small teams, fast iterations, owning the whole product",
         ],
         ko: [
-          "Next.js, NestJS, Flutter로 만든 실제 운영 서비스",
+          "실제 사용자가 쓰는 웹·앱 서비스 출시와 운영",
           "실제 사용자 앞에서 버티는 검색·LLM 기능",
           "작은 팀, 빠른 반복, 제품 전체를 책임지는 방식",
         ],
       },
+      stack: ["Next.js", "NestJS", "Flutter", "TypeScript", "PostgreSQL", "Docker", "AWS"],
     },
-  } satisfies Record<"research" | "engineering", { title: Localized<string>; items: Localized<string[]> }>,
+  } satisfies Record<"research" | "engineering", { title: Localized<string>; items: Localized<string[]>; stack: string[] }>,
 
   /** Primary links, shown on the home page and in the footer. */
   links: [

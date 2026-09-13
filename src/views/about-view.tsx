@@ -1,6 +1,8 @@
+import Image from "next/image";
+import { CodeXml, FlaskConical, GraduationCap, MapPin } from "lucide-react";
 import { AwardGrid } from "@/components/award-grid";
-import { PageHeader } from "@/components/page-header";
 import { SectionHeading } from "@/components/section-heading";
+import { TechBadge } from "@/components/tech-badge";
 import { TimelineList } from "@/components/timeline-list";
 import { profile } from "@/data/profile";
 import { timelineByKind, type TimelineKind } from "@/data/timeline";
@@ -18,25 +20,70 @@ const SECTION_KEY: Record<TimelineKind, "career" | "education" | "awards" | "act
 export default function AboutView({ locale }: { locale: Locale }) {
   const t = dictionary[locale].pages.about;
   const kinds: TimelineKind[] = ["career", "education", "award", "activity"];
-  const tracks = [profile.tracks.research, profile.tracks.engineering];
+  const tracks = [
+    { ...profile.tracks.research, Icon: FlaskConical },
+    { ...profile.tracks.engineering, Icon: CodeXml },
+  ];
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
-      <PageHeader title={t.title} description={t.description} className="pb-10 md:pb-12" />
+      {/* Profile block doubles as the page header. */}
+      <header className="flex flex-col gap-6 pt-6 sm:flex-row sm:items-start sm:gap-8 md:pt-10">
+        <Image
+          src={profile.avatar}
+          alt={pick(profile.name, locale)}
+          width={112}
+          height={112}
+          priority
+          className="size-24 shrink-0 rounded-full object-cover sm:size-28"
+        />
+        <div className="min-w-0 max-w-content">
+          <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
+            {pick(profile.name, locale)}
+          </h1>
+          <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+            <li className="inline-flex items-center gap-1.5">
+              <GraduationCap className="size-4" />
+              {pick(profile.affiliation, locale)}
+            </li>
+            <li className="inline-flex items-center gap-1.5">
+              <MapPin className="size-4" />
+              {pick(profile.location, locale)}
+            </li>
+          </ul>
+          <div className="mt-5 space-y-3 text-lg leading-relaxed text-pretty">
+            {pick(profile.about, locale).map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+          </div>
+        </div>
+      </header>
 
-      <div className="max-w-content space-y-4 text-lg leading-relaxed text-pretty">
-        {pick(profile.about, locale).map((p) => (
-          <p key={p}>{p}</p>
-        ))}
-      </div>
-
-      <section className="mt-14 grid gap-10 md:grid-cols-2 md:gap-12">
-        {tracks.map((track) => (
-          <div key={pick(track.title, "en")}>
-            <SectionHeading className="mb-3">{pick(track.title, locale)}</SectionHeading>
-            <ul className="space-y-1.5 text-sm leading-relaxed">
+      <section className="mt-12 grid gap-4 md:grid-cols-2">
+        {tracks.map(({ Icon, ...track }) => (
+          <div
+            key={pick(track.title, "en")}
+            className="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6"
+          >
+            <h2 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
+              <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                <Icon className="size-[18px]" />
+              </span>
+              {pick(track.title, locale)}
+            </h2>
+            <ul className="flex-1 space-y-2 text-sm leading-relaxed">
               {pick(track.items, locale).map((item) => (
-                <li key={item} className="text-pretty">{item}</li>
+                <li key={item} className="flex gap-2.5">
+                  <span aria-hidden className="mt-[0.7em] size-1 shrink-0 rounded-full bg-muted-foreground/60" />
+                  <span className="text-pretty">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <ul className="flex flex-wrap gap-1.5">
+              {track.stack.map((s) => (
+                <li key={s}>
+                  <TechBadge name={s} />
+                </li>
               ))}
             </ul>
           </div>
