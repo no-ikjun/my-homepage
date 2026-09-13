@@ -1,0 +1,32 @@
+export const metadata = {
+  title: "Wisemind",
+  kind: "product",
+  status: "completed",
+  start: "2024-02",
+  end: "2025-07",
+  summary: "ChatGPT와 HyperCLOVA X 기반의 LLM 금융 분석 어시스턴트.",
+  affiliation: "개인",
+  role: ["풀스택 개발", "AI 연동"],
+  stack: ["React", "NestJS", "FastAPI", "Cloudflare", "AWS"],
+  links: [
+    { label: "서비스", href: "https://analyst.ikjun.com" },
+    { label: "백엔드", href: "https://github.com/no-ikjun/analyst-nest" },
+    { label: "AI 서버", href: "https://github.com/no-ikjun/wisemind-ai-server" },
+    { label: "프론트엔드", href: "https://github.com/no-ikjun/analyst-fe" },
+  ],
+  image: "https://analyst.ikjun.com/logo.png",
+};
+
+## 왜 만들었나
+
+금융 데이터는 넘치지만 읽어내려면 전문성이 필요합니다. Wisemind는 일상 언어로 질문하면 근거 수치와 함께 분석을 돌려줍니다.
+
+## 무엇을 만들었나
+
+- React 프론트엔드, NestJS API, 그리고 ChatGPT와 HyperCLOVA X를 호출하는 FastAPI AI 서버로 이루어진 3-서비스 구조.
+- 모델이 일반 지식이 아니라 실제 금융 데이터를 바탕으로 답하도록 하는 프롬프트와 도구 설계.
+- Cloudflare 뒤에 AWS로 배포.
+
+## 배운 점
+
+서로 다른 두 LLM 제공자 위에 제품을 올리면서 추상화 경계, 평가 방법, 그리고 모델 출력이 사용자에게 닿기 전에 어디서 가드레일이 필요한지에 대해 많이 배웠습니다.

@@ -1,0 +1,32 @@
+export const metadata = {
+  title: "Wisemind",
+  kind: "product",
+  status: "completed",
+  start: "2024-02",
+  end: "2025-07",
+  summary: "An LLM-powered financial analysis assistant built on ChatGPT and HyperCLOVA X.",
+  affiliation: "Personal",
+  role: ["Full-stack development", "AI integration"],
+  stack: ["React", "NestJS", "FastAPI", "Cloudflare", "AWS"],
+  links: [
+    { label: "Live", href: "https://analyst.ikjun.com" },
+    { label: "Backend", href: "https://github.com/no-ikjun/analyst-nest" },
+    { label: "AI server", href: "https://github.com/no-ikjun/wisemind-ai-server" },
+    { label: "Frontend", href: "https://github.com/no-ikjun/analyst-fe" },
+  ],
+  image: "https://analyst.ikjun.com/logo.png",
+};
+
+## Why
+
+Financial data is abundant but reading it takes expertise. Wisemind lets you ask questions in plain language and get an analysis with the numbers behind it.
+
+## What I built
+
+- A three-service architecture: a React frontend, a NestJS API, and a FastAPI AI server that talks to ChatGPT and HyperCLOVA X.
+- Prompt and tool design so the model works from actual financial data rather than general knowledge.
+- Deployment on AWS behind Cloudflare.
+
+## What I learned
+
+Building a product on top of two different LLM providers taught me a lot about abstraction boundaries, evaluation, and where model output needs guardrails before it reaches a user.

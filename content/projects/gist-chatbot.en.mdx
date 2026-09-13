@@ -1,0 +1,34 @@
+export const metadata = {
+  title: "GIST Chatbot",
+  kind: "product",
+  status: "active",
+  start: "2026-01",
+  summary: "A retrieval-based assistant that answers questions about GIST from the school's official documents.",
+  affiliation: "GSA InfoTeam",
+  role: ["Answer generation system", "Full-stack development", "UI design"],
+  stack: ["React", "TypeScript", "NestJS", "MCP", "Docker"],
+  links: [
+    { label: "Live", href: "https://chatbot.gistory.me" },
+    { label: "Backend (MCP client)", href: "https://github.com/gsainfoteam/chatbot-be" },
+    { label: "Frontend", href: "https://github.com/gsainfoteam/chatbot-fe" },
+    { label: "MCP server", href: "https://github.com/gsainfoteam/chatbot-mcp" },
+  ],
+  image: "https://chatbot.gistory.me/logo.svg",
+  featured: true,
+  order: 1,
+};
+
+## Why
+
+Information about GIST is scattered across academic notices, the student handbook, orientation material and departmental pages. Students ask the same questions every semester and the answers are hard to find. The chatbot turns that pile of official documents into something you can just ask.
+
+## What I built
+
+- **Answer generation.** A retrieval pipeline that chunks uploaded documents, ranks the relevant passages and grounds the model's answer in them, so responses cite real school policy instead of guessing.
+- **MCP architecture.** Document search lives in a separate MCP server; the NestJS backend is the MCP client. New data sources plug in without touching the answer logic.
+- **Embeddable widget.** The frontend ships as an iframe so any student service can drop the chatbot in with one tag.
+- **Per-service dashboard.** Each integrating service manages its own documents and sees its own usage.
+
+## Outcome
+
+Deployed at chatbot.gistory.me and used by GIST students. Ongoing work focuses on answer accuracy and response latency.

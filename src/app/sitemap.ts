@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { getPublishedWritings } from "@/lib/writings";
+import { getPublishedWritings } from "@/lib/content/writings";
+import { getProjects } from "@/lib/content/projects";
 import { localePath, LOCALES } from "@/lib/locale";
 
 /** Locale-neutral paths that exist in both en and ko, with their priority. */
@@ -42,5 +43,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }));
 
-  return [...localizedEntries, ...writingEntries];
+  // Projects exist in both locales at mirrored URLs.
+  const projects = await getProjects("en");
+  const projectEntries: MetadataRoute.Sitemap = projects.flatMap((p) =>
+    LOCALES.map((locale) => ({
+      url: abs(localePath(locale, `/projects/${p.slug}`)),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: abs(localePath("en", `/projects/${p.slug}`)),
+          ko: abs(localePath("ko", `/projects/${p.slug}`)),
+        },
+      },
+    }))
+  );
+
+  return [...localizedEntries, ...projectEntries, ...writingEntries];
 }

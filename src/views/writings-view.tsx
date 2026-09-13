@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./writings.module.css";
-import { getPublishedWritings } from "@/lib/writings";
+import { getPublishedWritings } from "@/lib/content/writings";
 import { PageHero, BadgeChip } from "@/components/ui";
 import { translations } from "@/lib/translations";
 import { localePath, type Locale } from "@/lib/locale";

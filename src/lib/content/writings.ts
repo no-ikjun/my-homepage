@@ -24,7 +24,7 @@ async function listMdxFiles() {
 
 async function importWritingModule(slug: string): Promise<WritingModule> {
   return import(
-    /* webpackInclude: /\.mdx?$/ */ `../../content/writings/${slug}.mdx`
+    /* webpackInclude: /\.mdx?$/ */ `../../../content/writings/${slug}.mdx`
   ) as Promise<WritingModule>;
 }
 

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import styles from "./page.module.css";
-import { getPublishedWritings, getWritingBySlug } from "@/lib/writings";
+import { getPublishedWritings, getWritingBySlug } from "@/lib/content/writings";
 import { SITE_URL } from "@/lib/site";
 import { BadgeChip } from "@/components/ui";
 
