@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { dictionary } from "@/lib/dictionary";
 import { formatPeriod } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/locale";
@@ -25,18 +24,11 @@ export function ProjectCard({
         className,
       )}
     >
-      <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
-        <Badge
-          variant="outline"
-          className={cn(
-            "rounded-full font-mono tracking-wide uppercase",
-            project.kind === "research" && "border-brand/40 text-brand",
-          )}
-        >
-          {t.project.kind[project.kind]}
-        </Badge>
+      <p className="text-sm text-muted-foreground">
+        <span className={cn(project.kind === "research" && "text-brand")}>{t.project.kind[project.kind]}</span>
+        <span aria-hidden> · </span>
         <span className="tabular-nums">{formatPeriod(project.start, project.end, locale)}</span>
-      </div>
+      </p>
 
       <div className="flex-1 space-y-1.5">
         <h3 className="flex items-start justify-between gap-2 text-base font-semibold tracking-tight">

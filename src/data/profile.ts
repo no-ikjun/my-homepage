@@ -46,9 +46,6 @@ export const profile = {
     ],
   } satisfies Localized<string[]>,
 
-  /** "YYYY-MM" - bump whenever the Now block changes. */
-  nowUpdated: "2026-09",
-
   /** "Now" block on the home page. Keep to 3-4 items; edit freely. */
   now: [
     {

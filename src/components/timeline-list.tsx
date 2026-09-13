@@ -48,7 +48,7 @@ export function TimelineList({ items, locale }: { items: TimelineItem[]; locale:
         const org = pick(item.org, locale);
         return (
           <li key={item.id} className="grid gap-3 py-6 md:grid-cols-[10rem_1fr] md:gap-6">
-            <p className="font-mono text-xs text-muted-foreground tabular-nums md:pt-3">
+            <p className="text-sm text-muted-foreground tabular-nums md:pt-2.5">
               {formatPeriod(item.start, item.end, locale)}
             </p>
 
@@ -81,7 +81,7 @@ export function TimelineList({ items, locale }: { items: TimelineItem[]; locale:
                         <p className="text-sm font-medium">
                           {pick(entry.title, locale)}
                           {entry.start ? (
-                            <span className="ml-2 font-mono text-xs font-normal text-muted-foreground tabular-nums">
+                            <span className="ml-2 text-xs font-normal text-muted-foreground tabular-nums">
                               {formatPeriod(entry.start, entry.end, locale)}
                             </span>
                           ) : null}

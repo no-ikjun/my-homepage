@@ -109,12 +109,9 @@ html[data-theme="dark"] {
 
 @theme inline {
   --font-sans:
-    var(--font-geist-sans), var(--font-pretendard), ui-sans-serif, system-ui,
-    -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR",
-    sans-serif;
-  --font-mono:
-    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas,
-    monospace;
+    var(--font-pretendard), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -194,7 +191,6 @@ html[data-theme="dark"] {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    font-feature-settings: "ss01", "cv11";
   }
 
   main {

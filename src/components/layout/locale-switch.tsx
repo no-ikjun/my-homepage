@@ -22,7 +22,7 @@ export function LocaleSwitch({ label, className }: { label: string; className?: 
       aria-label={label}
       title={label}
       className={cn(
-        "inline-flex h-9 items-center rounded-full px-3 font-mono text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground",
+        "inline-flex h-9 items-center rounded-full px-3 text-sm text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground",
         className,
       )}
     >

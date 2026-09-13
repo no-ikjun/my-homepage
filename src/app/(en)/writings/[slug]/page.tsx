@@ -65,7 +65,7 @@ export default async function WritingDetailPage({ params }: Props) {
       </Link>
 
       <header className="mt-6 max-w-content">
-        <time dateTime={metadata.date} className="font-mono text-xs text-muted-foreground tabular-nums">
+        <time dateTime={metadata.date} className="text-sm text-muted-foreground tabular-nums">
           {formatDate(metadata.date, "en")}
         </time>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight text-balance md:text-4xl">

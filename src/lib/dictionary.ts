@@ -17,7 +17,6 @@ const en = {
   },
   home: {
     now: "Now",
-    updated: "Updated",
     nowKinds: {
       research: "Researching",
       building: "Building",
@@ -107,7 +106,6 @@ const ko: typeof en = {
   },
   home: {
     now: "Now",
-    updated: "업데이트",
     nowKinds: {
       research: "연구",
       building: "개발",

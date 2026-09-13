@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/page-header";
 import { SectionHeading } from "@/components/section-heading";
+import { AwardGrid } from "@/components/award-grid";
 import { TimelineList } from "@/components/timeline-list";
 import { profile } from "@/data/profile";
 import { timelineByKind, type TimelineKind } from "@/data/timeline";
@@ -42,16 +43,14 @@ export default function AboutView({ locale }: { locale: Locale }) {
         </div>
         <div>
           <SectionHeading>{t.principles}</SectionHeading>
-          <ol className="space-y-2 text-sm leading-relaxed">
-            {pick(profile.principles, locale).map((item, i) => (
+          <ul className="space-y-2 text-sm leading-relaxed">
+            {pick(profile.principles, locale).map((item) => (
               <li key={item} className="flex gap-3">
-                <span className="w-4 shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <span aria-hidden className="mt-[0.65em] size-1.5 shrink-0 rounded-full bg-border" />
                 <span className="text-pretty">{item}</span>
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       </section>
 
@@ -62,10 +61,12 @@ export default function AboutView({ locale }: { locale: Locale }) {
           const key = SECTION_KEY[kind];
           return (
             <section key={kind} id={key} aria-labelledby={`about-${key}`} className="scroll-mt-28">
-              <SectionHeading id={`about-${key}`} aside={items.length}>
-                {t[key]}
-              </SectionHeading>
-              <TimelineList items={items} locale={locale} />
+              <SectionHeading id={`about-${key}`}>{t[key]}</SectionHeading>
+              {kind === "award" ? (
+                <AwardGrid items={items} locale={locale} />
+              ) : (
+                <TimelineList items={items} locale={locale} />
+              )}
             </section>
           );
         })}

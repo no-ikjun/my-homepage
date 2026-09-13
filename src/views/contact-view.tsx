@@ -45,7 +45,7 @@ export default function ContactView({ locale }: { locale: Locale }) {
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-2 font-medium">
                     {NAME[ch.id]}
-                    <span className="truncate font-mono text-xs font-normal text-muted-foreground">
+                    <span className="truncate text-sm font-normal text-muted-foreground">
                       {ch.label}
                     </span>
                   </span>

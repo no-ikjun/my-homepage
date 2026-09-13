@@ -37,7 +37,7 @@ export default async function WritingsView({ locale }: { locale: Locale }) {
               >
                 <time
                   dateTime={w.date}
-                  className="font-mono text-xs text-muted-foreground tabular-nums md:pt-1"
+                  className="text-sm text-muted-foreground tabular-nums md:pt-0.5"
                 >
                   {formatDate(w.date, locale)}
                 </time>

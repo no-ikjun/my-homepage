@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { dictionary } from "@/lib/dictionary";
 import { formatPeriod } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/locale";
@@ -10,7 +9,7 @@ import type { ProjectEntry } from "@/types/project";
 function Meta({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <dt className="font-mono text-xs tracking-wide text-muted-foreground uppercase">{label}</dt>
+      <dt className="text-sm text-muted-foreground">{label}</dt>
       <dd className="mt-1.5 text-sm">{children}</dd>
     </div>
   );
@@ -38,24 +37,11 @@ export default function ProjectDetailView({
       </Link>
 
       <header className="mt-6 max-w-content">
-        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-          <Badge
-            variant="outline"
-            className={cn(
-              "rounded-full font-mono tracking-wide uppercase",
-              meta.kind === "research" && "border-brand/40 text-brand",
-            )}
-          >
-            {t.project.kind[meta.kind]}
-          </Badge>
+        <p className="text-sm text-muted-foreground">
+          <span className={cn(meta.kind === "research" && "text-brand")}>{t.project.kind[meta.kind]}</span>
+          <span aria-hidden> · </span>
           <span className="tabular-nums">{formatPeriod(meta.start, meta.end, locale)}</span>
-          {meta.status === "active" ? (
-            <>
-              <span aria-hidden>·</span>
-              <span>{t.project.status.active}</span>
-            </>
-          ) : null}
-        </div>
+        </p>
         <h1 className="mt-4 text-3xl font-semibold tracking-tight text-balance md:text-4xl">
           {meta.title}
         </h1>

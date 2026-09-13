@@ -10,7 +10,6 @@ import { profile } from "@/data/profile";
 import { getFeaturedProjects } from "@/lib/content/projects";
 import { getPublishedWritings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
-import { formatMonth } from "@/lib/format";
 import { pick } from "@/lib/i18n";
 import { localePath, type Locale } from "@/lib/locale";
 
@@ -80,16 +79,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
 
       {/* ----------------------------------------------------------- now */}
       <Reveal as="section" delay={0.08} className="mt-20" aria-labelledby="now-heading">
-        <SectionHeading
-          id="now-heading"
-          aside={`${t.home.updated} ${formatMonth(profile.nowUpdated, locale)}`}
-        >
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand/60 motion-reduce:hidden" />
-            <span className="relative inline-flex size-2 rounded-full bg-brand" />
-          </span>
-          {t.home.now}
-        </SectionHeading>
+        <SectionHeading id="now-heading">{t.home.now}</SectionHeading>
 
         <ul className="divide-y divide-border border-y border-border">
           {profile.now.map((item) => {
@@ -97,7 +87,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
             const detail = pick(item.detail, locale);
             const inner = (
               <>
-                <span className="font-mono text-xs tracking-wide text-muted-foreground uppercase md:pt-1">
+                <span className="text-sm text-muted-foreground md:pt-0.5">
                   {t.home.nowKinds[item.kind]}
                 </span>
                 <span className="min-w-0">
@@ -170,7 +160,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
                       <span className="mt-0.5 line-clamp-1 block text-sm text-muted-foreground">{w.summary}</span>
                     ) : null}
                   </span>
-                  <span className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums">{w.date}</span>
+                  <span className="shrink-0 text-sm text-muted-foreground tabular-nums">{w.date}</span>
                 </Link>
               </li>
             ))}
@@ -179,16 +169,16 @@ export default async function HomeView({ locale }: { locale: Locale }) {
       ) : null}
 
       {/* -------------------------------------------------------- contact */}
-      <Reveal as="section" delay={0.3} className="mt-24">
-        <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-border bg-card p-6 md:flex-row md:items-center">
-          <p className="text-lg font-medium tracking-tight text-balance">{t.home.contactLead}</p>
-          <Button asChild className="rounded-full">
-            <a href={profile.links[0].href}>
-              <Mail data-icon="inline-start" />
-              {t.home.emailMe}
-            </a>
-          </Button>
-        </div>
+      <Reveal as="section" delay={0.3} className="mt-24 max-w-content">
+        <p className="text-lg leading-relaxed text-pretty">
+          {t.home.contactLead}{" "}
+          <a
+            href={profile.links[0].href}
+            className="underline decoration-border underline-offset-4 transition-colors hover:decoration-brand"
+          >
+            {t.home.emailMe}
+          </a>
+        </p>
       </Reveal>
     </main>
   );

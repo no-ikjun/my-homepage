@@ -7,7 +7,7 @@ Personal site of Ikjun Choi: research, projects, writing, contact. Bilingual (En
 - Next.js 16 (App Router) + React 19, TypeScript
 - Tailwind CSS v4 + shadcn/ui (radix), `motion` for the few animations
 - MDX for long-form content (`@next/mdx`)
-- Geist (Latin) + Pretendard (Korean), self-hosted via `next/font`
+- Pretendard (Latin + Korean), self-hosted via `next/font`
 - Vercel Analytics
 
 ```bash

@@ -22,9 +22,7 @@ export default async function ProjectsView({ locale }: { locale: Locale }) {
           if (!items.length) return null;
           return (
             <section key={kind} aria-labelledby={`projects-${kind}`}>
-              <SectionHeading id={`projects-${kind}`} aside={items.length}>
-                {t[kind]}
-              </SectionHeading>
+              <SectionHeading id={`projects-${kind}`}>{t[kind]}</SectionHeading>
               <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((p) => (
                   <li key={p.slug} className="flex">
