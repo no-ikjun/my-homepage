@@ -30,16 +30,7 @@ export default function ProjectDetailView({
   const { meta, Content } = entry;
 
   return (
-    <main
-      className="relative mx-auto w-full max-w-page px-6"
-      style={meta.accent ? ({ "--accent-color": meta.accent } as React.CSSProperties) : undefined}
-    >
-      {meta.accent ? (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-24 -z-10 h-[28rem] bg-[radial-gradient(55%_60%_at_15%_0%,color-mix(in_srgb,var(--accent-color)_16%,transparent),transparent_70%)]"
-        />
-      ) : null}
+    <main className="mx-auto w-full max-w-page px-6">
       <Link
         href={localePath(locale, "/projects")}
         className="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -49,7 +40,7 @@ export default function ProjectDetailView({
       </Link>
 
       <header className="mt-6 max-w-content">
-        <ProjectIcon src={meta.image} title={meta.title} accent={meta.accent} size={56} className="mb-5" />
+        <ProjectIcon src={meta.image} title={meta.title} size={56} className="mb-5" />
         <p className="text-sm text-muted-foreground">
           <span className={cn(meta.kind === "research" && "text-brand")}>{t.project.kind[meta.kind]}</span>
           <span aria-hidden> · </span>

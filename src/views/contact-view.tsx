@@ -12,13 +12,6 @@ const ICON = {
   instagram: InstagramIcon,
 } as const;
 
-const COLOR: Record<string, string | undefined> = {
-  email: undefined, // uses --brand
-  linkedin: "#0A66C2",
-  github: undefined, // stays neutral
-  instagram: "#E4405F",
-};
-
 const NAME = {
   email: "Email",
   github: "GitHub",
@@ -46,10 +39,7 @@ export default function ContactView({ locale }: { locale: Locale }) {
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="group -mx-3 flex items-center gap-4 rounded-lg px-3 py-4 transition-colors hover:bg-foreground/[0.03]"
               >
-                <span
-                  style={{ "--c": COLOR[ch.id] ?? (ch.id === "email" ? "var(--brand)" : "var(--muted-foreground)") } as React.CSSProperties}
-                  className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-[color-mix(in_srgb,var(--c)_22%,transparent)] bg-[color-mix(in_srgb,var(--c)_10%,var(--card))] text-[var(--c)] transition-transform group-hover:scale-105"
-                >
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors group-hover:text-foreground">
                   <Icon className="size-[18px]" />
                 </span>
                 <span className="min-w-0 flex-1">

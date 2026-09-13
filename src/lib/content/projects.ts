@@ -61,7 +61,6 @@ function toMeta(
     stack: fm.stack ?? [],
     links: fm.links ?? [],
     image: fm.image,
-    accent: fm.accent,
     gallery: fm.gallery ?? [],
     featured: fm.featured ?? false,
     order: fm.order ?? 0,
