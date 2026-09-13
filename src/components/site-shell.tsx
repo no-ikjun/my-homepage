@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/contexts/theme-context";
 import { SITE_URL } from "@/lib/site";
 import { translations } from "@/lib/translations";
 import { HTML_LANG, localePath, type Locale } from "@/lib/locale";
+import { fontVariables } from "@/lib/fonts";
 
 const themeBootstrapScript = `
 (function () {
@@ -57,7 +58,11 @@ export default function SiteShell({
   ];
 
   return (
-    <html lang={HTML_LANG[locale]} suppressHydrationWarning>
+    <html
+      lang={HTML_LANG[locale]}
+      className={fontVariables}
+      suppressHydrationWarning
+    >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <ThemeProvider>
