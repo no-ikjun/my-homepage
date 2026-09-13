@@ -1,12 +1,21 @@
 import Link from "next/link";
-import type { ProjectEntry } from "@/types/project";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { dictionary } from "@/lib/dictionary";
 import { formatPeriod } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/locale";
+import { cn } from "@/lib/utils";
+import type { ProjectEntry } from "@/types/project";
 
-/**
- * Minimal render of a project case study. Restyled in the views phase; this
- * exists so the content loader is exercised by the build.
- */
+function Meta({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <dt className="font-mono text-xs tracking-wide text-muted-foreground uppercase">{label}</dt>
+      <dd className="mt-1.5 text-sm">{children}</dd>
+    </div>
+  );
+}
+
 export default function ProjectDetailView({
   locale,
   entry,
@@ -14,28 +23,95 @@ export default function ProjectDetailView({
   locale: Locale;
   entry: ProjectEntry;
 }) {
+  const t = dictionary[locale];
+  const d = t.pages.projectDetail;
   const { meta, Content } = entry;
+
   return (
-    <main className="mx-auto w-full max-w-content px-6 py-16">
+    <main className="mx-auto w-full max-w-page px-6">
       <Link
         href={localePath(locale, "/projects")}
-        className="text-sm text-muted-foreground hover:text-foreground"
+        className="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
-        ← {locale === "ko" ? "프로젝트" : "Projects"}
+        <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-px" />
+        {d.back}
       </Link>
-      <header className="mt-6 space-y-3">
-        <p className="text-sm text-muted-foreground">
-          {formatPeriod(meta.start, meta.end, locale)}
-          {meta.affiliation ? ` · ${meta.affiliation}` : null}
-        </p>
-        <h1 className="text-3xl font-semibold tracking-tight text-balance">
+
+      <header className="mt-6 max-w-content">
+        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+          <Badge
+            variant="outline"
+            className={cn(
+              "rounded-full font-mono tracking-wide uppercase",
+              meta.kind === "research" && "border-brand/40 text-brand",
+            )}
+          >
+            {t.project.kind[meta.kind]}
+          </Badge>
+          <span className="tabular-nums">{formatPeriod(meta.start, meta.end, locale)}</span>
+          {meta.status === "active" ? (
+            <>
+              <span aria-hidden>·</span>
+              <span>{t.project.status.active}</span>
+            </>
+          ) : null}
+        </div>
+        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-balance md:text-4xl">
           {meta.title}
         </h1>
-        <p className="text-lg text-muted-foreground text-pretty">{meta.summary}</p>
+        <p className="mt-3 text-lg text-muted-foreground text-pretty">{meta.summary}</p>
       </header>
-      <article className="prose-custom mt-10">
-        <Content />
-      </article>
+
+      <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_16rem] lg:gap-16">
+        <article className="prose-custom min-w-0">
+          <Content />
+        </article>
+
+        <aside className="lg:order-none order-first lg:sticky lg:top-28 lg:self-start">
+          <dl className="grid grid-cols-2 gap-6 rounded-2xl border border-border bg-card p-5 lg:grid-cols-1">
+            {meta.affiliation ? <Meta label={d.affiliation}>{meta.affiliation}</Meta> : null}
+            {meta.role.length ? (
+              <Meta label={d.role}>
+                <ul className="space-y-0.5">
+                  {meta.role.map((r) => (
+                    <li key={r}>{r}</li>
+                  ))}
+                </ul>
+              </Meta>
+            ) : null}
+            {meta.stack.length ? (
+              <Meta label={d.stack}>
+                <ul className="flex flex-wrap gap-1.5">
+                  {meta.stack.map((s) => (
+                    <li key={s} className="rounded-md bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </Meta>
+            ) : null}
+            {meta.links?.length ? (
+              <Meta label={d.links}>
+                <ul className="space-y-1">
+                  {meta.links.map((l) => (
+                    <li key={l.href}>
+                      <a
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1 text-foreground hover:underline hover:underline-offset-4"
+                      >
+                        {l.label}
+                        <ArrowUpRight className="size-3.5 text-muted-foreground" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </Meta>
+            ) : null}
+          </dl>
+        </aside>
+      </div>
     </main>
   );
 }

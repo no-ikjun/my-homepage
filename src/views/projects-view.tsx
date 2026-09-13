@@ -1,119 +1,42 @@
-"use client";
-
-import { useState } from "react";
-import Image from "next/image";
-import styles from "./projects.module.css";
-import { projects } from "@/data/projects";
-import { translations } from "@/lib/translations";
+import { ProjectCard } from "@/components/project-card";
+import { PageHeader } from "@/components/page-header";
+import { SectionHeading } from "@/components/section-heading";
+import { getProjects } from "@/lib/content/projects";
+import { dictionary } from "@/lib/dictionary";
 import { type Locale } from "@/lib/locale";
-import { PageHero } from "@/components/ui";
-import ProjectDetailModal from "@/components/project-detail-modal";
-import type { Project } from "@/data/projects";
+import type { ProjectKind } from "@/types/project";
 
-function ProjectCard({
-  project,
-  onSelect,
-}: {
-  project: Project;
-  onSelect: (project: Project) => void;
-}) {
-  return (
-    <button
-      type="button"
-      className={styles.projectCard}
-      onClick={() => onSelect(project)}
-      aria-label={`${project.title} - ${project.summary}`}
-    >
-      <span className={styles.projectCardArrow} aria-hidden="true">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M9 18l6-6-6-6" />
-        </svg>
-      </span>
-      <div className={styles.projectCardInner}>
-        <div className={styles.projectThumb} aria-hidden="true">
-          {project.image ? (
-            <Image
-              src={project.image}
-              alt=""
-              fill
-              sizes="72px"
-              className={styles.coverImage}
-            />
-          ) : null}
-        </div>
-        <div className={styles.projectCardBody}>
-          <h3 className={styles.projectTitle}>{project.title}</h3>
-          <p className={styles.projectPeriod}>{project.period}</p>
-          <p className={styles.projectSummary}>{project.summary}</p>
-        </div>
-      </div>
-    </button>
-  );
-}
+const ORDER: ProjectKind[] = ["research", "product"];
 
-export default function ProjectsView({ locale }: { locale: Locale }) {
-  const t = translations[locale];
-  const lang = locale;
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  const sections = [
-    {
-      id: "individual-projects-title",
-      title: t.projectsIndividualTitle,
-      items: projects[lang].individual,
-    },
-    {
-      id: "team-projects-title",
-      title: t.projectsTeamTitle,
-      items: projects[lang].team,
-    },
-  ];
+export default async function ProjectsView({ locale }: { locale: Locale }) {
+  const t = dictionary[locale].pages.projects;
+  const projects = await getProjects(locale);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.shell}>
-        <PageHero
-          title={t.projectsPageTitle}
-          description={t.projectsPageDescription}
-        />
+    <main className="mx-auto w-full max-w-page px-6">
+      <PageHeader title={t.title} description={t.description} />
 
-        {sections.map((section) => (
-          <section
-            key={section.id}
-            className={styles.projectSection}
-            aria-labelledby={section.id}
-          >
-            <h2 id={section.id} className={styles.sectionTitle}>
-              {section.title}
-            </h2>
-            <div className={styles.projectList}>
-              {section.items.map((project) => (
-                <ProjectCard
-                  key={project.title}
-                  project={project}
-                  onSelect={setSelectedProject}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
+      <div className="space-y-16">
+        {ORDER.map((kind) => {
+          const items = projects.filter((p) => p.kind === kind);
+          if (!items.length) return null;
+          return (
+            <section key={kind} aria-labelledby={`projects-${kind}`}>
+              <SectionHeading id={`projects-${kind}`} aside={items.length}>
+                {t[kind]}
+              </SectionHeading>
+              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((p) => (
+                  <li key={p.slug} className="flex">
+                    <ProjectCard project={p} locale={locale} className="flex-1" />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })}
+        {projects.length === 0 ? <p className="text-muted-foreground">{t.empty}</p> : null}
       </div>
-
-      <ProjectDetailModal
-        locale={locale}
-        project={selectedProject}
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
     </main>
   );
 }

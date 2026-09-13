@@ -1,25 +1,23 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import styles from "./page.module.css";
+import { ArrowLeft } from "lucide-react";
 import { getPublishedWritings, getWritingBySlug } from "@/lib/content/writings";
+import { dictionary } from "@/lib/dictionary";
+import { formatDate } from "@/lib/format";
 import { SITE_URL } from "@/lib/site";
-import { BadgeChip } from "@/components/ui";
 
-type WritingDetailPageProps = {
-  params: Promise<{ slug: string }>;
-};
+type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
   const writings = await getPublishedWritings();
-  return writings.map((writing) => ({ slug: writing.slug }));
+  return writings.map((w) => ({ slug: w.slug }));
 }
 
-export async function generateMetadata({ params }: WritingDetailPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug: slugParam } = await params;
   const entry = await getWritingBySlug(slugParam);
-  if (!entry || entry.metadata.published === false) {
-    return { title: "Writing" };
-  }
+  if (!entry || entry.metadata.published === false) return { title: "Writing" };
 
   const { title, summary, slug, date } = entry.metadata;
   const url = `${SITE_URL}/writings/${slug}`;
@@ -47,37 +45,49 @@ export async function generateMetadata({ params }: WritingDetailPageProps): Prom
   };
 }
 
-export default async function WritingDetailPage({ params }: WritingDetailPageProps) {
+/** Posts are written in one language and live at a single unprefixed URL. */
+export default async function WritingDetailPage({ params }: Props) {
   const { slug } = await params;
   const entry = await getWritingBySlug(slug);
-  if (!entry || entry.metadata.published === false) {
-    notFound();
-  }
+  if (!entry || entry.metadata.published === false) notFound();
 
   const { Content, metadata } = entry;
+  const t = dictionary.en.pages.writings;
 
   return (
-    <main className={styles.main}>
-      <div className={styles.shell}>
-        <header className={styles.header}>
-          <p className={styles.date}>{metadata.date}</p>
-          <h1 className={styles.title}>{metadata.title}</h1>
-          {metadata.summary ? <p className={styles.summary}>{metadata.summary}</p> : null}
-          {metadata.tags?.length ? (
-            <div className={styles.tagRow}>
-              {metadata.tags.map((tag) => (
-                <BadgeChip key={tag} size="sm" tone="muted">
-                  {tag}
-                </BadgeChip>
-              ))}
-            </div>
-          ) : null}
-        </header>
+    <main className="mx-auto w-full max-w-page px-6">
+      <Link
+        href="/writings"
+        className="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-px" />
+        {t.back}
+      </Link>
 
-        <article className={styles.content}>
-          <Content />
-        </article>
-      </div>
+      <header className="mt-6 max-w-content">
+        <time dateTime={metadata.date} className="font-mono text-xs text-muted-foreground tabular-nums">
+          {formatDate(metadata.date, "en")}
+        </time>
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-balance md:text-4xl">
+          {metadata.title}
+        </h1>
+        {metadata.summary ? (
+          <p className="mt-3 text-lg text-muted-foreground text-pretty">{metadata.summary}</p>
+        ) : null}
+        {metadata.tags?.length ? (
+          <ul className="mt-4 flex flex-wrap gap-1.5">
+            {metadata.tags.map((tag) => (
+              <li key={tag} className="rounded-md bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                {tag}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </header>
+
+      <article className="prose-custom mt-10">
+        <Content />
+      </article>
     </main>
   );
 }

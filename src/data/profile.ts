@@ -11,8 +11,10 @@ export type NowItem = {
   href?: string;
 };
 
+export type SocialId = "email" | "github" | "linkedin" | "instagram";
+
 export type SocialLink = {
-  id: "email" | "github" | "linkedin";
+  id: SocialId;
   label: string;
   href: string;
 };
@@ -111,10 +113,19 @@ export const profile = {
     ],
   } satisfies Localized<string[]>,
 
+  /** Primary links, shown on the home page and in the footer. */
   links: [
     { id: "email", label: "choiikjun1101@gmail.com", href: "mailto:choiikjun1101@gmail.com" },
     { id: "github", label: "no-ikjun", href: "https://github.com/no-ikjun" },
     { id: "linkedin", label: "ikjunchoi", href: "https://www.linkedin.com/in/ikjunchoi/" },
+  ] satisfies SocialLink[],
+
+  /** Everything listed on the contact page, in order. */
+  channels: [
+    { id: "email", label: "choiikjun1101@gmail.com", href: "mailto:choiikjun1101@gmail.com" },
+    { id: "linkedin", label: "linkedin.com/in/ikjunchoi", href: "https://www.linkedin.com/in/ikjunchoi/" },
+    { id: "github", label: "github.com/no-ikjun", href: "https://github.com/no-ikjun" },
+    { id: "instagram", label: "@__ikjun", href: "https://www.instagram.com/__ikjun/" },
   ] satisfies SocialLink[],
 };
 

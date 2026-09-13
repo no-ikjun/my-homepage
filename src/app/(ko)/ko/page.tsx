@@ -1,10 +1,10 @@
 import HomeView from "@/views/home-view";
+import { dictionary } from "@/lib/dictionary";
 import { pageMetadata } from "@/lib/metadata";
-import { translations } from "@/lib/translations";
 
 export const metadata = pageMetadata({
   locale: "ko",
-  description: translations.ko.siteDescription,
+  description: dictionary.ko.meta.siteDescription,
   path: "/",
 });
 
