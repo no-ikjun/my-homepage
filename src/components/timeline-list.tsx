@@ -43,11 +43,11 @@ function Highlights({ items }: { items: string[] }) {
  */
 export function TimelineList({ items, locale }: { items: TimelineItem[]; locale: Locale }) {
   return (
-    <ul className="divide-y divide-border border-y border-border">
+    <ul className="space-y-10">
       {items.map((item) => {
         const org = pick(item.org, locale);
         return (
-          <li key={item.id} className="grid gap-3 py-6 md:grid-cols-[10rem_1fr] md:gap-6">
+          <li key={item.id} className="grid gap-3 md:grid-cols-[10rem_1fr] md:gap-6">
             <p className="text-sm text-muted-foreground tabular-nums md:pt-2.5">
               {formatPeriod(item.start, item.end, locale)}
             </p>
@@ -75,7 +75,7 @@ export function TimelineList({ items, locale }: { items: TimelineItem[]; locale:
                 {item.highlights ? <Highlights items={pick(item.highlights, locale)} /> : null}
 
                 {item.entries?.length ? (
-                  <ul className="mt-4 space-y-4 border-l border-border pl-4">
+                  <ul className="mt-4 space-y-4">
                     {item.entries.map((entry) => (
                       <li key={pick(entry.title, locale)}>
                         <p className="text-sm font-medium">

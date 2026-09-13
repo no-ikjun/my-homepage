@@ -81,7 +81,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
       <Reveal as="section" delay={0.08} className="mt-20" aria-labelledby="now-heading">
         <SectionHeading id="now-heading">{t.home.now}</SectionHeading>
 
-        <ul className="divide-y divide-border border-y border-border">
+        <ul className="space-y-2">
           {profile.now.map((item) => {
             const title = pick(item.title, locale);
             const detail = pick(item.detail, locale);
@@ -103,7 +103,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
                 </span>
               </>
             );
-            const cls = "group grid gap-1 py-5 md:grid-cols-[9rem_1fr] md:gap-6";
+            const cls = "group grid gap-1 py-3 md:grid-cols-[9rem_1fr] md:gap-6";
             return (
               <li key={item.id}>
                 {item.href ? (
@@ -147,12 +147,12 @@ export default async function HomeView({ locale }: { locale: Locale }) {
           >
             {t.home.writing}
           </SectionHeading>
-          <ul className="divide-y divide-border border-y border-border">
+          <ul className="space-y-1">
             {recentWritings.map((w) => (
               <li key={w.slug}>
                 <Link
                   href={`/writings/${w.slug}`}
-                  className="group -mx-3 flex items-baseline justify-between gap-4 rounded-lg px-3 py-4 transition-colors hover:bg-foreground/[0.03]"
+                  className="group -mx-3 flex items-baseline justify-between gap-4 rounded-lg px-3 py-3 transition-colors hover:bg-foreground/[0.03]"
                 >
                   <span className="min-w-0">
                     <span className="block font-medium">{w.title}</span>

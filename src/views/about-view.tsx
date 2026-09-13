@@ -29,7 +29,7 @@ export default function AboutView({ locale }: { locale: Locale }) {
         </div>
       </PageHeader>
 
-      <section className="grid gap-10 border-t border-border pt-10 md:grid-cols-2">
+      <section className="grid gap-10 md:grid-cols-2">
         <div>
           <SectionHeading>{t.interests}</SectionHeading>
           <ul className="space-y-2 text-sm leading-relaxed">
