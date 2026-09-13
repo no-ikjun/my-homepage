@@ -1,6 +1,6 @@
+import { AwardGrid } from "@/components/award-grid";
 import { PageHeader } from "@/components/page-header";
 import { SectionHeading } from "@/components/section-heading";
-import { AwardGrid } from "@/components/award-grid";
 import { TimelineList } from "@/components/timeline-list";
 import { profile } from "@/data/profile";
 import { timelineByKind, type TimelineKind } from "@/data/timeline";
@@ -18,40 +18,30 @@ const SECTION_KEY: Record<TimelineKind, "career" | "education" | "awards" | "act
 export default function AboutView({ locale }: { locale: Locale }) {
   const t = dictionary[locale].pages.about;
   const kinds: TimelineKind[] = ["career", "education", "award", "activity"];
+  const tracks = [profile.tracks.research, profile.tracks.engineering];
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
-      <PageHeader title={t.title} description={t.description}>
-        <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground text-pretty">
-          {pick(profile.intro, locale).map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </div>
-      </PageHeader>
+      <PageHeader title={t.title} description={t.description} className="pb-10 md:pb-12" />
 
-      <section className="grid gap-10 md:grid-cols-2">
-        <div>
-          <SectionHeading>{t.interests}</SectionHeading>
-          <ul className="space-y-2 text-sm leading-relaxed">
-            {pick(profile.interests, locale).map((item) => (
-              <li key={item} className="flex gap-3">
-                <span aria-hidden className="mt-[0.65em] size-1.5 shrink-0 rounded-full bg-brand" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <SectionHeading>{t.principles}</SectionHeading>
-          <ul className="space-y-2 text-sm leading-relaxed">
-            {pick(profile.principles, locale).map((item) => (
-              <li key={item} className="flex gap-3">
-                <span aria-hidden className="mt-[0.65em] size-1.5 shrink-0 rounded-full bg-border" />
-                <span className="text-pretty">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="max-w-content space-y-5 text-base leading-relaxed text-pretty md:text-lg">
+        {pick(profile.about, locale).map((p) => (
+          <p key={p}>{p}</p>
+        ))}
+      </div>
+
+      <section className="mt-16 grid gap-10 md:grid-cols-2 md:gap-12">
+        {tracks.map((track) => (
+          <div key={pick(track.title, "en")}>
+            <SectionHeading className="mb-3">{pick(track.title, locale)}</SectionHeading>
+            <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{pick(track.body, locale)}</p>
+            <ul className="mt-4 space-y-1.5 text-sm leading-relaxed">
+              {pick(track.items, locale).map((item) => (
+                <li key={item} className="text-pretty">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </section>
 
       <div className="mt-20 space-y-20">

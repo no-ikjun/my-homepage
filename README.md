@@ -21,7 +21,7 @@ npm run lint
 
 | What | Where |
 | --- | --- |
-| Headline, intro, Now block, interests, links | `src/data/profile.ts` |
+| Headline, intro, Now block, About narrative and tracks, links | `src/data/profile.ts` |
 | Career, education, awards, activities | `src/data/timeline.ts` |
 | Project case studies | `content/projects/<slug>.<en|ko>.mdx` |
 | Blog posts (single language) | `content/writings/<slug>.mdx` |
