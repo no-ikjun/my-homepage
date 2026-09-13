@@ -29,6 +29,8 @@ export type ProjectFrontmatter = {
   links?: ProjectLink[];
   /** Logo; local path or an allowed remote host */
   image?: string;
+  /** Brand colour of the project (hex). Tints its card, icon and detail header. */
+  accent?: string;
   /** Screenshots shown at the top of the detail page */
   gallery?: { src: string; alt: string }[];
   /** Surfaces the project on the home page */
