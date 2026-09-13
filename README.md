@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ikjun.com
 
-## Getting Started
+Personal site of Ikjun Choi: research, projects, writing, contact. Bilingual (English at `/`, Korean at `/ko`).
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router) + React 19, TypeScript
+- Tailwind CSS v4 + shadcn/ui (radix), `motion` for the few animations
+- MDX for long-form content (`@next/mdx`)
+- Geist (Latin) + Pretendard (Korean), self-hosted via `next/font`
+- Vercel Analytics
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build (also type-checks)
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| Headline, intro, Now block, interests, links | `src/data/profile.ts` |
+| Career, education, awards, activities | `src/data/timeline.ts` |
+| Project case studies | `content/projects/<slug>.<en|ko>.mdx` |
+| Blog posts (single language) | `content/writings/<slug>.mdx` |
+| UI copy (nav, labels, page titles) | `src/lib/dictionary.ts` |
+| Design tokens | `src/app/globals.css` |
+| Shell (header, mobile dock, footer) | `src/components/layout/` |
+| Page bodies | `src/views/` |
+| Routes (thin, one per locale) | `src/app/(en)/`, `src/app/(ko)/ko/` |
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Structured data keeps shared fields (dates, URLs, logos) once and localises only copy with `Localized<T>` (`{ en, ko }`). Dates are `YYYY-MM`; `formatPeriod` renders them per locale.
 
-## Learn More
+## Adding content
 
-To learn more about Next.js, take a look at the following resources:
+**A project.** Create `content/projects/<slug>.en.mdx` and `<slug>.ko.mdx`. Both must exist for the page to be generated. Export `metadata`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```js
+export const metadata = {
+  title: "…",
+  kind: "research" | "product",
+  status: "active" | "completed" | "archived",
+  start: "2026-01",
+  end: "2026-06",          // omit while ongoing
+  summary: "One sentence.",
+  affiliation: "Lab / team / Personal",
+  role: ["…"],
+  stack: ["…"],
+  links: [{ label: "…", href: "…" }],
+  image: "/img/…",         // optional; remote hosts must be in next.config.mjs
+  featured: true,          // shows on the home page (max 3)
+  order: 0,                // lower first
+};
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**A post.** Copy `content/writings/_template.mdx`, set `published: true`. Posts live at `/writings/<slug>` in one language.
 
-## Deploy on Vercel
+**The Now block.** Edit `profile.now` and bump `profile.nowUpdated`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Theming
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Tokens are oklch CSS variables on `:root` and `html[data-theme="dark"]`; Tailwind reads them through `@theme inline`. The palette is near-monochrome with one accent (`--brand`) reserved for links, focus and active states. `glass` is a utility for the floating header and mobile dock only. The theme is chosen by an inline script before first paint and persisted in `localStorage`.

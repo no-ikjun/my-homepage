@@ -28,7 +28,8 @@ const nextConfig = {
   },
   images: {
     // Hosts allowed for next/image optimisation. Keep in sync with the
-    // `image` fields in src/data/*.ts - an unlisted host throws at request time.
+    // `logo` fields in src/data/timeline.ts and `image` in content/projects - an
+    // unlisted host throws at request time.
     remotePatterns: [
       { protocol: "https", hostname: "d3ob3cint7tr3s.cloudfront.net" },
       { protocol: "https", hostname: "chatbot.gistory.me" },

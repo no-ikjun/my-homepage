@@ -62,6 +62,10 @@ export default function SiteShell({
   return (
     <html lang={HTML_LANG[locale]} className={fontVariables} suppressHydrationWarning>
       <body>
+        {/* Parser-executed before first paint, so there is no theme flash.
+            (next/script beforeInteractive runs after the Next runtime loads.)
+            React logs a dev-only "script tag" warning when this tree is
+            client-rendered, which only happens for 404s; harmless. */}
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <ThemeProvider>
           <Header
