@@ -26,14 +26,20 @@ export default async function ProjectsView({ locale }: { locale: Locale }) {
               <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((p) => (
                   <li key={p.slug} className="flex">
-                    <ProjectCard project={p} locale={locale} className="flex-1" />
+                    <ProjectCard
+                      project={p}
+                      locale={locale}
+                      className="flex-1"
+                    />
                   </li>
                 ))}
               </ul>
             </section>
           );
         })}
-        {projects.length === 0 ? <p className="text-muted-foreground">{t.empty}</p> : null}
+        {projects.length === 0 ? (
+          <p className="text-muted-foreground">{t.empty}</p>
+        ) : null}
       </div>
     </main>
   );

@@ -9,7 +9,13 @@ import { localePath, type Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 import type { ProjectEntry } from "@/types/project";
 
-function Meta({ label, children }: { label: string; children: React.ReactNode }) {
+function Meta({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <dt className="text-sm text-muted-foreground">{label}</dt>
@@ -40,16 +46,27 @@ export default function ProjectDetailView({
       </Link>
 
       <header className="mt-6 max-w-content">
-        <ProjectIcon src={meta.image} title={meta.title} size={56} className="mb-5" />
+        <ProjectIcon
+          src={meta.image}
+          title={meta.title}
+          size={56}
+          className="mb-5"
+        />
         <p className="text-sm text-muted-foreground">
-          <span className={cn(meta.kind === "research" && "text-brand")}>{t.project.kind[meta.kind]}</span>
+          <span className={cn(meta.kind === "research" && "text-brand")}>
+            {t.project.kind[meta.kind]}
+          </span>
           <span aria-hidden> · </span>
-          <span className="tabular-nums">{formatPeriod(meta.start, meta.end, locale)}</span>
+          <span className="tabular-nums">
+            {formatPeriod(meta.start, meta.end, locale)}
+          </span>
         </p>
         <h1 className="mt-4 text-3xl font-semibold tracking-tight text-balance md:text-4xl">
           {meta.title}
         </h1>
-        <p className="mt-3 text-lg text-muted-foreground text-pretty">{meta.summary}</p>
+        <p className="mt-3 text-lg text-muted-foreground text-pretty">
+          {meta.summary}
+        </p>
       </header>
 
       {meta.gallery?.length ? (
@@ -79,7 +96,9 @@ export default function ProjectDetailView({
 
         <aside className="lg:order-none order-first lg:sticky lg:top-28 lg:self-start">
           <dl className="grid grid-cols-2 gap-6 rounded-2xl border border-border bg-card p-5 lg:grid-cols-1">
-            {meta.affiliation ? <Meta label={d.affiliation}>{meta.affiliation}</Meta> : null}
+            {meta.affiliation ? (
+              <Meta label={d.affiliation}>{meta.affiliation}</Meta>
+            ) : null}
             {meta.role.length ? (
               <Meta label={d.role}>
                 <ul className="space-y-0.5">

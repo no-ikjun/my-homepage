@@ -22,7 +22,10 @@ export type SocialLink = {
 export const profile = {
   name: { en: "Ikjun Choi", ko: "최익준" } satisfies Localized<string>,
   avatar: "/img/profile_round3.png",
-  location: { en: "Gwangju, South Korea", ko: "광주, 대한민국" } satisfies Localized<string>,
+  location: {
+    en: "Gwangju, South Korea",
+    ko: "광주, 대한민국",
+  } satisfies Localized<string>,
   affiliation: {
     en: "EECS undergraduate at GIST",
     ko: "GIST 전기전자컴퓨터공학과 학부생",
@@ -114,23 +117,58 @@ export const profile = {
           "작은 팀, 빠른 반복, 제품 전체를 책임지는 방식",
         ],
       },
-      stack: ["Next.js", "NestJS", "Flutter", "TypeScript", "PostgreSQL", "Docker", "AWS"],
+      stack: [
+        "Next.js",
+        "NestJS",
+        "Flutter",
+        "TypeScript",
+        "PostgreSQL",
+        "Docker",
+        "AWS",
+      ],
     },
-  } satisfies Record<"research" | "engineering", { title: Localized<string>; items: Localized<string[]>; stack: string[] }>,
+  } satisfies Record<
+    "research" | "engineering",
+    { title: Localized<string>; items: Localized<string[]>; stack: string[] }
+  >,
 
   /** Primary links, shown on the home page and in the footer. */
   links: [
-    { id: "email", label: "choiikjun1101@gmail.com", href: "mailto:choiikjun1101@gmail.com" },
+    {
+      id: "email",
+      label: "choiikjun1101@gmail.com",
+      href: "mailto:choiikjun1101@gmail.com",
+    },
     { id: "github", label: "no-ikjun", href: "https://github.com/no-ikjun" },
-    { id: "linkedin", label: "ikjunchoi", href: "https://www.linkedin.com/in/ikjunchoi/" },
+    {
+      id: "linkedin",
+      label: "ikjunchoi",
+      href: "https://www.linkedin.com/in/ikjunchoi/",
+    },
   ] satisfies SocialLink[],
 
   /** Everything listed on the contact page, in order. */
   channels: [
-    { id: "email", label: "choiikjun1101@gmail.com", href: "mailto:choiikjun1101@gmail.com" },
-    { id: "linkedin", label: "linkedin.com/in/ikjunchoi", href: "https://www.linkedin.com/in/ikjunchoi/" },
-    { id: "github", label: "github.com/no-ikjun", href: "https://github.com/no-ikjun" },
-    { id: "instagram", label: "@__ikjun", href: "https://www.instagram.com/__ikjun/" },
+    {
+      id: "email",
+      label: "choiikjun1101@gmail.com",
+      href: "mailto:choiikjun1101@gmail.com",
+    },
+    {
+      id: "linkedin",
+      label: "linkedin.com/in/ikjunchoi",
+      href: "https://www.linkedin.com/in/ikjunchoi/",
+    },
+    {
+      id: "github",
+      label: "github.com/no-ikjun",
+      href: "https://github.com/no-ikjun",
+    },
+    {
+      id: "instagram",
+      label: "@__ikjun",
+      href: "https://www.instagram.com/__ikjun/",
+    },
   ] satisfies SocialLink[],
 };
 

@@ -25,10 +25,12 @@ export default function ContactView({ locale }: { locale: Locale }) {
   return (
     <main className="mx-auto w-full max-w-page px-6">
       <PageHeader title={t.title} description={t.description}>
-        <p className="mt-6 text-base leading-relaxed text-muted-foreground text-pretty">{t.lead}</p>
+        <p className="mt-6 text-base leading-relaxed text-muted-foreground text-pretty">
+          {t.lead}
+        </p>
       </PageHeader>
 
-      <ul className="max-w-content divide-y divide-border">
+      <ul className="divide-y divide-border">
         {profile.channels.map((ch) => {
           const Icon = ICON[ch.id];
           const external = ch.href.startsWith("http");
@@ -36,7 +38,9 @@ export default function ContactView({ locale }: { locale: Locale }) {
             <li key={ch.id}>
               <a
                 href={ch.href}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                {...(external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
                 className="group -mx-3 flex items-center gap-4 rounded-lg px-3 py-4 transition-colors hover:bg-foreground/[0.03]"
               >
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors group-hover:text-foreground">
@@ -49,7 +53,9 @@ export default function ContactView({ locale }: { locale: Locale }) {
                       {ch.label}
                     </span>
                   </span>
-                  <span className="mt-0.5 block text-sm text-muted-foreground">{t.channels[ch.id]}</span>
+                  <span className="mt-0.5 block text-sm text-muted-foreground">
+                    {t.channels[ch.id]}
+                  </span>
                 </span>
                 <ArrowUpRight className="size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
               </a>

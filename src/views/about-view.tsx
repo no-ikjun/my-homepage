@@ -11,7 +11,10 @@ import { dictionary } from "@/lib/dictionary";
 import { pick } from "@/lib/i18n";
 import { type Locale } from "@/lib/locale";
 
-const SECTION_KEY: Record<TimelineKind, "career" | "education" | "awards" | "activities"> = {
+const SECTION_KEY: Record<
+  TimelineKind,
+  "career" | "education" | "awards" | "activities"
+> = {
   career: "career",
   education: "education",
   award: "awards",
@@ -28,7 +31,11 @@ export default function AboutView({ locale }: { locale: Locale }) {
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
-      <PageHeader title={t.title} description={t.description} className="pb-6 md:pb-8">
+      <PageHeader
+        title={t.title}
+        description={t.description}
+        className="pb-6 md:pb-8"
+      >
         {/* Jump links: this page is long and these are its real sections. */}
         <ul className="mt-6 flex flex-wrap gap-2">
           {kinds.map((kind) => {
@@ -62,7 +69,10 @@ export default function AboutView({ locale }: { locale: Locale }) {
             <ul className="flex-1 space-y-2 text-sm leading-relaxed">
               {pick(track.items, locale).map((item) => (
                 <li key={item} className="flex gap-2.5">
-                  <span aria-hidden className="mt-[0.7em] size-1 shrink-0 rounded-full bg-muted-foreground/60" />
+                  <span
+                    aria-hidden
+                    className="mt-[0.7em] size-1 shrink-0 rounded-full bg-muted-foreground/60"
+                  />
                   <span className="text-pretty">{item}</span>
                 </li>
               ))}
@@ -84,7 +94,12 @@ export default function AboutView({ locale }: { locale: Locale }) {
           if (!items.length) return null;
           const key = SECTION_KEY[kind];
           return (
-            <section key={kind} id={key} aria-labelledby={`about-${key}`} className="scroll-mt-28">
+            <section
+              key={kind}
+              id={key}
+              aria-labelledby={`about-${key}`}
+              className="scroll-mt-28"
+            >
               <SectionHeading id={`about-${key}`}>{t[key]}</SectionHeading>
               {kind === "award" ? (
                 <AwardGrid items={items} locale={locale} />

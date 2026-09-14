@@ -41,7 +41,9 @@ export const timeline: TimelineItem[] = [
     title: { en: "Undergraduate Research Intern", ko: "학부 연구 인턴" },
     start: "2026-03",
     highlights: {
-      en: ["Generative AI research on diffusion language models, advised by Prof. Kwanyoung Kim"],
+      en: [
+        "Generative AI research on diffusion language models, advised by Prof. Kwanyoung Kim",
+      ],
       ko: ["김관영 교수님 지도 아래 Diffusion Language Model 연구"],
     },
   },
@@ -51,12 +53,18 @@ export const timeline: TimelineItem[] = [
     org: { en: "Sterri Inc.", ko: "(주)스테리" },
     orgUrl: "https://sterri.io",
     logo: "https://d3ob3cint7tr3s.cloudfront.net/sterri_logo.jpeg",
-    title: { en: "Product Developer (Full Stack)", ko: "제품 개발자 (Full Stack)" },
+    title: {
+      en: "Product Developer (Full Stack)",
+      ko: "제품 개발자 (Full Stack)",
+    },
     start: "2026-01",
     end: "2026-03",
     entries: [
       {
-        title: { en: "Warru — event platform for streamers", ko: "와르르 — 스트리머 이벤트 플랫폼" },
+        title: {
+          en: "Warru — event platform for streamers",
+          ko: "와르르 — 스트리머 이벤트 플랫폼",
+        },
         highlights: {
           en: [
             "REST API with NestJS and a Next.js frontend",
@@ -82,7 +90,10 @@ export const timeline: TimelineItem[] = [
     end: "2024-02",
     entries: [
       {
-        title: { en: "Rushhour — real-time subway congestion app", ko: "러시아워 — 실시간 지하철 혼잡도 앱" },
+        title: {
+          en: "Rushhour — real-time subway congestion app",
+          ko: "러시아워 — 실시간 지하철 혼잡도 앱",
+        },
         start: "2023-06",
         end: "2024-02",
         highlights: {
@@ -114,11 +125,17 @@ export const timeline: TimelineItem[] = [
   {
     id: "gist",
     kind: "education",
-    org: { en: "Gwangju Institute of Science and Technology", ko: "광주과학기술원 (GIST)" },
+    org: {
+      en: "Gwangju Institute of Science and Technology",
+      ko: "광주과학기술원 (GIST)",
+    },
     orgUrl: "https://www.gist.ac.kr",
     logo: "/img/logo_gist.png",
     logoShape: "round",
-    title: { en: "B.S. in Electrical Engineering and Computer Science", ko: "전기전자컴퓨터공학 학사 과정" },
+    title: {
+      en: "B.S. in Electrical Engineering and Computer Science",
+      ko: "전기전자컴퓨터공학 학사 과정",
+    },
     start: "2023-03",
     highlights: {
       en: ["Minor in Business Administration and Economics"],
@@ -136,8 +153,14 @@ export const timeline: TimelineItem[] = [
     start: "2026-06",
     end: "2026-08",
     highlights: {
-      en: ["CS161 Computer Security", "CS188 Introduction to Artificial Intelligence"],
-      ko: ["CS161 Computer Security", "CS188 Introduction to Artificial Intelligence"],
+      en: [
+        "CS161 Computer Security",
+        "CS188 Introduction to Artificial Intelligence",
+      ],
+      ko: [
+        "CS161 Computer Security",
+        "CS188 Introduction to Artificial Intelligence",
+      ],
     },
   },
   {
@@ -163,24 +186,36 @@ export const timeline: TimelineItem[] = [
   {
     id: "aiewf-2026",
     kind: "award",
-    org: { en: "AI Engineer World's Fair Hackathon", ko: "AI Engineer World's Fair Hackathon" },
+    org: {
+      en: "AI Engineer World's Fair Hackathon",
+      ko: "AI Engineer World's Fair Hackathon",
+    },
     orgUrl: "https://cerebralvalley.ai/e/aiewf-hackathon-2026",
     logo: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/ai_world_fair_hackathon.webp",
     title: { en: "3rd place", ko: "3위" },
     start: "2026-06",
     end: "2026-06",
     highlights: {
-      en: ["Rote — a continual-learning computer automation platform powered by generative AI"],
+      en: [
+        "Rote — a continual-learning computer automation platform powered by generative AI",
+      ],
       ko: ["Rote — 생성형 AI 기반 지속 학습형 컴퓨터 자동화 플랫폼"],
     },
   },
   {
     id: "impact-ai-2025",
     kind: "award",
-    org: { en: "Impact AI Hackathon · GDG GIST", ko: "Impact AI Hackathon · GDG GIST" },
-    orgUrl: "https://gdg.community.dev/events/details/google-gdg-on-campus-gwangju-institute-of-science-and-technology-gwangju-south-korea-presents-build-with-ai-impact-ai-hackathon-1/",
+    org: {
+      en: "Impact AI Hackathon · GDG GIST",
+      ko: "Impact AI Hackathon · GDG GIST",
+    },
+    orgUrl:
+      "https://gdg.community.dev/events/details/google-gdg-on-campus-gwangju-institute-of-science-and-technology-gwangju-south-korea-presents-build-with-ai-impact-ai-hackathon-1/",
     logo: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/impact_hackathon.png",
-    title: { en: "2nd place · GIST AI Institute Director's Award", ko: "2위 · GIST 인공지능연구소장상" },
+    title: {
+      en: "2nd place · GIST AI Institute Director's Award",
+      ko: "2위 · GIST 인공지능연구소장상",
+    },
     start: "2025-05",
     end: "2025-05",
     highlights: {
@@ -191,7 +226,10 @@ export const timeline: TimelineItem[] = [
   {
     id: "kpmg-2024",
     kind: "award",
-    org: { en: "KPMG Ideathon · Samjong KPMG", ko: "KPMG 아이디어톤 · 삼정 KPMG" },
+    org: {
+      en: "KPMG Ideathon · Samjong KPMG",
+      ko: "KPMG 아이디어톤 · 삼정 KPMG",
+    },
     orgUrl: "http://www.dhnews.co.kr/news/view/1065585962399224",
     logo: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/2024_kpmg_ideathon.jpg",
     title: { en: "3rd prize", ko: "3등" },
@@ -205,10 +243,17 @@ export const timeline: TimelineItem[] = [
   {
     id: "gwangju-data-2023",
     kind: "award",
-    org: { en: "Gwangju Public Data Utilization Contest", ko: "광주광역시 공공데이터 활용 창업경진대회" },
-    orgUrl: "https://ccei.creativekorea.or.kr/gwangju/custom/notice_view.do?no=28519&rnum=1361",
+    org: {
+      en: "Gwangju Public Data Utilization Contest",
+      ko: "광주광역시 공공데이터 활용 창업경진대회",
+    },
+    orgUrl:
+      "https://ccei.creativekorea.or.kr/gwangju/custom/notice_view.do?no=28519&rnum=1361",
     logo: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/gwangju_data.png",
-    title: { en: "2nd prize · Service Development", ko: "2위 · 서비스 개발 부문 우수상" },
+    title: {
+      en: "2nd prize · Service Development",
+      ko: "2위 · 서비스 개발 부문 우수상",
+    },
     start: "2023-07",
     end: "2023-07",
     highlights: {
@@ -220,7 +265,8 @@ export const timeline: TimelineItem[] = [
     id: "sws-kaist-2023",
     kind: "award",
     org: { en: "Side With Startups · KAIST", ko: "Side With Startups · KAIST" },
-    orgUrl: "https://docs.google.com/presentation/d/1cXm37OX8B42wRRq6S16i2StgV6BaVh9VDfI3NG8HTPo/edit?usp=sharing",
+    orgUrl:
+      "https://docs.google.com/presentation/d/1cXm37OX8B42wRRq6S16i2StgV6BaVh9VDfI3NG8HTPo/edit?usp=sharing",
     logo: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/profile_1.webp",
     title: { en: "1st prize", ko: "1위" },
     start: "2023-05",
@@ -238,7 +284,10 @@ export const timeline: TimelineItem[] = [
     org: { en: "GSA InfoTeam", ko: "GSA InfoTeam" },
     orgUrl: "https://introduce.gistory.me",
     logo: "https://avatars.githubusercontent.com/u/54899579?s=280&v=4",
-    title: { en: "Team Leader · Full-stack Developer", ko: "팀 리더 · 풀스택 개발자" },
+    title: {
+      en: "Team Leader · Full-stack Developer",
+      ko: "팀 리더 · 풀스택 개발자",
+    },
     start: "2023-03",
     entries: [
       {
@@ -251,7 +300,11 @@ export const timeline: TimelineItem[] = [
             "Ran internal seminars to build the team culture",
             "Planned Devs' Night for GIST developers",
           ],
-          ko: ["법인 설립 기여 및 운영", "조직 문화 정착을 위한 내부 세미나 진행", "GIST 개발자 이벤트 Devs' Night 기획"],
+          ko: [
+            "법인 설립 기여 및 운영",
+            "조직 문화 정착을 위한 내부 세미나 진행",
+            "GIST 개발자 이벤트 Devs' Night 기획",
+          ],
         },
       },
       {
@@ -266,7 +319,10 @@ export const timeline: TimelineItem[] = [
         title: { en: "Full-stack Developer", ko: "풀스택 개발자" },
         start: "2023-03",
         highlights: {
-          en: ["Built Ziggle, the integrated notice platform", "Built the GIST Chatbot"],
+          en: [
+            "Built Ziggle, the integrated notice platform",
+            "Built the GIST Chatbot",
+          ],
           ko: ["통합 공지 관리 플랫폼 Ziggle 개발", "GIST 챗봇 서비스 개발"],
         },
       },
@@ -283,7 +339,10 @@ export const timeline: TimelineItem[] = [
       {
         title: { en: "Club Leader", ko: "동아리장" },
         start: "2026-01",
-        highlights: { en: ["Organises and runs club activities"], ko: ["동아리 운영 및 관리"] },
+        highlights: {
+          en: ["Organises and runs club activities"],
+          ko: ["동아리 운영 및 관리"],
+        },
       },
       {
         title: { en: "Junior Developer", ko: "주니어 개발자" },
@@ -294,7 +353,10 @@ export const timeline: TimelineItem[] = [
             "Ran open sessions on React, Next.js and Flutter",
             "Ran a mentoring programme for junior developers",
           ],
-          ko: ["React, Next.js, Flutter 등 기술 오픈 세션 진행", "주니어 개발자 양성 멘토링 프로그램 운영"],
+          ko: [
+            "React, Next.js, Flutter 등 기술 오픈 세션 진행",
+            "주니어 개발자 양성 멘토링 프로그램 운영",
+          ],
         },
       },
     ],
@@ -308,7 +370,10 @@ export const timeline: TimelineItem[] = [
     start: "2023-03",
     end: "2023-12",
     highlights: {
-      en: ["Startup ecosystem study group", "Took part in a mock start-up programme"],
+      en: [
+        "Startup ecosystem study group",
+        "Took part in a mock start-up programme",
+      ],
       ko: ["스타트업 관련 스터디", "모의 창업 프로그램 참여"],
     },
   },

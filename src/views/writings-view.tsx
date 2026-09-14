@@ -17,12 +17,20 @@ export default async function WritingsView({ locale }: { locale: Locale }) {
       {writings.length === 0 ? (
         <section className="max-w-content rounded-2xl border border-dashed border-border p-8">
           <h2 className="font-medium">{p.emptyTitle}</h2>
-          <p className="mt-1 text-sm text-muted-foreground">{p.emptyDescription}</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {p.emptyDescription}
+          </p>
           <div className="mt-5 flex gap-4 text-sm">
-            <Link href={localePath(locale, "/projects")} className="underline underline-offset-4 hover:text-brand">
+            <Link
+              href={localePath(locale, "/projects")}
+              className="underline underline-offset-4 hover:text-brand"
+            >
               {t.nav.projects}
             </Link>
-            <Link href={localePath(locale, "/about")} className="underline underline-offset-4 hover:text-brand">
+            <Link
+              href={localePath(locale, "/about")}
+              className="underline underline-offset-4 hover:text-brand"
+            >
               {t.nav.about}
             </Link>
           </div>
@@ -52,7 +60,10 @@ export default async function WritingsView({ locale }: { locale: Locale }) {
                   {w.tags?.length ? (
                     <span className="mt-2 flex flex-wrap gap-1.5">
                       {w.tags.map((tag) => (
-                        <span key={tag} className="rounded-md bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                        <span
+                          key={tag}
+                          className="rounded-md bg-muted px-1.5 py-0.5 text-xs text-muted-foreground"
+                        >
                           {tag}
                         </span>
                       ))}

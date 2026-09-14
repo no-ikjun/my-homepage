@@ -15,7 +15,11 @@ import { dictionary } from "@/lib/dictionary";
 import { pick } from "@/lib/i18n";
 import { localePath, type Locale } from "@/lib/locale";
 
-const LINK_ICON = { email: Mail, github: GitHubIcon, linkedin: LinkedInIcon } as const;
+const LINK_ICON = {
+  email: Mail,
+  github: GitHubIcon,
+  linkedin: LinkedInIcon,
+} as const;
 
 export default async function HomeView({ locale }: { locale: Locale }) {
   const t = dictionary[locale];
@@ -30,10 +34,15 @@ export default async function HomeView({ locale }: { locale: Locale }) {
   return (
     <main className="mx-auto w-full max-w-page px-6">
       {/* ---------------------------------------------------------- hero */}
-      <Reveal as="section" className="grid items-center gap-10 pt-6 md:grid-cols-[1fr_auto] md:gap-16 md:pt-14">
+      <Reveal
+        as="section"
+        className="grid items-center gap-10 pt-6 md:grid-cols-[1fr_auto] md:gap-16 md:pt-14"
+      >
         <div className="order-2 max-w-content md:order-1">
           <p className="font-medium">{pick(profile.name, locale)}</p>
-          <p className="text-sm text-muted-foreground">{pick(profile.affiliation, locale)}</p>
+          <p className="text-sm text-muted-foreground">
+            {pick(profile.affiliation, locale)}
+          </p>
 
           <h1 className="mt-6 text-4xl leading-[1.08] font-semibold tracking-tight text-balance md:text-5xl">
             {pick(profile.headline, locale)}
@@ -46,27 +55,35 @@ export default async function HomeView({ locale }: { locale: Locale }) {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-2">
-          {profile.links.map((link) => {
-            const Icon = LINK_ICON[link.id];
-            const external = link.href.startsWith("http");
-            return (
-              <Button key={link.id} asChild variant="outline" size="sm" className="rounded-full">
-                <a
-                  href={link.href}
-                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            {profile.links.map((link) => {
+              const Icon = LINK_ICON[link.id];
+              const external = link.href.startsWith("http");
+              return (
+                <Button
+                  key={link.id}
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="rounded-full"
                 >
-                  <Icon data-icon="inline-start" />
-                  {link.label}
-                </a>
-              </Button>
-            );
-          })}
-          <Button asChild variant="ghost" size="sm" className="rounded-full">
-            <Link href={localePath(locale, "/about")}>
-              {t.home.moreAbout}
-              <ArrowRight data-icon="inline-end" />
-            </Link>
-          </Button>
+                  <a
+                    href={link.href}
+                    {...(external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    <Icon data-icon="inline-start" />
+                    {link.label}
+                  </a>
+                </Button>
+              );
+            })}
+            <Button asChild variant="ghost" size="sm" className="rounded-full">
+              <Link href={localePath(locale, "/about")}>
+                {t.home.moreAbout}
+                <ArrowRight data-icon="inline-end" />
+              </Link>
+            </Button>
           </div>
         </div>
 
@@ -81,7 +98,12 @@ export default async function HomeView({ locale }: { locale: Locale }) {
       </Reveal>
 
       {/* ----------------------------------------------------------- now */}
-      <Reveal as="section" delay={0.08} className="mt-20" aria-labelledby="now-heading">
+      <Reveal
+        as="section"
+        delay={0.08}
+        className="mt-20"
+        aria-labelledby="now-heading"
+      >
         <SectionHeading id="now-heading">{t.home.now}</SectionHeading>
 
         <ul className="divide-y divide-border">
@@ -106,11 +128,15 @@ export default async function HomeView({ locale }: { locale: Locale }) {
                 </span>
               </>
             );
-            const cls = "group grid gap-1 py-4 md:grid-cols-[9rem_1fr] md:gap-6";
+            const cls =
+              "group grid gap-1 py-4 md:grid-cols-[9rem_1fr] md:gap-6";
             return (
               <li key={item.id}>
                 {item.href ? (
-                  <Link href={localePath(locale, item.href)} className={`${cls} -mx-3 rounded-lg px-3 transition-colors hover:bg-foreground/[0.03]`}>
+                  <Link
+                    href={localePath(locale, item.href)}
+                    className={`${cls} -mx-3 rounded-lg px-3 transition-colors hover:bg-foreground/[0.03]`}
+                  >
                     {inner}
                   </Link>
                 ) : (
@@ -124,10 +150,18 @@ export default async function HomeView({ locale }: { locale: Locale }) {
 
       {/* ------------------------------------------------- selected work */}
       {featured.length ? (
-        <Reveal as="section" delay={0.16} className="mt-20" aria-labelledby="work-heading">
+        <Reveal
+          as="section"
+          delay={0.16}
+          className="mt-20"
+          aria-labelledby="work-heading"
+        >
           <SectionHeading
             id="work-heading"
-            action={{ href: localePath(locale, "/projects"), label: t.home.allProjects }}
+            action={{
+              href: localePath(locale, "/projects"),
+              label: t.home.allProjects,
+            }}
           >
             {t.home.selectedWork}
           </SectionHeading>
@@ -137,7 +171,11 @@ export default async function HomeView({ locale }: { locale: Locale }) {
               <ul className="grid gap-4 md:grid-cols-2">
                 {rest.map((p) => (
                   <li key={p.slug} className="flex">
-                    <ProjectCard project={p} locale={locale} className="flex-1" />
+                    <ProjectCard
+                      project={p}
+                      locale={locale}
+                      className="flex-1"
+                    />
                   </li>
                 ))}
               </ul>
@@ -148,10 +186,18 @@ export default async function HomeView({ locale }: { locale: Locale }) {
 
       {/* --------------------------------------------------------- awards */}
       {awards.length ? (
-        <Reveal as="section" delay={0.2} className="mt-20" aria-labelledby="awards-heading">
+        <Reveal
+          as="section"
+          delay={0.2}
+          className="mt-20"
+          aria-labelledby="awards-heading"
+        >
           <SectionHeading
             id="awards-heading"
-            action={{ href: localePath(locale, "/about#awards"), label: t.home.allAwards }}
+            action={{
+              href: localePath(locale, "/about#awards"),
+              label: t.home.allAwards,
+            }}
           >
             {t.home.awards}
           </SectionHeading>
@@ -161,10 +207,18 @@ export default async function HomeView({ locale }: { locale: Locale }) {
 
       {/* -------------------------------------------------------- writing */}
       {recentWritings.length ? (
-        <Reveal as="section" delay={0.24} className="mt-20" aria-labelledby="writing-heading">
+        <Reveal
+          as="section"
+          delay={0.24}
+          className="mt-20"
+          aria-labelledby="writing-heading"
+        >
           <SectionHeading
             id="writing-heading"
-            action={{ href: localePath(locale, "/writings"), label: t.home.allWriting }}
+            action={{
+              href: localePath(locale, "/writings"),
+              label: t.home.allWriting,
+            }}
           >
             {t.home.writing}
           </SectionHeading>
@@ -179,10 +233,14 @@ export default async function HomeView({ locale }: { locale: Locale }) {
                   <span className="min-w-0">
                     <span className="block font-medium">{w.title}</span>
                     {w.summary ? (
-                      <span className="mt-0.5 line-clamp-1 block text-sm text-muted-foreground">{w.summary}</span>
+                      <span className="mt-0.5 line-clamp-1 block text-sm text-muted-foreground">
+                        {w.summary}
+                      </span>
                     ) : null}
                   </span>
-                  <span className="shrink-0 text-sm text-muted-foreground tabular-nums">{w.date}</span>
+                  <span className="shrink-0 text-sm text-muted-foreground tabular-nums">
+                    {w.date}
+                  </span>
                 </Link>
               </li>
             ))}
