@@ -60,7 +60,14 @@ export default function SiteShell({
   ];
 
   return (
-    <html lang={HTML_LANG[locale]} className={fontVariables} suppressHydrationWarning>
+    <html
+      lang={HTML_LANG[locale]}
+      className={fontVariables}
+      // Lets Next.js switch smooth scrolling off while it scrolls to the top on
+      // navigation; otherwise it lands a header-height short of the top.
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <body>
         {/* Parser-executed before first paint, so there is no theme flash.
             (next/script beforeInteractive runs after the Next runtime loads.)
