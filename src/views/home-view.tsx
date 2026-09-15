@@ -6,10 +6,12 @@ import { Reveal } from "@/components/motion/reveal";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
+import { news } from "@/data/news";
 import { profile } from "@/data/profile";
 import { getFeaturedProjects } from "@/lib/content/projects";
 import { getPublishedWritings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
+import { formatMonth } from "@/lib/format";
 import { pick } from "@/lib/i18n";
 import { localePath, type Locale } from "@/lib/locale";
 
@@ -93,50 +95,47 @@ export default async function HomeView({ locale }: { locale: Locale }) {
         />
       </Reveal>
 
-      {/* ----------------------------------------------------------- now */}
-      <Reveal
-        as="section"
-        delay={0.08}
-        className="mt-20"
-        aria-labelledby="now-heading"
-      >
-        <SectionHeading id="now-heading">{t.home.now}</SectionHeading>
-
+      {/* -------------------------------------------------------- recent */}
+      <Reveal as="section" delay={0.08} className="mt-20" aria-labelledby="recent-heading">
+        <SectionHeading id="recent-heading">{t.home.recent}</SectionHeading>
         <ul className="divide-y divide-border">
-          {profile.now.map((item) => {
-            const title = pick(item.title, locale);
-            const detail = pick(item.detail, locale);
+          {news.slice(0, 4).map((item) => {
+            const external = item.href?.startsWith("http");
             const inner = (
               <>
-                <span className="text-sm text-muted-foreground md:pt-0.5">
-                  {t.home.nowKinds[item.kind]}
+                <span className="text-sm text-muted-foreground tabular-nums md:pt-0.5">
+                  {formatMonth(item.date, locale)}
                 </span>
                 <span className="min-w-0">
-                  <span className="flex items-center gap-1.5 font-medium">
-                    {title}
-                    {item.href ? (
-                      <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                    ) : null}
+                  <span className="flex flex-wrap items-baseline gap-x-2">
+                    <span className="text-xs text-muted-foreground">{t.home.newsKinds[item.kind]}</span>
+                    <span className="flex items-center gap-1.5 font-medium">
+                      {pick(item.title, locale)}
+                      {item.href ? (
+                        <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                      ) : null}
+                    </span>
                   </span>
                   <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
-                    {detail}
+                    {pick(item.summary, locale)}
                   </span>
                 </span>
               </>
             );
-            const cls =
-              "group grid gap-1 py-4 md:grid-cols-[9rem_1fr] md:gap-6";
+            const cls = "group grid gap-1 py-4 md:grid-cols-[7rem_1fr] md:gap-6";
+            const linkCls = `${cls} -mx-3 rounded-lg px-3 transition-colors hover:bg-foreground/[0.03]`;
             return (
               <li key={item.id}>
-                {item.href ? (
-                  <Link
-                    href={localePath(locale, item.href)}
-                    className={`${cls} -mx-3 rounded-lg px-3 transition-colors hover:bg-foreground/[0.03]`}
-                  >
+                {!item.href ? (
+                  <div className={cls}>{inner}</div>
+                ) : external ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                    {inner}
+                  </a>
+                ) : (
+                  <Link href={localePath(locale, item.href)} className={linkCls}>
                     {inner}
                   </Link>
-                ) : (
-                  <div className={cls}>{inner}</div>
                 )}
               </li>
             );

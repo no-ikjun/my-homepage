@@ -21,7 +21,8 @@ npm run lint
 
 | What | Where |
 | --- | --- |
-| Headline, intro, Now block, About narrative and tracks, links | `src/data/profile.ts` |
+| Headline, intro, About tracks, links | `src/data/profile.ts` |
+| Recent news on the home page (curated, first four shown) | `src/data/news.ts` |
 | Career, education, awards, activities | `src/data/timeline.ts` |
 | Project case studies | `content/projects/<slug>.<en|ko>.mdx` |
 | Blog posts (single language) | `content/writings/<slug>.mdx` |
@@ -62,7 +63,7 @@ Stack names get a brand mark and tint from `src/components/tech-badge.tsx` (back
 
 **A post.** Copy `content/writings/_template.mdx`, set `published: true` and `lang` (`"en"` or `"ko"`). Posts live at `/writings/<slug>` in one language; the TOC is built from `##`/`###` headings.
 
-**The Now block.** Edit `profile.now` and bump `profile.nowUpdated`.
+**Recent news.** Add an entry to the top of `src/data/news.ts`; the home page shows the first four.
 
 ## Theming
 

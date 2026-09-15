@@ -16,11 +16,14 @@ const en = {
     goHome: "Go to home",
   },
   home: {
-    now: "Now",
-    nowKinds: {
-      research: "Researching",
-      building: "Building",
-      learning: "Learning",
+    recent: "Recent",
+    newsKinds: {
+      award: "Award",
+      education: "Education",
+      career: "Career",
+      project: "Project",
+      activity: "Activity",
+      writing: "Writing",
     },
     selectedWork: "Selected work",
     allProjects: "All projects",
@@ -104,11 +107,14 @@ const ko: typeof en = {
     goHome: "홈으로",
   },
   home: {
-    now: "Now",
-    nowKinds: {
-      research: "연구",
-      building: "개발",
-      learning: "학습",
+    recent: "최근 소식",
+    newsKinds: {
+      award: "수상",
+      education: "학업",
+      career: "경력",
+      project: "프로젝트",
+      activity: "활동",
+      writing: "글",
     },
     selectedWork: "대표 작업",
     allProjects: "모든 프로젝트",

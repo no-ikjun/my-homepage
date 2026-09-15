@@ -1,16 +1,5 @@
 import type { Localized } from "@/lib/i18n";
 
-export type NowKind = "research" | "building" | "learning";
-
-export type NowItem = {
-  id: string;
-  kind: NowKind;
-  title: Localized<string>;
-  detail: Localized<string>;
-  /** Locale-neutral internal path ("/projects/x") or external URL */
-  href?: string;
-};
-
 export type SocialId = "email" | "github" | "linkedin" | "instagram";
 
 export type SocialLink = {
@@ -48,42 +37,6 @@ export const profile = {
       "모델이 어떻게 동작하는지 이해하고, 아이디어를 실험으로 검증하고, 검증된 것을 누군가 쓸 수 있는 시스템으로 옮기는 전체 과정에 관심이 있습니다.",
     ],
   } satisfies Localized<string[]>,
-
-  /** "Now" block on the home page. Keep to 3-4 items; edit freely. */
-  now: [
-    {
-      id: "dlm-research",
-      kind: "research",
-      title: {
-        en: "Diffusion language models",
-        ko: "Diffusion Language Model 연구",
-      },
-      detail: {
-        en: "Undergraduate research intern at Real-Lab@GIST, advised by Prof. Kwanyoung Kim. Exploring more practical training and generation for diffusion LMs.",
-        ko: "Real-Lab@GIST 학부 연구 인턴 (지도교수 김관영). Diffusion LM의 더 실용적인 학습·생성 방법을 탐구하고 있습니다.",
-      },
-      href: "/projects/diffusion-language-models",
-    },
-    {
-      id: "gist-chatbot",
-      kind: "building",
-      title: { en: "GIST Chatbot", ko: "GIST 챗봇" },
-      detail: {
-        en: "A retrieval-based assistant over GIST's official documents, built with an MCP server and client.",
-        ko: "GIST 공식 자료를 검색해 답하는 챗봇. MCP 서버·클라이언트 구조로 만들고 있습니다.",
-      },
-      href: "/projects/gist-chatbot",
-    },
-    {
-      id: "learning",
-      kind: "learning",
-      title: { en: "Security and AI foundations", ko: "보안과 AI 기초" },
-      detail: {
-        en: "Fresh off CS161 and CS188 at UC Berkeley; digging deeper into model training infrastructure.",
-        ko: "UC Berkeley에서 CS161·CS188을 마치고, 모델 학습 인프라를 더 깊게 파고 있습니다.",
-      },
-    },
-  ] satisfies NowItem[],
 
   /** The two tracks, side by side on the About page. */
   tracks: {
