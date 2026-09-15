@@ -103,26 +103,24 @@ export default async function HomeView({ locale }: { locale: Locale }) {
             const external = item.href?.startsWith("http");
             const inner = (
               <>
-                <span className="text-sm text-muted-foreground tabular-nums md:pt-0.5">
-                  {formatMonth(item.date, locale)}
+                <span className="flex items-baseline gap-2 md:flex-col md:gap-0.5 md:pt-0.5">
+                  <span className="text-sm text-muted-foreground tabular-nums">{formatMonth(item.date, locale)}</span>
+                  <span className="text-xs text-muted-foreground">{t.home.newsKinds[item.kind]}</span>
                 </span>
                 <span className="min-w-0">
-                  <span className="flex flex-wrap items-baseline gap-x-2">
-                    <span className="text-xs text-muted-foreground">{t.home.newsKinds[item.kind]}</span>
-                    <span className="flex items-center gap-1.5 font-medium">
-                      {pick(item.title, locale)}
-                      {item.href ? (
-                        <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                      ) : null}
-                    </span>
+                  <span className="flex items-center gap-1.5 font-medium">
+                    {pick(item.title, locale)}
+                    {item.href ? (
+                      <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                    ) : null}
                   </span>
-                  <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
+                  <span className="mt-1 block max-w-content text-sm leading-relaxed text-muted-foreground text-pretty">
                     {pick(item.summary, locale)}
                   </span>
                 </span>
               </>
             );
-            const cls = "group grid gap-1 py-4 md:grid-cols-[7rem_1fr] md:gap-6";
+            const cls = "group grid gap-1.5 py-5 md:grid-cols-[10rem_1fr] md:gap-8";
             const linkCls = `${cls} -mx-3 rounded-lg px-3 transition-colors hover:bg-foreground/[0.03]`;
             return (
               <li key={item.id}>
