@@ -50,7 +50,7 @@ export const metadata = {
   stack: ["…"],
   links: [{ label: "…", href: "…" }],
   image: "/img/…",         // logo; remote hosts must be in next.config.mjs
-  gallery: [               // first entry is also the card cover (16:10 works best)
+  gallery: [               // optional; first entry doubles as the card cover (16:10)
     { src: "/img/projects/<slug>/1.png", alt: "…" },
   ],
   featured: true,          // shows on the home page (max 3)
@@ -58,7 +58,7 @@ export const metadata = {
 };
 ```
 
-Stack names get a brand mark and tint from `src/components/tech-badge.tsx` (backed by `simple-icons`); unknown names render as a neutral chip. Gallery entries currently point at `/img/placeholder-screenshot.svg` until real screenshots are added.
+Stack names get a brand mark and tint from `src/components/tech-badge.tsx` (backed by `simple-icons`); unknown names render as a neutral chip. Screenshots are optional: without a `gallery`, cards and the detail page simply show no images.
 
 **A post.** Copy `content/writings/_template.mdx`, set `published: true` and `lang` (`"en"` or `"ko"`). Posts live at `/writings/<slug>` in one language; the TOC is built from `##`/`###` headings.
 

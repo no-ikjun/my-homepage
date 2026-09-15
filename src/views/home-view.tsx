@@ -2,13 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
-import { AwardGrid } from "@/components/award-grid";
 import { Reveal } from "@/components/motion/reveal";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { profile } from "@/data/profile";
-import { timelineByKind } from "@/data/timeline";
 import { getFeaturedProjects } from "@/lib/content/projects";
 import { getPublishedWritings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
@@ -28,8 +26,6 @@ export default async function HomeView({ locale }: { locale: Locale }) {
     getPublishedWritings(),
   ]);
   const recentWritings = writings.slice(0, 3);
-  const awards = timelineByKind("award").slice(0, 3);
-  const [lead, ...rest] = featured;
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
@@ -165,43 +161,13 @@ export default async function HomeView({ locale }: { locale: Locale }) {
           >
             {t.home.selectedWork}
           </SectionHeading>
-          <div className="space-y-4">
-            <ProjectCard project={lead} locale={locale} feature />
-            {rest.length ? (
-              <ul className="grid gap-4 md:grid-cols-2">
-                {rest.map((p) => (
-                  <li key={p.slug} className="flex">
-                    <ProjectCard
-                      project={p}
-                      locale={locale}
-                      className="flex-1"
-                    />
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
-        </Reveal>
-      ) : null}
-
-      {/* --------------------------------------------------------- awards */}
-      {awards.length ? (
-        <Reveal
-          as="section"
-          delay={0.2}
-          className="mt-20"
-          aria-labelledby="awards-heading"
-        >
-          <SectionHeading
-            id="awards-heading"
-            action={{
-              href: localePath(locale, "/about#awards"),
-              label: t.home.allAwards,
-            }}
-          >
-            {t.home.awards}
-          </SectionHeading>
-          <AwardGrid items={awards} locale={locale} />
+          <ul className="grid gap-4 md:grid-cols-3">
+            {featured.map((p) => (
+              <li key={p.slug} className="flex">
+                <ProjectCard project={p} locale={locale} className="flex-1" />
+              </li>
+            ))}
+          </ul>
         </Reveal>
       ) : null}
 
