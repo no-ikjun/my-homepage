@@ -98,28 +98,32 @@ export default async function HomeView({ locale }: { locale: Locale }) {
       {/* -------------------------------------------------------- recent */}
       <Reveal as="section" delay={0.08} className="mt-20" aria-labelledby="recent-heading">
         <SectionHeading id="recent-heading">{t.home.recent}</SectionHeading>
-        <ul className="grid gap-4 sm:grid-cols-2">
+        <ul className="divide-y divide-border">
           {news.slice(0, 4).map((item) => {
             const external = item.href?.startsWith("http");
             const inner = (
               <>
-                <span className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <span className="tabular-nums">{formatMonth(item.date, locale)}</span>
-                  <span aria-hidden>·</span>
-                  <span>{t.home.newsKinds[item.kind]}</span>
-                  {item.href ? (
-                    <ArrowUpRight className="ml-auto size-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
-                  ) : null}
+                <span className="text-sm text-muted-foreground tabular-nums md:pt-0.5">
+                  {formatMonth(item.date, locale)}
                 </span>
-                <span className="mt-2 block font-medium text-balance">{pick(item.title, locale)}</span>
-                <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
-                  {pick(item.summary, locale)}
+                <span className="min-w-0">
+                  <span className="flex flex-wrap items-baseline gap-x-2">
+                    <span className="text-xs text-muted-foreground">{t.home.newsKinds[item.kind]}</span>
+                    <span className="flex items-center gap-1.5 font-medium">
+                      {pick(item.title, locale)}
+                      {item.href ? (
+                        <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                      ) : null}
+                    </span>
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {pick(item.summary, locale)}
+                  </span>
                 </span>
               </>
             );
-            const cls =
-              "group flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-[border-color,transform,box-shadow]";
-            const linkCls = `${cls} hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-[0_16px_40px_-20px_oklch(0_0_0/0.3)]`;
+            const cls = "group grid gap-1 py-4 md:grid-cols-[7rem_1fr] md:gap-6";
+            const linkCls = `${cls} -mx-3 rounded-lg px-3 transition-colors hover:bg-foreground/[0.03]`;
             return (
               <li key={item.id}>
                 {!item.href ? (
