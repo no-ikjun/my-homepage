@@ -31,7 +31,7 @@ function Row({
   children: ReactNode;
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-label`} className="grid scroll-mt-28 gap-4 md:grid-cols-[11rem_1fr] md:gap-12">
+    <section id={id} aria-labelledby={`${id}-label`} className="grid scroll-mt-28 gap-4 md:grid-cols-[10rem_1fr] md:gap-12">
       <h2
         id={`${id}-label`}
         className="flex items-center gap-2 text-sm font-semibold tracking-tight md:sticky md:top-28 md:self-start"
@@ -103,14 +103,19 @@ export default function AboutView({ locale }: { locale: Locale }) {
           const items = timelineByKind(kind);
           if (!items.length) return null;
           const key = SECTION_KEY[kind];
-          return (
-            <Row key={kind} id={key} label={t[key]}>
-              {kind === "award" ? (
+          if (kind === "award") {
+            return (
+              <Row key={kind} id={key} label={t[key]}>
                 <AwardGrid items={items} locale={locale} />
-              ) : (
-                <TimelineList items={items} locale={locale} />
-              )}
-            </Row>
+              </Row>
+            );
+          }
+          // Timeline sections put the section name in the date column, so the
+          // left column carries the dates instead of sitting empty.
+          return (
+            <section key={kind} id={key} className="scroll-mt-28">
+              <TimelineList items={items} locale={locale} heading={{ id: `${key}-label`, text: t[key] }} />
+            </section>
           );
         })}
       </div>

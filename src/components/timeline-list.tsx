@@ -42,20 +42,36 @@ function Highlights({ items }: { items: string[] }) {
  * One row per organisation: logo, org, role, period, then highlights or
  * sub-entries. Same component for career, education, awards and activities.
  */
-export function TimelineList({ items, locale }: { items: TimelineItem[]; locale: Locale }) {
+export function TimelineList({
+  items,
+  locale,
+  heading,
+}: {
+  items: TimelineItem[];
+  locale: Locale;
+  /** Section name shown in the date column above the first entry (CV layout). */
+  heading?: { id: string; text: string };
+}) {
   return (
-    <ul className="divide-y divide-border">
-      {items.map((item) => {
+    <ul className="divide-y divide-border" aria-labelledby={heading?.id}>
+      {items.map((item, i) => {
         const org = pick(item.org, locale);
         return (
           <li
             key={item.id}
             id={item.id}
-            className="grid scroll-mt-28 gap-3 py-7 first:pt-0 last:pb-0 md:grid-cols-[8rem_1fr] md:gap-6"
+            className="grid scroll-mt-28 gap-3 py-7 first:pt-0 last:pb-0 md:grid-cols-[10rem_1fr] md:gap-12"
           >
-            <p className="text-sm text-muted-foreground tabular-nums md:pt-4">
-              {formatPeriod(item.start, item.end, locale)}
-            </p>
+            <div className="md:pt-4">
+              {heading && i === 0 ? (
+                <h2 id={heading.id} className="mb-3 text-sm font-semibold tracking-tight">
+                  {heading.text}
+                </h2>
+              ) : null}
+              <p className="text-sm text-muted-foreground tabular-nums">
+                {formatPeriod(item.start, item.end, locale)}
+              </p>
+            </div>
 
             <div className="flex gap-4">
               <Logo src={item.logo} alt={org} shape={item.logoShape} />
