@@ -1,11 +1,23 @@
+import Link from "next/link";
 import { CodeXml, FlaskConical, GraduationCap, Mail, MapPin, Microscope } from "lucide-react";
+import { AwardGrid } from "@/components/award-grid";
+import { SectionHeading } from "@/components/section-heading";
 import { TechBadge } from "@/components/tech-badge";
-import { TimelineStory } from "@/components/timeline-story";
+import { TimelineList } from "@/components/timeline-list";
 import { profile } from "@/data/profile";
-import { timeline, type TimelineKind } from "@/data/timeline";
+import { timeline, timelineByKind, type TimelineKind } from "@/data/timeline";
 import { dictionary } from "@/lib/dictionary";
 import { pick } from "@/lib/i18n";
 import { type Locale } from "@/lib/locale";
+
+const SECTION_KEY: Record<TimelineKind, "career" | "education" | "awards" | "activities"> = {
+  career: "career",
+  education: "education",
+  award: "awards",
+  activity: "activities",
+};
+
+const KINDS: TimelineKind[] = ["career", "education", "award", "activity"];
 
 export default function AboutView({ locale }: { locale: Locale }) {
   const t = dictionary[locale].pages.about;
@@ -14,7 +26,7 @@ export default function AboutView({ locale }: { locale: Locale }) {
   const email = profile.links.find((l) => l.id === "email");
 
   const facts = [
-    school && { Icon: GraduationCap, text: `${pick(school.org, locale)}` , sub: pick(school.title, locale) },
+    school && { Icon: GraduationCap, text: pick(school.org, locale), sub: pick(school.title, locale) },
     lab && { Icon: Microscope, text: pick(lab.org, locale), sub: pick(lab.title, locale) },
     { Icon: MapPin, text: pick(profile.location, locale) },
     email && { Icon: Mail, text: email.label, href: email.href },
@@ -24,13 +36,6 @@ export default function AboutView({ locale }: { locale: Locale }) {
     { ...profile.tracks.research, Icon: FlaskConical },
     { ...profile.tracks.engineering, Icon: CodeXml },
   ];
-
-  const kindLabels: Record<TimelineKind, string> = {
-    career: t.career,
-    education: t.education,
-    award: t.awards,
-    activity: t.activities,
-  };
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
@@ -78,12 +83,42 @@ export default function AboutView({ locale }: { locale: Locale }) {
               </section>
             ))}
           </div>
+
+          {/* Section index, desktop only: the sections stack right below on mobile. */}
+          <nav aria-label={t.title} className="mt-10 hidden lg:block">
+            <ul className="space-y-1.5 text-sm">
+              {KINDS.map((kind) => {
+                const key = SECTION_KEY[kind];
+                return (
+                  <li key={key}>
+                    <Link href={`#${key}`} className="text-muted-foreground transition-colors hover:text-foreground">
+                      {t[key]}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </aside>
 
-        {/* ------------------------------------------------------- story */}
-        <section aria-label={t.timeline} className="min-w-0 pt-2 lg:pt-3">
-          <TimelineStory items={timeline} locale={locale} kindLabels={kindLabels} />
-        </section>
+        {/* ---------------------------------------------------- sections */}
+        <div className="min-w-0 space-y-20 lg:pt-3">
+          {KINDS.map((kind) => {
+            const items = timelineByKind(kind);
+            if (!items.length) return null;
+            const key = SECTION_KEY[kind];
+            return (
+              <section key={kind} id={key} aria-labelledby={`about-${key}`} className="scroll-mt-28">
+                <SectionHeading id={`about-${key}`}>{t[key]}</SectionHeading>
+                {kind === "award" ? (
+                  <AwardGrid items={items} locale={locale} />
+                ) : (
+                  <TimelineList items={items} locale={locale} />
+                )}
+              </section>
+            );
+          })}
+        </div>
       </div>
     </main>
   );
