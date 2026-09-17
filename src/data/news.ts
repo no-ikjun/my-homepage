@@ -9,7 +9,7 @@ export type NewsItem = {
   kind: NewsKind;
   title: Localized<string>;
   summary: Localized<string>;
-  /** Locale-neutral internal path ("/about#awards") or an external URL */
+  /** Locale-neutral internal path ("/about#<timeline id>") or an external URL */
   href?: string;
 };
 
@@ -27,7 +27,7 @@ export const news: NewsItem[] = [
       en: "3rd place with Rote, a continual-learning computer automation platform.",
       ko: "지속 학습형 컴퓨터 자동화 플랫폼 Rote로 3위를 받았습니다.",
     },
-    href: "/about#awards",
+    href: "/about#aiewf-2026",
   },
   {
     id: "berkeley-2026",
@@ -38,7 +38,7 @@ export const news: NewsItem[] = [
       en: "Eight weeks in Berkeley for CS161 Computer Security and CS188 Introduction to AI.",
       ko: "8주간 Berkeley에서 CS161 Computer Security와 CS188 Introduction to AI를 들었습니다.",
     },
-    href: "/about#education",
+    href: "/about#berkeley",
   },
   {
     id: "real-lab-2026",

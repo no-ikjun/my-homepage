@@ -50,6 +50,7 @@ const en = {
     about: {
       title: "About",
       description: "What I work on, and where I've worked and studied.",
+      timeline: "Timeline",
       career: "Experience",
       education: "Education",
       awards: "Awards",
@@ -141,6 +142,7 @@ const ko: typeof en = {
     about: {
       title: "소개",
       description: "하고 있는 일, 그리고 일하고 배워 온 곳들.",
+      timeline: "타임라인",
       career: "경력",
       education: "학력",
       awards: "수상",
