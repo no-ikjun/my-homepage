@@ -218,7 +218,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
           {t.home.contactLead}{" "}
           <a
             href={profile.links[0].href}
-            className="underline decoration-border underline-offset-4 transition-colors hover:decoration-brand"
+            className="underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
           >
             {t.home.emailMe}
           </a>

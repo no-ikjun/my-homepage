@@ -23,7 +23,7 @@ export function InlineText({ text, className }: { text: string; className?: stri
         href={href}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         className={cn(
-          "underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-brand",
+          "underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-foreground",
           className,
         )}
       >
