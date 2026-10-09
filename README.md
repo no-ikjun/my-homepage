@@ -32,7 +32,7 @@ npm run lint
 | Page bodies | `src/views/` |
 | Routes (thin, one per locale) | `src/app/(en)/`, `src/app/(ko)/ko/` |
 
-Structured data keeps shared fields (dates, URLs, logos) once and localises only copy with `Localized<T>` (`{ en, ko }`). Dates are `YYYY-MM`; `formatPeriod` renders them per locale.
+Structured data keeps shared fields (dates, URLs, logos) once and localises only copy with `Localized<T>` (`{ en, ko }`). Dates are `YYYY-MM`; `formatPeriod` renders them per locale. Highlight and summary strings may contain `[label](https://…)` links, rendered by `InlineText`.
 
 ## Adding content
 

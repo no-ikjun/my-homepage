@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { InlineText } from "@/components/inline-text";
 import { Reveal } from "@/components/motion/reveal";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
@@ -115,7 +116,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
                     ) : null}
                   </span>
                   <span className="mt-1 block max-w-content text-sm leading-relaxed text-muted-foreground text-pretty">
-                    {pick(item.summary, locale)}
+                    <InlineText text={pick(item.summary, locale)} />
                   </span>
                 </span>
               </>

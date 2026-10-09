@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { InlineText } from "@/components/inline-text";
 import type { TimelineItem } from "@/data/timeline";
 import { formatPeriod } from "@/lib/format";
 import { pick } from "@/lib/i18n";
@@ -31,7 +32,9 @@ function Highlights({ items }: { items: string[] }) {
       {items.map((h) => (
         <li key={h} className="flex gap-2">
           <span aria-hidden className="mt-[0.6em] size-1 shrink-0 rounded-full bg-border" />
-          <span className="text-pretty">{h}</span>
+          <span className="text-pretty">
+            <InlineText text={h} />
+          </span>
         </li>
       ))}
     </ul>

@@ -2,6 +2,10 @@ import type { Localized } from "@/lib/i18n";
 
 export type TimelineKind = "education" | "career" | "award" | "activity";
 
+/**
+ * Highlight strings may contain markdown-style links: "[label](https://…)".
+ * See src/components/inline-text.tsx.
+ */
 export type TimelineEntry = {
   title: Localized<string>;
   /** "YYYY-MM" */
@@ -176,9 +180,9 @@ export const timeline: TimelineItem[] = [
     highlights: {
       en: [
         "Head of the student council's IT department",
-        "Built the school management system JshsUs",
+        "Built the school management system [JshsUs](https://jshsus.kr)",
       ],
-      ko: ["학생회 정보부장", "학교 관리 시스템 JshsUs(과구리) 개발"],
+      ko: ["학생회 정보부장", "학교 관리 시스템 [JshsUs(과구리)](https://jshsus.kr) 개발"],
     },
   },
 
