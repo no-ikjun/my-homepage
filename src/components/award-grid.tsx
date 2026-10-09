@@ -10,7 +10,7 @@ import { type Locale } from "@/lib/locale";
  */
 export function AwardGrid({ items, locale }: { items: TimelineItem[]; locale: Locale }) {
   return (
-    <ul className="grid gap-3 sm:grid-cols-2">
+    <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item) => {
         const org = pick(item.org, locale);
         const placement = pick(item.title, locale);
