@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import type { TimelineItem } from "@/data/timeline";
 import { formatMonth } from "@/lib/format";
 import { pick } from "@/lib/i18n";
@@ -38,9 +39,17 @@ export function AwardGrid({ items, locale }: { items: TimelineItem[]; locale: Lo
                 aria-hidden
                 className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/5"
               />
+              {item.orgUrl ? (
+                <span
+                  aria-hidden
+                  className="absolute top-3 right-3 flex size-8 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors group-hover:bg-white group-hover:text-black"
+                >
+                  <ArrowUpRight className="size-4" />
+                </span>
+              ) : null}
               <div className="absolute inset-x-0 bottom-0 p-4">
                 <p className="text-xs text-white/75 tabular-nums">{formatMonth(item.start, locale)}</p>
-                <h3 className="mt-0.5 font-semibold leading-snug text-balance">{org}</h3>
+                <h3 className="mt-0.5 font-semibold leading-snug text-balance underline-offset-4 group-hover:underline">{org}</h3>
                 <p className="mt-1 text-sm font-medium">{placement}</p>
                 {project ? <p className="mt-1 text-xs leading-snug text-white/80 text-pretty">{project}</p> : null}
               </div>
