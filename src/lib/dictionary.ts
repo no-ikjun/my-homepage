@@ -30,8 +30,6 @@ const en = {
     writing: "Writing",
     allWriting: "All writing",
     moreAbout: "More about me",
-    contactLead: "Open to research collaboration and engineering roles.",
-    emailMe: "Email me",
   },
   project: {
     kind: { research: "Research", product: "Product" },
@@ -122,8 +120,6 @@ const ko: typeof en = {
     writing: "글",
     allWriting: "모든 글",
     moreAbout: "더 알아보기",
-    contactLead: "연구 협업과 엔지니어링 기회 모두 환영합니다.",
-    emailMe: "이메일 보내기",
   },
   project: {
     kind: { research: "연구", product: "제품" },

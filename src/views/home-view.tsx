@@ -211,19 +211,6 @@ export default async function HomeView({ locale }: { locale: Locale }) {
           </ul>
         </Reveal>
       ) : null}
-
-      {/* -------------------------------------------------------- contact */}
-      <Reveal as="section" delay={0.3} className="mt-24 max-w-content">
-        <p className="text-lg leading-relaxed text-pretty">
-          {t.home.contactLead}{" "}
-          <a
-            href={profile.links[0].href}
-            className="underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
-          >
-            {t.home.emailMe}
-          </a>
-        </p>
-      </Reveal>
     </main>
   );
 }
