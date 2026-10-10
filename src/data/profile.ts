@@ -22,19 +22,19 @@ export const profile = {
 
   /** The one-line identity statement shown at the top of the home page. */
   headline: {
-    en: "I study generative AI and build products that put it to work.",
-    ko: "생성형 AI를 연구하고, 그것을 실제로 쓰이는 제품으로 만듭니다.",
+    en: "I like building software that people find useful.",
+    ko: "사람들에게 쓸모 있는 소프트웨어를 만드는 걸 좋아합니다.",
   } satisfies Localized<string>,
 
   /** Short paragraphs under the headline. */
   intro: {
     en: [
-      "I'm an undergraduate at GIST working on diffusion language models at Real-Lab, and a full-stack engineer who has shipped apps and platforms used by real people.",
-      "I care about the whole loop: understanding how a model works, testing an idea in an experiment, and turning what holds up into a system someone can use.",
+      "I'm an EECS undergraduate at GIST. I enjoy exploring new technology and figuring out how it can be useful in everyday life.",
+      "Building things often gives me new questions to explore. I'm curious about what AI can help with, and I enjoy trying out ideas and improving them as I learn.",
     ],
     ko: [
-      "GIST 학부생으로 Real-Lab에서 Diffusion Language Model을 연구하고 있으며, 실제 사용자가 쓰는 앱과 플랫폼을 만들어 온 풀스택 엔지니어입니다.",
-      "모델이 어떻게 동작하는지 이해하고, 아이디어를 실험으로 검증하고, 검증된 것을 누군가 쓸 수 있는 시스템으로 옮기는 전체 과정에 관심이 있습니다.",
+      "GIST에서 전기전자컴퓨터공학을 공부하고 있습니다. 새로운 기술을 알아가고, 일상에서 어떻게 활용할 수 있을지 고민하는 걸 좋아합니다.",
+      "직접 만들다 보면 더 알고 싶은 것들이 생깁니다. AI가 어떤 문제에 도움이 될지 궁금하고, 떠오른 아이디어를 구현하고 다듬으며 배우는 과정을 즐깁니다.",
     ],
   } satisfies Localized<string[]>,
 
