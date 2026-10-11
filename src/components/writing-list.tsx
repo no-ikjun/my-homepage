@@ -134,7 +134,7 @@ export function WritingList({
                       </span>
                     </span>
                     {w.cover ? (
-                      <span className="relative mt-2 block aspect-square w-24 shrink-0 overflow-hidden rounded-lg border border-border bg-muted md:mt-0.5 md:w-20">
+                      <span className="relative mt-2 block aspect-square w-24 shrink-0 overflow-hidden rounded-lg bg-muted md:mt-0.5 md:w-20">
                         <Image
                           src={w.cover}
                           alt=""
