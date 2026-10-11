@@ -2,12 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectIcon } from "@/components/project-icon";
 import { TechBadge } from "@/components/tech-badge";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Globe } from "lucide-react";
+import { GitHubIcon } from "@/components/icons";
 import { dictionary } from "@/lib/dictionary";
 import { formatPeriod } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 import type { ProjectEntry } from "@/types/project";
+
+/** Picks a mark for a project link from its host, so the data needs no icon field. */
+function LinkIcon({ href }: { href: string }) {
+  const cls = "size-4 shrink-0 text-muted-foreground";
+  if (/github\.com/.test(href)) return <GitHubIcon className={cls} />;
+  return <Globe className={cls} />;
+}
 
 function Meta({
   label,
@@ -121,17 +129,18 @@ export default function ProjectDetailView({
             ) : null}
             {meta.links?.length ? (
               <Meta label={d.links}>
-                <ul className="space-y-1">
+                <ul className="space-y-1.5">
                   {meta.links.map((l) => (
                     <li key={l.href}>
                       <a
                         href={l.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-1 text-foreground hover:underline hover:underline-offset-4"
+                        className="group inline-flex items-center gap-2 text-foreground hover:underline hover:underline-offset-4"
                       >
+                        <LinkIcon href={l.href} />
                         {l.label}
-                        <ArrowUpRight className="size-3.5 text-muted-foreground" />
+                        <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                       </a>
                     </li>
                   ))}
