@@ -4,9 +4,10 @@ const withMDX = createMDX({
   extension: /\.mdx?$/,
   // Plugins are named as strings so the config stays serialisable for Turbopack.
   options: {
-    remarkPlugins: [["remark-gfm", {}]],
+    remarkPlugins: [["remark-gfm", {}], ["remark-math", {}]],
     rehypePlugins: [
       ["rehype-slug", {}],
+      ["rehype-katex", { output: "htmlAndMathml" }],
       [
         "rehype-pretty-code",
         {
