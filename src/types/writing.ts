@@ -1,14 +1,21 @@
 import type { ComponentType } from "react";
+import { type Locale } from "@/lib/locale";
 
-export type WritingMeta = {
+/** Exported as `metadata` from content/writings/<slug>.<locale>.mdx. */
+export type WritingFrontmatter = {
   title: string;
-  slug: string;
   date: string;
   summary: string;
   tags?: string[];
   published?: boolean;
-  /** Language the post is written in; sets the lang attribute for wrapping and screen readers. */
-  lang?: "en" | "ko";
+};
+
+export type WritingMeta = WritingFrontmatter & {
+  slug: string;
+  /** Language this file is written in (from the filename). */
+  lang: Locale;
+  /** Every language the post exists in. */
+  available: Locale[];
 };
 
 export type WritingHeading = {

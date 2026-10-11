@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
-import { getPublishedWritings } from "@/lib/content/writings";
+import { getWritings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
 import { formatDate } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/locale";
@@ -8,7 +8,7 @@ import { localePath, type Locale } from "@/lib/locale";
 export default async function WritingsView({ locale }: { locale: Locale }) {
   const t = dictionary[locale];
   const p = t.pages.writings;
-  const writings = await getPublishedWritings();
+  const writings = await getWritings(locale);
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
@@ -40,7 +40,7 @@ export default async function WritingsView({ locale }: { locale: Locale }) {
           {writings.map((w) => (
             <li key={w.slug}>
               <Link
-                href={`/writings/${w.slug}`}
+                href={localePath(locale, `/writings/${w.slug}`)}
                 lang={w.lang}
                 className="group -mx-3 grid gap-1 rounded-lg px-3 py-4 transition-colors hover:bg-foreground/[0.03] md:grid-cols-[9rem_1fr] md:gap-6"
               >
@@ -51,7 +51,12 @@ export default async function WritingsView({ locale }: { locale: Locale }) {
                   {formatDate(w.date, locale)}
                 </time>
                 <span className="min-w-0">
-                  <span className="block font-medium">{w.title}</span>
+                  <span className="block font-medium">
+                    {w.title}
+                    {w.lang !== locale ? (
+                      <span lang={locale} className="ml-2 align-middle text-xs font-normal text-muted-foreground uppercase">{w.lang}</span>
+                    ) : null}
+                  </span>
                   {w.summary ? (
                     <span className="mt-1 block text-sm leading-relaxed text-muted-foreground text-pretty">
                       {w.summary}

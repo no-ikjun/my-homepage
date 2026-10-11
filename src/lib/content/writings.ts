@@ -2,72 +2,105 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { ComponentType } from "react";
 import GithubSlugger from "github-slugger";
-import type { WritingEntry, WritingHeading, WritingMeta } from "@/types/writing";
+import { type Locale } from "@/lib/locale";
+import type { WritingEntry, WritingFrontmatter, WritingHeading, WritingMeta } from "@/types/writing";
 
 const WRITINGS_DIR = path.join(process.cwd(), "content", "writings");
+const FILE_RE = /^(?<slug>[a-z0-9-]+)\.(?<locale>en|ko)\.mdx$/;
 
 type WritingModule = {
   default: ComponentType;
-  metadata?: Partial<WritingMeta>;
+  metadata?: Partial<WritingFrontmatter>;
 };
 
-async function listMdxFiles() {
+type FileRef = { slug: string; locale: Locale };
+
+async function listFiles(): Promise<FileRef[]> {
   try {
     const entries = await fs.readdir(WRITINGS_DIR, { withFileTypes: true });
     return entries
-      .filter((entry) => entry.isFile() && /\.mdx?$/.test(entry.name))
-      .map((entry) => entry.name);
+      .filter((e) => e.isFile())
+      .map((e) => e.name.match(FILE_RE)?.groups as FileRef | undefined)
+      .filter((m): m is FileRef => Boolean(m));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
     throw error;
   }
 }
 
-async function importWritingModule(slug: string): Promise<WritingModule> {
+function importWritingModule(slug: string, locale: Locale) {
   return import(
-    /* webpackInclude: /\.mdx?$/ */ `../../../content/writings/${slug}.mdx`
+    /* webpackInclude: /\.mdx$/ */ `../../../content/writings/${slug}.${locale}.mdx`
   ) as Promise<WritingModule>;
 }
 
-function toMeta(slug: string, metadata?: Partial<WritingMeta>): WritingMeta {
+/**
+ * Which file to serve for `slug` under `locale`: the matching language when it
+ * exists, otherwise whatever language the post was written in. Posts need not
+ * be translated to appear under both locales.
+ */
+function resolveLocale(files: FileRef[], slug: string, locale: Locale): Locale | null {
+  const available = files.filter((f) => f.slug === slug).map((f) => f.locale);
+  if (!available.length) return null;
+  return available.includes(locale) ? locale : available[0];
+}
+
+function toMeta(slug: string, lang: Locale, available: Locale[], fm?: Partial<WritingFrontmatter>): WritingMeta {
   return {
-    title: metadata?.title ?? slug,
     slug,
-    date: metadata?.date ?? "1970-01-01",
-    summary: metadata?.summary ?? "",
-    tags: metadata?.tags ?? [],
-    published: metadata?.published ?? true,
-    lang: metadata?.lang ?? "en",
+    lang,
+    available,
+    title: fm?.title ?? slug,
+    date: fm?.date ?? "1970-01-01",
+    summary: fm?.summary ?? "",
+    tags: fm?.tags ?? [],
+    published: fm?.published ?? true,
   };
 }
 
-export async function getAllWritingMetas() {
-  const files = await listMdxFiles();
+/** Published posts as seen from `locale`, newest first; untranslated posts fall back to their own language. */
+export async function getWritings(locale: Locale): Promise<WritingMeta[]> {
+  const files = await listFiles();
+  const slugs = [...new Set(files.map((f) => f.slug))];
   const metas = await Promise.all(
-    files.map(async (file) => {
-      const slug = file.replace(/\.mdx?$/, "");
-      const mod = await importWritingModule(slug);
-      return toMeta(slug, mod.metadata);
-    })
+    slugs.map(async (slug) => {
+      const lang = resolveLocale(files, slug, locale)!;
+      const available = files.filter((f) => f.slug === slug).map((f) => f.locale);
+      const mod = await importWritingModule(slug, lang);
+      return toMeta(slug, lang, available, mod.metadata);
+    }),
   );
-
-  return metas.sort((a, b) => b.date.localeCompare(a.date));
+  return metas.filter((m) => m.published !== false).sort((a, b) => b.date.localeCompare(a.date));
 }
 
-export async function getPublishedWritings() {
-  const metas = await getAllWritingMetas();
-  return metas.filter((meta) => meta.published !== false);
+export async function getWriting(locale: Locale, slug: string): Promise<WritingEntry | null> {
+  const files = await listFiles();
+  const lang = resolveLocale(files, slug, locale);
+  if (!lang) return null;
+  const available = files.filter((f) => f.slug === slug).map((f) => f.locale);
+  const mod = await importWritingModule(slug, lang);
+  const metadata = toMeta(slug, lang, available, mod.metadata);
+  if (metadata.published === false) return null;
+  return { metadata, Content: mod.default };
+}
+
+/** Every slug, for generateStaticParams; each locale route renders all of them. */
+export async function getWritingSlugs(): Promise<string[]> {
+  const files = await listFiles();
+  return [...new Set(files.map((f) => f.slug))];
 }
 
 /**
- * h2/h3 headings of a post, with the same ids rehype-slug assigns, for the
- * table of contents. Parsed from the raw source; fenced code is skipped.
+ * h2/h3 headings of the file actually served, with the ids rehype-slug
+ * assigns, for the table of contents. Parsed from the source; fenced code is skipped.
  */
-export async function getWritingHeadings(slug: string): Promise<WritingHeading[]> {
-  const files = await listMdxFiles();
-  const file = files.find((name) => name === `${slug}.mdx` || name === `${slug}.md`);
-  if (!file) return [];
-  const source = await fs.readFile(path.join(WRITINGS_DIR, file), "utf8");
+export async function getWritingHeadings(slug: string, lang: Locale): Promise<WritingHeading[]> {
+  let source: string;
+  try {
+    source = await fs.readFile(path.join(WRITINGS_DIR, `${slug}.${lang}.mdx`), "utf8");
+  } catch {
+    return [];
+  }
   const slugger = new GithubSlugger();
   const headings: WritingHeading[] = [];
   let inFence = false;
@@ -83,16 +116,4 @@ export async function getWritingHeadings(slug: string): Promise<WritingHeading[]
     headings.push({ id: slugger.slug(text), text, depth: m[1].length as 2 | 3 });
   }
   return headings;
-}
-
-export async function getWritingBySlug(slug: string): Promise<WritingEntry | null> {
-  const files = await listMdxFiles();
-  const exists = files.some((name) => name === `${slug}.mdx` || name === `${slug}.md`);
-  if (!exists) return null;
-
-  const mod = await importWritingModule(slug);
-  return {
-    metadata: toMeta(slug, mod.metadata),
-    Content: mod.default,
-  };
 }

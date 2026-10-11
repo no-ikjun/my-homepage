@@ -25,7 +25,7 @@ npm run lint
 | Recent news on the home page (curated, first four shown) | `src/data/news.ts` |
 | Career, education, awards, activities | `src/data/timeline.ts` |
 | Project case studies | `content/projects/<slug>.<en|ko>.mdx` |
-| Blog posts (single language) | `content/writings/<slug>.mdx` |
+| Blog posts | `content/writings/<slug>.<en|ko>.mdx` |
 | UI copy (nav, labels, page titles) | `src/lib/dictionary.ts` |
 | Design tokens | `src/app/globals.css` |
 | Shell (header, mobile dock, footer) | `src/components/layout/` |
@@ -61,7 +61,7 @@ export const metadata = {
 
 Stack names get a brand mark and tint from `src/components/tech-badge.tsx` (backed by `simple-icons`); unknown names render as a neutral chip. Screenshots are optional: without a `gallery`, cards and the detail page simply show no images.
 
-**A post.** Copy `content/writings/_template.mdx`, set `published: true` and `lang` (`"en"` or `"ko"`). Posts live at `/writings/<slug>` in one language; the TOC is built from `##`/`###` headings. Math works with `$…$` inline and `$$…$$` blocks (remark-math + KaTeX); citations use GFM footnotes (`[^key]` in the text, `[^key]: …` at the end).
+**A post.** Copy `content/writings/_template.mdx` to `<slug>.<en|ko>.mdx` and set `published: true`. A post with both files switches with the header toggle; a post with one file is shown under both locales with a note. The TOC is built from `##`/`###` headings. Math works with `$…$` inline and `$$…$$` blocks (remark-math + KaTeX); citations use GFM footnotes (`[^key]` in the text, `[^key]: …` at the end).
 
 **Recent news.** Add an entry to the top of `src/data/news.ts`; the home page shows the first four.
 

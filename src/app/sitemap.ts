@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { getPublishedWritings } from "@/lib/content/writings";
+import { getWritings } from "@/lib/content/writings";
 import { getProjects } from "@/lib/content/projects";
 import { localePath, LOCALES } from "@/lib/locale";
 
@@ -34,14 +34,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  // Posts are written in a single language and live at one URL each.
-  const writings = await getPublishedWritings();
-  const writingEntries: MetadataRoute.Sitemap = writings.map((w) => ({
-    url: `${SITE_URL}/writings/${w.slug}`,
-    lastModified: new Date(w.date),
-    changeFrequency: "monthly",
-    priority: 0.75,
-  }));
+  // Posts exist at both locale URLs; untranslated ones serve their own language at both.
+  const writings = await getWritings("en");
+  const writingEntries: MetadataRoute.Sitemap = writings.flatMap((w) =>
+    LOCALES.map((locale) => ({
+      url: abs(localePath(locale, `/writings/${w.slug}`)),
+      lastModified: new Date(w.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+      alternates: {
+        languages: {
+          en: abs(localePath("en", `/writings/${w.slug}`)),
+          ko: abs(localePath("ko", `/writings/${w.slug}`)),
+        },
+      },
+    }))
+  );
 
   // Projects exist in both locales at mirrored URLs.
   const projects = await getProjects("en");

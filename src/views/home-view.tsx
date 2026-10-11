@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { news } from "@/data/news";
 import { profile } from "@/data/profile";
 import { getFeaturedProjects } from "@/lib/content/projects";
-import { getPublishedWritings } from "@/lib/content/writings";
+import { getWritings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
 import { formatMonth } from "@/lib/format";
 import { pick } from "@/lib/i18n";
@@ -26,7 +26,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
   const t = dictionary[locale];
   const [featured, writings] = await Promise.all([
     getFeaturedProjects(locale, 3),
-    getPublishedWritings(),
+    getWritings(locale),
   ]);
   const recentWritings = writings.slice(0, 3);
 
@@ -190,7 +190,7 @@ export default async function HomeView({ locale }: { locale: Locale }) {
             {recentWritings.map((w) => (
               <li key={w.slug}>
                 <Link
-                  href={`/writings/${w.slug}`}
+                  href={localePath(locale, `/writings/${w.slug}`)}
                   lang={w.lang}
                   className="group -mx-3 flex items-baseline justify-between gap-4 rounded-lg px-3 py-3 transition-colors hover:bg-foreground/[0.03]"
                 >

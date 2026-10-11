@@ -77,6 +77,7 @@ const en = {
       emptyDescription: "Short technical notes and essays are on the way.",
       back: "All writing",
       onThisPage: "On this page",
+      onlyIn: { en: "This post is only available in English.", ko: "This post is only available in Korean." },
     },
     contact: {
       title: "Contact",
@@ -168,6 +169,7 @@ const ko: typeof en = {
       emptyDescription: "짧은 기술 노트와 에세이를 준비하고 있습니다.",
       back: "모든 글",
       onThisPage: "목차",
+      onlyIn: { en: "이 글은 영어로만 작성되었습니다.", ko: "이 글은 한국어로만 작성되었습니다." },
     },
     contact: {
       title: "연락처",

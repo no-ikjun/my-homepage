@@ -5,7 +5,6 @@ export const metadata = {
     "Instead of emitting one token at a time, a diffusion language model restores a whole sentence. A walk through the objective and the sampling loop of masked diffusion LMs, with the equations.",
   tags: ["Diffusion LM", "Generative models", "Math"],
   published: true,
-  lang: "en",
 };
 
 Say "language model" and most people picture an autoregressive one: condition on the tokens so far, predict a distribution for the next token, sample one, repeat. A diffusion language model drops that ordering. It lays the whole sentence out at once and, over several steps, turns a badly corrupted sentence into a less corrupted one until the original comes back.
