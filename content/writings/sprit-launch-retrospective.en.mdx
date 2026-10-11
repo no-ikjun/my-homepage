@@ -1,0 +1,85 @@
+export const metadata = {
+  title: "I built a service alone. Will anyone like it?",
+  date: "2024-04-02",
+  category: "notes",
+  summary:
+    "What I learned taking SPRIT, a reading-habit app, from idea to launch to its first month of operation on my own: how I found the first users, what the numbers said, and what building a one-person product is actually like.",
+  tags: ["SPRIT", "Solo development", "Product", "Launch retrospective"],
+  published: true,
+};
+
+This is a write-up of a talk I gave at a WING session in April 2024. The numbers are from roughly one month after launch.
+
+![SPRIT app screens: home, reading timer, reading log](/img/writings/sprit-launch-retrospective/cover.jpg "Three screens of SPRIT. From left: home, the reading timer, the reading log.")
+
+## What SPRIT is
+
+SPRIT is a personal reading-log app built around forming a steady reading habit. You add the book you are reading, start a timer, read, and watch the record build up. Judged by features alone, there are plenty of reading-log apps. The difference is where the weight sits: on the habit rather than the log. The features are there to make you read tomorrow as well as today, not to tell you how much you read today.
+
+## Why I built it
+
+The start was simple. I wanted to read consistently and could not, and the apps I used were good at recording but did nothing to build a habit. Around the same time I kept running into stories of solo developers shipping and monetising apps on their own, and the two things overlapped into "build something alone and ship it, end to end". I surveyed the existing services, saw that there were many, and still did not find the one I wanted to use. That was reason enough.
+
+## Planning and building
+
+Planning took about two months, September to October 2023. I wrote a first idea down in Notion, refined it, and kept a separate page for things that just came to mind. The reference pile was wide: GitHub's contribution graph, other reading apps, even the UI of a transit app. The name and the branding were settled in this period too.
+
+The first commit was on 7 November 2023. The stack: Flutter for the app, NestJS for the server, Figma for design. I wired up Apple and Kakao sign-in and drew every screen in Figma before building it. Real speed only came after final exams, and the app went on the stores on 7 March 2024. Six months from planning to launch, four of them actual development.
+
+## How I found the first users
+
+Three things.
+
+1. **Friends.** The surest method, with the clearest ceiling.
+2. **Communities.** A launch post on Disquiet, plus early-user platforms like Earningbirds.
+3. **Instagram ads.** A small test.
+
+The ad results:
+
+![Instagram ad insights: ₩32,034 spent, 106 website visits](/img/writings/sprit-launch-retrospective/instagram-ads.jpg "₩32,034 over four days bought 106 landing-page visits. ₩302 per visit.")
+
+Over four days, ₩32,034 bought 106 visits to the landing page, ₩302 each. Of the people who visited, 42% were 18 to 24 and 41% were 25 to 34, and close to half were in Seoul. Few of them went on to install, but I learned who responds.
+
+## The response after launch
+
+The Disquiet launch post reached number one on the trending list, and most of the feedback came from there.
+
+![SPRIT at number one on Disquiet's trending products](/img/writings/sprit-launch-retrospective/disquiet-trending.jpg "Number one on Disquiet trending. Almost all of the early feedback came from this post.")
+
+In numbers: landing-page views spiked on every day I posted somewhere and sank in between; new sign-ups started around twenty a day right after launch and tapered off. DAU was 17 a month after 3 March, with one day near 40 in between.
+
+![DAU over the first month, from zero in early March to the twenties mid-month and near forty at the end](/img/writings/sprit-launch-retrospective/dau.jpg "DAU in the first month. A spike on days with promotion, otherwise around twenty.")
+
+Retention was, honestly, the painful number. The share of users coming back dropped sharply after the first day and stayed flat.
+
+![Retention curve: a steep drop after day one, then flat at a low level](/img/writings/sprit-launch-retrospective/retention.jpg "Share of users returning after install. Getting past day one was the whole game.")
+
+Still, a few things counted as results. A brief appearance at number 99 in the App Store's Books category, number one on Disquiet, and a `SELECT COUNT(*)` on the users table that was bigger every time I ran it.
+
+## Monetisation and marketing
+
+For monetisation I added AdMob. Total revenue for the month: $4.02. The number mattered less than the fact that a path for money to come in now existed.
+
+For marketing I wrote "reading app recommendation" style posts on Naver Blog, Tistory and Brunch to catch search traffic, and spread the word on KakaoTalk. The posts outlasted the ads.
+
+## Raising retention
+
+To move DAU, there had to be a reason to come back. That became quests: give a period and a target, like a one-week reading quest, and show progress.
+
+![SPRIT quest screen with a one-week reading quest and its progress](/img/writings/sprit-launch-retrospective/quest.jpg "Quests. An attempt to build a reason to return into the app itself.")
+
+## What building a one-person product is like
+
+Three things, as I put them in the talk.
+
+1. **A career.** I wrote that I would like to be able to say "I built and ran an app with 1,000 DAU", with "I wish" in brackets. Not yet, but that is the direction.
+2. **The hexagon founder.** Frontend, backend, UI/UX, planning, marketing, leadership. Alone, you end up doing a bit of all of them. It is hard to go deep on any one, but you learn with your hands how they connect.
+3. **Fun.** The immersion was its own reward.
+
+And three attitudes. **Validate**: check that people want it before building. **Code**: some things you only learn by building anyway. **Polish**: refine what exists rather than adding more.
+
+## So, will anyone like it?
+
+Some people clearly did. Fewer than I imagined, and they leave faster than I imagined. The first month of a solo product turned out to be a search for the few who stay. Learning why they stay was the next step, and quests were the first attempt.
+
+SPRIT is still running. More on the [project page](/projects/sprit).

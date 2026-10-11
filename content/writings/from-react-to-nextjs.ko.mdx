@@ -1,0 +1,224 @@
+export const metadata = {
+  title: "React에서 Next.js로",
+  date: "2023-04-07",
+  category: "engineering",
+  summary:
+    "라이브러리와 프레임워크의 차이에서 출발해 Next.js를 왜 쓰는지, 그리고 라우팅·스타일링·데이터 페칭·SEO까지 기본 사용법을 한 번에 훑습니다.",
+  tags: ["Next.js", "React", "SSR", "프론트엔드"],
+  published: true,
+};
+
+2023년 4월 WING 세션에서 발표한 내용을 글로 옮겼습니다. 당시 Next.js는 Pages Router 기준이었고, 이 글도 그 기준으로 씁니다. 지금의 App Router와는 파일 구조와 데이터 페칭 방식이 다르지만, "왜 Next.js인가"는 그대로입니다.
+
+## Next.js란
+
+React는 사용자 인터페이스를 만들기 위한 JavaScript **라이브러리**입니다. Next.js는 서버 사이드 렌더링되는 React 애플리케이션을 만들기 위한 **프레임워크**입니다. 두 단어의 차이가 이 글의 출발점입니다.
+
+## 라이브러리와 프레임워크
+
+라이브러리는 미리 작성된 코드 조각이고, 내가 필요할 때 가져다 씁니다. 프레임워크는 애플리케이션의 구조를 정해 주는 규칙의 집합이고, 내 코드가 그 안에 들어갑니다.
+
+차이는 **흐름을 누가 가지고 있느냐**입니다. 라이브러리는 내 코드가 라이브러리를 호출합니다. 프레임워크는 프레임워크가 내 코드를 호출합니다. 이것을 제어의 역전(Inversion of Control)이라고 부릅니다. React만 쓸 때는 라우팅, 번들링, 렌더링 방식을 전부 내가 고르고 조립해야 합니다. Next.js는 그 결정을 대신 내려 주고, 대신 그 규칙을 따르라고 요구합니다.
+
+## 왜 Next.js인가
+
+**서버 사이드 렌더링.** 클라이언트 사이드 렌더링은 빈 HTML을 받은 뒤 JavaScript가 실행되어야 화면이 생깁니다. Next.js는 서버에서 HTML을 먼저 만들어 보내고, 그 위에 React가 붙어(hydration) 상호작용이 가능해집니다. 첫 화면이 빨리 보입니다.
+
+**검색 엔진 최적화.** 검색 엔진 크롤러는 완성된 HTML을 읽습니다. 미리 렌더링된 페이지는 그 자체로 내용을 담고 있어서 색인이 잘 됩니다.
+
+**파일 기반 라우팅.** `pages/about.tsx`를 만들면 `/about`이 생깁니다. 라우터 설정 파일이 없습니다.
+
+**코드 분할.** 페이지 단위로 번들이 나뉘어서, 한 페이지를 열 때 그 페이지의 코드만 받습니다.
+
+## 사용법
+
+### 프로젝트 만들기
+
+```bash
+npx create-next-app@latest --typescript project-name --use-npm
+cd project-name
+npm run dev
+```
+
+### 이동
+
+`<a>` 대신 `Link`를 씁니다. 전체 페이지를 다시 받지 않고 클라이언트에서 전환합니다.
+
+```tsx
+import Link from "next/link";
+
+export default function NavBar() {
+  return (
+    <nav>
+      <Link href="/">Home</Link>
+      <Link href="/about">About</Link>
+    </nav>
+  );
+}
+```
+
+### 라우팅
+
+`pages` 폴더 안의 파일이 곧 경로입니다.
+
+```tsx
+// pages/index.tsx
+export default function Home() {
+  return <h1>Hello</h1>;
+}
+```
+
+```tsx
+// pages/about.tsx
+export default function About() {
+  return <h1>About</h1>;
+}
+```
+
+### 동적 라우팅
+
+대괄호가 들어간 파일 이름은 변수가 됩니다. `pages/movies/[id].tsx`는 `/movies/101010` 같은 주소를 받고, 값은 `useRouter`로 읽습니다.
+
+```tsx
+// pages/movies/[id].tsx
+import { useRouter } from "next/router";
+
+export default function Movie() {
+  const router = useRouter();
+  const { id } = router.query;
+  return <h1>Movie: {id}</h1>;
+}
+```
+
+`pages/movies/all.tsx`처럼 고정된 이름이 함께 있으면 그쪽이 우선합니다.
+
+### 스타일링
+
+두 가지 방식이 기본으로 들어 있습니다. CSS Modules는 파일 이름이 `.module.css`로 끝나는 CSS를 불러와 클래스 이름이 충돌하지 않게 해 줍니다.
+
+```css
+/* modules/main.module.css */
+.nav_title {
+  font-size: 30px;
+}
+.nav_color {
+  color: blue;
+}
+```
+
+```tsx
+import styles from "../modules/main.module.css";
+
+export default function About() {
+  return <h1 className={[styles.nav_title, styles.nav_color].join(" ")}>About</h1>;
+}
+```
+
+styled-jsx는 컴포넌트 안에 스타일을 함께 둡니다. 범위가 그 컴포넌트로 한정됩니다.
+
+```tsx
+export default function About() {
+  return (
+    <>
+      <h1 className="title">About</h1>
+      <style jsx>{`
+        .title {
+          color: red;
+          font-size: 30px;
+        }
+      `}</style>
+    </>
+  );
+}
+```
+
+### 공통 레이아웃
+
+`pages/_app.tsx`는 모든 페이지를 감쌉니다. 내비게이션 바나 전역 스타일처럼 모든 페이지에 있어야 할 것이 여기 갑니다.
+
+```tsx
+// pages/_app.tsx
+import NavBar from "../components/NavBar";
+import "../styles/globals.css";
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <NavBar />
+      <Component {...pageProps} />
+    </>
+  );
+}
+```
+
+### 데이터 가져오기
+
+미리 렌더링하는 방식이 두 가지입니다. **정적 생성(SSG)**은 빌드 시점에 HTML을 만들어 두고 모든 요청에 재사용합니다. **서버 사이드 렌더링(SSR)**은 요청마다 HTML을 만듭니다. 내용이 자주 바뀌지 않으면 SSG, 요청마다 달라야 하면 SSR입니다.
+
+```tsx
+// SSG: 빌드 때 한 번
+export async function getStaticProps() {
+  const res = await fetch("https://.../posts");
+  const posts = await res.json();
+  return { props: { posts } };
+}
+```
+
+```tsx
+// SSR: 요청마다
+export async function getServerSideProps(context) {
+  const res = await fetch("https://.../...");
+  const data = await res.json();
+  if (!data) {
+    return { notFound: true };
+  }
+  return { props: { data } };
+}
+```
+
+### SEO
+
+`next/head`로 페이지마다 제목과 메타 태그를 넣습니다. 재사용할 수 있게 컴포넌트로 만들어 두면 편합니다.
+
+```tsx
+import Head from "next/head";
+
+interface SEOProps {
+  description: string;
+  title: string;
+  siteTitle: string;
+}
+
+export default function SEO({ description, title, siteTitle }: SEOProps) {
+  return (
+    <Head>
+      <title>{`${title} | ${siteTitle}`}</title>
+      <meta name="description" content={description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:site_name" content={siteTitle} />
+    </Head>
+  );
+}
+```
+
+```tsx
+// pages/about.tsx
+import SEO from "../components/SEO";
+
+export default function About() {
+  return (
+    <>
+      <SEO title="About" description="About page" siteTitle="Next" />
+      <h1>About</h1>
+    </>
+  );
+}
+```
+
+렌더링된 HTML의 `<head>`를 열어 보면 메타 태그가 들어가 있습니다. 크롤러가 읽는 것이 바로 이것입니다.
+
+## 정리
+
+React는 화면을 만드는 도구이고, Next.js는 그 화면을 어디서 어떻게 그려서 어떻게 전달할지까지 정해 주는 틀입니다. 서버 렌더링, SEO, 파일 기반 라우팅, 코드 분할은 React만으로도 할 수 있지만 전부 직접 조립해야 하고, Next.js는 그 조립을 규칙으로 바꿔 놓았습니다. 그 규칙을 받아들이는 대가로 결정할 것이 줄어듭니다. 작은 팀이 빨리 만들어야 할 때 이 거래는 대체로 남는 장사입니다.

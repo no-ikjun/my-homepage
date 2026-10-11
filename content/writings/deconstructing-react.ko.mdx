@@ -1,16 +1,22 @@
 export const metadata = {
-  title: "Deconstructing React: 리액트 만들어보기",
+  title: "Deconstructing React: 리액트 직접 만들어보기",
   date: "2023-08-25",
   category: "engineering",
   summary:
-    "TypeScript와 Parcel만으로 createElement, render, useState, 그리고 로딩 리소스까지 직접 구현하며 React가 안에서 어떻게 돌아가는지 따라가 본 기록.",
+    "TypeScript와 Parcel만으로 createElement, render, useState, 그리고 데이터 로딩까지 직접 구현하며 React가 안에서 어떻게 돌아가는지 따라가 보았습니다.",
   tags: ["React", "TypeScript", "JSX"],
   published: true,
 };
 
-2023년 8월에 [velog](https://velog.io/@choi041101/Deconstructing-React)에 올렸던 글을 옮겨 왔습니다.
+React를 매일 쓰면서도 JSX가 어떻게 화면이 되는지, `useState`가 어떻게 값을 기억하는지는 정확히 모르고 있었습니다. 그래서 라이브러리 없이 빈 파일에서 출발해 React의 핵심 조각들을 하나씩 직접 만들어 봤습니다. 완성도보다는 "왜 이렇게 생겼는지"를 이해하는 것이 목적입니다.
 
-디렉토리 만들고, 타입스크립트 설치
+2023년 8월 WING 세션에서 발표한 내용으로, 당시 [velog](https://velog.io/@choi041101/Deconstructing-React)에 올렸던 글을 다듬어 옮겼습니다.
+
+![점 하나에서 타원을 하나씩 더해 React 로고가 완성되는 네 단계](/img/writings/deconstructing-react/cover.svg "React 로고가 만들어지는 순서처럼, 이 글도 조각을 하나씩 더해 갑니다.")
+
+## 프로젝트 준비
+
+디렉토리를 만들고 TypeScript와 Parcel을 설치합니다.
 
 ```bash
 mkdir deconstructing-react
@@ -20,46 +26,51 @@ npm install parcel-bundler
 yarn add typescript parcel -D
 ```
 
-타입스크립트 초기화
+TypeScript를 초기화합니다.
 
 ```bash
 tsc --init
 ```
 
-tsconfig.json 파일에서 몇 가지 수정
+`tsconfig.json`에서 두 가지를 바꿉니다. JSX를 React 방식으로 변환하도록 하고, 실험이 목적이니 엄격 모드는 끕니다.
 
 ```json
 "jsx": "react"
 "strict": false
 ```
 
-index.html, index.tsx 파일 생성
+`index.html`과 `index.tsx`를 만들고, HTML에서 스크립트를 불러옵니다.
 
 ```html
 <script src="index.tsx"></script>
 ```
 
-parcel환경에서 서버 실행
+Parcel로 개발 서버를 띄웁니다.
 
 ```bash
 parcel index.html
 ```
 
-index.tsx에 본격적으로 jsx 넣어보기
+## JSX는 결국 함수 호출입니다
+
+`index.tsx`에 JSX 한 줄을 넣어 봅니다.
 
 ```jsx
 const a = <div>hello</div>;
 ```
 
-![실행 결과 스크린샷 1](/img/writings/deconstructing-react/01.png)
+![React가 정의되지 않았다는 오류](/img/writings/deconstructing-react/01.png)
 
+`React`가 없다는 오류가 납니다. JSX는 컴파일되면 `React.createElement(...)` 호출로 바뀌기 때문입니다. 그렇다면 빈 객체라도 `React`라는 이름으로 두면 어떻게 될까요.
 
 ```jsx
 const React = {};
 const a = <div>hello</div>;
 ```
-![실행 결과 스크린샷 2](/img/writings/deconstructing-react/02.png)
 
+![createElement가 함수가 아니라는 오류](/img/writings/deconstructing-react/02.png)
+
+이번에는 `createElement`가 함수가 아니라고 합니다. 빈 함수를 하나 달아 줍니다.
 
 ```jsx
 let React = {
@@ -68,12 +79,9 @@ let React = {
 const a = <div>hello</div>;
 ```
 
-![실행 결과 스크린샷 3](/img/writings/deconstructing-react/03.png)
+![오류 없이 실행된 화면](/img/writings/deconstructing-react/03.png)
 
-
-이렇게만 해도 에러는 사라진다!
-
-그럼 이 함수가 받아오고 있는 argument에 한 번 접근해보자
+이것만으로 오류가 사라집니다. 이제 이 함수가 어떤 인자를 받는지 확인해 봅니다.
 
 ```jsx
 const React = {
@@ -84,10 +92,9 @@ const React = {
 const a = <div>hello</div>;
 ```
 
-![실행 결과 스크린샷 4](/img/writings/deconstructing-react/04.png)
+![콘솔에 찍힌 createElement의 인자](/img/writings/deconstructing-react/04.png)
 
-
-div는 태그 이름이고, hello는 요소 안의 값 이름이다. 그럼 null은 뭘까?
+`div`는 태그 이름이고 `hello`는 요소 안의 내용입니다. 가운데의 `null`이 무엇인지 보려고 속성을 하나 붙여 봅니다.
 
 ```jsx
 const React = {
@@ -98,12 +105,13 @@ const React = {
 const a = <div className="good">hello</div>;
 ```
 
-![실행 결과 스크린샷 5](/img/writings/deconstructing-react/05.png)
+![className이 두 번째 인자로 전달된 모습](/img/writings/deconstructing-react/05.png)
 
+두 번째 인자는 속성(props)이었습니다. 즉 `createElement`는 태그 이름, 속성, 그리고 자식들을 차례로 받습니다.
 
-클래스 리스트였군!
+## 엘리먼트 객체 만들기
 
-그럼 이제 본격적으로 요소를 반환하는 함수를 작성해보자!
+이제 `createElement`가 실제로 무언가를 반환하게 합니다. React 엘리먼트는 결국 태그와 속성, 자식을 담은 평범한 객체입니다.
 
 ```jsx
 const React = {
@@ -116,10 +124,9 @@ const React = {
 const a = <div className="good">hello</div>;
 ```
 
-![실행 결과 스크린샷 6](/img/writings/deconstructing-react/06.png)
+![반환된 엘리먼트 객체](/img/writings/deconstructing-react/06.png)
 
-
-적당히 a변수 잘 수정해주면
+중첩된 JSX도 넣어 봅니다.
 
 ```jsx
 const React = {
@@ -133,25 +140,20 @@ const a = (
   <div className="good">
     <h1>hello</h1>
     <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-      deleniti harum quibusdam inventore!
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+      perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus
+      itaque similique, adipisci voluptatum atque ex deleniti harum quibusdam
+      inventore!
     </p>
   </div>
 );
 ```
 
-![실행 결과 스크린샷 7](/img/writings/deconstructing-react/07.png)
+![중첩된 엘리먼트 객체 트리](/img/writings/deconstructing-react/07.png)
 
+자식 요소까지 객체 트리로 잘 만들어집니다. 이것이 흔히 말하는 가상 DOM입니다.
 
-이런식으로 잘 나오는 것을 확인할 수 있음.
-
-다음단계는 이 element를 화면에 보여주는 것!
-
-먼저 지금은 그냥 jsx 변수인 a를 함수 컴포넌트로 바꾸어보자
-
-→ 이제 a는 진짜 react component이다!
-
-- 이참에 변수 이름도 App으로 바꿔보자
+다음은 이 변수 `a`를 함수 컴포넌트로 바꾸는 일입니다. `createElement`가 받은 `tag`가 함수라면 그 함수를 호출해 결과를 쓰면 됩니다. 변수 이름도 `App`으로 바꿉니다.
 
 ```jsx
 const React = {
@@ -168,8 +170,10 @@ const App = () => (
   <div className="good">
     <h1>hello</h1>
     <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-      deleniti harum quibusdam inventore!
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+      perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus
+      itaque similique, adipisci voluptatum atque ex deleniti harum quibusdam
+      inventore!
     </p>
   </div>
 );
@@ -177,28 +181,24 @@ const App = () => (
 <App />;
 ```
 
-이러면 일단 Poor man’s react가 만들어졌다.
+여기까지가 아주 작은 React입니다. 다만 React 자체는 퍼즐의 한 조각일 뿐이고, 이 가상 DOM 트리를 실제 화면 어딘가에 놓아 주는 부분이 따로 필요합니다.
 
-react is just a part of the puzzle you need to have something that takes your virtual Dom tree puts it somewhere.
+## render: 객체를 실제 DOM으로
 
-본격적으로 이를 화면에 표시해보자.
-
-→ we need to create our render function
-
-index.html에 app이라는 id를 가진 태그를 만들어준다.
+`index.html`에 `app`이라는 id를 가진 요소를 만듭니다.
 
 ```html
 <div id="app"></div>
 <script src="index.tsx"></script>
 ```
 
-그리고 index.tsx에서는 App이라는 함수를 렌더하는 함수를 작성해준다.
+그리고 `index.tsx`에서 `App`을 그 안에 그리도록 `render`를 호출합니다.
 
 ```jsx
 render(<App />, document.getElementById("app"));
 ```
 
-1차 시도
+첫 번째 시도입니다. 엘리먼트 객체를 받아 실제 DOM 요소를 만들고, 속성을 옮기고, 자식을 재귀적으로 그립니다.
 
 ```jsx
 const React = {
@@ -215,8 +215,10 @@ const App = () => (
   <div className="good">
     <h1>hello</h1>
     <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-      deleniti harum quibusdam inventore!
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+      perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus
+      itaque similique, adipisci voluptatum atque ex deleniti harum quibusdam
+      inventore!
     </p>
   </div>
 );
@@ -229,7 +231,9 @@ const render = (reactElement, container) => {
       .forEach((p) => (actualDomElement[p] = reactElement[p]));
   }
   if (reactElement.props.children) {
-    reactElement.props.children.forEach((child) => render(child, actualDomElement));
+    reactElement.props.children.forEach((child) =>
+      render(child, actualDomElement),
+    );
   }
   container.appendChild(actualDomElement);
 };
@@ -237,18 +241,11 @@ const render = (reactElement, container) => {
 render(<App />, document.getElementById("app"));
 ```
 
-![실행 결과 스크린샷 8](/img/writings/deconstructing-react/08.png)
+![문자열 자식에서 발생한 오류](/img/writings/deconstructing-react/08.png)
 
+오류가 납니다. `<h1>hello</h1>`의 `hello`처럼 자식 중에는 엘리먼트 객체가 아니라 그냥 문자열인 것이 있기 때문입니다. 숫자도 마찬가지입니다.
 
-왜 이러냐?
-
-저 위에 써놓은 jsx의 자식 태그 안의 hello와 같은 문자는 react element가 아닌 그저 문자열이기 때문이다.
-
-solution → reactElement를 reactElementOrStringOrNumber로 변환
-
-→ TypeScript의 필요성 한 번 강조해주면 좋을 듯
-
-변경 사항 적용
+그래서 `render`가 받는 값이 엘리먼트일 수도, 문자열이나 숫자일 수도 있다고 보고 먼저 분기합니다. 이름도 그 사실이 드러나게 바꿨습니다. 이런 지점이 TypeScript가 있으면 미리 잡히는 종류의 실수입니다.
 
 ```jsx
 const React = {
@@ -265,25 +262,35 @@ const App = () => (
   <div className="good">
     <h1>hello</h1>
     <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-      deleniti harum quibusdam inventore!
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+      perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus
+      itaque similique, adipisci voluptatum atque ex deleniti harum quibusdam
+      inventore!
     </p>
   </div>
 );
 
 const render = (reactElementOrStringOrNumber, container) => {
   if (["string", "number"].includes(typeof reactElementOrStringOrNumber)) {
-    container.appendChild(document.createTextNode(String(reactElementOrStringOrNumber)));
+    container.appendChild(
+      document.createTextNode(String(reactElementOrStringOrNumber)),
+    );
     return;
   }
-  const actualDomElement = document.createElement(reactElementOrStringOrNumber.tag);
+  const actualDomElement = document.createElement(
+    reactElementOrStringOrNumber.tag,
+  );
   if (reactElementOrStringOrNumber.props) {
     Object.keys(reactElementOrStringOrNumber.props)
       .filter((p) => p !== "children")
-      .forEach((p) => (actualDomElement[p] = reactElementOrStringOrNumber.props[p]));
+      .forEach(
+        (p) => (actualDomElement[p] = reactElementOrStringOrNumber.props[p]),
+      );
   }
   if (reactElementOrStringOrNumber.props.children) {
-    reactElementOrStringOrNumber.props.children.forEach((child) => render(child, actualDomElement));
+    reactElementOrStringOrNumber.props.children.forEach((child) =>
+      render(child, actualDomElement),
+    );
   }
   container.appendChild(actualDomElement);
 };
@@ -291,20 +298,13 @@ const render = (reactElementOrStringOrNumber, container) => {
 render(<App />, document.getElementById("app"));
 ```
 
-![실행 결과 스크린샷 9](/img/writings/deconstructing-react/09.png)
+![브라우저에 렌더링된 App 컴포넌트](/img/writings/deconstructing-react/09.png)
 
+화면에 그려집니다. 하지만 이대로는 정적인 HTML과 다를 게 없습니다. 상태가 없기 때문입니다.
 
-키야 이게 되네?
+## useState 첫 시도
 
-🥳🥳🥳🥳🥳
-
-하지만 이런 건 필요없다! 왜냐? state가 존재하지 않기 때문이다!
-
-이럴 바엔 그냥 HTML 쓰지;;
-
-일단 그 전에 App 컴포넌트를 저런 식으로 쓰지 말고 return으로 jsx를 뱉어내는 식으로 수정해보자
-
-그리고 input 창을 하나 만들자
+먼저 `App`을 JSX를 바로 반환하는 형태에서 `return` 문을 쓰는 형태로 바꾸고, 입력창을 하나 둡니다.
 
 ```jsx
 const App = () => {
@@ -313,17 +313,17 @@ const App = () => {
       <h1>hello</h1>
       <input type="text" placeholder="name" />
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-        deleniti harum quibusdam inventore!
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+        perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam
+        natus itaque similique, adipisci voluptatum atque ex deleniti harum
+        quibusdam inventore!
       </p>
     </div>
   );
 };
 ```
 
-그냥 우리가 원래 썼던 방식 그대로 useState의 기능을 코드로 작성해보자
-
-(주의할 점 : 우리는 React에서 onChange의 형태로 이벤트 코드를 작성하지만, 이는 React에서 사용되는 방법이고, 실제 input 태그에서의 변화를 가지고 코드를 실행하기 위한 것은 onchange이다.)
+평소 React에서 쓰던 방식 그대로 `useState`를 써 봅니다. 한 가지 주의할 점은, React의 `onChange`는 React가 제공하는 합성 이벤트이고 실제 DOM 속성은 `onchange`라는 것입니다. 지금은 React가 없으니 DOM 속성을 그대로 씁니다.
 
 ```jsx
 const App = () => {
@@ -331,22 +331,26 @@ const App = () => {
   return (
     <div className="good">
       <h1>Hello, {name}</h1>
-      <input type="text" placeholder="name" value={name} onchange={(e) => setName(e.target.value)} />
+      <input
+        type="text"
+        placeholder="name"
+        value={name}
+        onchange={(e) => setName(e.target.value)}
+      />
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-        deleniti harum quibusdam inventore!
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+        perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam
+        natus itaque similique, adipisci voluptatum atque ex deleniti harum
+        quibusdam inventore!
       </p>
     </div>
   );
 };
 ```
 
-![실행 결과 스크린샷 10](/img/writings/deconstructing-react/10.png)
+![useState가 정의되지 않았다는 오류](/img/writings/deconstructing-react/10.png)
 
-
-당연하게도, useState라는 건 없다고 한다.
-
-App 컴포넌트 위에 useState라는 것을 선언하자
+당연히 `useState`가 없다고 합니다. `App` 위에 가장 단순한 형태로 선언합니다. 초기값을 받아 두고, `setState`로 바꾸는 것이 전부입니다.
 
 ```jsx
 const useState = (initialState) => {
@@ -356,28 +360,17 @@ const useState = (initialState) => {
 };
 ```
 
-초기 상태를 받아오고, setState라는 함수를 통해 state를 업데이트 해주는 코드
+![입력창과 초기값이 표시된 화면](/img/writings/deconstructing-react/11.png)
 
-![실행 결과 스크린샷 11](/img/writings/deconstructing-react/11.png)
+`name`을 쓸 수는 있게 됐지만, 입력창의 값을 바꿔도 화면은 그대로입니다. 값이 바뀌었으면 다시 그려야 하는데 그 부분이 없기 때문입니다.
 
-
-name이라는 변수를 사용할 수는 있게 되었다. 하지만 input창의 값을 변경했을 때 변수 값이 변하지는 않는다.
-
-왜 안될까?
-
-→ 실제 React가 그렇듯이, 값이 바뀌었다면 재랜더링 해주어야한다.
-
-그럼 rerender함수를 만들어보자.
-
-(render 함수 아래에 선언)
+`render` 아래에 `rerender`를 만들고, `setState`가 호출될 때마다 실행되게 합니다.
 
 ```jsx
 const rerender = () => {
   render(<App />, document.getElementById("app"));
-}
+};
 ```
-
-이런 식으로 rerender함수를 작성하고, state가 변할때마다 호출하는 식으로 구현하면 될 것 같은 느낌이 든다.
 
 ```jsx
 const useState = (initialState) => {
@@ -390,12 +383,9 @@ const useState = (initialState) => {
 };
 ```
 
-![실행 결과 스크린샷 12](/img/writings/deconstructing-react/12.png)
+![화면이 중복으로 그려진 모습](/img/writings/deconstructing-react/12.png)
 
-
-쉣
-
-rerender가 발생할 때 이전에 있던 모든 element를 삭제해주면 될 듯
+다시 그리긴 하는데 이전 화면 위에 덧붙입니다. `rerender`에서 기존 요소를 먼저 지우도록 합니다.
 
 ```jsx
 const rerender = () => {
@@ -404,9 +394,7 @@ const rerender = () => {
 };
 ```
 
-그래도 ikjun이라는 초기 값은 변화하지 않는 것을 확인할 수 있다.
-
-콘솔에 찍어보면서 무슨 일이 일어나고 있는 것인지 확인해보자
+그래도 `ikjun`이라는 초기값은 바뀌지 않습니다. 무슨 일이 일어나는지 콘솔에 찍어 봅니다.
 
 ```jsx
 const useState = (initialState) => {
@@ -421,41 +409,19 @@ const useState = (initialState) => {
 };
 ```
 
-![실행 결과 스크린샷 13](/img/writings/deconstructing-react/13.png)
+![setState 호출 뒤 initial 로그가 다시 찍히는 콘솔](/img/writings/deconstructing-react/13.png)
 
+`setState`는 잘 불리지만, 다시 그릴 때 `useState`가 다시 실행되면서 매번 초기값으로 돌아갑니다. 여기서 훅이 어떻게 값을 기억하는지 생각해 봐야 합니다.
 
-그럼  이제 여기서 우리는 훅이 어떤 식으로 동작하는지에 대해 생각해보아야 한다. 
+## 상태는 컴포넌트 밖에 있어야 합니다
 
-어떻게 고칠까?
+핵심은 클로저(closure)입니다. 함수가 실행될 때마다 지역 변수는 새로 만들어지므로, 함수 안에 둔 상태는 이전 값을 기억할 수 없습니다.
 
-여기서 사용되는 개념이 바로 클로저(Closure)이다.
+![함수 안의 카운터가 매번 0으로 초기화되는 예제](/img/writings/deconstructing-react/14.png)
 
-(클로저에 관한건 나중에 따로 다루기로 하자.)
+위 예제가 전형적인 경우입니다. `increase`가 호출될 때마다 `counter`가 0에서 시작하니 상태 변화를 만들 수 없습니다. 가장 먼저 떠오르는 해결책은 전역 변수지만, 어디서든 읽고 바꿀 수 있어 부작용의 원인이 되기 쉽습니다. 그래서 바깥 스코프에 저장소를 두되 접근은 함수를 통해서만 하는 방식, 즉 클로저로 상태를 관리합니다.
 
-공부를 아주 간단하게 해보았음.
-
-요약해보자면,
-
-클로저를 사용하지 않으면 그 상태가 이전에 어떤 상태였는지 기억할 수 없음.
-
-왜? 그 함수가 실행될 때마다 초기화될거니까?
-
-![실행 결과 스크린샷 14](/img/writings/deconstructing-react/14.png)
-
-
-이 예제 코드가 가장 대표적인 예라고 할 수 있을 듯. 이러면 increase 함수가 호출될 때마다 counter가 0으로 초기화 되어서 결국에는 상태변화를 구현할 수 없음
-
-그럼 가장 기본적으로 생각해볼 수 있는 방법이 바로 전역변수를 활용하는 방법.
-
-근데 전역변수의 사용은 그닥 추천되지 않음.
-
-전역변수는 언제든지 누구나 접근할 수 있고 변경할 수 있기 때문에 많은 부작용을 유발해 오류의 원인이 되므로 사용을 억제해야 한다.
-
-그래 그럼 우리도 클로저를 사용해서 상태를 관리해보자.
-
-일단 이름 바꾸는 것 보다, count를 관리함으로써 보다 직관적인 구현이 가능하도록 방향을 잡았다.
-
-그래서 일단 count를 보여주고 이를 증가 혹은 감소시키는 버튼을 컴포넌트에 집어넣었다.
+이름 하나만 바꾸는 것보다 숫자를 세는 쪽이 동작을 확인하기 쉬워서, 카운터와 증감 버튼을 컴포넌트에 추가했습니다.
 
 ```jsx
 const App = () => {
@@ -464,43 +430,34 @@ const App = () => {
   return (
     <div className="good">
       <h1>Hello, {name}</h1>
-      <input type="text" placeholder="name" value={name} onchange={(e) => setName(e.target.value)} />
+      <input
+        type="text"
+        placeholder="name"
+        value={name}
+        onchange={(e) => setName(e.target.value)}
+      />
       <h2>The count is : {count}</h2>
       <button onclick={() => setCount(count + 1)}>+</button>
       <button onclick={() => setCount(count - 1)}>-</button>
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-        deleniti harum quibusdam inventore!
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+        perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam
+        natus itaque similique, adipisci voluptatum atque ex deleniti harum
+        quibusdam inventore!
       </p>
     </div>
   );
 };
 ```
 
-이러면 state가 바뀌려고 할 때마다 리렌더링은 정상적으로 되는 것 같지만 state 값을 확인해보면 계속 다시 초기화되는 모습을 볼 수 있다.
-
-그래서 일단은 외부 스코프에 store을 만들어서 그곳에 값을 저장하는 방식을 구현해보자.
-
-state를 보관 할 states와 어떤 state에 대해 다루는지를 알려줄 stateCursor를 useState를 선언한 부분 위에 각각 선언.
-
-(stateCursor는 states의 몇 번째 인덱스에 그 값이 있는지를 나타낼 변수?)
+이 상태에서는 리렌더링은 되지만 값은 계속 초기화됩니다. 이제 상태를 컴포넌트 밖으로 꺼냅니다. 값을 보관할 `states` 배열과, 지금 몇 번째 상태를 다루는지 가리키는 `stateCursor`를 `useState` 위에 둡니다.
 
 ```jsx
 const states = [];
 let stateCursor = 0;
 ```
 
-일단 useState에 있는 콘솔 로그 부터 지우고,
-
-forzenCursor라는 변수를 만들어 어떤 state에 대해서 다룰지 나타낸다.
-
-원래 state라는 변수로 관리하던 값을 외부 변수인 states의 값을 참조하는 식으로 변경함.
-
-initialState가 없는 경우에는 그냥 states[FROZENCURSOR]를 넣어줌
-
-**states[FROZENCURSOR]에 값이 없을 경우에는 initialState를 넣어줌**
-
-로직을 마무리할 때 stateCursor++를 해줌으로써 자동으로 다음 상태로 이동
+`useState`는 호출되는 순간의 커서를 `FROZENCURSOR`에 고정해 두고, 그 자리의 값을 읽고 씁니다. 그 자리에 아직 값이 없으면 초기값을 넣고, 끝나면 커서를 하나 올려 다음 `useState` 호출이 다음 칸을 쓰게 합니다.
 
 ```jsx
 const states = [];
@@ -518,7 +475,7 @@ const useState = (initialState) => {
 };
 ```
 
-그리고 컴포넌트가 리렌더링 되었을 때는 stateCursor를 0으로 초기화
+다시 그릴 때는 커서를 0으로 되돌려, 같은 순서로 호출되는 `useState`들이 같은 칸을 다시 찾게 합니다.
 
 ```jsx
 const rerender = () => {
@@ -528,22 +485,15 @@ const rerender = () => {
 };
 ```
 
-![실행 결과 스크린샷 15](/img/writings/deconstructing-react/15.png)
+![이름과 카운터가 모두 유지되며 바뀌는 화면](/img/writings/deconstructing-react/15.png)
 
+드디어 상태가 유지됩니다. 훅을 조건문 안에서 부르면 안 되는 이유도 여기서 보입니다. 호출 순서가 곧 저장 위치이기 때문입니다.
 
-미쳤다
+## 데이터 불러오기와 Concurrent Mode 흉내
 
-마지막으로 구현해볼 것은 React 측에서 밀고있는 Concurrent Mode이다.
+마지막으로 만들어 볼 것은 React가 밀고 있던 Concurrent Mode의 아주 작은 조각입니다. 거칠게 말하면 비동기 작업을 다루되, 그 우선순위를 React가 정해 DOM 트리의 일부만 먼저 그릴 수 있게 하는 것입니다. 여기서는 API로 사진 주소를 받아 와 화면에 띄우는 것까지만 해 봅니다.
 
-번역하자만 동시성 모드? 라고 할 수 있음.
-
-가장 쉽게 말하자면 일단 비동기 처리를 구현한다고 생각하면됨.
-
-근데 그런 비동기 작업의 우선순위를 React에서 부여하여 부분적인 DOM Tree 렌더링을 가능하게 하는 걸 Concurrent Mode라고 말하는 듯 함.
-
-실습에서는 api를 통해 사진 파일의 url을 불러오고 이를 화면에 표시하도록 구성해보겠음.
-
-App컴포넌트에 api를 통해 dogPhotoUrl을 받아오는 코드를 작성하고 이를 화면에 표시하도록 함
+`App`에서 강아지 사진 API를 호출해 주소를 받아 오고, 그 값을 화면에 넣어 봅니다.
 
 ```jsx
 const App = () => {
@@ -555,88 +505,86 @@ const App = () => {
   return (
     <div className="good">
       <h1>Hello, {name}</h1>
-      <input type="text" placeholder="name" value={name} onchange={(e) => setName(e.target.value)} />
+      <input
+        type="text"
+        placeholder="name"
+        value={name}
+        onchange={(e) => setName(e.target.value)}
+      />
       <h2>The count is : {count}</h2>
       {dogPhotoUrl}
       <button onclick={() => setCount(count + 1)}>+</button>
       <button onclick={() => setCount(count - 1)}>-</button>
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-        deleniti harum quibusdam inventore!
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+        perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam
+        natus itaque similique, adipisci voluptatum atque ex deleniti harum
+        quibusdam inventore!
       </p>
     </div>
   );
 };
 ```
 
-![실행 결과 스크린샷 16](/img/writings/deconstructing-react/16.png)
+![Promise를 자식으로 넣어 발생한 오류](/img/writings/deconstructing-react/16.png)
 
+오류가 납니다. `fetch`의 결과는 Promise인데 그에 대한 처리가 전혀 없기 때문입니다. 이 Promise가 언제 끝나는지 알고 관리해 줄 무언가가 필요합니다. React에서는 이를 `createResource`라는 이름으로 다룹니다.
 
-에러가 뜸.
+`createResource`의 동작을 정리하면 이렇습니다.
 
-왜냐면 data를 fetching해오는 것은 promise인데, 그쪽 관련된 작업을 아무 것도 해주지 않음.
+- 내부에서 `wrapPromise`를 호출해 Promise의 상태에 접근할 수 없던 문제를 해결합니다.
+- 클로저로 상태와 결과를 관리하고, 대기 중이면 Promise를 `throw`해서 `Suspense` 쪽으로 전달합니다.
+- pending 상태에서는 결과에 접근할 수 있도록 `throw`하고, error 상태에서도 처리를 위해 `throw`합니다.
 
-따라서 우리는 이 promise를 관리해줄 필요가 있고, 언제 준비되는지 알아야함.
-
-React에서는 이를 createResource로 관리한다고?
-
-createResource에 대한 부가 설명
-
-- createResource()는 wrapPromise를 호출함.
-- 여기서 promise의 상태에 접근할 수 없었던 문제를 해결함.
-- 클로저로 상태와 결과를 관리하고 suspender를 throw하는 것으로 Suspense 컴포넌트에 promise를 전달할 수 있게 됨.
-- pending상태일 경우에 상태에 접근할 수 있게 result를 throw하고,
-- error상태일 경우에도 에러를 처리하기 위해 result를 throw함.
+먼저 호출부를 이렇게 바꿉니다. 데이터를 불러오는 함수를 앞에, 고유한 키를 뒤에 넘깁니다.
 
 ```tsx
 const App = () => {
   const [name, setName] = useState("ikjun");
   const [count, setCount] = useState(0);
   const dogPhotoUrl = createResource(() => {
-    fetch("https://dog.ceo/api/breeds/image/random")
+    (fetch("https://dog.ceo/api/breeds/image/random")
       .then((r) => r.json())
-      .then((playload) => playload.message), 'dogPhoto'
+      .then((playload) => playload.message),
+      "dogPhoto");
   });
   return (
     <div className="good">
       <h1>Hello, {name}</h1>
-      <input type="text" placeholder="name" value={name} onchange={(e) => setName(e.target.value)} />
+      <input
+        type="text"
+        placeholder="name"
+        value={name}
+        onchange={(e) => setName(e.target.value)}
+      />
       <h2>The count is : {count}</h2>
       {dogPhotoUrl}
       <button onclick={() => setCount(count + 1)}>+</button>
       <button onclick={() => setCount(count - 1)}>-</button>
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-        deleniti harum quibusdam inventore!
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+        perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam
+        natus itaque similique, adipisci voluptatum atque ex deleniti harum
+        quibusdam inventore!
       </p>
     </div>
   );
 };
 ```
 
-그래서 일단 이런 식으로 수정. 
-
-createResource는 데이터 불러오는 로직을 앞에 작성하고, 그 뒤에는 고유 key 값을 파라미터로 넣어주어야 한다.
-
-그럼 이제 createResource를 만들어보자. (App 컴포넌트 바로 위에)
+이제 `createResource`를 `App` 바로 위에 만듭니다. 키로 캐시를 조회해서 값이 있으면 돌려주고, 없으면 Promise와 키를 함께 `throw`합니다.
 
 ```tsx
 const promiseCache = new Map();
 const createResource = (asyncFunc, key) => {
-  if(promiseCache.has(key)){
+  if (promiseCache.has(key)) {
     return promiseCache.get(key);
   }
   throw { promise: asyncFunc(), key };
-}
+};
 ```
 
-App 컴포넌트는 코드의 상단에 있는 createElement로 부터 만들어짐.
-
-→ 자식 요소를 그냥 만들기만 하면 안됨.
-
-→ 왜? promise 형태인 놈이 있기 때문!
-
-따라서 try, catch문 사용
+`App` 컴포넌트는 맨 위의 `createElement`가 함수를 호출해서 만들어집니다. 그 안에서 Promise가 `throw`될 수 있으니, 함수 컴포넌트 호출을 `try`/`catch`로 감쌉니다. 잡히면 Promise가 끝난 뒤 캐시에 넣고 다시 그리도록 예약하고, 당장은 "Loading..."을 반환합니다.
 
 ```tsx
 const React = {
@@ -658,39 +606,52 @@ const React = {
 };
 ```
 
-이런 식으로 promise가 있을 때의 상황을 관리해주면 됨.
-
-아직 pending 상태이면 Loading이라는 문구를 출력
-
-정상 처리된 상태이면 그냥 props 전달
-
-마지막으로 불러온 데이터를 바탕으로 사진을 출력하도록 컴포넌트를 구성한다면
+대기 중이면 Loading 문구가 보이고, 데이터가 도착하면 정상적으로 그려집니다. 마지막으로 받아 온 주소로 사진을 표시하도록 컴포넌트를 정리합니다.
 
 ```tsx
 const App = () => {
   const [name, setName] = useState("ikjun");
   const [count, setCount] = useState(0);
-  const dogPhotoUrl = createResource(() => fetch("https://dog.ceo/api/breeds/image/random").then((r) => r.json()), "dog");
+  const dogPhotoUrl = createResource(
+    () =>
+      fetch("https://dog.ceo/api/breeds/image/random").then((r) => r.json()),
+    "dog",
+  );
   return (
     <div className="good">
       <h1>Hello, {name}</h1>
-      <input type="text" placeholder="name" value={name} onchange={(e) => setName(e.target.value)} />
+      <input
+        type="text"
+        placeholder="name"
+        value={name}
+        onchange={(e) => setName(e.target.value)}
+      />
       <h2>The count is : {count}</h2>
       <img src={dogPhotoUrl.message} />
       <button onclick={() => setCount(count + 1)}>+</button>
       <button onclick={() => setCount(count - 1)}>-</button>
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam natus itaque similique, adipisci voluptatum atque ex
-        deleniti harum quibusdam inventore!
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa harum
+        perferendis veniam ut accusantium iusto deleniti nemo! Nisi quisquam
+        natus itaque similique, adipisci voluptatum atque ex deleniti harum
+        quibusdam inventore!
       </p>
     </div>
   );
 };
 ```
 
-![실행 결과 스크린샷 17](/img/writings/deconstructing-react/17.jpg)
+![강아지 사진이 표시된 최종 화면](/img/writings/deconstructing-react/17.jpg)
 
+## 마치며
 
-끝!
+빈 파일에서 출발해 React의 네 조각을 만들었습니다.
 
-🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳
+- `createElement`: JSX는 함수 호출이고, 그 결과는 태그·속성·자식을 담은 객체입니다.
+- `render`: 그 객체 트리를 재귀적으로 실제 DOM으로 바꿉니다. 문자열 자식을 따로 처리해야 합니다.
+- `useState`: 상태는 컴포넌트 밖의 배열에 살고, 호출 순서가 곧 저장 위치입니다. 훅의 규칙이 왜 있는지가 여기서 드러납니다.
+- `createResource`: 아직 없는 데이터는 Promise를 던져서 알리고, 도착하면 다시 그립니다.
+
+실제 React는 매번 전체를 지우고 다시 그리는 대신 차이만 반영하고, 상태도 컴포넌트마다 따로 관리합니다. 하지만 "왜 이런 모양인지"는 이 작은 버전만으로도 꽤 분명해졌습니다.
+
+전체 코드는 [no-ikjun/deconstructing-react](https://github.com/no-ikjun/deconstructing-react) 저장소에 있습니다.

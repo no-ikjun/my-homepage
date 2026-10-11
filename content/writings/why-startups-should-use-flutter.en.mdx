@@ -1,0 +1,64 @@
+export const metadata = {
+  title: "Why a startup should build its app in Flutter",
+  date: "2023-10-10",
+  category: "engineering",
+  summary:
+    "A tour of the app-development landscape and why I recommend cross-platform, and Flutter in particular, split into the developer's view and the startup's view.",
+  tags: ["Flutter", "Mobile", "Cross-platform", "Startups"],
+  published: true,
+};
+
+This is a write-up of a talk I gave at a WING session in October 2023. At the time I was building a Flutter app at a startup, and that experience is what the post rests on.
+
+## Before we start
+
+There are three broad ways to build an app: **native**, one codebase per platform; **cross-platform**, one codebase for both; and **hybrid**, a web app wrapped to look like an app. Mobile websites and PWAs are options too. Which is right depends on who is building what and how fast, so this post answers one case: a startup's first app.
+
+## The landscape
+
+Native development means Swift and Xcode on iOS, Kotlin or Java and Android Studio on Android. The two platforms differ in language, tooling and UI system. The same screen is built twice, tested twice, shipped twice.
+
+Cross-platform frameworks exist to remove that duplication. The two main ones, React Native and Flutter, take different approaches. React Native drives each platform's native UI components from JavaScript across a bridge. Flutter draws the screen itself with its own rendering engine. That difference becomes a difference in performance and consistency.
+
+A PWA makes a website installable. Uber, Starbucks and Pinterest use them, and for a content-centred service they are a real option, though device access and store presence are still limited.
+
+The market keeps growing. Revenue in app-development software and downloads of non-game apps were both rising year on year, which means demand for people who can build apps rises with them.
+
+## For developers
+
+### Why learn app development
+
+The solution to a real-world problem is very often an app. People spend most of the day on their phones, and a service has to be there to be used. And if you search "learn app development" today, Flutter is one of the first results, which says how low the barrier has become.
+
+### Why cross-platform
+
+Learn one framework and you handle two platforms, and you start to see the whole app ecosystem. Meeting the platforms' differences through an abstraction widens your understanding of them, and that experience carries over if you later move to native.
+
+### Why Flutter
+
+**Performance.** In CPU-heavy tests such as the Gauss-Legendre algorithm, React Native fell well behind native while Flutter landed close to Swift and Kotlin, because Dart compiles to native code and nothing crosses a bridge.
+
+**Productivity.** Hot reload shows a change as you make it, and composing the UI from widgets makes translating a design fast.
+
+**Community.** By 2021 Flutter led React Native on StackOverflow questions, GitHub contributors and Google Trends. When you ask, there is an answer.
+
+**A path to native.** Once you are fluent in building UI with Flutter, you can reach native APIs directly through platform channels, Android's HealthConnect or iOS's CMPedometer, for instance.
+
+![Flutter channel calling Android HealthConnect and iOS CMPedometer](/img/writings/why-startups-should-use-flutter/flutter-channel.jpg "Define the method and parameters in Dart; the platform channel connects to each native API.")
+
+## For startups
+
+Job postings asking for Flutter have multiplied, and large services such as Naver 지식iN and eBay are built with it. Rushhour, the app at the startup where I worked, was a Flutter app too: real-time subway congestion, and one person could carry both platforms because of Flutter.
+
+What matters to a startup, in the end, is cost.
+
+- **Time.** Build once, ship to both stores. Running the lean-startup loop of build, measure, learn quickly requires the build step to be short.
+- **Maintenance.** Fixes happen once. There is no keeping two codebases in step for every feature.
+
+There are problems. Flutter contractors are still hard to find. If nobody on the team knows Flutter and the work has to go outside, React Native, with its deeper pool of React developers, can be the better choice. Unusual, but it happens.
+
+## Conclusion
+
+The Flutter team's stated goal is to fundamentally shift how developers think about building apps: one codebase for mobile, web and desktop, with continued investment in graphics performance, web-and-mobile integration, new architectures and developer experience. Google standing behind it is hard to ignore.
+
+So: Flutter. At least when a small team has to get a first app to market quickly. The appendix of the talk introduced FlutterFlow, which assembles Flutter apps without code; at the prototype stage, that is an option too.
