@@ -142,8 +142,16 @@ export const timeline: TimelineItem[] = [
     },
     start: "2023-03",
     highlights: {
-      en: ["Minor in Business Administration and Economics"],
-      ko: ["경영·경제 부전공"],
+      en: [
+        "Minor in Business Administration and Economics",
+        "Academic Excellence Scholarship — Spring 2024, Spring 2026",
+        "Dean's List — Spring 2026",
+      ],
+      ko: [
+        "경영·경제 부전공",
+        "성적우수장학금 — 2024년 1학기, 2026년 1학기",
+        "Dean's List — 2026년 1학기",
+      ],
     },
   },
   {
