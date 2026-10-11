@@ -24,6 +24,8 @@ export type ProjectFrontmatter = {
   summary: string;
   /** Where the work happened: a lab, a team, "Personal" */
   affiliation?: string;
+  /** True when built with others; drives the person/people mark on cards. Defaults to false. */
+  team?: boolean;
   role: string[];
   stack: string[];
   links?: ProjectLink[];

@@ -57,6 +57,7 @@ function toMeta(
     end: fm.end,
     summary: fm.summary ?? "",
     affiliation: fm.affiliation,
+    team: fm.team ?? false,
     role: fm.role ?? [],
     stack: fm.stack ?? [],
     links: fm.links ?? [],

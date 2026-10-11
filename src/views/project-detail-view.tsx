@@ -109,9 +109,13 @@ export default function ProjectDetailView({
             ) : null}
             {meta.role.length ? (
               <Meta label={d.role}>
-                <ul className="flex flex-wrap gap-x-4 gap-y-0.5 lg:flex-col">
+                {/* Small marks keep several roles readable as separate items. */}
+                <ul className="flex flex-wrap gap-x-4 gap-y-1 lg:flex-col">
                   {meta.role.map((r) => (
-                    <li key={r}>{r}</li>
+                    <li key={r} className="flex items-baseline gap-2">
+                      <span aria-hidden className="size-1 shrink-0 translate-y-[-0.2em] rounded-full bg-muted-foreground/50" />
+                      {r}
+                    </li>
                   ))}
                 </ul>
               </Meta>

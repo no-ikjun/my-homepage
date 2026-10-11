@@ -6,7 +6,7 @@ import { dictionary } from "@/lib/dictionary";
 import { type Locale } from "@/lib/locale";
 import type { ProjectKind } from "@/types/project";
 
-const ORDER: ProjectKind[] = ["research", "product"];
+const ORDER: ProjectKind[] = ["product", "research"];
 
 export default async function ProjectsView({ locale }: { locale: Locale }) {
   const t = dictionary[locale].pages.projects;

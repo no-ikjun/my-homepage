@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, User, Users } from "lucide-react";
 import { ProjectIcon } from "@/components/project-icon";
 import { TechBadge } from "@/components/tech-badge";
 import { dictionary } from "@/lib/dictionary";
@@ -61,6 +61,30 @@ export function ProjectCard({
         </div>
 
         <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground text-pretty">{project.summary}</p>
+
+        {/* Who it was built with, and what I did there. A team project reads
+            as its team's name; "Personal" says the rest. */}
+        {project.affiliation || project.role.length ? (
+          <dl className="space-y-1 text-sm">
+            {project.affiliation ? (
+              <div className="flex items-center gap-1.5">
+                <dt className="sr-only">{t.pages.projectDetail.affiliation}</dt>
+                {project.team ? (
+                  <Users aria-hidden className="size-3.5 shrink-0 text-muted-foreground" />
+                ) : (
+                  <User aria-hidden className="size-3.5 shrink-0 text-muted-foreground" />
+                )}
+                <dd className="truncate">{project.affiliation}</dd>
+              </div>
+            ) : null}
+            {project.role.length ? (
+              <div className="pl-5">
+                <dt className="sr-only">{t.pages.projectDetail.role}</dt>
+                <dd className="line-clamp-1 text-muted-foreground">{project.role.slice(0, 2).join(" · ")}</dd>
+              </div>
+            ) : null}
+          </dl>
+        ) : null}
 
         {project.stack.length ? (
           <ul className="mt-auto flex flex-wrap gap-1.5">
