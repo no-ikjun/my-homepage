@@ -16,14 +16,14 @@ export const profile = {
     ko: "광주, 대한민국",
   } satisfies Localized<string>,
   affiliation: {
-    en: "EECS undergraduate at GIST · Business & Economics minor",
-    ko: "GIST 전기전자컴퓨터공학 전공 · 경영·경제 부전공",
+    en: "EECS undergraduate at GIST",
+    ko: "GIST 전기전자컴퓨터공학 전공",
   } satisfies Localized<string>,
 
   /** The one-line identity statement shown at the top of the home page. */
   headline: {
-    en: "I build things to understand technology and the value it can create.",
-    ko: "직접 만들며 기술을 이해하고, 그 기술이 만드는 가치를 탐구합니다.",
+    en: "I build things to understand technology and its value.",
+    ko: "직접 만들며 기술과 그 가치를 탐구합니다.",
   } satisfies Localized<string>,
 
   /** Short paragraphs under the headline. */
