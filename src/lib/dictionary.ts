@@ -141,7 +141,7 @@ const ko: typeof en = {
   pages: {
     about: {
       title: "소개",
-      description: "지금까지 해온 일과 배운 것들, 그리고 앞으로 탐구하고 싶은 것들.",
+      description: "경력, 학력, 수상과 활동을 정리했습니다.",
       lead: "소프트웨어 개발과 AI 연구를 경험하며, 기술과 비즈니스가 만나는 지점에도 관심을 넓혀가고 있습니다.",
       timeline: "타임라인",
       career: "경력",
@@ -151,7 +151,7 @@ const ko: typeof en = {
     },
     projects: {
       title: "프로젝트",
-      description: "연구와 제품. 각각 짧은 케이스 스터디를 담았습니다.",
+      description: "연구와 제품 개발 프로젝트를 소개합니다.",
       research: "연구",
       product: "제품",
       empty: "아직 항목이 없습니다.",
@@ -166,7 +166,7 @@ const ko: typeof en = {
     },
     writings: {
       title: "글",
-      description: "연구, 엔지니어링, 제품 만들기에 대한 기록.",
+      description: "연구와 개발 과정에서 배운 것을 기록합니다.",
       emptyTitle: "아직 발행한 글이 없습니다",
       emptyDescription: "짧은 기술 노트와 에세이를 준비하고 있습니다.",
       back: "모든 글",
@@ -177,8 +177,8 @@ const ko: typeof en = {
     },
     contact: {
       title: "연락처",
-      description: "이메일이 가장 빠릅니다.",
-      lead: "연구 협업, 엔지니어링 기회, 혹은 만들고 있는 무엇이든 편하게 이야기 나눠요.",
+      description: "이메일로 연락 주시면 가장 빠르게 답할 수 있습니다.",
+      lead: "연구 협업, 개발 관련 제안, 기타 문의 모두 환영합니다.",
       channels: {
         email: "무엇이든. 며칠 안에 답장합니다.",
         linkedin: "경력 프로필과 메시지.",
