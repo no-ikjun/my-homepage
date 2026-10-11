@@ -77,7 +77,7 @@ export function WritingList({
               aria-selected={active}
               onClick={() => select(tab)}
               className={cn(
-                "inline-flex h-8 items-center gap-1.5 rounded-full border px-3 text-sm transition-colors",
+                "inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border px-3 text-sm transition-colors",
                 active
                   ? "border-foreground bg-foreground text-background"
                   : "border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground",
@@ -94,10 +94,8 @@ export function WritingList({
 
       <div className="mt-10 space-y-12">
         {byYear.map(([year, items]) => (
-          <section key={year} aria-label={year} className="grid gap-4 md:grid-cols-[9rem_1fr] md:gap-6">
-            <h2 className="text-xl font-semibold tracking-tight tabular-nums md:sticky md:top-28 md:self-start">
-              {year}
-            </h2>
+          <section key={year} aria-label={year}>
+            <h2 className="mb-3 text-xl font-semibold tracking-tight tabular-nums">{year}</h2>
             <ul className="divide-y divide-border">
               {items.map((w) => (
                 <li key={w.slug}>
