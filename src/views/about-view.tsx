@@ -37,8 +37,8 @@ export default function AboutView({ locale }: { locale: Locale }) {
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
-      <PageHeader title={t.title} description={t.description} className="pb-6 md:pb-8">
-        <p className="mt-5 max-w-content text-base leading-relaxed text-pretty">{t.lead}</p>
+      <PageHeader title={t.title} description={t.description} className="max-w-none pb-6 md:pb-8">
+        <p className="mt-5 text-base leading-relaxed text-pretty">{t.lead}</p>
 
         <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
           {facts.map(({ Icon, text, href }) => (
