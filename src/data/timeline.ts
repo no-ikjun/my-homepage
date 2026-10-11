@@ -146,10 +146,7 @@ export const timeline: TimelineItem[] = [
         "Minor in Business Administration and Economics",
         "Dean's List — Spring 2026",
       ],
-      ko: [
-        "경영·경제 부전공",
-        "Dean's List — 2026년 1학기",
-      ],
+      ko: ["경영·경제 부전공", "Dean's List — 2026년 1학기"],
     },
   },
   {
@@ -188,7 +185,10 @@ export const timeline: TimelineItem[] = [
         "Head of the student council's IT department",
         "Built the school management system [JshsUs](https://jshsus.kr)",
       ],
-      ko: ["학생회 정보부장", "학교 관리 시스템 [JshsUs(과구리)](https://jshsus.kr) 개발"],
+      ko: [
+        "학생회 IT부장",
+        "학교 관리 시스템 [JshsUs(과구리)](https://jshsus.kr) 개발",
+      ],
     },
   },
 
