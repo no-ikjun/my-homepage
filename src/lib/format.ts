@@ -39,7 +39,7 @@ export function formatDate(date: string, locale: Locale): string {
   const d = new Date(`${date}T00:00:00+09:00`);
   return new Intl.DateTimeFormat(locale === "ko" ? "ko-KR" : "en-US", {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
   }).format(d);
 }
