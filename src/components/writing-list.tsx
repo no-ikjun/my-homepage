@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -102,7 +103,7 @@ export function WritingList({
                   <Link
                     href={localePath(locale, `/writings/${w.slug}`)}
                     lang={w.lang}
-                    className="group -mx-3 grid gap-1 rounded-lg px-3 py-4 transition-colors hover:bg-foreground/[0.03] md:grid-cols-[7.5rem_1fr] md:gap-6"
+                    className="group -mx-3 grid gap-1 rounded-lg px-3 py-4 transition-colors hover:bg-foreground/[0.03] md:grid-cols-[7.5rem_1fr_auto] md:gap-6"
                   >
                     <time dateTime={w.date} className="text-sm text-muted-foreground tabular-nums md:pt-0.5">
                       {formatDate(w.date, locale)}
@@ -132,6 +133,17 @@ export function WritingList({
                         ))}
                       </span>
                     </span>
+                    {w.cover ? (
+                      <span className="relative mt-2 block aspect-square w-24 shrink-0 overflow-hidden rounded-lg border border-border bg-muted md:mt-0.5 md:w-20">
+                        <Image
+                          src={w.cover}
+                          alt=""
+                          fill
+                          sizes="96px"
+                          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                        />
+                      </span>
+                    ) : null}
                   </Link>
                 </li>
               ))}

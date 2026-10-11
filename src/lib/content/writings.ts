@@ -45,11 +45,30 @@ function resolveLocale(files: FileRef[], slug: string, locale: Locale): Locale |
   return available.includes(locale) ? locale : available[0];
 }
 
-function toMeta(slug: string, lang: Locale, available: Locale[], fm?: Partial<WritingFrontmatter>): WritingMeta {
+const IMAGE_RE = /!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/;
+
+/** The first markdown image in a post's source, for the list thumbnail. */
+async function firstImage(slug: string, lang: Locale): Promise<string | undefined> {
+  try {
+    const source = await fs.readFile(path.join(WRITINGS_DIR, `${slug}.${lang}.mdx`), "utf8");
+    return IMAGE_RE.exec(source)?.[1];
+  } catch {
+    return undefined;
+  }
+}
+
+function toMeta(
+  slug: string,
+  lang: Locale,
+  available: Locale[],
+  fm?: Partial<WritingFrontmatter>,
+  cover?: string,
+): WritingMeta {
   return {
     slug,
     lang,
     available,
+    cover,
     title: fm?.title ?? slug,
     date: fm?.date ?? "1970-01-01",
     category: fm?.category ?? "notes",
@@ -67,8 +86,8 @@ export async function getWritings(locale: Locale): Promise<WritingMeta[]> {
     slugs.map(async (slug) => {
       const lang = resolveLocale(files, slug, locale)!;
       const available = files.filter((f) => f.slug === slug).map((f) => f.locale);
-      const mod = await importWritingModule(slug, lang);
-      return toMeta(slug, lang, available, mod.metadata);
+      const [mod, cover] = await Promise.all([importWritingModule(slug, lang), firstImage(slug, lang)]);
+      return toMeta(slug, lang, available, mod.metadata, cover);
     }),
   );
   return metas.filter((m) => m.published !== false).sort((a, b) => b.date.localeCompare(a.date));

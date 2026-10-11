@@ -21,6 +21,8 @@ export type WritingMeta = WritingFrontmatter & {
   lang: Locale;
   /** Every language the post exists in. */
   available: Locale[];
+  /** First image in the body, used as the list thumbnail. */
+  cover?: string;
 };
 
 export type WritingHeading = {
