@@ -349,6 +349,31 @@ html[data-theme="dark"] {
   & .katex {
     font-size: 1.05em;
   }
+  /* GFM footnotes: a quiet list after a rule, with the auto heading kept hidden. */
+  & section[data-footnotes] {
+    margin-top: 3em;
+    padding-top: 1.5em;
+    border-top: 1px solid var(--border);
+    font-size: 0.9375rem;
+  }
+  & section[data-footnotes] ol {
+    padding-left: 1.5em;
+  }
+  & section[data-footnotes] li + li {
+    margin-top: 0.5em;
+  }
+  & section[data-footnotes] p {
+    display: inline;
+  }
+  & sup a[data-footnote-ref] {
+    text-decoration: none;
+    padding-inline: 0.15em;
+    font-weight: 500;
+  }
+  & a[data-footnote-backref] {
+    text-decoration: none;
+    margin-left: 0.25em;
+  }
   & hr {
     margin-block: 3em;
     border: 0;

@@ -61,7 +61,7 @@ export const metadata = {
 
 Stack names get a brand mark and tint from `src/components/tech-badge.tsx` (backed by `simple-icons`); unknown names render as a neutral chip. Screenshots are optional: without a `gallery`, cards and the detail page simply show no images.
 
-**A post.** Copy `content/writings/_template.mdx`, set `published: true` and `lang` (`"en"` or `"ko"`). Posts live at `/writings/<slug>` in one language; the TOC is built from `##`/`###` headings. Math works with `$…$` inline and `$$…$$` blocks (remark-math + KaTeX).
+**A post.** Copy `content/writings/_template.mdx`, set `published: true` and `lang` (`"en"` or `"ko"`). Posts live at `/writings/<slug>` in one language; the TOC is built from `##`/`###` headings. Math works with `$…$` inline and `$$…$$` blocks (remark-math + KaTeX); citations use GFM footnotes (`[^key]` in the text, `[^key]: …` at the end).
 
 **Recent news.** Add an entry to the top of `src/data/news.ts`; the home page shows the first four.
 
