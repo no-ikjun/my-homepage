@@ -12,6 +12,8 @@ export const metadata = {
 
 이 글은 그중 가장 단순하고 지금 가장 널리 쓰이는 형태인 **마스크 기반(masked) diffusion 언어모델**을 다룹니다.[^d3pm] 연속 공간의 가우시안 diffusion과는 다르게, 이산 토큰 위에서 "지우기"와 "되살리기"만으로 정의됩니다.
 
+![t가 커질수록 토큰이 마스크 기호로 바뀌는 정방향 과정](/img/writings/how-diffusion-language-models-work/forward-process.svg "정방향 과정. t = 0에서는 원문 그대로, t = 0.5에서는 절반쯤, t = 1에서는 전부 [M]으로 바뀐다. 각 위치는 독립적으로 마스크된다.")
+
 ## 자기회귀와 무엇이 다른가
 
 길이 $L$인 문장 $x = (x_1, \dots, x_L)$에 대해 자기회귀 모델은 결합 확률을 이렇게 쪼갭니다.
