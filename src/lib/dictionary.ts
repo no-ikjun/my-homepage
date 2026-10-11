@@ -47,7 +47,7 @@ const en = {
   pages: {
     about: {
       title: "About",
-      description: "What I work on, what I've learned, and what I'm curious about.",
+      description: "Experience, education, awards and activities.",
       lead: "My interests span software engineering, AI research, and the intersection of technology and business.",
       timeline: "Timeline",
       career: "Experience",
