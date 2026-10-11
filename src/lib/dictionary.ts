@@ -69,6 +69,7 @@ const en = {
       links: "Links",
       affiliation: "With",
       period: "Period",
+      relatedWriting: "Related writing",
     },
     writings: {
       title: "Writing",
@@ -163,6 +164,7 @@ const ko: typeof en = {
       links: "링크",
       affiliation: "소속",
       period: "기간",
+      relatedWriting: "관련 글",
     },
     writings: {
       title: "글",

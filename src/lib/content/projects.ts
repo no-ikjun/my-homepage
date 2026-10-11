@@ -63,6 +63,7 @@ function toMeta(
     links: fm.links ?? [],
     image: fm.image,
     gallery: fm.gallery ?? [],
+    writings: fm.writings ?? [],
     featured: fm.featured ?? false,
     order: fm.order ?? 0,
     published: fm.published ?? true,

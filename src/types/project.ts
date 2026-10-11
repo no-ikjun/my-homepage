@@ -33,6 +33,8 @@ export type ProjectFrontmatter = {
   image?: string;
   /** Screenshots shown at the top of the detail page */
   gallery?: { src: string; alt: string }[];
+  /** Slugs of posts in content/writings about this project, shown under the body */
+  writings?: string[];
   /** Surfaces the project on the home page */
   featured?: boolean;
   /** Lower first among featured / same start month */
@@ -40,9 +42,11 @@ export type ProjectFrontmatter = {
   published?: boolean;
 };
 
-export type ProjectMeta = ProjectFrontmatter & {
+export type ProjectMeta = Omit<ProjectFrontmatter, "team" | "writings"> & {
   slug: string;
   locale: Locale;
+  team: boolean;
+  writings: string[];
 };
 
 export type ProjectEntry = {

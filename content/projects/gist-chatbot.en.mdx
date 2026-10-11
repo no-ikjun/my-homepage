@@ -23,6 +23,10 @@ export const metadata = {
 
 Information about GIST is scattered across academic notices, the student handbook, orientation material and departmental pages. Students ask the same questions every semester and the answers are hard to find. The chatbot turns that pile of official documents into something you can just ask.
 
+## My part
+
+Within GSA InfoTeam I owned the answer-generation system end to end, plus frontend and backend development and the UI design. Document collection and infrastructure were shared with other members of the team.
+
 ## What I built
 
 - **Answer generation.** A retrieval pipeline that chunks uploaded documents, ranks the relevant passages and grounds the model's answer in them, so responses cite real school policy instead of guessing.
@@ -30,6 +34,14 @@ Information about GIST is scattered across academic notices, the student handboo
 - **Embeddable widget.** The frontend ships as an iframe so any student service can drop the chatbot in with one tag.
 - **Per-service dashboard.** Each integrating service manages its own documents and sees its own usage.
 
+## Technical decisions
+
+**Why search was split out.** The first version kept search and answer generation in one backend. Changing a single chunk size meant redeploying the whole answer server, and one experiment took half a day. Moving search into an MCP server turned a new data source into "one more tool", and as experiments got cheaper there were more of them.
+
+**One tool, wide arguments.** Exposing `search`, `search_by_category` and `search_recent` separately left the model dithering between similar tools. Collapsing them into a single `search_documents` with a category argument simplified both the prompt and the logs.
+
+**Chunking per document type.** Notices became one chunk each with title and date prepended; the handbook is split on article boundaries with the chapter title as a prefix; table-heavy orientation material is flattened row by row into "field: value" sentences. A single rule for everything had noticeably hurt handbook answers.
+
 ## Outcome
 
-Deployed at chatbot.gistory.me and used by GIST students. Ongoing work focuses on answer accuracy and response latency.
+Deployed at chatbot.gistory.me and used by GIST students; the iframe widget has started appearing in other campus services. An evaluation set of 40 questions with expected answers now puts a number on every structural change, and swapping the search index halved response latency. Current work is on answer accuracy.

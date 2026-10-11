@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, User, Users } from "lucide-react";
 import { ProjectIcon } from "@/components/project-icon";
@@ -9,11 +8,7 @@ import { localePath, type Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 import type { ProjectMeta } from "@/types/project";
 
-/**
- * Compact project card. If the project has a gallery, its first image is shown
- * as a cover; otherwise the card is icon + text, so nothing has to be
- * screenshotted for the site to look finished.
- */
+/** Compact project card: icon, title, summary, who it was built with, stack. */
 export function ProjectCard({
   project,
   locale,
@@ -24,7 +19,6 @@ export function ProjectCard({
   className?: string;
 }) {
   const t = dictionary[locale];
-  const cover = project.gallery?.[0];
 
   return (
     <Link
@@ -34,18 +28,6 @@ export function ProjectCard({
         className,
       )}
     >
-      {cover ? (
-        <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-muted">
-          <Image
-            src={cover.src}
-            alt={cover.alt}
-            fill
-            sizes="(max-width: 640px) 100vw, 33vw"
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-          />
-        </div>
-      ) : null}
-
       <div className="flex flex-1 flex-col gap-4 p-5">
         <div className="flex items-center gap-3">
           <ProjectIcon src={project.image} title={project.title} size={40} />

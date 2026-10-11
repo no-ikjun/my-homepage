@@ -4,8 +4,9 @@ import { ProjectIcon } from "@/components/project-icon";
 import { TechBadge } from "@/components/tech-badge";
 import { ArrowLeft, ArrowUpRight, Globe } from "lucide-react";
 import { GitHubIcon } from "@/components/icons";
+import { getWritings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
-import { formatPeriod } from "@/lib/format";
+import { formatDate, formatPeriod } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 import type { ProjectEntry } from "@/types/project";
@@ -32,7 +33,7 @@ function Meta({
   );
 }
 
-export default function ProjectDetailView({
+export default async function ProjectDetailView({
   locale,
   entry,
 }: {
@@ -42,6 +43,12 @@ export default function ProjectDetailView({
   const t = dictionary[locale];
   const d = t.pages.projectDetail;
   const { meta, Content } = entry;
+
+  // Posts named in the frontmatter, in that order.
+  const allWritings = await getWritings(locale);
+  const related = meta.writings
+    .map((slug) => allWritings.find((w) => w.slug === slug))
+    .filter((w): w is NonNullable<typeof w> => Boolean(w));
 
   return (
     <main className="mx-auto w-full max-w-page px-6">
@@ -78,7 +85,7 @@ export default function ProjectDetailView({
       </header>
 
       {meta.gallery?.length ? (
-        <ul className="mt-10 grid gap-3 sm:grid-cols-2">
+        <ul className={cn("mt-10 grid gap-3", meta.gallery.length > 1 ? "sm:grid-cols-2" : "max-w-content")}>
           {meta.gallery.map((shot, i) => (
             <li
               key={`${shot.src}-${i}`}
@@ -98,9 +105,35 @@ export default function ProjectDetailView({
       ) : null}
 
       <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_16rem] lg:gap-16">
-        <article className="prose-custom min-w-0">
-          <Content />
-        </article>
+        <div className="min-w-0">
+          <article className="prose-custom">
+            <Content />
+          </article>
+
+          {related.length ? (
+            <section aria-labelledby="related-writing" className="mt-14">
+              <h2 id="related-writing" className="text-sm font-medium text-muted-foreground">
+                {d.relatedWriting}
+              </h2>
+              <ul className="mt-3 divide-y divide-border">
+                {related.map((w) => (
+                  <li key={w.slug}>
+                    <Link
+                      href={localePath(locale, `/writings/${w.slug}`)}
+                      lang={w.lang}
+                      className="group flex items-baseline justify-between gap-6 py-3"
+                    >
+                      <span className="font-medium underline-offset-4 group-hover:underline">{w.title}</span>
+                      <time dateTime={w.date} className="shrink-0 text-sm text-muted-foreground tabular-nums">
+                        {formatDate(w.date, locale)}
+                      </time>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+        </div>
 
         <aside className="lg:order-none order-first lg:sticky lg:top-28 lg:self-start">
           <dl className="grid gap-6 rounded-2xl border border-border bg-card p-5">
@@ -154,6 +187,7 @@ export default function ProjectDetailView({
           </dl>
         </aside>
       </div>
+
     </main>
   );
 }
