@@ -23,7 +23,9 @@ export const profile = {
   /** The one-line identity statement shown at the top of the home page. */
   headline: {
     en: "I build things to understand technology and its value.",
-    ko: "만들며 배우고, 기술의 가치를 고민합니다.",
+    // Non-breaking spaces keep "기술의 가치를 고민합니다" on one line, so the
+    // balanced headline breaks after the comma instead of mid-phrase.
+    ko: "만들며 배우고, 기술의\u00A0가치를\u00A0고민합니다.",
   } satisfies Localized<string>,
 
   /** Short paragraphs under the headline. */
