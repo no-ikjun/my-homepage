@@ -103,13 +103,13 @@ export default function ProjectDetailView({
         </article>
 
         <aside className="lg:order-none order-first lg:sticky lg:top-28 lg:self-start">
-          <dl className="grid grid-cols-2 gap-6 rounded-2xl border border-border bg-card p-5 lg:grid-cols-1">
+          <dl className="grid gap-6 rounded-2xl border border-border bg-card p-5">
             {meta.affiliation ? (
               <Meta label={d.affiliation}>{meta.affiliation}</Meta>
             ) : null}
             {meta.role.length ? (
               <Meta label={d.role}>
-                <ul className="space-y-0.5">
+                <ul className="flex flex-wrap gap-x-4 gap-y-0.5 lg:flex-col">
                   {meta.role.map((r) => (
                     <li key={r}>{r}</li>
                   ))}
@@ -129,7 +129,7 @@ export default function ProjectDetailView({
             ) : null}
             {meta.links?.length ? (
               <Meta label={d.links}>
-                <ul className="space-y-1.5">
+                <ul className="flex flex-wrap gap-x-5 gap-y-1.5 lg:flex-col">
                   {meta.links.map((l) => (
                     <li key={l.href}>
                       <a
