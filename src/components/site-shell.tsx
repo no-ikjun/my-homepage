@@ -9,7 +9,7 @@ import { dictionary } from "@/lib/dictionary";
 import { fontVariables } from "@/lib/fonts";
 import { pick } from "@/lib/i18n";
 import { HTML_LANG, localePath, type Locale } from "@/lib/locale";
-import { SITE_URL } from "@/lib/site";
+import { personJsonLd } from "@/lib/json-ld";
 
 const themeBootstrapScript = `
 (function () {
@@ -23,18 +23,6 @@ const themeBootstrapScript = `
     document.documentElement.style.colorScheme = theme;
   } catch (e) {}
 })();`;
-
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Ikjun Choi (최익준)",
-  alternateName: ["Ikjun Choi", "최익준"],
-  jobTitle: "Undergraduate Researcher & Software Engineer",
-  affiliation: { "@type": "CollegeOrUniversity", name: "Gwangju Institute of Science and Technology" },
-  url: SITE_URL,
-  knowsLanguage: ["en", "ko"],
-  sameAs: profile.links.filter((l) => l.href.startsWith("http")).map((l) => l.href),
-};
 
 /**
  * Shared body of both root layouts. There is one root layout per locale so that

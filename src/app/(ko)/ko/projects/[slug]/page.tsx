@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ProjectDetailView from "@/views/project-detail-view";
 import { getProject, getProjectSlugs } from "@/lib/content/projects";
-import { pageMetadata } from "@/lib/metadata";
+import { dictionary } from "@/lib/dictionary";
+import { OG_IMAGE_SIZE, ogImageUrl, pageMetadata } from "@/lib/metadata";
 
 const locale = "ko";
 
@@ -22,6 +23,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: entry.meta.title,
     description: entry.meta.summary,
     path: `/projects/${slug}`,
+    image: {
+      url: ogImageUrl({
+        title: entry.meta.title,
+        eyebrow: dictionary[locale].pages.projects.title,
+        description: entry.meta.summary,
+        locale,
+      }),
+      alt: entry.meta.title,
+      ...OG_IMAGE_SIZE,
+    },
   });
 }
 

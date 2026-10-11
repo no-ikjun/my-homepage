@@ -23,6 +23,8 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  // The social-card route reads its fonts and avatar from disk at runtime.
+  outputFileTracingIncludes: { "/og": ["./src/app/og/*.ttf", "./src/app/og/avatar.png"] },
   // Conservative security headers. A full CSP is intentionally left out: the
   // theme bootstrap and JSON-LD are inline <script> tags and would need a nonce
   // or hash before script-src could be locked down.

@@ -98,8 +98,8 @@ export async function getWriting(locale: Locale, slug: string): Promise<WritingE
   const lang = resolveLocale(files, slug, locale);
   if (!lang) return null;
   const available = files.filter((f) => f.slug === slug).map((f) => f.locale);
-  const mod = await importWritingModule(slug, lang);
-  const metadata = toMeta(slug, lang, available, mod.metadata);
+  const [mod, cover] = await Promise.all([importWritingModule(slug, lang), firstImage(slug, lang)]);
+  const metadata = toMeta(slug, lang, available, mod.metadata, cover);
   if (metadata.published === false) return null;
   return { metadata, Content: mod.default };
 }

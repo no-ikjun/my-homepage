@@ -4,6 +4,7 @@ import { Toc } from "@/components/toc";
 import { getWritingHeadings } from "@/lib/content/writings";
 import { dictionary } from "@/lib/dictionary";
 import { formatDate } from "@/lib/format";
+import { blogPostingJsonLd } from "@/lib/json-ld";
 import { localePath, type Locale } from "@/lib/locale";
 import type { WritingEntry } from "@/types/writing";
 
@@ -21,6 +22,10 @@ export default async function WritingDetailView({
 
   return (
     <main className="mx-auto w-full max-w-page px-6" lang={metadata.lang}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd(metadata)) }}
+      />
       <Link
         href={localePath(locale, "/writings")}
         lang={locale}

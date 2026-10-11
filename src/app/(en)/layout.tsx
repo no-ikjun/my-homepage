@@ -1,7 +1,7 @@
 import SiteShell from "@/components/site-shell";
 import { rootMetadata } from "@/lib/metadata";
 
-export const metadata = rootMetadata("en");
+export const metadata = rootMetadata();
 
 export default function EnRootLayout({
   children,
