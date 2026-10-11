@@ -1,0 +1,125 @@
+export const metadata = {
+  title: "How diffusion language models work",
+  date: "2026-10-05",
+  summary:
+    "Instead of emitting one token at a time, a diffusion language model restores a whole sentence. A walk through the objective and the sampling loop of masked diffusion LMs, with the equations.",
+  tags: ["Diffusion LM", "Generative models", "Math"],
+  published: true,
+  lang: "en",
+};
+
+Say "language model" and most people picture an autoregressive one: condition on the tokens so far, predict a distribution for the next token, sample one, repeat. A diffusion language model drops that ordering. It lays the whole sentence out at once and, over several steps, turns a badly corrupted sentence into a less corrupted one until the original comes back.
+
+This post covers the simplest and currently most common form, the **masked diffusion language model**.[^d3pm] Unlike Gaussian diffusion in a continuous space, it is defined over discrete tokens with nothing more than "erase" and "restore".
+
+## What differs from autoregression
+
+For a sentence $x = (x_1, \dots, x_L)$ of length $L$, an autoregressive model factorises the joint probability as
+
+$$
+p_\theta(x) = \prod_{i=1}^{L} p_\theta(x_i \mid x_{<i})
+$$
+
+Generation is $L$ sequential calls, left to right. One token per call, and a token once sampled cannot be revised.
+
+A diffusion language model does not factorise the joint by position. It learns a **process** that starts from a fully masked sentence and arrives at the original. Several positions can be filled at the same step, and the order in which they are filled is a sampling-time choice rather than something baked into training.
+
+## Forward process: erase tokens
+
+Where continuous diffusion adds Gaussian noise to the data, masked diffusion replaces tokens with a special symbol $[\mathrm{M}]$. Let $t \in [0, 1]$ be the probability that a position is masked, independently per position. The forward process is then
+
+$$
+q(x_t^{(i)} \mid x_0^{(i)}) =
+\begin{cases}
+x_0^{(i)} & \text{with probability } 1 - t \\
+[\mathrm{M}] & \text{with probability } t
+\end{cases}
+$$
+
+At $t = 0$ the sentence is intact; at $t = 1$ everything is masked. Two properties matter. First, a masked position stays masked as $t$ grows (an absorbing state).[^d3pm] Second, because positions are independent, $x_t$ for any $t$ can be sampled from $x_0$ in one shot: during training you draw a $t$ and mask immediately.
+
+## Reverse process: fill in the blanks
+
+What the model $p_\theta$ learns is the reverse direction: given the masked sentence $x_t$, predict the original token at each masked position.
+
+$$
+p_\theta(x_0^{(i)} \mid x_t), \quad i \in \{\, j : x_t^{(j)} = [\mathrm{M}] \,\}
+$$
+
+Architecturally this is a bidirectional transformer, like BERT.[^bert] It sees every position at once and outputs a distribution over the vocabulary at each masked slot. The difference is that the mask ratio is not pinned at 15% but varies anywhere between $0$ and $1$ from step to step. The model has to work on inputs that are almost entirely hidden and on inputs that are almost entirely revealed.
+
+## Training objective
+
+Expanding the variational lower bound (ELBO) of continuous diffusion for the masking process gives a surprisingly simple expression.[^mdlm][^md4]
+
+$$
+\mathcal{L}(\theta) =
+\mathbb{E}_{t \sim U(0,1)}\;
+\mathbb{E}_{x_t \sim q(\cdot \mid x_0)}
+\left[
+\frac{1}{t}
+\sum_{i:\, x_t^{(i)} = [\mathrm{M}]}
+-\log p_\theta\!\left(x_0^{(i)} \mid x_t\right)
+\right]
+$$
+
+Read it this way: draw a mask ratio $t$, mask the sentence at that ratio, sum the cross-entropy over the masked positions, and divide by $t$.
+
+The $1/t$ weight is the heart of it. When $t$ is small, few tokens are masked and the summed loss is small; dividing by $t$ keeps the expected loss comparable across all $t$. Drop the weight and the expression collapses into "BERT with a random mask ratio" and stops being a bound on the likelihood. In practice, removing it makes perplexity noticeably worse.[^mdlm]
+
+There is a quiet advantage here that autoregressive models lack. Near $t = 1$ the model must produce tokens from an almost empty sentence; near $t = 0$ it fills a few gaps with nearly full context. One model learns both "writing from scratch" and "filling in blanks".
+
+## Sampling: how many steps, in what order
+
+Generation starts from $x_1$, fully masked. Pick a number of steps $T$, lower $t$ from $1$ toward $0$, and at each step:
+
+1. Feed the current $x_t$ to the model and get $p_\theta(x_0^{(i)} \mid x_t)$ for every masked position.
+2. Sample one token at each of those positions.
+3. Commit only some of the sampled tokens; revert the rest to $[\mathrm{M}]$.
+
+How many to commit in step 3, and which ones, is the entire sampler. The amount usually follows a schedule: moving from $t$ to $s < t$, the probability of leaving a position masked is
+
+$$
+p(\text{keep masked}) = \frac{s}{t}
+$$
+
+which makes the reverse transition match the forward process exactly. The order is a choice.
+
+| Strategy | Which positions commit first | Character |
+| --- | --- | --- |
+| Random | Arbitrary | Closest to the theory; quality is the baseline |
+| Confidence first[^maskgit] | Highest predicted probability | Better quality, more repetition |
+| Confidence + noise | Confidence plus Gumbel noise to shake up the order | A compromise, and the most common in practice |
+
+A smaller $T$ is faster but commits more positions per step, and positions committed together cannot see each other. So as the step count drops you get sentences that are grammatical yet inconsistent with themselves. That is why "how few steps can we get away with" is one of the central questions in this area.
+
+## Why people care
+
+- **Parallel generation.** With $T \ll L$, far fewer model calls than autoregression, and the gap grows with sentence length.
+- **Bidirectional context.** Editing the middle of a sentence or filling a gap with both sides given is natural; autoregressive models need extra training for that.
+- **Control.** Fix some positions from the start and the output satisfies the constraint. Classifier guidance also attaches easily.
+
+The weak spots are just as clear. At equal parameter count, autoregressive models still win on perplexity, quality falls quickly as sampling steps shrink, and the length has to be chosen up front. That said, reports are starting to appear of masked diffusion models at the billions-of-parameters scale that stand up to autoregressive models of similar size.[^llada]
+
+## Summary
+
+A masked diffusion language model fits in three lines. The forward process erases tokens with probability $t$, the model fills in the erased positions, and the loss is the cross-entropy over masked positions times $1/t$. Generation starts from a fully masked sentence and commits a few positions at a time over several steps; "how many steps" and "in what order" decide quality and speed.
+
+Simple equations leave many places to vary. The next post will look at how to cut the number of sampling steps without giving up quality.
+
+## References
+
+If you are reading from scratch, this order works well. Papers 2 and 3 give the cleanest formulation of masked diffusion, 1 is where it comes from, 4 is the intuition for sampling order, and 5 is what happens at scale.
+
+1. Austin, J., Johnson, D. D., Ho, J., Tarlow, D., & van den Berg, R. (2021). *Structured Denoising Diffusion Models in Discrete State-Spaces*. NeurIPS. [arXiv:2107.03006](https://arxiv.org/abs/2107.03006)
+2. Sahoo, S. S., Arriola, M., Schiff, Y., Gokaslan, A., Marroquin, E., Chiu, J. T., Rush, A., & Kuleshov, V. (2024). *Simple and Effective Masked Diffusion Language Models*. NeurIPS. [arXiv:2406.07524](https://arxiv.org/abs/2406.07524)
+3. Shi, J., Han, K., Wang, Z., Doucet, A., & Titsias, M. K. (2024). *Simplified and Generalized Masked Diffusion for Discrete Data*. NeurIPS. [arXiv:2406.04329](https://arxiv.org/abs/2406.04329)
+4. Chang, H., Zhang, H., Jiang, L., Liu, C., & Freeman, W. T. (2022). *MaskGIT: Masked Generative Image Transformer*. CVPR. [arXiv:2202.04200](https://arxiv.org/abs/2202.04200)
+5. Nie, S., Zhu, F., You, Z., Zhang, X., Ou, J., Hu, J., Zhou, J., Lin, Y., Wen, J.-R., & Li, C. (2025). *Large Language Diffusion Models*. [arXiv:2502.09992](https://arxiv.org/abs/2502.09992)
+
+[^d3pm]: Discrete diffusion with an absorbing state was formalised as D3PM in Austin et al. (2021). [arXiv:2107.03006](https://arxiv.org/abs/2107.03006)
+[^bert]: Devlin et al. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*. NAACL. [arXiv:1810.04805](https://arxiv.org/abs/1810.04805)
+[^mdlm]: Sahoo et al. (2024). *Simple and Effective Masked Diffusion Language Models*. The $1/t$-weighted objective and the comparison without the weight follow this paper. [arXiv:2406.07524](https://arxiv.org/abs/2406.07524)
+[^md4]: Shi et al. (2024). *Simplified and Generalized Masked Diffusion for Discrete Data*. Derives the same objective independently and generalises it. [arXiv:2406.04329](https://arxiv.org/abs/2406.04329)
+[^maskgit]: Committing positions in confidence order comes from MaskGIT in image generation. Chang et al. (2022). [arXiv:2202.04200](https://arxiv.org/abs/2202.04200)
+[^llada]: Nie et al. (2025). *Large Language Diffusion Models*. Trains an 8B-parameter masked diffusion model from scratch and compares it with autoregressive models of similar size. [arXiv:2502.09992](https://arxiv.org/abs/2502.09992)
