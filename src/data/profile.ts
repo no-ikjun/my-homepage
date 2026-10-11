@@ -16,25 +16,25 @@ export const profile = {
     ko: "광주, 대한민국",
   } satisfies Localized<string>,
   affiliation: {
-    en: "EECS undergraduate at GIST",
-    ko: "GIST 전기전자컴퓨터공학과 학부생",
+    en: "EECS undergraduate at GIST · Business & Economics minor",
+    ko: "GIST 전기전자컴퓨터공학 전공 · 경영·경제 부전공",
   } satisfies Localized<string>,
 
   /** The one-line identity statement shown at the top of the home page. */
   headline: {
-    en: "I like building software that people find useful.",
-    ko: "사람들에게 쓸모 있는 소프트웨어를 만드는 걸 좋아합니다.",
+    en: "I build things to understand technology and the value it can create.",
+    ko: "직접 만들며 기술을 이해하고, 그 기술이 만드는 가치를 탐구합니다.",
   } satisfies Localized<string>,
 
   /** Short paragraphs under the headline. */
   intro: {
     en: [
-      "I'm an EECS undergraduate at GIST. I enjoy exploring new technology and figuring out how it can be useful in everyday life.",
-      "Building things often gives me new questions to explore. I'm curious about what AI can help with, and I enjoy trying out ideas and improving them as I learn.",
+      "I'm an EECS undergraduate at GIST, also studying business and economics. I enjoy exploring new technologies, building products, and understanding how they can make a difference in the real world.",
+      "Through software development and AI research, I've become increasingly interested in not just how technology works, but why it matters and where it can create value.",
     ],
     ko: [
-      "GIST에서 전기전자컴퓨터공학을 공부하고 있습니다. 새로운 기술을 알아가고, 일상에서 어떻게 활용할 수 있을지 고민하는 걸 좋아합니다.",
-      "직접 만들다 보면 더 알고 싶은 것들이 생깁니다. AI가 어떤 문제에 도움이 될지 궁금하고, 떠오른 아이디어를 구현하고 다듬으며 배우는 과정을 즐깁니다.",
+      "GIST에서 전기전자컴퓨터공학을 전공하고, 경영·경제를 부전공하고 있습니다. 새로운 기술을 탐구하고 직접 구현하면서, 그것이 현실에서 어떤 변화를 만들어낼 수 있을지 고민하는 것을 좋아합니다.",
+      "서비스 개발과 AI 연구를 경험하며 기술이 어떻게 작동하는지뿐 아니라, 왜 필요하고 어디에서 가치를 만들어낼 수 있는지에 점점 더 관심을 갖게 되었습니다.",
     ],
   } satisfies Localized<string[]>,
 
@@ -44,14 +44,14 @@ export const profile = {
       title: { en: "Research", ko: "연구" },
       items: {
         en: [
-          "Diffusion language models and their decoding",
-          "Efficient training and inference for generative models",
-          "Evaluation that reflects real use, not just benchmarks",
+          "Exploring generative AI and diffusion language models",
+          "Studying how models generate, reason, and improve",
+          "Connecting technical advances with real-world usefulness",
         ],
         ko: [
-          "Diffusion Language Model과 디코딩 방법",
-          "생성 모델의 효율적인 학습과 추론",
-          "벤치마크가 아니라 실제 사용을 반영하는 평가",
+          "생성형 AI와 Diffusion Language Model 탐구",
+          "생성모델의 학습·추론·생성 과정 연구",
+          "기술적 성능 개선과 실제 활용 가치의 연결에 대한 관심",
         ],
       },
       stack: ["PyTorch", "Hugging Face", "Python"],
@@ -60,14 +60,14 @@ export const profile = {
       title: { en: "Engineering", ko: "엔지니어링" },
       items: {
         en: [
-          "Shipping and running web and mobile products people use",
-          "Retrieval and LLM features that hold up with real users",
-          "Small teams, fast iterations, owning the whole product",
+          "Building and operating products for real users",
+          "Turning ideas into working systems, from prototype to deployment",
+          "Iterating quickly and taking ownership of the entire product",
         ],
         ko: [
-          "실제 사용자가 쓰는 웹·앱 서비스 출시와 운영",
-          "실제 사용자 앞에서 버티는 검색·LLM 기능",
-          "작은 팀, 빠른 반복, 제품 전체를 책임지는 방식",
+          "실제 사용자를 위한 웹·모바일 서비스 개발과 운영",
+          "아이디어부터 구현·배포까지 이어지는 제품 개발",
+          "빠른 실행과 반복 개선, 제품 전반에 대한 주도적인 책임",
         ],
       },
       stack: [

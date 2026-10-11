@@ -47,7 +47,8 @@ const en = {
   pages: {
     about: {
       title: "About",
-      description: "What I work on, and where I've worked and studied.",
+      description: "What I work on, what I've learned, and what I'm curious about.",
+      lead: "My interests span software engineering, AI research, and the intersection of technology and business.",
       timeline: "Timeline",
       career: "Experience",
       education: "Education",
@@ -137,7 +138,8 @@ const ko: typeof en = {
   pages: {
     about: {
       title: "소개",
-      description: "하고 있는 일, 그리고 일하고 배워 온 곳들.",
+      description: "지금까지 해온 일과 배운 것들, 그리고 앞으로 탐구하고 싶은 것들.",
+      lead: "소프트웨어 개발과 AI 연구를 경험하며, 기술과 비즈니스가 만나는 지점에도 관심을 넓혀가고 있습니다.",
       timeline: "타임라인",
       career: "경력",
       education: "학력",
