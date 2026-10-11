@@ -52,6 +52,7 @@ function toMeta(slug: string, lang: Locale, available: Locale[], fm?: Partial<Wr
     available,
     title: fm?.title ?? slug,
     date: fm?.date ?? "1970-01-01",
+    category: fm?.category ?? "notes",
     summary: fm?.summary ?? "",
     tags: fm?.tags ?? [],
     published: fm?.published ?? true,

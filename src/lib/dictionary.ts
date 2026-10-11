@@ -78,6 +78,8 @@ const en = {
       back: "All writing",
       onThisPage: "On this page",
       onlyIn: { en: "This post is only available in English.", ko: "This post is only available in Korean." },
+      all: "All",
+      categories: { research: "Research", engineering: "Engineering", notes: "Notes" },
     },
     contact: {
       title: "Contact",
@@ -170,6 +172,8 @@ const ko: typeof en = {
       back: "모든 글",
       onThisPage: "목차",
       onlyIn: { en: "이 글은 영어로만 작성되었습니다.", ko: "이 글은 한국어로만 작성되었습니다." },
+      all: "전체",
+      categories: { research: "연구", engineering: "엔지니어링", notes: "노트" },
     },
     contact: {
       title: "연락처",
