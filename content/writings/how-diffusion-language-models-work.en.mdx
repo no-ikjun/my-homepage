@@ -12,8 +12,6 @@ Say "language model" and most people picture an autoregressive one: condition on
 
 This post covers the simplest and currently most common form, the **masked diffusion language model**.[^d3pm] Unlike Gaussian diffusion in a continuous space, it is defined over discrete tokens with nothing more than "erase" and "restore".
 
-![The forward process: tokens turn into mask symbols as t grows](/img/writings/how-diffusion-language-models-work/forward-process.svg "The forward process. At t = 0 the sentence is intact, at t = 0.5 about half is masked, at t = 1 everything is [M]. Each position is masked independently.")
-
 ## What differs from autoregression
 
 For a sentence $x = (x_1, \dots, x_L)$ of length $L$, an autoregressive model factorises the joint probability as
