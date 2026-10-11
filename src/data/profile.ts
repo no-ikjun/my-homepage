@@ -57,7 +57,6 @@ export const profile = {
           "기술적 성능 개선과 실제 활용 가치의 연결에 대한 관심",
         ],
       },
-      stack: ["PyTorch", "Hugging Face", "Python"],
     },
     engineering: {
       title: { en: "Engineering", ko: "엔지니어링" },
@@ -73,19 +72,10 @@ export const profile = {
           "빠른 실행과 반복 개선, 제품 전반에 대한 주도적인 책임",
         ],
       },
-      stack: [
-        "Next.js",
-        "NestJS",
-        "Flutter",
-        "TypeScript",
-        "PostgreSQL",
-        "Docker",
-        "AWS",
-      ],
     },
   } satisfies Record<
     "research" | "engineering",
-    { title: Localized<string>; items: Localized<string[]>; stack: string[] }
+    { title: Localized<string>; items: Localized<string[]> }
   >,
 
   /** Primary links, shown on the home page and in the footer. */

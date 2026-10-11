@@ -3,7 +3,6 @@ import { CodeXml, FlaskConical, GraduationCap, Mail, MapPin, Microscope } from "
 import { AwardGrid } from "@/components/award-grid";
 import { PageHeader } from "@/components/page-header";
 import { SectionHeading } from "@/components/section-heading";
-import { TechBadge } from "@/components/tech-badge";
 import { TimelineList } from "@/components/timeline-list";
 import { profile } from "@/data/profile";
 import { timeline, timelineByKind, type TimelineKind } from "@/data/timeline";
@@ -83,18 +82,11 @@ export default function AboutView({ locale }: { locale: Locale }) {
               </span>
               {pick(track.title, locale)}
             </h2>
-            <ul className="flex-1 space-y-2 text-sm leading-relaxed">
+            <ul className="space-y-2 text-sm leading-relaxed">
               {pick(track.items, locale).map((item) => (
                 <li key={item} className="flex gap-2.5">
                   <span aria-hidden className="mt-[0.7em] size-1 shrink-0 rounded-full bg-muted-foreground/60" />
                   <span className="text-pretty">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <ul className="flex flex-wrap gap-1.5">
-              {track.stack.map((s) => (
-                <li key={s}>
-                  <TechBadge name={s} />
                 </li>
               ))}
             </ul>
