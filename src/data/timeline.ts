@@ -383,8 +383,12 @@ export const timeline: TimelineItem[] = [
   },
 ];
 
+/** Items of one kind: ongoing first, then newest start first. */
 export function timelineByKind(kind: TimelineKind): TimelineItem[] {
   return timeline
     .filter((item) => item.kind === kind)
-    .sort((a, b) => b.start.localeCompare(a.start));
+    .sort((a, b) => {
+      const ongoing = Number(!b.end) - Number(!a.end);
+      return ongoing !== 0 ? ongoing : b.start.localeCompare(a.start);
+    });
 }
