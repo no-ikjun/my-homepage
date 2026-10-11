@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { getPublishedWritings } from "@/lib/writings";
+import { getWritings } from "@/lib/content/writings";
+import { getProjects } from "@/lib/content/projects";
 import { localePath, LOCALES } from "@/lib/locale";
 
 /** Locale-neutral paths that exist in both en and ko, with their priority. */
@@ -15,12 +16,11 @@ const PAGES: { path: string; priority: number; changeFrequency: "weekly" | "mont
 const abs = (path: string) => `${SITE_URL}${path === "/" ? "" : path}`;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
-
+  // No lastModified on pages and projects: a build timestamp would mark every
+  // URL changed on every deploy, which is noise to crawlers. Posts carry a date.
   const localizedEntries: MetadataRoute.Sitemap = PAGES.flatMap((page) =>
     LOCALES.map((locale) => ({
       url: abs(localePath(locale, page.path)),
-      lastModified: now,
       changeFrequency: page.changeFrequency,
       priority: page.priority,
       // Tell search engines these two URLs are translations of each other.
@@ -33,14 +33,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  // Posts are written in a single language and live at one URL each.
-  const writings = await getPublishedWritings();
-  const writingEntries: MetadataRoute.Sitemap = writings.map((w) => ({
-    url: `${SITE_URL}/writings/${w.slug}`,
-    lastModified: new Date(w.date),
-    changeFrequency: "monthly",
-    priority: 0.75,
-  }));
+  // A post is served under both locale URLs, but an untranslated one is only
+  // listed at its original language; the other URL declares that one canonical.
+  const writings = await getWritings("en");
+  const writingEntries: MetadataRoute.Sitemap = writings.flatMap((w) =>
+    w.available.map((locale) => ({
+      url: abs(localePath(locale, `/writings/${w.slug}`)),
+      lastModified: new Date(`${w.date}T00:00:00+09:00`),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+      ...(w.available.length > 1
+        ? {
+            alternates: {
+              languages: Object.fromEntries(
+                w.available.map((l) => [l, abs(localePath(l, `/writings/${w.slug}`))]),
+              ),
+            },
+          }
+        : {}),
+    }))
+  );
 
-  return [...localizedEntries, ...writingEntries];
+  // Projects exist in both locales at mirrored URLs.
+  const projects = await getProjects("en");
+  const projectEntries: MetadataRoute.Sitemap = projects.flatMap((p) =>
+    LOCALES.map((locale) => ({
+      url: abs(localePath(locale, `/projects/${p.slug}`)),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: abs(localePath("en", `/projects/${p.slug}`)),
+          ko: abs(localePath("ko", `/projects/${p.slug}`)),
+        },
+      },
+    }))
+  );
+
+  return [...localizedEntries, ...projectEntries, ...writingEntries];
 }

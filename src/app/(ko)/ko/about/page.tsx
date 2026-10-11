@@ -1,11 +1,13 @@
 import AboutView from "@/views/about-view";
+import { dictionary } from "@/lib/dictionary";
 import { pageMetadata } from "@/lib/metadata";
-import { translations } from "@/lib/translations";
+
+const page = dictionary.ko.pages.about;
 
 export const metadata = pageMetadata({
   locale: "ko",
-  title: translations.ko.aboutPageTitle,
-  description: translations.ko.aboutPageDescription,
+  title: page.title,
+  description: page.description,
   path: "/about",
 });
 

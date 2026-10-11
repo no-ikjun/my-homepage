@@ -1,175 +1,115 @@
-import Image from "next/image";
 import Link from "next/link";
-import styles from "./about.module.css";
-import { careers } from "@/data/careers";
-import { activities, awards, educations } from "@/data/experiences";
-import { translations } from "@/lib/translations";
+import { CodeXml, FlaskConical, GraduationCap, Mail, MapPin, Microscope } from "lucide-react";
+import { AwardGrid } from "@/components/award-grid";
+import { PageHeader } from "@/components/page-header";
+import { SectionHeading } from "@/components/section-heading";
+import { TimelineList } from "@/components/timeline-list";
+import { profile } from "@/data/profile";
+import { timeline, timelineByKind, type TimelineKind } from "@/data/timeline";
+import { dictionary } from "@/lib/dictionary";
+import { pick } from "@/lib/i18n";
 import { type Locale } from "@/lib/locale";
-import { PageHero } from "@/components/ui";
-import EducationsBox from "@/components/educations_box";
-import AwardsBox from "@/components/awards_box";
-import ActivitiesBox from "@/components/activities_box";
+
+const SECTION_KEY: Record<TimelineKind, "career" | "education" | "awards" | "activities"> = {
+  career: "career",
+  education: "education",
+  award: "awards",
+  activity: "activities",
+};
 
 export default function AboutView({ locale }: { locale: Locale }) {
-  const t = translations[locale];
-  const lang = locale;
-  const careerItems = careers[lang];
-
-  const workingPrinciples =
-    lang === "ko"
-      ? [
-          "문제를 먼저 정의하고, 해결책은 가능한 단순하게 설계합니다.",
-          "작게 만들고 빠르게 검증하는 반복을 선호합니다.",
-          "가설을 세우고 실험으로 검증하는 방식을 중요하게 생각합니다.",
-          "제품 관점과 개발 관점을 함께 보고 의사결정합니다.",
-        ]
-      : [
-          "Define the problem first, then design the simplest possible solution.",
-          "Prefer small releases and fast validation loops.",
-          "Value forming hypotheses and validating them through experiments.",
-          "Make decisions from both product and engineering perspectives.",
-        ];
+  const t = dictionary[locale].pages.about;
+  const kinds: TimelineKind[] = ["career", "education", "award", "activity"];
+  const school = timeline.find((i) => i.id === "gist");
+  const lab = timeline.find((i) => i.id === "real-lab");
+  const email = profile.links.find((l) => l.id === "email");
+  const facts = [
+    school && { Icon: GraduationCap, text: pick(school.org, locale) },
+    lab && { Icon: Microscope, text: pick(lab.org, locale) },
+    { Icon: MapPin, text: pick(profile.location, locale) },
+    email && { Icon: Mail, text: email.label, href: email.href },
+  ].filter(Boolean) as { Icon: typeof MapPin; text: string; href?: string }[];
+  const tracks = [
+    { ...profile.tracks.research, Icon: FlaskConical },
+    { ...profile.tracks.engineering, Icon: CodeXml },
+  ];
 
   return (
-    <main className={styles.main}>
-      <div className={styles.shell}>
-        <PageHero
-          title={t.aboutPageTitle}
-          description={t.aboutPageDescription}
-        />
+    <main className="mx-auto w-full max-w-page px-6">
+      <PageHeader title={t.title} description={t.description} className="max-w-none pb-6 md:pb-8">
+        <p className="mt-5 text-base leading-relaxed text-pretty">{t.lead}</p>
 
-        <section className={styles.section}>
-          <div className={styles.sectionGrid}>
-            <div>
-              <h2 className={styles.sectionTitle}>{t.aboutInterestsTitle}</h2>
-              <p className={styles.sectionDescription}>
-                {t.aboutInterestsDescription}
-              </p>
-              <div className={styles.interestsText}>
-                {t.aboutInterestsContent
-                  .split(/\n\n+/)
-                  .filter(Boolean)
-                  .map((paragraph, i) => (
-                    <p key={i}>{paragraph.trim()}</p>
-                  ))}
-              </div>
-            </div>
+        <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          {facts.map(({ Icon, text, href }) => (
+            <li key={text} className="inline-flex items-center gap-1.5">
+              <Icon className="size-4 text-muted-foreground" />
+              {href ? (
+                <a href={href} className="hover:underline hover:underline-offset-4">{text}</a>
+              ) : (
+                text
+              )}
+            </li>
+          ))}
+        </ul>
 
-            <div>
-              <h2 className={styles.sectionTitle}>
-                {t.aboutWorkingStyleTitle}
-              </h2>
-              <ul className={styles.principlesList}>
-                {workingPrinciples.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
+        {/* Jump links: this page is long and these are its real sections. */}
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {kinds.map((kind) => {
+            const key = SECTION_KEY[kind];
+            return (
+              <li key={key}>
+                <Link
+                  href={`#${key}`}
+                  className="inline-flex h-8 items-center rounded-full border border-border px-3 text-sm text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+                >
+                  {t[key]}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </PageHeader>
 
-        <section id="career" className={styles.section}>
-          <div className={styles.sectionHeaderRow}>
-            <h2 className={styles.sectionTitle}>{t.sectionCareersTitle}</h2>
-          </div>
-
-          <div className={styles.careerPanel}>
-            <ul className={styles.careerList}>
-              {careerItems.map((item) => (
-                <li key={item.title} className={styles.careerItem}>
-                  <span className={styles.careerTimeline} aria-hidden="true" />
-                  <div className={styles.careerLeftCol}>
-                    <span className={styles.careerPeriod}>
-                      {item.description}
-                    </span>
-                    <div
-                      className={
-                        item.image?.trim()
-                          ? styles.careerCompany
-                          : `${styles.careerCompany} ${styles.careerCompanyNoLogo}`
-                      }
-                    >
-                      {item.image?.trim() ? (
-                        <div
-                          className={styles.careerLogo}
-                          aria-hidden="true"
-                        >
-                          <Image
-                            src={item.image}
-                            alt=""
-                            fill
-                            sizes="52px"
-                            className={styles.coverImage}
-                          />
-                        </div>
-                      ) : null}
-                      <div>
-                        <h3 className={styles.careerTitle}>
-                          {item.link ? (
-                            <Link
-                              href={item.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={styles.inlineLink}
-                            >
-                              {item.title} ↗
-                            </Link>
-                          ) : (
-                            item.title
-                          )}
-                        </h3>
-                        <p className={styles.careerRole}>
-                          {item.subDescription}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={styles.careerProjectsCol}>
-                    {item.content.map((project) => (
-                      <div key={project.title} className={styles.projectEntry}>
-                        <h4 className={styles.projectEntryTitle}>
-                          {project.title}
-                        </h4>
-                        <span className={styles.projectEntryPeriod}>
-                          {project.period}
-                        </span>
-                        <p className={styles.projectEntryDescription}>
-                          {project.description}
-                        </p>
-                        <ul className={styles.projectEntryList}>
-                          {project.content.map((point) => (
-                            <li key={point}>{point}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
+      <section className="grid gap-4 md:grid-cols-2">
+        {tracks.map(({ Icon, ...track }) => (
+          <div
+            key={pick(track.title, "en")}
+            className="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6"
+          >
+            <h2 className="flex items-center gap-2.5 text-lg font-semibold tracking-tight">
+              <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                <Icon className="size-[18px]" />
+              </span>
+              {pick(track.title, locale)}
+            </h2>
+            <ul className="space-y-2 text-sm leading-relaxed">
+              {pick(track.items, locale).map((item) => (
+                <li key={item} className="flex gap-2.5">
+                  <span aria-hidden className="mt-[0.7em] size-1 shrink-0 rounded-full bg-muted-foreground/60" />
+                  <span className="text-pretty">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-        </section>
+        ))}
+      </section>
 
-        <section id="education" className={styles.section}>
-          <EducationsBox title={t.educationsTitle} data={educations[lang]} />
-        </section>
-
-        <section id="awards" className={styles.section}>
-          <AwardsBox
-            title={t.awardsTitle}
-            data={awards[lang]}
-            moreInfoLabel={t.activityMoreInfo}
-          />
-        </section>
-
-        <section id="activities" className={styles.section}>
-          <ActivitiesBox
-            title={t.activitiesTitle}
-            data={activities[lang]}
-            moreInfoLabel={t.activityMoreInfo}
-          />
-        </section>
+      <div className="mt-20 space-y-20">
+        {kinds.map((kind) => {
+          const items = timelineByKind(kind);
+          if (!items.length) return null;
+          const key = SECTION_KEY[kind];
+          return (
+            <section key={kind} id={key} aria-labelledby={`about-${key}`} className="scroll-mt-28">
+              <SectionHeading id={`about-${key}`}>{t[key]}</SectionHeading>
+              {kind === "award" ? (
+                <AwardGrid items={items} locale={locale} />
+              ) : (
+                <TimelineList items={items} locale={locale} />
+              )}
+            </section>
+          );
+        })}
       </div>
     </main>
   );

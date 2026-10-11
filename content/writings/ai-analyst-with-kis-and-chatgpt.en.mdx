@@ -1,0 +1,130 @@
+export const metadata = {
+  title: "Automating stock research reports with a brokerage API and an LLM",
+  date: "2024-06-03",
+  category: "engineering",
+  summary:
+    "A pipeline that pulls price and financial data from the Korea Investment & Securities Open API, has the ChatGPT API analyse it, and posts the result to Slack. Data normalisation, prompt structure, pinning and validating the output format, cost control, and what I would change.",
+  tags: ["LLM", "AI Engineering", "ChatGPT API", "KIS Open API", "NestJS"],
+  published: true,
+};
+
+This is a write-up of a talk I gave at a WING session in June 2024, with the design and implementation details there was no time for on stage.
+
+## Background
+
+In early 2024 there was a run of articles saying AI would replace the work of junior analysts: the research support a new hire does, collecting data and turning it into a report in a fixed format, done by a model in seconds. Building that myself seemed like the way to learn both how far it goes and where it stops. Korea Investment & Securities (KIS) had opened its API to individual developers, which made it possible.
+
+## What I built
+
+Three jobs.
+
+- **Real-time price alerts.** Pull quotes for a watchlist and post them to Slack.
+- **Portfolio weight report.** Suggest weights across the whole watchlist.
+- **Single-stock research report.** Analyse one stock from its financial ratios.
+
+![Flow between the user, the server, the KIS API, ChatGPT and Slack](/img/writings/ai-analyst-with-kis-and-chatgpt/architecture.jpg "The user registers a watchlist; the server fetches stock data from the KIS API, asks ChatGPT for an analysis, and posts the result to Slack.")
+
+The flow is plain. The user registers stocks, the server fetches quotes and financials from the KIS API, tidies the data, sends it to the ChatGPT API, and posts the analysis to Slack. I was the only user, so Slack was the most convenient output channel. The frontend is React with TypeScript and Vite; the server is NestJS.
+
+## Collecting data: the KIS Developers Open API
+
+The API covers domestic equities end to end over REST: quotes, stock details, financial ratios, real-time executions, rankings, orders and account queries, with a similar range for overseas stocks. Among brokerage APIs open to individuals it has unusually good documentation and a paper-trading sandbox.
+
+Three things needed care.
+
+- **Auth tokens.** Access tokens are issued from an app key and secret, so the first module I wrote caches the token and refreshes it before expiry. Issuing one per request hits the limit quickly.
+- **Rate limits.** There is a per-second cap, so iterating over the watchlist spaces the calls out, and failed calls retry with a short exponential backoff.
+- **Real-time quotes.** For polling versus WebSocket I leaned on Toss Securities' SLASH 22 talk on their real-time price system. Their collector-to-Kafka-to-Redis-to-app pipeline is not something a one-person service copies, but the principle came with me: quotes are pushed, not pulled.
+
+## Normalising data: what to give the model
+
+This mattered more than I expected. Feeding raw API responses into a prompt wastes tokens and, worse, the field names are abbreviated codes the model misreads. So each response is first mapped onto an object with human-readable names and explicit units. Simplified:
+
+```ts
+type StockSnapshot = {
+  name: string;          // company name
+  code: string;          // ticker
+  asOf: string;          // reference date
+  price: number;         // current price (KRW)
+  revenue: number;       // revenue (KRW 100M)
+  netIncome: number;     // net income (KRW 100M)
+  totalAssets: number;   // total assets (KRW 100M)
+  equity: number;        // shareholders' equity (KRW 100M)
+  roe: number;           // %
+  debtRatio: number;     // %
+  currentRatio: number;  // %
+  revenueGrowth: number; // multiple
+};
+```
+
+With units fixed on the fields, the model almost never mixes "hundred million won" with "won". Hand it bare numbers and the wrong unit shows up inside a perfectly fluent sentence. This data layer ended up setting the ceiling on report quality.
+
+## Prompt structure
+
+The goal was a report in a fixed format, in the same shape every time; anything auto-posted to Slack cannot wobble. The prompt has three layers.
+
+1. **Role and rules (system).** Act as an analyst, use only the supplied data, invent no facts the data does not contain, output language, section order.
+2. **Data (user).** The normalised object as JSON.
+3. **Task (user).** The instruction for the report type.
+
+The instructions I actually used, translated:
+
+- Based on the supplied data, provide a detailed financial analysis and investment recommendation.
+- Give a target price and judge whether the stock is a buy or a sell.
+- Based on the supplied data, write a comprehensive financial report.
+- Using CAPM, compute portfolio weights for the supplied watchlist.
+
+What did the most for the format was not any named technique but **fixing the section headings and attaching one example report**. I looked at Chain-of-Thought and Self-Consistency too, but this task's problem was consistency of output, not depth of reasoning. Temperature stayed low: in a job where the same data must yield the same report, variety is not a virtue.
+
+## Validating the output
+
+Model output does not go straight to Slack; it passes a check first. The checks are simple.
+
+- Are all the required section headings present?
+- Do numeric fields such as the target price parse as numbers?
+- Does every number in the report exist in the input data?
+
+The last one is the important one. A report containing a number that is not in the input is discarded and requested again. It does not eliminate hallucination, but it does stop "revenue that is not in the data" from reaching Slack. The point at which the validation failure rate dropped visibly was the point at which I considered the prompt stable.
+
+## Between prompt engineering and fine-tuning
+
+When prompting alone cannot hold the format, the next option is fine-tuning: teaching a pretrained model an output style from a small set of examples, which OpenAI offers through its API. The rule I settled on:
+
+- If the problem is **what the model needs to know**, attach external knowledge with retrieval (RAG).
+- If the problem is **how the model should behave**, fine-tune.
+- If it is neither and the problem is **format**, prompt plus validation.
+
+This project's problem was format, and prompting plus validation held it, so fine-tuning never happened. The data already came from the API, so RAG was unnecessary too. Using neither was the conclusion; investigating both was what made the conclusion possible.
+
+## The result
+
+Pick an investment profile, search by ticker, add stocks to the watchlist.
+
+![Watchlist management screen](/img/writings/ai-analyst-with-kis-and-chatgpt/watchlist.jpg "The watchlist screen. Search by ticker and add.")
+
+Alerts arrive like this:
+
+![Watchlist price alert posted to Slack](/img/writings/ai-analyst-with-kis-and-chatgpt/slack-alert.jpg "Current price and day-over-day change for overseas watchlist stocks, in Slack.")
+
+Reports arrive like this:
+
+![Single-stock analysis report posted to Slack](/img/writings/ai-analyst-with-kis-and-chatgpt/report.jpg "A single-stock report. Ratio summary, interpretation, target price and verdict, in a fixed format.")
+
+The format holds from the ratio summary through the interpretation to the target price and verdict. The portfolio report derives expected returns with CAPM and weights with mean-variance optimisation, then explains them.
+
+## Cost and operation
+
+Normalised data kept the tokens per call small, and reports are generated at most once a day per stock and cached; a repeat request for the same input is allowed only after a validation failure. Price alerts never touch the model. Using an LLM to forward numbers that can simply be forwarded adds cost and latency and nothing else. Deciding where the model is used and where it is not was what decided the running cost.
+
+## If I built it again
+
+- **Structured output.** Request JSON against a schema instead of free text to be checked afterwards, and let the server render. It was possible then; I did not use it because a text report was the goal. Today the schema would come first.
+- **Code computes, the model explains.** Having the model run CAPM and mean-variance optimisation was the wrong division of labour. Numeric work belongs in code; the model should interpret results it is handed. If the model computes, there is no way to check it.
+- **An evaluation set.** A handful of stocks with hand-picked "good reports", compared on every prompt change. At the time I judged by eye, and eyes get used to things faster than you think.
+- **The disclaimer in the template.** "This is not investment advice" belonged in the output template, not in the prompt.
+
+## Conclusion
+
+Two things became clear. Tidy the data, fix the format, add validation, and something that looks like a report comes out reliably. Whether the report is right is a separate question, and what closes the gap is depth of data and a system of checks. Around the time of the talk, brokerages were launching similar things, a ChatGPT-based analyst at Eugene Investment, a stock-reading AI at Mirae Asset. The direction was the same; the difference was those two things.
+
+The code is in [analyst-fe](https://github.com/no-ikjun/analyst-fe) and [analyst-nest](https://github.com/no-ikjun/analyst-nest), and the service went on under the name Wisemind. More on the [project page](/projects/wisemind).

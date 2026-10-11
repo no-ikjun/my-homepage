@@ -1,0 +1,54 @@
+export const metadata = {
+  title: "SPRIT",
+  kind: "product",
+  status: "active",
+  start: "2024-03",
+  summary: "A mobile app that helps people build a steady reading habit.",
+  affiliation: "Personal",
+  role: ["Product planning", "App development", "Backend development", "UI design"],
+  stack: ["Flutter", "Next.js", "NestJS", "Docker", "AWS", "Figma"],
+  links: [
+    { label: "Website", href: "https://sprit-app.me" },
+    { label: "App", href: "https://github.com/no-ikjun/sprit" },
+    { label: "Backend", href: "https://github.com/no-ikjun/sprit-be" },
+    { label: "Disquiet", href: "https://disquiet.io/product/%EC%8A%A4%ED%94%84%EB%A6%BF" },
+  ],
+  image: "https://play-lh.googleusercontent.com/xc7SKBJq60amNLJMphT9QBPkfbaVXtbrhGbTuexJPtxYII_A-QC2hcLHuJ96PvHqHw=w240-h480-rw",
+  featured: true,
+  writings: ["sprit-launch-retrospective"],
+  gallery: [
+    { src: "/img/projects/sprit/screens.jpg", alt: "SPRIT app: reading log, stats and goals" },
+  ],
+  order: 1,
+};
+
+## Why
+
+Most people want to read more and stop after a week. There were plenty of reading apps already, but most were a shelf for books you had finished, not a nudge to read today. SPRIT is built around the latter: tracking, a goal you can actually hit, a reminder at the right time, and other people seeing you show up.
+
+## What I built
+
+- **Reading log and stats.** Sessions, pages and time, summarised so progress is visible.
+- **Goals and quests.** Short loops with a deadline and a target, such as a one-week reading quest. Added after launch once the retention data came in.
+- **Reminders.** Push notifications at the reading time the user picks.
+- **Social sharing.** Post a reading status to keep yourself accountable.
+- **Social sign-in.** Apple and Kakao login to keep sign-up friction low.
+
+## How I built it
+
+Two months of planning in Notion from September 2023, a first commit on 7 November, and a store release on 7 March 2024: six months from idea to launch, four of them development. Screens were drawn in Figma first and then built in Flutter; the server is NestJS on PostgreSQL, shipped as a Docker image to AWS.
+
+Building alone, the test for every decision was whether one person could keep it running. Both the app and the server use strongly typed languages, and deploying the server never grew beyond swapping one image.
+
+## Outcome
+
+- The launch post reached number one on Disquiet's trending list, and most early feedback came from there.
+- DAU in the first month sat around 20, with peaks near 40 on days with promotion.
+- A four-day Instagram campaign cost about 300 won per landing-page visit; blog posts drove traffic for longer than the ads did.
+- AdMob brought in 4.02 dollars in the first month. The number mattered less than having a path for money to arrive.
+
+The painful number was retention: the share of users returning the day after install dropped sharply and stayed flat. Quests were the first attempt to bend that curve.
+
+## Looking back
+
+The first month of a solo product was really a search for the few people who like it. If I did it again I would wire retention events before launch and ship a reason to come back in the first version. The numbers and decisions behind the launch are in the post below.

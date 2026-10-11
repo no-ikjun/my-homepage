@@ -1,0 +1,48 @@
+export const metadata = {
+  title: "Wisemind",
+  kind: "product",
+  status: "completed",
+  start: "2024-02",
+  end: "2025-07",
+  summary: "An LLM-powered financial analysis assistant built on ChatGPT and HyperCLOVA X.",
+  affiliation: "Personal",
+  role: ["Full-stack development", "AI integration"],
+  stack: ["React", "NestJS", "FastAPI", "Cloudflare", "AWS"],
+  order: 3,
+  links: [
+    { label: "Live", href: "https://analyst.ikjun.com" },
+    { label: "Backend", href: "https://github.com/no-ikjun/analyst-nest" },
+    { label: "AI server", href: "https://github.com/no-ikjun/wisemind-ai-server" },
+    { label: "Frontend", href: "https://github.com/no-ikjun/analyst-fe" },
+  ],
+  image: "https://analyst.ikjun.com/logo.png",
+  writings: ["ai-analyst-with-kis-and-chatgpt"],
+};
+
+## Why
+
+Financial data is abundant but reading it takes expertise. In early 2024, as headlines claimed AI would replace junior analysts, building that job seemed the honest way to learn where it works and where it breaks. It started as an experiment that pulled quotes and financials from the Korea Investment & Securities Open API and had an LLM write research notes, and grew into Wisemind.
+
+## What I built
+
+- **Stock research reports.** A fixed-format analysis of one stock from its financial ratios.
+- **Portfolio weighting.** A report proposing weights across a watchlist.
+- **Real-time alerts.** Price alerts for watched stocks delivered to Slack.
+- **Plain-language questions.** A conversational interface that answers with the numbers behind it.
+
+## Architecture
+
+Three services: a React frontend, a NestJS API, and a FastAPI AI server that talks to ChatGPT and HyperCLOVA X. Deployed on AWS behind Cloudflare.
+
+The work was mostly around the model rather than in it.
+
+- **Data normalisation.** API responses are reduced to a snapshot type with fixed units before anything reaches the model. This layer set the ceiling on report quality.
+- **Prompt structure.** Three layers of role, data and task, with report sections pinned so every run comes back in the same shape.
+- **Output validation.** Checks for missing sections, unparsable numbers and figures that never appeared in the input; a failing report is discarded and requested again.
+- **Tokens and rate limits.** Cached access tokens, spacing between calls and exponential backoff to stay inside the brokerage API's limits.
+
+## What I learned
+
+Clean data, a fixed format and validation reliably produce something that looks like a report. Whether the report is right is a different problem. Next time I would ask for a JSON schema instead of free text, keep calculations in code and leave the model only the interpretation, and build an evaluation set before touching the prompt. Running on two LLM providers also taught me a lot about abstraction boundaries and where guardrails belong.
+
+The service ran until July 2025. Design and implementation details are in the post below.

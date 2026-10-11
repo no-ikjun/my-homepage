@@ -1,11 +1,13 @@
 import ContactView from "@/views/contact-view";
+import { dictionary } from "@/lib/dictionary";
 import { pageMetadata } from "@/lib/metadata";
-import { translations } from "@/lib/translations";
+
+const page = dictionary.en.pages.contact;
 
 export const metadata = pageMetadata({
   locale: "en",
-  title: translations.en.contactPageTitle,
-  description: translations.en.contactPageDescription,
+  title: page.title,
+  description: page.description,
   path: "/contact",
 });
 

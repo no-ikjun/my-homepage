@@ -2,11 +2,29 @@ import createMDX from "@next/mdx";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
+  // Plugins are named as strings so the config stays serialisable for Turbopack.
+  options: {
+    remarkPlugins: [["remark-gfm", {}], ["remark-math", {}]],
+    rehypePlugins: [
+      ["rehype-slug", {}],
+      ["rehype-katex", { output: "htmlAndMathml" }],
+      [
+        "rehype-pretty-code",
+        {
+          theme: { light: "github-light", dark: "github-dark" },
+          keepBackground: false,
+          defaultLang: "plaintext",
+        },
+      ],
+    ],
+  },
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  // The social-card route reads its fonts and avatar from disk at runtime.
+  outputFileTracingIncludes: { "/og": ["./src/app/og/*.ttf", "./src/app/og/avatar.png"] },
   // Conservative security headers. A full CSP is intentionally left out: the
   // theme bootstrap and JSON-LD are inline <script> tags and would need a nonce
   // or hash before script-src could be locked down.
@@ -28,7 +46,8 @@ const nextConfig = {
   },
   images: {
     // Hosts allowed for next/image optimisation. Keep in sync with the
-    // `image` fields in src/data/*.ts - an unlisted host throws at request time.
+    // `logo` fields in src/data/timeline.ts and `image` in content/projects - an
+    // unlisted host throws at request time.
     remotePatterns: [
       { protocol: "https", hostname: "d3ob3cint7tr3s.cloudfront.net" },
       { protocol: "https", hostname: "chatbot.gistory.me" },

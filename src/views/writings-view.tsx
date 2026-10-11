@@ -1,68 +1,39 @@
 import Link from "next/link";
-import styles from "./writings.module.css";
-import { getPublishedWritings } from "@/lib/writings";
-import { PageHero, BadgeChip } from "@/components/ui";
-import { translations } from "@/lib/translations";
+import { PageHeader } from "@/components/page-header";
+import { WritingList } from "@/components/writing-list";
+import { getWritings } from "@/lib/content/writings";
+import { dictionary } from "@/lib/dictionary";
 import { localePath, type Locale } from "@/lib/locale";
 
 export default async function WritingsView({ locale }: { locale: Locale }) {
-  const t = translations[locale];
-  const writings = await getPublishedWritings();
+  const t = dictionary[locale];
+  const p = t.pages.writings;
+  const writings = await getWritings(locale);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.shell}>
-        <PageHero
-          title={t.writingsPageTitle}
-          description={t.writingsPageDescription}
-        />
+    <main className="mx-auto w-full max-w-page px-6">
+      <PageHeader title={p.title} description={p.description} />
 
-        {writings.length === 0 ? (
-          <section className={styles.emptyState} aria-label={t.writingsEmptyTitle}>
-            <p className={styles.emptyKicker}>{t.writingsEmptyKicker}</p>
-            <h2 className={styles.emptyTitle}>{t.writingsEmptyTitle}</h2>
-            <p className={styles.emptyDescription}>{t.writingsEmptyDescription}</p>
-            <div className={styles.emptyLinks}>
-              <Link
-                href={localePath(locale, "/projects")}
-                className={styles.inlineLink}
-              >
-                {t.navProjects} ↗
-              </Link>
-              <Link
-                href={localePath(locale, "/about")}
-                className={styles.inlineLink}
-              >
-                {t.navAbout} ↗
-              </Link>
-            </div>
-          </section>
-        ) : (
-          <ul className={styles.list}>
-            {writings.map((writing) => (
-              <li key={writing.slug}>
-                <Link href={`/writings/${writing.slug}`} className={styles.item}>
-                  <div className={styles.itemDate}>{writing.date}</div>
-                  <div className={styles.itemBody}>
-                    <h2 className={styles.itemTitle}>{writing.title}</h2>
-                    <p className={styles.itemSummary}>{writing.summary}</p>
-                    {writing.tags?.length ? (
-                      <div className={styles.tagRow}>
-                        {writing.tags.map((tag) => (
-                          <BadgeChip key={tag} size="sm" tone="muted">
-                            {tag}
-                          </BadgeChip>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-                  <span className={styles.arrow}>↗</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {writings.length === 0 ? (
+        <section className="max-w-content rounded-2xl border border-dashed border-border p-8">
+          <h2 className="font-medium">{p.emptyTitle}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{p.emptyDescription}</p>
+          <div className="mt-5 flex gap-4 text-sm">
+            <Link href={localePath(locale, "/projects")} className="underline underline-offset-4 hover:decoration-foreground">
+              {t.nav.projects}
+            </Link>
+            <Link href={localePath(locale, "/about")} className="underline underline-offset-4 hover:decoration-foreground">
+              {t.nav.about}
+            </Link>
+          </div>
+        </section>
+      ) : (
+        <WritingList
+          writings={writings}
+          locale={locale}
+          labels={{ all: p.all, categories: p.categories }}
+        />
+      )}
     </main>
   );
 }

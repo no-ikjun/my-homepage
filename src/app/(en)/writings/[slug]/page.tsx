@@ -1,83 +1,44 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import styles from "./page.module.css";
-import { getPublishedWritings, getWritingBySlug } from "@/lib/writings";
-import { SITE_URL } from "@/lib/site";
-import { BadgeChip } from "@/components/ui";
+import WritingDetailView from "@/views/writing-detail-view";
+import { getWriting, getWritingSlugs } from "@/lib/content/writings";
+import { OG_IMAGE_SIZE, pageMetadata, writingOgImageUrl } from "@/lib/metadata";
 
-type WritingDetailPageProps = {
-  params: Promise<{ slug: string }>;
-};
+const locale = "en";
+
+type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  const writings = await getPublishedWritings();
-  return writings.map((writing) => ({ slug: writing.slug }));
+  const slugs = await getWritingSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: WritingDetailPageProps): Promise<Metadata> {
-  const { slug: slugParam } = await params;
-  const entry = await getWritingBySlug(slugParam);
-  if (!entry || entry.metadata.published === false) {
-    return { title: "Writing" };
-  }
-
-  const { title, summary, slug, date } = entry.metadata;
-  const url = `${SITE_URL}/writings/${slug}`;
-  const publishedTime = /^\d{4}-\d{2}-\d{2}/.test(date) ? `${date}T00:00:00+09:00` : undefined;
-
-  return {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const entry = await getWriting(locale, slug);
+  if (!entry) return { title: "Writing" };
+  const { title, summary, date, tags, lang, available } = entry.metadata;
+  const base = pageMetadata({
+    // The post's own language drives og:locale and, for an untranslated post
+    // served at both locale URLs, the canonical; hreflang lists real translations only.
+    locale: lang,
+    canonicalLocale: lang,
+    locales: available,
     title,
     description: summary || title,
-    alternates: { canonical: url },
-    openGraph: {
-      type: "article",
-      url,
-      title,
-      description: summary || title,
-      publishedTime,
-      tags: entry.metadata.tags,
-      images: [{ url: `${SITE_URL}/img/profile_round3.png`, alt: title }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: summary || title,
-      images: [`${SITE_URL}/img/profile_round3.png`],
-    },
+    path: `/writings/${slug}`,
+    image: { url: writingOgImageUrl(entry.metadata), alt: title, ...OG_IMAGE_SIZE },
+  });
+  const publishedTime = /^\d{4}-\d{2}-\d{2}/.test(date) ? `${date}T00:00:00+09:00` : undefined;
+  return {
+    ...base,
+    openGraph: { ...base.openGraph, type: "article", publishedTime, tags },
   };
 }
 
-export default async function WritingDetailPage({ params }: WritingDetailPageProps) {
+export default async function WritingPage({ params }: Props) {
   const { slug } = await params;
-  const entry = await getWritingBySlug(slug);
-  if (!entry || entry.metadata.published === false) {
-    notFound();
-  }
-
-  const { Content, metadata } = entry;
-
-  return (
-    <main className={styles.main}>
-      <div className={styles.shell}>
-        <header className={styles.header}>
-          <p className={styles.date}>{metadata.date}</p>
-          <h1 className={styles.title}>{metadata.title}</h1>
-          {metadata.summary ? <p className={styles.summary}>{metadata.summary}</p> : null}
-          {metadata.tags?.length ? (
-            <div className={styles.tagRow}>
-              {metadata.tags.map((tag) => (
-                <BadgeChip key={tag} size="sm" tone="muted">
-                  {tag}
-                </BadgeChip>
-              ))}
-            </div>
-          ) : null}
-        </header>
-
-        <article className={styles.content}>
-          <Content />
-        </article>
-      </div>
-    </main>
-  );
+  const entry = await getWriting(locale, slug);
+  if (!entry) notFound();
+  return <WritingDetailView locale={locale} entry={entry} />;
 }

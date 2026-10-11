@@ -1,11 +1,13 @@
 import WritingsView from "@/views/writings-view";
+import { dictionary } from "@/lib/dictionary";
 import { pageMetadata } from "@/lib/metadata";
-import { translations } from "@/lib/translations";
+
+const page = dictionary.en.pages.writings;
 
 export const metadata = pageMetadata({
   locale: "en",
-  title: translations.en.writingsPageTitle,
-  description: translations.en.writingsPageDescription,
+  title: page.title,
+  description: page.description,
   path: "/writings",
 });
 

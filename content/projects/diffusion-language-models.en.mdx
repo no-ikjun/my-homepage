@@ -1,0 +1,33 @@
+export const metadata = {
+  title: "Diffusion Language Models",
+  kind: "research",
+  status: "active",
+  start: "2026-03",
+  summary: "Undergraduate research on more practical training and generation for diffusion-based language models.",
+  affiliation: "Real-Lab @ GIST",
+  team: true,
+  role: ["Undergraduate research intern"],
+  stack: ["PyTorch", "Hugging Face", "Python"],
+  links: [
+    { label: "Real-Lab", href: "https://real-lab-gist.framer.website" },
+  ],
+  featured: true,
+  writings: ["how-diffusion-language-models-work"],
+  order: 0,
+};
+
+## Context
+
+Diffusion language models generate text by iteratively denoising a whole sequence instead of predicting one token at a time. That opens up parallel decoding and controllable generation, but training them well and sampling from them efficiently is still an open problem.
+
+I joined Real-Lab at GIST in March 2026 as an undergraduate research intern, advised by Prof. Kwanyoung Kim, to work on exactly that gap.
+
+## What I'm working on
+
+- Reproducing recent diffusion LM baselines and building a clean training and evaluation harness.
+- Studying how noise schedules and masking strategies affect sample quality and training stability.
+- Looking for ways to make generation cheaper without giving up quality.
+
+## Status
+
+Early-stage. This page will grow as results come in; ask me about it if you're curious.

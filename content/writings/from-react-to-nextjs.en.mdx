@@ -1,0 +1,224 @@
+export const metadata = {
+  title: "From React to Next.js",
+  date: "2023-04-07",
+  category: "engineering",
+  summary:
+    "Starting from the difference between a library and a framework: why Next.js, and a single pass over the basics of routing, styling, data fetching and SEO.",
+  tags: ["Next.js", "React", "SSR", "Frontend"],
+  published: true,
+};
+
+This is a write-up of a talk I gave at a WING session in April 2023. Next.js was on the Pages Router then, and this post follows that. The App Router has since changed the file layout and data fetching, but the "why" is unchanged.
+
+## What Next.js is
+
+React is a JavaScript **library** for building user interfaces. Next.js is a **framework** for building server-rendered React applications. The difference between those two words is where this post starts.
+
+## Library versus framework
+
+A library is prewritten code you reach for when you need it. A framework is a set of rules that gives an application its structure, and your code goes inside it.
+
+The difference is **who holds the flow**. With a library, your code calls the library. With a framework, the framework calls your code. This is inversion of control. With React alone you choose and assemble routing, bundling and rendering yourself. Next.js makes those decisions for you, and in return asks you to follow its rules.
+
+## Why Next.js
+
+**Server-side rendering.** With client-side rendering the browser receives an empty HTML page and has to run JavaScript before anything appears. Next.js builds the HTML on the server first, then React attaches to it (hydration) and the page becomes interactive. The first paint is fast.
+
+**Search engine optimisation.** Crawlers read finished HTML. A pre-rendered page carries its content in the markup, so it indexes well.
+
+**File-based routing.** Create `pages/about.tsx` and `/about` exists. There is no router configuration file.
+
+**Code splitting.** Bundles are split per page, so opening a page downloads only that page's code.
+
+## How to use it
+
+### Creating a project
+
+```bash
+npx create-next-app@latest --typescript project-name --use-npm
+cd project-name
+npm run dev
+```
+
+### Navigation
+
+Use `Link` instead of `<a>`. It switches pages on the client without reloading the document.
+
+```tsx
+import Link from "next/link";
+
+export default function NavBar() {
+  return (
+    <nav>
+      <Link href="/">Home</Link>
+      <Link href="/about">About</Link>
+    </nav>
+  );
+}
+```
+
+### Routing
+
+Files inside `pages` are routes.
+
+```tsx
+// pages/index.tsx
+export default function Home() {
+  return <h1>Hello</h1>;
+}
+```
+
+```tsx
+// pages/about.tsx
+export default function About() {
+  return <h1>About</h1>;
+}
+```
+
+### Dynamic routing
+
+A bracketed file name becomes a parameter. `pages/movies/[id].tsx` matches `/movies/101010`, and the value is read with `useRouter`.
+
+```tsx
+// pages/movies/[id].tsx
+import { useRouter } from "next/router";
+
+export default function Movie() {
+  const router = useRouter();
+  const { id } = router.query;
+  return <h1>Movie: {id}</h1>;
+}
+```
+
+A fixed name alongside it, such as `pages/movies/all.tsx`, takes precedence.
+
+### Styling
+
+Two options come built in. CSS Modules import a stylesheet whose name ends in `.module.css` and scope its class names so they cannot collide.
+
+```css
+/* modules/main.module.css */
+.nav_title {
+  font-size: 30px;
+}
+.nav_color {
+  color: blue;
+}
+```
+
+```tsx
+import styles from "../modules/main.module.css";
+
+export default function About() {
+  return <h1 className={[styles.nav_title, styles.nav_color].join(" ")}>About</h1>;
+}
+```
+
+styled-jsx keeps the styles inside the component, scoped to it.
+
+```tsx
+export default function About() {
+  return (
+    <>
+      <h1 className="title">About</h1>
+      <style jsx>{`
+        .title {
+          color: red;
+          font-size: 30px;
+        }
+      `}</style>
+    </>
+  );
+}
+```
+
+### Shared layout
+
+`pages/_app.tsx` wraps every page. Anything that belongs on all pages, a navigation bar or global styles, goes here.
+
+```tsx
+// pages/_app.tsx
+import NavBar from "../components/NavBar";
+import "../styles/globals.css";
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <NavBar />
+      <Component {...pageProps} />
+    </>
+  );
+}
+```
+
+### Fetching data
+
+There are two ways to pre-render. **Static generation (SSG)** builds the HTML at build time and reuses it for every request. **Server-side rendering (SSR)** builds it on each request. If the content rarely changes, SSG; if it must differ per request, SSR.
+
+```tsx
+// SSG: once, at build time
+export async function getStaticProps() {
+  const res = await fetch("https://.../posts");
+  const posts = await res.json();
+  return { props: { posts } };
+}
+```
+
+```tsx
+// SSR: on every request
+export async function getServerSideProps(context) {
+  const res = await fetch("https://.../...");
+  const data = await res.json();
+  if (!data) {
+    return { notFound: true };
+  }
+  return { props: { data } };
+}
+```
+
+### SEO
+
+`next/head` sets the title and meta tags per page. A reusable component keeps it tidy.
+
+```tsx
+import Head from "next/head";
+
+interface SEOProps {
+  description: string;
+  title: string;
+  siteTitle: string;
+}
+
+export default function SEO({ description, title, siteTitle }: SEOProps) {
+  return (
+    <Head>
+      <title>{`${title} | ${siteTitle}`}</title>
+      <meta name="description" content={description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:site_name" content={siteTitle} />
+    </Head>
+  );
+}
+```
+
+```tsx
+// pages/about.tsx
+import SEO from "../components/SEO";
+
+export default function About() {
+  return (
+    <>
+      <SEO title="About" description="About page" siteTitle="Next" />
+      <h1>About</h1>
+    </>
+  );
+}
+```
+
+Open the rendered HTML's `<head>` and the meta tags are there. That is what the crawler reads.
+
+## Summary
+
+React is a tool for building screens; Next.js is a frame that also decides where and how those screens are rendered and delivered. Server rendering, SEO, file-based routing and code splitting are all achievable with React alone, but you assemble every piece yourself, and Next.js turns that assembly into rules. The price of accepting the rules is fewer decisions. For a small team that has to build fast, that trade is usually a good one.
