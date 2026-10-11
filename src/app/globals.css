@@ -280,7 +280,7 @@ html[data-theme="dark"] {
     transition: text-decoration-color var(--duration-fast) var(--ease-out-soft);
   }
   & a:hover {
-    text-decoration-color: var(--brand);
+    text-decoration-color: var(--foreground);
   }
   & ul,
   & ol {
