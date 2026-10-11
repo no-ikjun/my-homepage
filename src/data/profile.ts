@@ -23,7 +23,7 @@ export const profile = {
   /** The one-line identity statement shown at the top of the home page. */
   headline: {
     en: "I build things to understand technology and its value.",
-    ko: "직접 만들며 기술과 그 가치를 탐구합니다.",
+    ko: "만들며 배우고, 기술의 가치를 고민합니다.",
   } satisfies Localized<string>,
 
   /** Short paragraphs under the headline. */
