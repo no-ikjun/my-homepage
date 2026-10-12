@@ -41,7 +41,7 @@ export const timeline: TimelineItem[] = [
     kind: "career",
     org: { en: "Real-Lab @ GIST", ko: "Real-Lab @ GIST" },
     orgUrl: "https://real-lab-gist.framer.website",
-    logo: "https://d3ob3cint7tr3s.cloudfront.net/portfolio/gist_white.jpg",
+    logo: "/img/logo_reallab.svg",
     title: { en: "Undergraduate Research Intern", ko: "학부 연구 인턴" },
     start: "2026-03",
     highlights: {
