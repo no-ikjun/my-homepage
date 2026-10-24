@@ -41,6 +41,9 @@ const en = {
     email: "Email",
   },
   meta: {
+    // Home <title>. It must not be just the name: Google treats that as a
+    // repeat of the site name and swaps in the page's text instead.
+    homeTitle: "Ikjun Choi (최익준) | GIST EECS, AI research and software engineering",
     siteDescription:
       "Ikjun Choi — GIST undergraduate researching generative AI and diffusion language models, and a full-stack engineer.",
   },
@@ -136,6 +139,7 @@ const ko: typeof en = {
     email: "이메일",
   },
   meta: {
+    homeTitle: "최익준 Ikjun Choi | GIST 전기전자컴퓨터공학, AI 연구·소프트웨어 개발",
     siteDescription:
       "최익준 — 생성형 AI와 Diffusion Language Model을 연구하는 GIST 학부생이자 풀스택 엔지니어.",
   },

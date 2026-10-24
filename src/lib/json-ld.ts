@@ -22,6 +22,18 @@ export const personJsonLd = {
   sameAs: profile.links.filter((l) => l.href.startsWith("http")).map((l) => l.href),
 };
 
+/** Names the site for search results ("Ikjun Choi" above the title link). */
+export const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: "Ikjun Choi",
+  alternateName: ["최익준", "ikjun.com"],
+  url: SITE_URL,
+  inLanguage: ["en", "ko"],
+  publisher: { "@id": PERSON_ID },
+};
+
 const abs = (path: string) => (path.startsWith("http") ? path : `${SITE_URL}${path}`);
 
 /** BlogPosting for a writing page; the URL is that of the post's original language. */
