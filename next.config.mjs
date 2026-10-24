@@ -23,8 +23,13 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  // The social-card route reads its fonts and avatar from disk at runtime.
-  outputFileTracingIncludes: { "/og": ["./src/app/og/*.ttf", "./src/app/og/avatar.png"] },
+  // The social-card and CV routes read fonts and the avatar from disk at runtime.
+  outputFileTracingIncludes: {
+    "/og": ["./src/app/og/*.ttf", "./src/app/og/avatar.png"],
+    "/cv": ["./src/app/og/*.ttf", "./src/app/og/avatar.png"],
+  },
+  // react-pdf ships its own layout engine and font parser; bundling it breaks font loading.
+  serverExternalPackages: ["@react-pdf/renderer"],
   // Conservative security headers. A full CSP is intentionally left out: the
   // theme bootstrap and JSON-LD are inline <script> tags and would need a nonce
   // or hash before script-src could be locked down.
