@@ -9,7 +9,7 @@ import { dictionary } from "@/lib/dictionary";
 import { fontVariables } from "@/lib/fonts";
 import { pick } from "@/lib/i18n";
 import { HTML_LANG, localePath, type Locale } from "@/lib/locale";
-import { personJsonLd } from "@/lib/json-ld";
+import { personJsonLd, websiteJsonLd } from "@/lib/json-ld";
 
 const themeBootstrapScript = `
 (function () {
@@ -81,7 +81,7 @@ export default function SiteShell({
 
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([websiteJsonLd, personJsonLd]) }}
         />
       </body>
     </html>

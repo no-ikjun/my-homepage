@@ -4,6 +4,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   locale: "en",
+  absoluteTitle: dictionary.en.meta.homeTitle,
   description: dictionary.en.meta.siteDescription,
   path: "/",
 });

@@ -38,14 +38,16 @@ export default async function HomeView({ locale }: { locale: Locale }) {
         className="grid items-center gap-10 pt-6 md:grid-cols-[1fr_auto] md:gap-16 md:pt-14"
       >
         <div className="order-2 max-w-content md:order-1">
-          <p className="font-medium">{pick(profile.name, locale)}</p>
+          {/* The name is the h1 so search engines read it as the page's subject;
+              the headline below keeps the large type. */}
+          <h1 className="font-medium">{pick(profile.name, locale)}</h1>
           <p className="text-sm text-muted-foreground">
             {pick(profile.affiliation, locale)}
           </p>
 
-          <h1 className="mt-6 text-4xl leading-[1.08] font-semibold tracking-tight text-balance md:text-5xl">
+          <p className="mt-6 text-4xl leading-[1.08] font-semibold tracking-tight text-balance md:text-5xl">
             {pick(profile.headline, locale)}
-          </h1>
+          </p>
 
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground text-pretty">
             {pick(profile.intro, locale).map((p) => (

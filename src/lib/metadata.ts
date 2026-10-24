@@ -6,7 +6,8 @@ import { LOCALES, localePath, OG_LOCALE, type Locale } from "./locale";
 import type { WritingMeta } from "@/types/writing";
 
 const NAME_SUFFIX = "Ikjun Choi (최익준)";
-const SITE_NAME = "Ikjun Choi Portfolio";
+// What Google shows above the title link; WebSite JSON-LD in site-shell says the same.
+export const SITE_NAME = "Ikjun Choi";
 
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 } as const;
 
@@ -58,9 +59,12 @@ export function pageMetadata({
   canonicalLocale = locale,
   locales = LOCALES,
   image,
+  absoluteTitle,
 }: {
   locale: Locale;
   title?: string;
+  /** The whole <title>, skipping the "| Ikjun Choi" template (the home page). */
+  absoluteTitle?: string;
   description: string;
   path: string;
   canonicalLocale?: Locale;
@@ -68,7 +72,7 @@ export function pageMetadata({
   /** Absolute URL of the social card; defaults to a generated card with the title. */
   image?: { url: string; alt?: string; width?: number; height?: number };
 }): Metadata {
-  const fullTitle = title ? `${title} | ${NAME_SUFFIX}` : NAME_SUFFIX;
+  const fullTitle = absoluteTitle ?? (title ? `${title} | ${NAME_SUFFIX}` : NAME_SUFFIX);
   const canonical = localePath(canonicalLocale, path);
   const languages = Object.fromEntries(locales.map((l) => [l, localePath(l, path)]));
   const ogImage = image ?? {
@@ -78,7 +82,7 @@ export function pageMetadata({
   };
 
   return {
-    ...(title ? { title } : {}),
+    ...(absoluteTitle ? { title: { absolute: absoluteTitle } } : title ? { title } : {}),
     description,
     alternates: {
       canonical,
