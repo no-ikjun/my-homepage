@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { getWritings } from "@/lib/content/writings";
 import { getProjects } from "@/lib/content/projects";
-import { localePath, LOCALES } from "@/lib/locale";
+import { localePath, LOCALES, type Locale } from "@/lib/locale";
+import type { WritingMeta } from "@/types/writing";
 
 /** Locale-neutral paths that exist in both en and ko, with their priority. */
 const PAGES: { path: string; priority: number; changeFrequency: "weekly" | "monthly" | "yearly" }[] = [
@@ -13,46 +14,60 @@ const PAGES: { path: string; priority: number; changeFrequency: "weekly" | "mont
   { path: "/contact", priority: 0.65, changeFrequency: "yearly" },
 ];
 
+const postModified = (w: WritingMeta) => w.updated ?? w.date;
+const asDate = (day: string) => new Date(`${day}T00:00:00+09:00`);
+
 const abs = (path: string) => `${SITE_URL}${path === "/" ? "" : path}`;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Posts per locale, keeping only the files actually written in that
+  // language: an untranslated post is listed once, at its original URL (the
+  // other locale's URL declares that one canonical).
+  const posts = (await Promise.all(LOCALES.map((l) => getWritings(l))))
+    .flat()
+    .filter((w, i, all) => all.findIndex((x) => x.slug === w.slug && x.lang === w.lang) === i);
+  const writtenIn = (locale: Locale) => posts.filter((w) => w.lang === locale);
+
   // No lastModified on pages and projects: a build timestamp would mark every
-  // URL changed on every deploy, which is noise to crawlers. Posts carry a date.
+  // URL changed on every deploy, which is noise to crawlers. The writing index
+  // changes when a post does, so it carries the newest post's date.
+  const newestPost = (locale: Locale) => writtenIn(locale).map(postModified).sort().at(-1);
   const localizedEntries: MetadataRoute.Sitemap = PAGES.flatMap((page) =>
-    LOCALES.map((locale) => ({
-      url: abs(localePath(locale, page.path)),
-      changeFrequency: page.changeFrequency,
-      priority: page.priority,
-      // Tell search engines these two URLs are translations of each other.
-      alternates: {
-        languages: {
-          en: abs(localePath("en", page.path)),
-          ko: abs(localePath("ko", page.path)),
+    LOCALES.map((locale) => {
+      const latest = page.path === "/writings" ? newestPost(locale) : undefined;
+      return {
+        url: abs(localePath(locale, page.path)),
+        ...(latest ? { lastModified: asDate(latest) } : {}),
+        changeFrequency: page.changeFrequency,
+        priority: page.priority,
+        // Tell search engines these two URLs are translations of each other.
+        alternates: {
+          languages: {
+            en: abs(localePath("en", page.path)),
+            ko: abs(localePath("ko", page.path)),
+          },
         },
-      },
-    }))
+      };
+    })
   );
 
-  // A post is served under both locale URLs, but an untranslated one is only
-  // listed at its original language; the other URL declares that one canonical.
-  const writings = await getWritings("en");
-  const writingEntries: MetadataRoute.Sitemap = writings.flatMap((w) =>
-    w.available.map((locale) => ({
-      url: abs(localePath(locale, `/writings/${w.slug}`)),
-      lastModified: new Date(`${w.date}T00:00:00+09:00`),
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
-      ...(w.available.length > 1
-        ? {
-            alternates: {
-              languages: Object.fromEntries(
-                w.available.map((l) => [l, abs(localePath(l, `/writings/${w.slug}`))]),
-              ),
-            },
-          }
-        : {}),
-    }))
-  );
+  // lastmod is the last real edit, not the original publication date: posts
+  // first published elsewhere years ago were added here recently.
+  const writingEntries: MetadataRoute.Sitemap = posts.map((w) => ({
+    url: abs(localePath(w.lang, `/writings/${w.slug}`)),
+    lastModified: asDate(postModified(w)),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+    ...(w.available.length > 1
+      ? {
+          alternates: {
+            languages: Object.fromEntries(
+              w.available.map((l) => [l, abs(localePath(l, `/writings/${w.slug}`))]),
+            ),
+          },
+        }
+      : {}),
+  }));
 
   // Projects exist in both locales at mirrored URLs.
   const projects = await getProjects("en");
