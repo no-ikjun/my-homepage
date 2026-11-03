@@ -7,7 +7,10 @@ export type WritingCategory = (typeof WRITING_CATEGORIES)[number];
 /** Exported as `metadata` from content/writings/<slug>.<locale>.mdx. */
 export type WritingFrontmatter = {
   title: string;
+  /** Publication date, "YYYY-MM-DD". */
   date: string;
+  /** Last meaningful edit, "YYYY-MM-DD"; falls back to `date`. Drives sitemap lastmod and RSS. */
+  updated?: string;
   /** Broad shelf the post sits on; tags carry the finer topics. Defaults to "notes". */
   category?: WritingCategory;
   summary: string;

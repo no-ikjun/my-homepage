@@ -3,6 +3,7 @@ import { SITE_URL } from "./site";
 import { dictionary } from "./dictionary";
 import { formatDate } from "./format";
 import { LOCALES, localePath, OG_LOCALE, type Locale } from "./locale";
+import { FEED_PATH, feedTitle } from "./feed";
 import type { WritingMeta } from "@/types/writing";
 
 const NAME_SUFFIX = "Ikjun Choi (최익준)";
@@ -87,6 +88,7 @@ export function pageMetadata({
     alternates: {
       canonical,
       languages: { ...languages, "x-default": canonical },
+      types: { "application/rss+xml": [{ url: localePath(locale, FEED_PATH), title: feedTitle(locale) }] },
     },
     openGraph: {
       type: "website",

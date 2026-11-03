@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const entry = await getWriting(locale, slug);
   if (!entry) return { title: "Writing" };
-  const { title, summary, date, tags, lang, available } = entry.metadata;
+  const { title, summary, date, updated, tags, lang, available } = entry.metadata;
   const base = pageMetadata({
     // The post's own language drives og:locale and, for an untranslated post
     // served at both locale URLs, the canonical; hreflang lists real translations only.
@@ -32,7 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const publishedTime = /^\d{4}-\d{2}-\d{2}/.test(date) ? `${date}T00:00:00+09:00` : undefined;
   return {
     ...base,
-    openGraph: { ...base.openGraph, type: "article", publishedTime, tags },
+    openGraph: {
+      ...base.openGraph,
+      type: "article",
+      publishedTime,
+      ...(updated ? { modifiedTime: `${updated}T00:00:00+09:00` } : {}),
+      tags,
+    },
   };
 }
 

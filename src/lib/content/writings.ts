@@ -71,6 +71,7 @@ function toMeta(
     cover,
     title: fm?.title ?? slug,
     date: fm?.date ?? "1970-01-01",
+    updated: fm?.updated,
     category: fm?.category ?? "notes",
     summary: fm?.summary ?? "",
     tags: fm?.tags ?? [],

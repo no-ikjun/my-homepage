@@ -53,7 +53,7 @@ export function blogPostingJsonLd(meta: WritingMeta) {
     description: meta.summary || undefined,
     inLanguage: meta.lang,
     datePublished,
-    dateModified: datePublished,
+    dateModified: meta.updated ? `${meta.updated}T00:00:00+09:00` : datePublished,
     articleSection: section,
     keywords: meta.tags?.length ? meta.tags : undefined,
     image: [image],
